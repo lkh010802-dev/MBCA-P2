@@ -1,0 +1,15 @@
+{"test_id": 1, "input": "아침에 성수 갈 건데 카페 추천해줘", "runtime_context": {"current_datetime": "2026-08-28T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 2, "input": "점심쯤 성수에 갈 건데 할 거 추천해줘", "runtime_context": {"current_datetime": "2026-08-28T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 3, "input": "저녁쯤 잠실 가야 해. 그 전에 밥 먹고 싶어", "runtime_context": {"current_datetime": "2026-08-28T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 4, "input": "오전에 전시 보고 싶어", "runtime_context": {"current_datetime": "2026-08-28T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 5, "input": "오후에 카페 가고 싶어", "runtime_context": {"current_datetime": "2026-08-28T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 6, "input": "오후 3시에 성수 갈 거야. 쇼핑하고 싶어", "runtime_context": {"current_datetime": "2026-08-28T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 7, "input": "저녁 7시에 잠실 가야 해. 그 전에 카페", "runtime_context": {"current_datetime": "2026-08-28T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 8, "input": "회사 동료랑 점심 먹고 싶어", "runtime_context": {"current_datetime": "2026-08-28T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 9, "input": "아침 먹고 싶어", "runtime_context": {"current_datetime": "2026-08-28T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 10, "input": "오전 11시 반에 전시 보러 갈래", "runtime_context": {"current_datetime": "2026-08-28T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 11, "input": "점심쯤 여의도에서 일정 끝나고 카페 가고 싶어", "runtime_context": {"current_datetime": "2026-08-28T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 12, "input": "오후에 강남에서 약속 있어. 그 전에 혼자 밥 먹고 싶어", "runtime_context": {"current_datetime": "2026-08-28T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 13, "input": "점심부터 저녁까지 시간 있어. 쇼핑하고 싶어", "runtime_context": {"current_datetime": "2026-08-28T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 14, "input": "오전부터 오후까지 시간 있어. 전시 보고 싶어", "runtime_context": {"current_datetime": "2026-08-28T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 15, "input": "아침부터 10시까지 시간 있어. 카페 가고 싶어", "runtime_context": {"current_datetime": "2026-08-28T17:00:00+09:00", "timezone": "Asia/Seoul"}}

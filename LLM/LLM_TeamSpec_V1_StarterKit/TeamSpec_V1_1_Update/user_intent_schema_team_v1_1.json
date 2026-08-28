@@ -1,0 +1,206 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/schemas/team-llm-structured-output-v1-1.json",
+  "title": "Team LLM Natural Language Structured Output V1.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "start_location_text",
+    "end_location_text",
+    "start_time",
+    "end_time",
+    "start_time_period",
+    "end_time_period",
+    "desired_duration_min_minutes",
+    "desired_duration_max_minutes",
+    "activities",
+    "transport_mode",
+    "companions",
+    "budget_max",
+    "budget_preference",
+    "space_preference"
+  ],
+  "properties": {
+    "start_location_text": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "end_location_text": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "start_time": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$",
+      "description": "추천 활동을 시작할 수 있는 정확한 시각. 지금은 null."
+    },
+    "end_time": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$",
+      "description": "다음 일정 또는 가용 시간창의 정확한 종료 시각."
+    },
+    "start_time_period": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "morning",
+        "lunch",
+        "evening",
+        "am",
+        "pm",
+        null
+      ],
+      "description": "정확한 start_time이 없을 때 사용자가 명시한 모호한 시작 시간대. morning=06:00~11:00, lunch=11:00~15:00, evening=18:00~24:00, am=06:00~12:00, pm=12:00~22:00. 범위는 Backend 정책 해석용."
+    },
+    "end_time_period": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "morning",
+        "lunch",
+        "evening",
+        "am",
+        "pm",
+        null
+      ],
+      "description": "정확한 end_time이 없을 때 사용자가 명시한 모호한 종료/다음 일정 시간대. morning=06:00~11:00, lunch=11:00~15:00, evening=18:00~24:00, am=06:00~12:00, pm=12:00~22:00. 범위는 Backend 정책 해석용."
+    },
+    "desired_duration_min_minutes": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 1,
+      "description": "사용자가 목적지 활동에 쓰고 싶은 최소 체류시간(분)."
+    },
+    "desired_duration_max_minutes": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 1,
+      "description": "사용자가 목적지 활동에 쓰고 싶은 최대 체류시간(분)."
+    },
+    "activities": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": [
+          "food",
+          "cafe",
+          "walk",
+          "culture",
+          "entertainment",
+          "shopping",
+          "drink"
+        ]
+      }
+    },
+    "transport_mode": {
+      "type": "string",
+      "enum": [
+        "auto",
+        "public_transit",
+        "walk",
+        "car"
+      ]
+    },
+    "companions": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": [
+          "solo",
+          "friend",
+          "partner",
+          "family",
+          "child",
+          "coworker"
+        ]
+      }
+    },
+    "budget_max": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "budget_preference": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "low",
+        "medium",
+        "flexible",
+        "any",
+        null
+      ]
+    },
+    "space_preference": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "indoor",
+        "outdoor",
+        "any",
+        null
+      ],
+      "description": "사용자가 명시한 실내/야외 공간 선호. 환경/날씨 때문에 덮어쓰지 않음."
+    }
+  },
+  "allOf": [
+    {
+      "not": {
+        "properties": {
+          "start_time": {
+            "type": "string"
+          },
+          "start_time_period": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "start_time",
+          "start_time_period"
+        ]
+      }
+    },
+    {
+      "not": {
+        "properties": {
+          "end_time": {
+            "type": "string"
+          },
+          "end_time_period": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "end_time",
+          "end_time_period"
+        ]
+      }
+    }
+  ]
+}

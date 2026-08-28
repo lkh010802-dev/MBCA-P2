@@ -1,0 +1,28 @@
+<!doctype html><meta charset="utf-8"><title>Team Spec V1 Eval</title><style>body{font-family:Arial,Malgun Gothic,sans-serif;max-width:1100px;margin:30px auto}table{border-collapse:collapse;width:100%}th,td{border:1px solid #ddd;padding:7px}th{background:#17365D;color:white}</style><h1>Team Spec V1 Evaluation</h1><h2>Summary</h2><pre>{
+  "cases_expected": 12,
+  "cases_received": 12,
+  "schema_validity": 1.0,
+  "exact_case_accuracy": 1.0,
+  "activity_f1": 1.0,
+  "companions_f1": 1.0,
+  "default_hallucination_rate": 0.0,
+  "field_accuracy": {
+    "start_location_text": 1.0,
+    "end_location_text": 1.0,
+    "start_time": 1.0,
+    "end_time": 1.0,
+    "desired_duration_minutes": 1.0,
+    "transport_mode": 1.0,
+    "budget_max": 1.0,
+    "budget_preference": 1.0,
+    "space_preference": 1.0
+  },
+  "failure_type_counts": {},
+  "recommended_gates": {
+    "schema_validity": ">= 1.00",
+    "exact_case_accuracy": ">= 0.90",
+    "activity_f1": ">= 0.95",
+    "companions_f1": ">= 0.95",
+    "default_hallucination_rate": "< 0.02"
+  }
+}</pre><h2>Cases</h2><table><tr><th>ID</th><th>Input</th><th>Errors</th><th>Activity F1</th><th>Companion F1</th></tr><tr><td>1</td><td>실내에서 놀고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>2</td><td>비 오니까 실내에서 카페 가고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>3</td><td>전시 보고 싶은데 실내 위주로 가고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>4</td><td>야외에서 걷고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>5</td><td>밖에서 카페 마시고 산책하고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>6</td><td>무조건 야외가 좋아</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>7</td><td>실내든 야외든 상관없어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>8</td><td>안이든 밖이든 상관없이 카페 가고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>9</td><td>카페 가고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>10</td><td>전시 보고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>11</td><td>산책하고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>12</td><td>비 오는데 카페 가고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr></table>

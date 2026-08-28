@@ -1,0 +1,30 @@
+<!doctype html><meta charset="utf-8"><title>Team Spec V1 Eval</title><style>body{font-family:Arial,Malgun Gothic,sans-serif;max-width:1100px;margin:30px auto}table{border-collapse:collapse;width:100%}th,td{border:1px solid #ddd;padding:7px}th{background:#17365D;color:white}</style><h1>Team Spec V1 Evaluation</h1><h2>Summary</h2><pre>{
+  "cases_expected": 50,
+  "cases_received": 50,
+  "schema_validity": 1.0,
+  "exact_case_accuracy": 0.94,
+  "activity_f1": 1.0,
+  "companions_f1": 1.0,
+  "default_hallucination_rate": 0.0,
+  "field_accuracy": {
+    "start_location_text": 1.0,
+    "end_location_text": 1.0,
+    "start_time": 1.0,
+    "end_time": 1.0,
+    "desired_duration_minutes": 1.0,
+    "transport_mode": 1.0,
+    "budget_max": 1.0,
+    "budget_preference": 1.0,
+    "space_preference": 0.94
+  },
+  "failure_type_counts": {
+    "SPACE_PREFERENCE_MISMATCH": 3
+  },
+  "recommended_gates": {
+    "schema_validity": ">= 1.00",
+    "exact_case_accuracy": ">= 0.90",
+    "activity_f1": ">= 0.95",
+    "companions_f1": ">= 0.95",
+    "default_hallucination_rate": "< 0.02"
+  }
+}</pre><h2>Cases</h2><table><tr><th>ID</th><th>Input</th><th>Errors</th><th>Activity F1</th><th>Companion F1</th></tr><tr><td>1</td><td>지금 사당인데 7시에 잠실 약속 있어. 그사이에 카페 가고 싶어.</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>2</td><td>5시에 사당에 있을 거고 9시에 고터 가야 해. 두 시간 정도 카페 갔다가 술 한잔하고 싶어.</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>3</td><td>여자친구랑 차 타고 전시 보러 가고 싶은데 3만원 안에서 가성비 좋은 곳 없나?</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>4</td><td>지금부터 두 시간 정도 그냥 뭐하지?</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>5</td><td>카페 가고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>6</td><td>밥 먹고 카페 가고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>7</td><td>산책하고 술 한잔하고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>8</td><td>전시 보고 쇼핑하고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>9</td><td>실내에서 방탈출이나 보드게임 하고 싶어</td><td>SPACE_PREFERENCE_MISMATCH</td><td>1.0</td><td>1.0</td></tr><tr><td>10</td><td>차 가지고 왔어. 맛집 가고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>11</td><td>걸어서 갈 만한 카페</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>12</td><td>지하철 타고 가도 돼. 전시 보고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>13</td><td>혼자 카페 가고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>14</td><td>친구랑 쇼핑하러 가고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>15</td><td>남자친구랑 밥 먹고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>16</td><td>가족끼리 아이 데리고 전시 보러 갈 거야</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>17</td><td>회사 동료랑 점심 먹고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>18</td><td>2만원 안에서 밥 먹고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>19</td><td>5만원까지 괜찮아. 전시랑 카페 가고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>20</td><td>오늘 돈 별로 쓰기 싫어. 카페 가고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>21</td><td>적당한 가격이면 돼. 밥 먹고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>22</td><td>좀 비싸도 괜찮아. 괜찮은 전시 보고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>23</td><td>가격은 상관없어. 쇼핑하고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>24</td><td>3만원 안에서 최대한 가성비 좋게 밥 먹고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>25</td><td>5시부터 9시까지 시간 비어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>26</td><td>5시부터 9시까지 비는데 2시간 정도 놀고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>27</td><td>한 시간 반 정도 시간 있어. 카페 가고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>28</td><td>오후 2시 반부터 전시 보고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>29</td><td>저녁 7시에 강남에서 일정 끝나. 밥 먹고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>30</td><td>밤 10시에 홍대 가야 해. 그 전에 카페 가고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>31</td><td>지금 강남역이야. 뭐하지?</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>32</td><td>지금 홍대인데 카페 가고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>33</td><td>내일 5시에 사당에 있을 거야. 카페 가고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>34</td><td>7시에 잠실에서 친구 만나야 해. 그 전에 밥 먹고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>35</td><td>친구 두 명이랑 술 마시고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>36</td><td>가족이랑 쇼핑하고 밥도 먹고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>37</td><td>아이랑 보드게임 하고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>38</td><td>혼자 야외에서 걷다가 카페 가고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>39</td><td>차로 갈 거고 술은 안 마실 거야. 밥 먹고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>40</td><td>대중교통으로 가서 쇼핑하고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>41</td><td>야외에서 걷기 좋은 데 가고 싶어</td><td>SPACE_PREFERENCE_MISMATCH</td><td>1.0</td><td>1.0</td></tr><tr><td>42</td><td>미술관 보고 커피 마시고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>43</td><td>맛집에서 밥 먹고 맥주 한잔하고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>44</td><td>오락실이나 방탈출 하고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>45</td><td>돈은 상관없고 여자친구랑 전시 보고 쇼핑하고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>46</td><td>4만원까지 쓰고 차 가지고 갈 거야. 가족이랑 밥 먹고 카페 가고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>47</td><td>6시에 여의도에서 일정 끝나고 9시에 잠실 가야 해. 두 시간 정도 산책하고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>48</td><td>지금부터 카페 가고 싶은데 가격은 적당하면 돼</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>49</td><td>회사 동료랑 1시간 정도 보드게임 하고 싶어</td><td>PASS</td><td>1.0</td><td>1.0</td></tr><tr><td>50</td><td>실내든 야외든 상관없이 아무거나 추천해줘</td><td>SPACE_PREFERENCE_MISMATCH</td><td>1.0</td><td>1.0</td></tr></table>

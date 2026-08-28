@@ -1,0 +1,29 @@
+TeamSpec V1 -> V1.1 변경 요약
+================================
+
+Schema:
+11 fields -> 14 fields
+
+삭제:
+- desired_duration_minutes
+
+추가:
+- start_time_period
+- end_time_period
+- desired_duration_min_minutes
+- desired_duration_max_minutes
+
+Period:
+- morning = 06:00~11:00
+- lunch = 11:00~15:00
+- evening = 18:00~24:00
+- am = 06:00~12:00
+- pm = 12:00~22:00
+
+정책:
+- exact time과 period는 같은 endpoint에서 상호 배타적
+- exact duration: min=max
+- duration range: min/max 각각 보존
+- 가용시간과 희망 체류시간을 분리
+- 상대시간은 Backend Runtime Context(current_datetime/timezone) 활용
+- weather/sunrise/sunset/travel time/available stay time은 Intent Schema 밖에서 처리

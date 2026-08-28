@@ -1,0 +1,19 @@
+{
+  "package": "LLM_Backend_Handoff_V1_1_FREEZE",
+  "schema_version": "1.1",
+  "freeze_date": "2026-08-28",
+  "contract_fields": 14,
+  "validation": {
+    "golden_50_exact": "50/50",
+    "robustness_30_exact": "30/30"
+  },
+  "files": [
+    "LLM_Backend_Interface_Spec_V1_1_FREEZE.docx",
+    "LLM_Backend_Interface_Spec_V1_1_FREEZE.md",
+    "README_HANDOFF.txt",
+    "backend_parser_integration_example.py",
+    "example_requests_responses_v1_1.json",
+    "intent_parser_prompt_team_v1_1_FINAL.txt",
+    "user_intent_schema_team_v1_1.json"
+  ]
+}

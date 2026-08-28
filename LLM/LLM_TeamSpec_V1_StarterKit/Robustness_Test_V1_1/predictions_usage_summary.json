@@ -1,0 +1,11 @@
+{
+  "input_tokens": 162678,
+  "cached_input_tokens": 161340,
+  "uncached_input_tokens": 1338,
+  "output_tokens": 2640,
+  "reasoning_tokens": 0,
+  "total_tokens": 165318,
+  "cache_rate": 0.9917751632058422,
+  "requests": 30,
+  "average_total_tokens_per_request": 5510.6
+}

@@ -1,0 +1,17 @@
+팀 명세 기준 재설계 요약
+
+기존 Intent Parser의 need_clarification, semantic_tags, atmosphere, crowd_tolerance, indoor_outdoor, hard_constraints 등은 현재 팀 출력 계약에서 제거합니다.
+새 출력은 10개 고정 필드만 사용합니다.
+
+start_location_text
+end_location_text
+start_time
+end_time
+desired_duration_minutes
+activities
+transport_mode
+companions
+budget_max
+budget_preference
+
+LLM은 추가 질문/추천/Ranking을 하지 않고, 누락 정보는 null/[]/auto로 반환합니다.

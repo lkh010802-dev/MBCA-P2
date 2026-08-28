@@ -1,0 +1,16 @@
+﻿request_no,case_id,repeat_no,input,expected_space_preference,predicted_space_preference,passed,schema_valid,api_error,elapsed_seconds,input_tokens,cached_input_tokens,uncached_input_tokens,output_tokens,reasoning_tokens,total_tokens
+1,9,1,실내에서 방탈출이나 보드게임 하고 싶어,indoor,indoor,True,True,,3.34,2433,0,2433,70,0,2503
+2,9,2,실내에서 방탈출이나 보드게임 하고 싶어,indoor,indoor,True,True,,1.996,2433,2430,3,70,0,2503
+3,9,3,실내에서 방탈출이나 보드게임 하고 싶어,indoor,indoor,True,True,,1.795,2433,2430,3,70,0,2503
+4,9,4,실내에서 방탈출이나 보드게임 하고 싶어,indoor,indoor,True,True,,1.849,2433,2430,3,70,0,2503
+5,9,5,실내에서 방탈출이나 보드게임 하고 싶어,indoor,indoor,True,True,,1.578,2433,2430,3,70,0,2503
+6,41,1,야외에서 걷기 좋은 데 가고 싶어,outdoor,outdoor,True,True,,2.02,2432,2388,44,68,0,2500
+7,41,2,야외에서 걷기 좋은 데 가고 싶어,outdoor,outdoor,True,True,,1.648,2432,2429,3,68,0,2500
+8,41,3,야외에서 걷기 좋은 데 가고 싶어,outdoor,outdoor,True,True,,2.584,2432,2429,3,68,0,2500
+9,41,4,야외에서 걷기 좋은 데 가고 싶어,outdoor,outdoor,True,True,,1.553,2432,2429,3,68,0,2500
+10,41,5,야외에서 걷기 좋은 데 가고 싶어,outdoor,outdoor,True,True,,1.614,2432,2429,3,68,0,2500
+11,50,1,실내든 야외든 상관없이 아무거나 추천해줘,any,any,True,True,,2.41,2434,2388,46,65,0,2499
+12,50,2,실내든 야외든 상관없이 아무거나 추천해줘,any,any,True,True,,1.73,2434,2431,3,65,0,2499
+13,50,3,실내든 야외든 상관없이 아무거나 추천해줘,any,any,True,True,,1.61,2434,2431,3,65,0,2499
+14,50,4,실내든 야외든 상관없이 아무거나 추천해줘,any,any,True,True,,2.062,2434,2431,3,65,0,2499
+15,50,5,실내든 야외든 상관없이 아무거나 추천해줘,any,any,True,True,,2.633,2434,2431,3,65,0,2499

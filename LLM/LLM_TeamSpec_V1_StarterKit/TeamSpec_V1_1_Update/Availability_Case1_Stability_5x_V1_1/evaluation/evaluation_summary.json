@@ -1,0 +1,36 @@
+{
+  "test_suite": "TeamSpec V1.1 Custom Suite",
+  "cases_expected": 5,
+  "cases_received": 5,
+  "schema_validity": 1.0,
+  "exact_case_accuracy": 0.0,
+  "activity_f1": 1.0,
+  "companions_f1": 1.0,
+  "default_hallucination_rate": 0.15384615384615385,
+  "field_accuracy": {
+    "start_location_text": 1.0,
+    "end_location_text": 1.0,
+    "start_time": 1.0,
+    "end_time": 0.0,
+    "start_time_period": 1.0,
+    "end_time_period": 1.0,
+    "desired_duration_min_minutes": 0.0,
+    "desired_duration_max_minutes": 0.0,
+    "transport_mode": 1.0,
+    "budget_max": 1.0,
+    "budget_preference": 1.0,
+    "space_preference": 1.0
+  },
+  "failure_type_counts": {
+    "END_TIME_MISMATCH": 5,
+    "DESIRED_DURATION_MIN_MINUTES_MISMATCH": 5,
+    "DESIRED_DURATION_MAX_MINUTES_MISMATCH": 5
+  },
+  "recommended_gates": {
+    "schema_validity": ">= 1.00",
+    "exact_case_accuracy": ">= 0.90",
+    "activity_f1": ">= 0.95",
+    "companions_f1": ">= 0.95",
+    "default_hallucination_rate": "< 0.02"
+  }
+}

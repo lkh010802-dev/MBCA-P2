@@ -1,0 +1,57 @@
+{
+  "model": "gpt-5.6-terra",
+  "reasoning_effort": "none",
+  "cases": 3,
+  "repeats_per_case": 5,
+  "requests_planned": 15,
+  "requests_completed": 15,
+  "successful_api_calls": 15,
+  "schema_valid_calls": 15,
+  "overall_passes": 15,
+  "overall_success_rate": 1.0,
+  "case_results": [
+    {
+      "case_id": 9,
+      "input": "실내에서 방탈출이나 보드게임 하고 싶어",
+      "expected": "indoor",
+      "attempts": 5,
+      "passes": 5,
+      "success_rate": 1.0,
+      "predicted_value_counts": {
+        "indoor": 5
+      }
+    },
+    {
+      "case_id": 41,
+      "input": "야외에서 걷기 좋은 데 가고 싶어",
+      "expected": "outdoor",
+      "attempts": 5,
+      "passes": 5,
+      "success_rate": 1.0,
+      "predicted_value_counts": {
+        "outdoor": 5
+      }
+    },
+    {
+      "case_id": 50,
+      "input": "실내든 야외든 상관없이 아무거나 추천해줘",
+      "expected": "any",
+      "attempts": 5,
+      "passes": 5,
+      "success_rate": 1.0,
+      "predicted_value_counts": {
+        "any": 5
+      }
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 36495,
+    "cached_input_tokens": 33936,
+    "uncached_input_tokens": 2559,
+    "output_tokens": 1015,
+    "reasoning_tokens": 0,
+    "total_tokens": 37510,
+    "cache_rate": 0.9298808055898068,
+    "average_total_tokens_per_request": 2500.6666666666665
+  }
+}

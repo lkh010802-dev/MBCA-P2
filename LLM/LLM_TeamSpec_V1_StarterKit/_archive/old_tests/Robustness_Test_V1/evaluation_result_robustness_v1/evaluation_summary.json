@@ -1,0 +1,79 @@
+{
+  "test_suite": "Robustness Test V1",
+  "cases_expected": 25,
+  "cases_received": 25,
+  "schema_validity": 1.0,
+  "exact_case_accuracy": 0.96,
+  "activity_f1": 1.0,
+  "companions_f1": 1.0,
+  "default_hallucination_rate": 0.0047169811320754715,
+  "field_accuracy": {
+    "start_location_text": 1.0,
+    "end_location_text": 1.0,
+    "start_time": 1.0,
+    "end_time": 1.0,
+    "desired_duration_minutes": 0.96,
+    "transport_mode": 1.0,
+    "budget_max": 1.0,
+    "budget_preference": 1.0,
+    "space_preference": 1.0
+  },
+  "category_accuracy": {
+    "ambiguous_time": {
+      "passes": 2,
+      "cases": 3,
+      "accuracy": 0.6666666666666666
+    },
+    "colloquial": {
+      "passes": 3,
+      "cases": 3,
+      "accuracy": 1.0
+    },
+    "complex": {
+      "passes": 3,
+      "cases": 3,
+      "accuracy": 1.0
+    },
+    "negation": {
+      "passes": 3,
+      "cases": 3,
+      "accuracy": 1.0
+    },
+    "noise_or_sparse": {
+      "passes": 2,
+      "cases": 2,
+      "accuracy": 1.0
+    },
+    "schedule_scope": {
+      "passes": 3,
+      "cases": 3,
+      "accuracy": 1.0
+    },
+    "self_correction": {
+      "passes": 3,
+      "cases": 3,
+      "accuracy": 1.0
+    },
+    "space_boundary": {
+      "passes": 2,
+      "cases": 2,
+      "accuracy": 1.0
+    },
+    "typo": {
+      "passes": 3,
+      "cases": 3,
+      "accuracy": 1.0
+    }
+  },
+  "failure_type_counts": {
+    "DESIRED_DURATION_MINUTES_MISMATCH": 1
+  },
+  "recommended_gates": {
+    "schema_validity": ">= 1.00",
+    "exact_case_accuracy": ">= 0.88",
+    "activity_f1": ">= 0.95",
+    "companions_f1": ">= 0.95",
+    "default_hallucination_rate": "< 0.03",
+    "category_accuracy": "각 category >= 0.67 (초기 탐색용)"
+  }
+}

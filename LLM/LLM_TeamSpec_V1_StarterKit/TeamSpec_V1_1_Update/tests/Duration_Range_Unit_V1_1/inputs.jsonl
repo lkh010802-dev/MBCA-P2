@@ -1,0 +1,14 @@
+{"test_id": 1, "input": "2시간 놀고 싶어", "runtime_context": {"current_datetime": "2026-08-28T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 2, "input": "두세 시간 정도 놀고 싶어", "runtime_context": {"current_datetime": "2026-08-28T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 3, "input": "2~3시간 정도 카페에 있고 싶어", "runtime_context": {"current_datetime": "2026-08-28T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 4, "input": "한두 시간 전시 보고 싶어", "runtime_context": {"current_datetime": "2026-08-28T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 5, "input": "최소 2시간은 놀고 싶어", "runtime_context": {"current_datetime": "2026-08-28T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 6, "input": "최대 3시간 정도 있고 싶어", "runtime_context": {"current_datetime": "2026-08-28T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 7, "input": "한 시간 반 정도 카페에 있고 싶어", "runtime_context": {"current_datetime": "2026-08-28T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 8, "input": "2시간 반 정도 전시 보고 싶어", "runtime_context": {"current_datetime": "2026-08-28T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 9, "input": "몇 시간 정도 놀고 싶어", "runtime_context": {"current_datetime": "2026-08-28T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 10, "input": "지금부터 2시간 비었어", "runtime_context": {"current_datetime": "2026-08-28T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 11, "input": "한 시간 반 정도 시간 있어. 카페 가고 싶어", "runtime_context": {"current_datetime": "2026-08-28T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 12, "input": "5시부터 2시간 비어", "runtime_context": {"current_datetime": "2026-08-28T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 13, "input": "5시부터 9시까지 비는데 2시간 놀고 싶어", "runtime_context": {"current_datetime": "2026-08-28T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 14, "input": "3시간밖에 시간이 없어. 카페 가고 싶어", "runtime_context": {"current_datetime": "2026-08-28T17:00:00+09:00", "timezone": "Asia/Seoul"}}
