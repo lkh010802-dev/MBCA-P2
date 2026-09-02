@@ -1,0 +1,100 @@
+{"test_id": 1, "category": "location_time_scope", "input": "지금 을지로인데 오후 6시 반에 용산 가야 해. 그 전에 커피 마시고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 2, "category": "location_time_scope", "input": "내일 오전 10시에 성수에서 일정 끝나. 전시 보고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 3, "category": "location_time_scope", "input": "저녁쯤 잠실 가야 하는데 그 전에 밥 먹고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 4, "category": "location_time_scope", "input": "오후에 홍대에 있을 거야. 쇼핑하고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 5, "category": "location_time_scope", "input": "지금 합정이야. 그냥 산책하고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 6, "category": "location_time_scope", "input": "아침에 광화문에 갈 건데 카페 추천해줘", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 7, "category": "location_time_scope", "input": "오후 3시에 강남에서 끝나고 저녁 7시에 잠실 가야 해. 전시 보고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 8, "category": "location_time_scope", "input": "현재 신촌인데 내일 6시에 여의도에서 일정 끝나. 밥 먹고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 9, "category": "location_time_scope", "input": "오전에 성수에 있을 거고 저녁쯤 강남 가야 해. 쇼핑하고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 10, "category": "location_time_scope", "input": "밤 10시 반에 홍대 가야 해. 그 전에 카페 가고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 11, "category": "meal_vs_period", "input": "아침 먹고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 12, "category": "meal_vs_period", "input": "아침에 카페 가고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 13, "category": "meal_vs_period", "input": "점심 먹으러 가고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 14, "category": "meal_vs_period", "input": "점심쯤 전시 보고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 15, "category": "meal_vs_period", "input": "저녁 먹고 맥주 한잔하고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 16, "category": "meal_vs_period", "input": "저녁에 맥주 한잔하고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 17, "category": "meal_vs_period", "input": "오전에 박물관 가고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 18, "category": "meal_vs_period", "input": "오후에 쇼핑하고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 19, "category": "meal_vs_period", "input": "오후 2시에 카페 갈래", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 20, "category": "meal_vs_period", "input": "저녁 8시에 강남 약속 있어. 그 전엔 산책하고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 21, "category": "availability_duration", "input": "두 시간 시간 비어. 카페 가고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 22, "category": "availability_duration", "input": "45분 정도 여유 있어. 밥 먹고 싶어", "runtime_context": {"current_datetime": "2026-09-01T09:15:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 23, "category": "availability_duration", "input": "90분 뒤에 약속 있어. 전시 보고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 24, "category": "availability_duration", "input": "두 시간 뒤 잠실 가야 돼. 그 전에 쇼핑하고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 25, "category": "availability_duration", "input": "오후 5시부터 두 시간 비어. 카페 가고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 26, "category": "availability_duration", "input": "오후 5시부터 9시까지 시간 있어. 산책하고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 27, "category": "availability_duration", "input": "5시부터 9시까지 시간 있고 카페에서 한 시간 반 있고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 28, "category": "availability_duration", "input": "앞으로 90분 뭐 할까?", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 29, "category": "availability_duration", "input": "지금부터 세 시간 놀고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 30, "category": "availability_duration", "input": "한두 시간 정도 카페에 있고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 31, "category": "availability_duration", "input": "두세 시간 전시 보고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 32, "category": "availability_duration", "input": "최소 한 시간 반은 카페에 있고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 33, "category": "availability_duration", "input": "최대 두 시간만 쇼핑하고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 34, "category": "availability_duration", "input": "몇 시간 놀고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 35, "category": "availability_duration", "input": "두 시간 정도 시간 비었어. 카페 가고 싶어", "runtime_context": {}}
+{"test_id": 36, "category": "availability_duration", "input": "90분 뒤에 잠실 가야 해. 밥 먹고 싶어", "runtime_context": {}}
+{"test_id": 37, "category": "availability_duration", "input": "한 시간 반 정도 시간 있어. 산책하고 싶어", "runtime_context": {"current_datetime": "2026-09-01T23:30:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 38, "category": "availability_duration", "input": "90분 정도 비었어. 카페 갈래", "runtime_context": {"current_datetime": "2026-09-01T22:30:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 39, "category": "availability_duration", "input": "5시부터 9시까지 시간 있고 최소 2시간은 전시 보고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 40, "category": "availability_duration", "input": "앞으로 한두 시간 뭐 할까?", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 41, "category": "activity_revision_negation", "input": "카페 말고 밥 먹을래", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 42, "category": "activity_revision_negation", "input": "전시는 안 보고 쇼핑하고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 43, "category": "activity_revision_negation", "input": "산책하려다가 그냥 방탈출 할래", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 44, "category": "activity_revision_negation", "input": "술은 말고 커피 마시고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 45, "category": "activity_revision_negation", "input": "보드게임도 하고 오락실도 가고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 46, "category": "activity_revision_negation", "input": "미술관이랑 공연 보고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 47, "category": "activity_revision_negation", "input": "맛집 갔다가 카페 가고 맥주도 한잔하고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 48, "category": "activity_revision_negation", "input": "좀 걷고 쇼핑하고 커피 마시고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 49, "category": "activity_revision_negation", "input": "뭐하고 놀지?", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 50, "category": "activity_revision_negation", "input": "게임은 싫고 산책하고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 51, "category": "transport_boundary", "input": "걸어서 갈 만한 맛집 찾아줘", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 52, "category": "transport_boundary", "input": "도보로 갈 수 있는 카페 가고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 53, "category": "transport_boundary", "input": "산책 좀 하고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 54, "category": "transport_boundary", "input": "차 타고 미술관 갈래", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 55, "category": "transport_boundary", "input": "대중교통으로 카페 가고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 56, "category": "transport_boundary", "input": "지하철 말고 차로 갈래. 쇼핑하고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 57, "category": "transport_boundary", "input": "차는 안 가져왔고 걸어서 갈 만한 전시 보고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 58, "category": "transport_boundary", "input": "혼자 걷다가 카페 갈래", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 59, "category": "transport_boundary", "input": "도보 이동은 싫고 지하철로 가고 싶어. 밥 먹을래", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 60, "category": "transport_boundary", "input": "산책은 하고 싶은데 목적지까지는 차로 갈 거야", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 61, "category": "companions_scope", "input": "친구랑 밥 먹고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 62, "category": "companions_scope", "input": "7시에 친구 만나기 전에 혼자 카페 갈래", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 63, "category": "companions_scope", "input": "가족이랑 아이 데리고 쇼핑하고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 64, "category": "companions_scope", "input": "남자친구랑 전시 보고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 65, "category": "companions_scope", "input": "회사 동료랑 카페 가고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 66, "category": "companions_scope", "input": "혼자 말고 친구랑 산책할래", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 67, "category": "companions_scope", "input": "8시에 친구 만나기 전에 밥 먹고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 68, "category": "companions_scope", "input": "엄마랑 카페 갈래", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 69, "category": "companions_scope", "input": "아이랑 오락실 가고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 70, "category": "companions_scope", "input": "가족끼리 가는데 아이는 안 데려가. 밥 먹고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 71, "category": "budget_space", "input": "2만5천원까지 밥 먹는 데 쓸 수 있어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 72, "category": "budget_space", "input": "최대한 가성비 좋은 카페 가고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 73, "category": "budget_space", "input": "가격은 적당하면 돼. 전시 보고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 74, "category": "budget_space", "input": "좀 비싸도 괜찮아. 맛집 가고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 75, "category": "budget_space", "input": "돈은 전혀 상관없어. 쇼핑하고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 76, "category": "budget_space", "input": "3만원 안에서 가성비 좋게 밥 먹고 카페도 가고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 77, "category": "budget_space", "input": "실내에서 놀고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 78, "category": "budget_space", "input": "야외에서 산책하고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 79, "category": "budget_space", "input": "실내든 야외든 상관없어. 카페 가고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 80, "category": "budget_space", "input": "비 오니까 실내에서 전시 보고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 81, "category": "multi_constraint", "input": "내일 오후 4시에 성수에서 일정 끝나. 친구랑 지하철로 2만원 안에서 실내 전시를 한 시간 반 보고 싶고 저녁 8시엔 잠실 가야 해", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 82, "category": "multi_constraint", "input": "지금 홍대인데 9시에 강남 약속 있어. 그 전에 혼자 걸어서 갈 만한 카페에서 한 시간 있고 싶어. 가격은 적당하면 돼", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 83, "category": "multi_constraint", "input": "오전에 여의도에 있을 거야. 가족이랑 아이 데리고 차로 가서 5만원까지 실내에서 밥 먹고 쇼핑하고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 84, "category": "multi_constraint", "input": "6시에 광화문에서 끝나고 10시에 신촌 가야 해. 여자친구랑 야외 산책 두 시간 하고 싶고 돈은 별로 쓰기 싫어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 85, "category": "multi_constraint", "input": "오후에 성수 있을 거고 회사 동료랑 카페 갔다가 맥주 한잔하고 싶어. 4만원까지는 괜찮고 대중교통으로 갈래", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 86, "category": "multi_constraint", "input": "현재 잠실이야. 저녁 7시에 강남 가야 해. 친구랑 90분 정도 보드게임 하고 싶고 실내가 좋아", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 87, "category": "multi_constraint", "input": "내일 아침에 홍대에 있을 거고, 혼자 쇼핑 한두 시간 하고 싶어. 가격은 상관없어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 88, "category": "multi_constraint", "input": "5시부터 9시까지 비어. 가족이랑 차로 3만원 안에서 밥 먹고 카페 가고 싶은데 두 시간 정도 쓰고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 89, "category": "multi_constraint", "input": "지금부터 두 시간 뭐하지? 야외에서 친구랑 산책하고 싶고 돈은 적게 쓰고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 90, "category": "multi_constraint", "input": "저녁쯤 강남에 가야 하고 그 전에 여자친구랑 실내에서 전시 보고 카페 가고 싶어. 차로 갈 거야", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 91, "category": "typo_colloquial", "input": "혼자 카페좀 ㄱㄱ", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 92, "category": "typo_colloquial", "input": "여친이랑 전시보구 밥먹을래", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 93, "category": "typo_colloquial", "input": "지하철타구 쇼핑 ㄱ", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 94, "category": "typo_colloquial", "input": "두시간정도 놀고싶음", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 95, "category": "typo_colloquial", "input": "한시간 정도 시간빔 카페가고싶음", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 96, "category": "typo_colloquial", "input": "아 카페말고 술한잔할래", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 97, "category": "no_overinfer", "input": "조용하고 분위기 좋은 데 추천해줘", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 98, "category": "no_overinfer", "input": "데이트하기 좋은 곳 추천해줘", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 99, "category": "no_overinfer", "input": "날씨 좋으니까 어디 갈까?", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 100, "category": "no_overinfer", "input": "자전거 타고 갈 건데 피크닉 하고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}

@@ -1,0 +1,30 @@
+{"test_id": 1, "input": "오늘 강남에서 2시간 놀고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 2, "input": "홍대에서 카페 가고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 3, "input": "성수에서 놀다가 저녁에 잠실 가야 해", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 4, "input": "강남역에서 놀고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 5, "input": "홍대입구역에서 두 시간 놀고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 6, "input": "홍대입구에서 카페 가고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 7, "input": "서울숲에서 산책하고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 8, "input": "코엑스에서 쇼핑하고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 9, "input": "잠실에서 쇼핑하고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 10, "input": "잠실역에서 쇼핑하고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 11, "input": "광화문에서 카페 갈래", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 12, "input": "광화문역에서 카페 갈래", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 13, "input": "6시에 여의도에서 일정 끝나고 성수에서 카페 갔다가 9시에 잠실 가야 해", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 14, "input": "지금 사당인데 성수에서 전시 보고 8시에 잠실 가야 해", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 15, "input": "내일 5시에 사당에 있을 거야. 카페 가고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 16, "input": "7시에 홍대에서 친구 만나야 해. 그 전에 카페 갈래", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 17, "input": "홍대에서 친구랑 밥 먹고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 18, "input": "아침에 광화문에 갈 건데 카페 추천해줘", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 19, "input": "오후에 성수에 있을 거고 카페 가고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 20, "input": "성수에서 일정 끝나고 카페 가고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 21, "input": "성수에서 카페 갔다가 9시에 잠실 가야 해", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 22, "input": "서울숲에서 두 시간 걷다가 9시에 잠실 가야 해", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 23, "input": "강남에서 놀고 싶은데 차로 갈래", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 24, "input": "강남역에서 친구랑 3만원 안에서 밥 먹고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 25, "input": "지금 강남역인데 카페 가고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 26, "input": "지금 강남역인데 강남에서 카페 가고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 27, "input": "6시에 강남역에서 일정 끝나고 서울숲에서 산책하다가 9시에 홍대입구역 약속 있어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 28, "input": "서울숲에서 산책하고 싶어. 가격은 상관없어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 29, "input": "성수에서 2~3시간 놀고 싶고 저녁쯤 잠실 가야 해", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}
+{"test_id": 30, "input": "홍대입구역에서 혼자 한 시간 반 카페에 있고 싶어", "runtime_context": {"current_datetime": "2026-09-01T17:00:00+09:00", "timezone": "Asia/Seoul"}}

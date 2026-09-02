@@ -1,0 +1,68 @@
+{
+  "version": "1.3.1-resilience-freeze",
+  "status": "freeze",
+  "model": "gpt-5.6-luna",
+  "backend_fields": 16,
+  "freeze_core_sha256": {
+    "intent_parser_prompt_team_v1_3_COST_OPT.txt": "763eb86f1560285d4cc2b149041b8be73d14a3a41e29d70d80e07731bc30339a",
+    "user_intent_schema_team_v1_3_STRICT.json": "7b87af3eeefe29e109e8326dad1247eff1bb6bc38665399baeece1d925610d09",
+    "intent_postprocess.py": "da9dec2d04f36a261863209ea1e151cf886505ebb81e008f96c4d1ac48e1deb6",
+    "intent_parser.py": "7f1238bb8097fd96c1b66947eb093455592db362f85edb35544abb78d135fe78",
+    "runtime_resilience.py": "2d5b63d125b9024d30b70338a7d9272fb0f1259a0e77d584f2cb436acd90df00"
+  },
+  "historical_results": {
+    "v1_3_target_location_focus30": "30/30",
+    "v1_3_golden50": "50/50",
+    "v1_3_robustness30": "30/30",
+    "v1_3_blind100_v2_first_unseen": "97/100",
+    "v1_3_1_blind100_v2_reprocessed_regression": "100/100",
+    "v1_3_1_golden50_api_recheck": "50/50",
+    "v1_3_1_robustness30_api_recheck": "30/30"
+  },
+  "local_validation": {
+    "known_expected_fixed_point": "310/310",
+    "resilience_fault_injection": "25/25"
+  },
+  "real_api_smoke": {
+    "cases": "5/5",
+    "all_source": "llm",
+    "all_attempts": 1,
+    "prompt_cache_after_first": "4/4 hit",
+    "latency_ms": [
+      3954,
+      2555,
+      1885,
+      4345,
+      2049
+    ],
+    "total_tokens": [
+      2375,
+      2376,
+      2384,
+      2387,
+      2372
+    ],
+    "average_latency_ms": 2957.6,
+    "average_total_tokens": 2378.8
+  },
+  "resilience_defaults": {
+    "total_deadline_seconds": 8,
+    "first_attempt_timeout_seconds": 5,
+    "max_attempts": 2,
+    "retry_delay_seconds": 0.35,
+    "circuit_failure_threshold": 5,
+    "circuit_open_seconds": 30,
+    "result_cache_ttl_seconds": 86400,
+    "result_cache_mode": "fallback-only"
+  },
+  "hotfixes": [
+    {
+      "id": "windows-sqlite-close-fix1",
+      "reason": "Explicitly close SQLite connections to avoid WinError 32 during Windows file cleanup.",
+      "behavior_change": "resource cleanup only; prompt/schema/parser/retry/cache eligibility/fallback policy unchanged"
+    }
+  ],
+  "notes": [
+    "DEFAULT_PROMPT_CACHE_KEY retains the historical candidate string intentionally to preserve prompt-cache locality; it is not the Result Cache version key."
+  ]
+}

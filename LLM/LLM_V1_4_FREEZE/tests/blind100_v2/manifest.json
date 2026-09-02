@@ -1,0 +1,22 @@
+{
+  "name": "V1.3 Blind100 v2",
+  "protocol": "first-run blind/expansion; freeze core must not be edited before first run",
+  "case_count": 100,
+  "runtime_context_default": {
+    "current_datetime": "2026-09-01T17:00:00+09:00",
+    "timezone": "Asia/Seoul"
+  },
+  "category_counts": {
+    "location_role_scope": 25,
+    "time_period_scope": 15,
+    "availability_duration": 20,
+    "companions_scope": 10,
+    "activity_transport": 10,
+    "budget_space": 10,
+    "complex_generalization": 10
+  },
+  "notes": [
+    "No exact input overlap with V1.3 prior 210-case datasets is required by validator.",
+    "First-run score must be preserved even if failures are later added to regression."
+  ]
+}
