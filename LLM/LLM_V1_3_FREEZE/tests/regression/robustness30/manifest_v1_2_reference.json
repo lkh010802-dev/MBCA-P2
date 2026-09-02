@@ -1,0 +1,25 @@
+{
+  "suite": "Robustness Test V1.1",
+  "total_cases": 30,
+  "runtime_context": {
+    "current_datetime": "2026-08-28T17:00:00+09:00",
+    "timezone": "Asia/Seoul"
+  },
+  "categories": {
+    "typo_spacing": 5,
+    "colloquial_revision": 5,
+    "negation": 5,
+    "time_duration": 6,
+    "location_scope": 4,
+    "multi_constraint": 3,
+    "no_overinfer": 2
+  },
+  "policy_notes": [
+    "Golden 50 freeze 이후 신규 현실 입력 검증용",
+    "명시되지 않은 미지원 속성은 null/[]/default 유지",
+    "현재 위치만 언급하면 start_location_text=null",
+    "가용 시간 제약이 명시된 경우만 end_time으로 계산",
+    "단순 'N시간 뭐하지?'는 desired duration",
+    "자기수정 표현은 최종 의도를 우선"
+  ]
+}

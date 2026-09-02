@@ -1,0 +1,28 @@
+{
+  "name": "Blind/Expansion 100",
+  "version": "blind100_v1_frozen_before_first_api_run",
+  "purpose": "기존 Golden50/Robustness30과 정확히 겹치지 않는 신규 표현으로 Luna Hybrid FREEZE의 일반화 성능을 한 번 측정",
+  "cases": 100,
+  "category_counts": {
+    "location_time_scope": 10,
+    "meal_vs_period": 10,
+    "availability_duration": 20,
+    "activity_revision_negation": 10,
+    "transport_boundary": 10,
+    "companions_scope": 10,
+    "budget_space": 10,
+    "multi_constraint": 10,
+    "typo_colloquial": 6,
+    "no_overinfer": 4
+  },
+  "default_runtime_context": {
+    "current_datetime": "2026-09-01T17:00:00+09:00",
+    "timezone": "Asia/Seoul"
+  },
+  "blind_protocol": [
+    "첫 API 실행 전 prompt/schema/postprocess를 수정하지 않는다.",
+    "inputs.jsonl만 runner에 전달한다. golden.jsonl은 evaluator에서만 사용한다.",
+    "첫 100건 결과를 원본 blind score로 기록한다.",
+    "실패가 있어도 같은 blind100을 수정 후 성능 홍보용으로 재사용하지 않는다. 실패는 새 regression/focus set으로 편입한다."
+  ]
+}

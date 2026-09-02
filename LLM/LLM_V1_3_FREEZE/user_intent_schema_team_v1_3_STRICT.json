@@ -1,0 +1,179 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "start_location_text",
+    "target_location_text",
+    "target_location_scope",
+    "end_location_text",
+    "start_time",
+    "end_time",
+    "start_time_period",
+    "end_time_period",
+    "desired_duration_min_minutes",
+    "desired_duration_max_minutes",
+    "activities",
+    "transport_mode",
+    "companions",
+    "budget_max",
+    "budget_preference",
+    "space_preference"
+  ],
+  "properties": {
+    "start_location_text": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "target_location_text": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "target_location_scope": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "area",
+        "place",
+        null
+      ]
+    },
+    "end_location_text": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "start_time": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$"
+    },
+    "end_time": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$"
+    },
+    "start_time_period": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "morning",
+        "lunch",
+        "evening",
+        "am",
+        "pm",
+        null
+      ]
+    },
+    "end_time_period": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "morning",
+        "lunch",
+        "evening",
+        "am",
+        "pm",
+        null
+      ]
+    },
+    "desired_duration_min_minutes": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 1
+    },
+    "desired_duration_max_minutes": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 1
+    },
+    "activities": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "food",
+          "cafe",
+          "walk",
+          "culture",
+          "entertainment",
+          "shopping",
+          "drink"
+        ]
+      }
+    },
+    "transport_mode": {
+      "type": "string",
+      "enum": [
+        "auto",
+        "public_transit",
+        "walk",
+        "car"
+      ]
+    },
+    "companions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "solo",
+          "friend",
+          "partner",
+          "family",
+          "child",
+          "coworker"
+        ]
+      }
+    },
+    "budget_max": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "budget_preference": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "low",
+        "medium",
+        "flexible",
+        "any",
+        null
+      ]
+    },
+    "space_preference": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "indoor",
+        "outdoor",
+        "any",
+        null
+      ]
+    }
+  }
+}

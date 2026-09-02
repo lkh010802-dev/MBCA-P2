@@ -1,0 +1,21 @@
+{
+  "version": "V1.3-16FIELD-LUNA-HYBRID-FREEZE",
+  "model": "gpt-5.6-luna",
+  "output_fields": 16,
+  "freeze_core_sha256": {
+    "intent_parser_prompt_team_v1_3_COST_OPT.txt": "763eb86f1560285d4cc2b149041b8be73d14a3a41e29d70d80e07731bc30339a",
+    "intent_postprocess.py": "0597859a7ae0f386edada44ef815b36b9fbf0cf8d384cbc55fcd1de83001aa3b",
+    "user_intent_schema_team_v1_3_STRICT.json": "7b87af3eeefe29e109e8326dad1247eff1bb6bc38665399baeece1d925610d09",
+    "intent_parser.py": "cbd74c96e4cd6238a595f5811e7d91a16066f4cd9a9f254fdd9b41e196bffa9b",
+    "run_eval_v1_3_hybrid.py": "8694881073775699b81185016dbbe7c631996b5e658273b6d3034f6da29f7f55",
+    "evaluate_v1_3.py": "fa29e835b5c1f1d003414ab7b4ed7686c472a2cef0ceffd767e56e7e83c11031"
+  },
+  "known_api_validation": {
+    "target_location_focus30": "30/30",
+    "golden50": "50/50",
+    "robustness30": "30/30",
+    "total": "110/110"
+  },
+  "local_expected_validation_cases": 210,
+  "next_gate": "blind100_v2 first run"
+}
