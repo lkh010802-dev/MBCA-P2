@@ -1,0 +1,36 @@
+{
+  "name": "popup_crawler",
+  "version": "1.0.1",
+  "release_date": "2026-09-04",
+  "runtime": "Python + Playwright Chromium",
+  "primary_entrypoint": "run_daily.py",
+  "windows_manual_runner": "run_daily.bat",
+  "windows_scheduled_runner": "run_daily_scheduled.bat",
+  "windows_schedule_installer": "setup_daily_schedule.bat",
+  "backend_output": "output/YYYYMMDD_popup.csv",
+  "persistent_state_required_for_continuity": [
+    "data/master/"
+  ],
+  "tests": "146 passed",
+  "patch_date": "2026-09-04",
+  "coordinate_enrichment": "post-canonical Kakao/cache/same-address fallback",
+  "optional_env": [
+    "KAKAO_REST_API_KEY"
+  ],
+  "historical_csv_backfill": "backfill_coordinates.py",
+  "operation_hours_enrichment": "DayForYou full-detail raw extraction + deterministic schedule parsing + hotfix5",
+  "backend_operation_fields": [
+    "operation_hours_raw",
+    "operation_schedule",
+    "today_opening_time",
+    "today_closing_time",
+    "today_closed"
+  ],
+  "same_source_exact_dedupe": "official_url + normalized base address + exact dates + strong name identity",
+  "package_profile": "github_clean_source",
+  "backend_common_json": "backend_output/YYYYMMDD_popup_places.json",
+  "backend_latest_json": "backend_output/latest_popup_places.json",
+  "backend_adapter": "backend_adapter/popup_backend_adapter.py",
+  "backend_opening_time_policy": "opening_time=today_opening_time; closing_time=today_closing_time",
+  "duplicate_review_baseline": "0 after 2026-09-04 explicit decisions"
+}
