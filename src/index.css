@@ -1,0 +1,5 @@
+@import './App.css';
+* { box-sizing: border-box; }
+html { background: #eef5ff; }
+body { min-width: 320px; min-height: 100svh; margin: 0; color: #25262b; font-family: Pretendard, 'Noto Sans KR', 'Apple SD Gothic Neo', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+button, textarea, input { font: inherit; }
