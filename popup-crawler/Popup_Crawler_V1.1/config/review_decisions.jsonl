@@ -1,0 +1,32 @@
+{"decision_type":"CLASSIFICATION","record_id":"popga:7022","classification":"NON_POPUP","reason":"human_review_general_exhibition","note":"SEGA 역사 전시·굿즈·콜라보 카페 중심의 장기 일반 전시"}
+{"decision_type":"CLASSIFICATION","record_id":"popga:7146","classification":"NON_POPUP","reason":"human_review_long_brand_exhibition","note":"272일 브랜드 전시"}
+{"decision_type":"CLASSIFICATION","record_id":"dayforyou:26142","classification":"NON_POPUP","reason":"human_review_long_brand_exhibition","note":"Popga 7146과 동일한 장기 브랜드 전시"}
+{"decision_type":"CLASSIFICATION","record_id":"popga:7881","classification":"NON_POPUP","reason":"human_review_general_exhibition","note":"스파이더맨 일반 전시"}
+{"decision_type":"CLASSIFICATION","record_id":"dayforyou:31324","classification":"NON_POPUP","reason":"human_review_general_exhibition","note":"Popga 7881과 동일한 일반 전시"}
+{"decision_type":"CLASSIFICATION","record_id":"popply:4965","classification":"NON_POPUP","reason":"human_review_long_brand_exhibition","note":"Popga 7146 / DayForYou 26142와 동일한 메르세데스 장기 브랜드 전시"}
+{"decision_type":"DUPLICATE","left_record_id":"popga:8333","right_record_id":"dayforyou:35667","decision":"MERGE","reason":"human_review_same_event","note":"이치방쿠지 X 무신사"}
+{"decision_type":"DUPLICATE","left_record_id":"popga:8760","right_record_id":"dayforyou:36960","decision":"MERGE","reason":"human_review_same_event","note":"일리고 X 애즈유아"}
+{"decision_type":"DUPLICATE","left_record_id":"popga:8326","right_record_id":"dayforyou:35983","decision":"KEEP_SEPARATE","reason":"human_review_distinct_concepts","note":"동일 장소·기간이나 무릉도원과 30주년 크레페허브는 별도 행사"}
+{"decision_type":"DUPLICATE","left_record_id":"popga:8648","right_record_id":"dayforyou:36845","decision":"MERGE","reason":"human_review_same_event","note":"팬게이머 썸머 게임 클럽 / 인디게임 굿즈샵"}
+{"decision_type":"DUPLICATE","left_record_id":"popga:8712","right_record_id":"dayforyou:36834","decision":"MERGE","reason":"human_review_same_event","note":"MUKHA; 날짜 충돌은 field provenance로 보존"}
+{"decision_type":"DUPLICATE","left_record_id":"popga:8710","right_record_id":"dayforyou:36958","decision":"MERGE","reason":"human_review_same_event","note":"마망갸또; 복합시설 주소와 시작일 차이는 provenance로 보존"}
+{"decision_type":"DUPLICATE","left_record_id":"popga:7724","right_record_id":"popply:5340","decision":"MERGE","reason":"human_review_same_event","note":"PINGU x 롯데월드 아쿠아리움; 같은 IP/장소/종료일이며 시작일 차이는 source provenance로 보존"}
+{"decision_type":"CLASSIFICATION","record_id":"popply:4924","classification":"NON_POPUP","reason":"human_review_general_ticketed_exhibition","note":"진격의 거인展 FINAL은 동일 주소/기간 Popga 건과 같은 일반 티켓형 전시로 판단"}
+{"decision_type":"CLASSIFICATION","record_id":"popga:7286","classification":"NON_POPUP","reason":"human_review_long_term_flagship_store","note":"동일 주소/기간 Popply 상세의 첫 플래그십 스토어 GRAND OPEN과 일치하는 장기 상설 성격 공간"}
+{"decision_type":"CLASSIFICATION","record_id":"popply:5874","classification":"NON_POPUP","reason":"human_review_whole_event_festival","note":"2026 아덕페 전체는 카드쇼·하비쇼·덕후마켓·포토존 등 복합 페스티벌이며 설명 속 주술회전 X 리끌로우 팝업은 하위 코너"}
+{"decision_type":"CLASSIFICATION","record_id":"popga:8778","classification":"NON_POPUP","reason":"human_review_in_store_fair","note":"제5인격 겨울축제 페어 @홍대는 애니메이트 상설점 내 굿즈 판매·구매특전 페어로 독립 팝업스토어가 아님"}
+{"decision_type":"CLASSIFICATION","record_id":"popga:8779","classification":"NON_POPUP","reason":"human_review_in_store_fair","note":"제5인격 겨울축제 페어 @잠실은 애니메이트 상설점 내 굿즈 판매·구매특전 페어로 독립 팝업스토어가 아님"}
+{"decision_type":"DUPLICATE","left_record_id":"popga:8720","right_record_id":"popply:5867","decision":"MERGE","reason":"human_review_same_event","note":"솔트앤초콜릿 동일 팝업; 동일 장소/기간/브랜드"}
+{"decision_type":"DUPLICATE","left_record_id":"popga:7411","right_record_id":"dayforyou:37286","decision":"MERGE","reason":"human_review_same_event","note":"29CM X LOFT 동일 문구 팝업; 이름 표현 차이"}
+{"decision_type":"DUPLICATE","left_record_id":"dayforyou:37297","right_record_id":"popply:5867","decision":"MERGE","reason":"human_review_same_event","note":"솔트앤초콜릿 동일 팝업; DayForYou 제목 표현 차이"}
+{"decision_type":"DUPLICATE","left_record_id":"popga:8720","right_record_id":"dayforyou:37297","decision":"MERGE","reason":"human_review_same_event","note":"솔트앤초콜릿 동일 팝업; 이름 표현 차이"}
+{"decision_type":"DUPLICATE","left_record_id":"popga:7411","right_record_id":"popply:5870","decision":"MERGE","reason":"human_review_same_event","note":"29CM X LOFT 2026 문구 팝업 동일 행사"}
+{"decision_type":"DUPLICATE","left_record_id":"dayforyou:37286","right_record_id":"popply:5870","decision":"MERGE","reason":"human_review_same_event","note":"29CM X LOFT 2026 문구 팝업 동일 행사"}
+{"decision_type":"DUPLICATE","left_record_id":"dayforyou:37285","right_record_id":"popply:5870","decision":"MERGE","reason":"human_review_same_event","note":"29CM X LOFT PAGE TO PAGES 게시물과 동일 행사"}
+{"decision_type":"DUPLICATE","left_record_id":"popga:7411","right_record_id":"dayforyou:37285","decision":"MERGE","reason":"human_review_same_event","note":"29CM X LOFT PAGE TO PAGES 게시물과 동일 행사"}
+{"decision_type":"DUPLICATE","left_record_id":"popga:8852","right_record_id":"popply:5867","decision":"KEEP_SEPARATE","reason":"human_review_distinct_brands","note":"레스트앤레크레이션과 솔트앤초콜릿은 동일 더현대/기간의 별도 브랜드 팝업"}
+{"decision_type":"DUPLICATE","left_record_id":"popga:8743","right_record_id":"dayforyou:37296","decision":"KEEP_SEPARATE","reason":"human_review_distinct_brands","note":"러닉스와 S.A.C.(SALT AND CHOCOLATE)는 별도 브랜드 팝업"}
+{"decision_type":"DUPLICATE","left_record_id":"popga:8852","right_record_id":"dayforyou:37297","decision":"KEEP_SEPARATE","reason":"human_review_distinct_brands","note":"레스트앤레크레이션과 솔트앤초콜릿은 별도 브랜드 팝업"}
+{"decision_type":"DUPLICATE","left_record_id":"dayforyou:37296","right_record_id":"popply:5867","decision":"MERGE","reason":"human_review_brand_alias","note":"S.A.C.는 SALT AND CHOCOLATE의 브랜드 약칭; 동일 장소/기간"}
+{"decision_type":"DUPLICATE","left_record_id":"popga:8720","right_record_id":"dayforyou:37296","decision":"MERGE","reason":"human_review_brand_alias","note":"S.A.C.는 SALT AND CHOCOLATE의 브랜드 약칭; 동일 팝업"}
+{"decision_type":"DUPLICATE","left_record_id":"popga:8743","right_record_id":"popply:5867","decision":"KEEP_SEPARATE","reason":"human_review_distinct_brands","note":"러닉스와 솔트앤초콜릿은 동일 더현대/기간의 별도 브랜드 팝업"}
