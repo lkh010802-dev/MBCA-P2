@@ -1,0 +1,35 @@
+Popup Crawler v1.2 Production Stability Patch validation
+Date: 2026-09-08
+
+1) Full reconstructed project regression suite
+Ran 164 tests
+OK
+
+2) Production master recovery smoke test
+Input: 20260907_popup.csv
+Recovered: 431 rows
+Sample persistent ID: popup_91439c147f15f133
+source_refs preserved: YES
+master_status preserved: ACTIVE
+
+3) 2026-09-08 duplicate regressions covered
+- Amai Mochi / Bottari editorial alias cluster: no REVIEW
+- Conan collaboration cafe same-event cluster: AUTO merge
+- Unrelated collaboration cafe at same address: REJECT
+- Keroro same-source reposts: AUTO merge
+- Keroro different concrete street address: REJECT
+
+4) Safety behavior
+- Small unresolved review components -> quarantine only, safe rows may commit
+- Large review count/rate spike -> blocks master/CSV
+- Master state stored outside versioned code folder for scheduled/n8n runs
+- Missing production master can recover from previous master or latest CSV
+- Missing state with no recovery source blocks before source crawling unless one-time bootstrap is explicitly allowed
+
+5) Patch contents
+No .env
+No .venv
+No data/
+No output/
+No logs/
+No secrets

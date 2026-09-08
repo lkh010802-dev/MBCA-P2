@@ -1,0 +1,25 @@
+.venv/
+venv/
+__pycache__/
+*.pyc
+.env
+data/debug/*.html
+data/cache/detail_html/*.html
+data/runs/*/detail_html/*.html
+data/popga/runs/*/detail_html/*.html
+data/popply/runs/*/detail_html/*.html
+data/popply/runs/*/rendered_list_*.html
+
+# Runtime-generated persistent/artifact directories
+data/
+output/
+logs/
+*.log
+backend_output/
+
+# Local backup / temporary files
+*.bak
+*.bak_*
+*.bak_before_*
+*.tmp
+.pytest_cache/

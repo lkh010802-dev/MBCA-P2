@@ -1,0 +1,28 @@
+Popup Crawler v1.2 Production Stability Patch
+
+Runtime files:
+- run.py
+- run_daily.py
+- run_integrate.py
+- run_daily_scheduled.bat
+- run_daily_n8n.bat
+- VERSION
+- integration/duplicate.py
+- crawlers/dayforyou_detail.py
+- scripts/ensure_production_state.py
+- MIGRATE_PRODUCTION_STATE.bat
+- CHECK_PRODUCTION_STATE.bat
+
+Docs:
+- PATCH_README_PRODUCTION_STABILITY.md
+- DEPLOY_PRODUCTION.md
+
+Regression tests:
+- tests/test_production_stability_20260908.py
+- tests/test_duplicate_review_tolerance_v2.py
+- tests/test_integration.py
+- tests/test_v090.py
+- tests/test_v092.py
+- tests/test_v100.py
+
+This patch intentionally contains NO .env, .venv, data, output, logs, or server secrets.
