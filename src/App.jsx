@@ -4,10 +4,11 @@ import AnalysisLoading from './components/recommendation/AnalysisLoading'
 import RecommendationPage from './pages/RecommendationPage'
 import { useRecommendation } from './hooks/useRecommendation'
 import { useRef, useState } from 'react'
+import { readSession, writeSession } from './utils/sessionStore'
 
 function App() {
-  const [view, setView] = useState('welcome')
-  const [result, setResult] = useState(null)
+  const [result, setResult] = useState(() => readSession('koala-result', null))
+  const [view, setView] = useState(() => readSession('koala-result', null) ? 'result' : 'welcome')
   const requestId = useRef(0)
   const { request, error } = useRecommendation()
 
@@ -18,6 +19,7 @@ function App() {
     if (currentRequestId !== requestId.current) return
     if (response) {
       setResult(response)
+      writeSession('koala-result', response)
       setView('result')
     } else {
       setView('home')

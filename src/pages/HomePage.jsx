@@ -28,6 +28,7 @@ function HomePage({ isOpen, onRecommend, error }) {
       <section className="home-intro">
         <p className="home-eyebrow">오늘의 빈 시간을 채워볼까요?</p>
         <h1>오늘의 빈 시간을<br />채워볼까요?</h1>
+        <p className="home-intro-copy">현재 위치와 남은 시간, 하고 싶은 일을 적으면 주변 지역과 실제 이동 경로까지 추천해드려요.</p>
       </section>
       <button className={`location-card location-card--${status}`} type="button" onClick={requestLocation}>
         <span className="location-icon">⌖</span>
@@ -36,11 +37,12 @@ function HomePage({ isOpen, onRecommend, error }) {
       </button>
       <form className="recommendation-form" onSubmit={handleSubmit}>
         <label htmlFor="recommendation-message">어떤 시간을 보내고 싶으세요?</label>
-        <textarea id="recommendation-message" value={message} onChange={(event) => setMessage(event.target.value)} spellCheck={false} placeholder={'예) 지금부터 3시간 정도 시간 있고\n8시에 잠실 가야 해. 카페나 전시 보고 싶어.'} />
+        <p className="recommendation-hint">현재 위치·남은 시간·하고 싶은 일을 편하게 적어주세요.</p>
+        <textarea id="recommendation-message" value={message} onChange={(event) => setMessage(event.target.value)} spellCheck={false} placeholder={'예) 지금 신림역이고 3시간 있어. 카페에서 쉬다가 산책하고 싶어.'} />
         <section className="recommendation-guide" aria-label="코알라 추천 기준">
           <div className="guide-heading">
             <span className="guide-bubble">코알라가 살펴볼게요</span>
-            <small>한 문장에 담아주세요</small>
+            <small>입력한 문장에서 자동으로 정리해요</small>
           </div>
           <div className="guide-items">
             <span><b aria-hidden="true">📍</b>현재 위치</span>

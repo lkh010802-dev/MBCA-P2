@@ -1,6 +1,23 @@
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? 'http://127.0.0.1:8000'
 
-async function postJson(path, payload) {
+const responses = new Map()
+const pending = new Map()
+
+function postJson(path, payload, { fresh = false } = {}) {
+  const key = JSON.stringify([path, payload])
+  const cached = fresh ? null : responses.get(key)
+  if (cached?.expires > Date.now()) return Promise.resolve(cached.data)
+  if (pending.has(key)) return pending.get(key)
+  const request = sendJson(path, payload).then((data) => {
+    if (responses.size >= 50) responses.delete(responses.keys().next().value)
+    responses.set(key, { data, expires: Date.now() + 60000 })
+    return data
+  }).finally(() => pending.delete(key))
+  pending.set(key, request)
+  return request
+}
+
+async function sendJson(path, payload) {
   const response = await fetch(`${API_BASE_URL}${path}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -42,7 +59,7 @@ export function validatePlaceSelection({ startLatitude, startLongitude, selected
   })
 }
 
-export function requestCourse({ startLocation, selectedPlaces, availableTimeMinutes, endLocation, transportMode = 'auto' }) {
+export function requestCourse({ startLocation, selectedPlaces, availableTimeMinutes, endLocation, transportMode = 'auto', fresh = false }) {
   return postJson('/recommend/course', {
     start_location: startLocation,
     selected_places: selectedPlaces.map((place) => ({
@@ -54,16 +71,16 @@ export function requestCourse({ startLocation, selectedPlaces, availableTimeMinu
     available_time_minutes: availableTimeMinutes,
     end_location: endLocation ?? null,
     transport_mode: transportMode,
-  })
+  }, { fresh })
 }
 
-export async function requestRoutePreview({ startLatitude, startLongitude, endLatitude, endLongitude }) {
+export async function requestRoutePreview({ startLatitude, startLongitude, endLatitude, endLongitude, transportMode = 'auto' }) {
   const parameters = new URLSearchParams({
     start_latitude: startLatitude,
     start_longitude: startLongitude,
     end_latitude: endLatitude,
     end_longitude: endLongitude,
-    transport_mode: 'auto',
+    transport_mode: transportMode,
   })
   const response = await fetch(`${API_BASE_URL}/route-preview?${parameters}`)
   const data = await response.json().catch(() => ({}))
