@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.2 server automation - 2026-09-10
+
+- FastAPI 실행·상태·다운로드 API와 Bearer 토큰 인증을 추가했습니다.
+- 성공 상태 응답에 해당 실행에서 생성된 JSON 파일명, 날짜, 건수, 다운로드 경로를 포함합니다.
+- `YYYYMMDD_popup_places.json`을 날짜별로 다운로드할 수 있도록 했습니다.
+- n8n에서 매일 08:00 KST 실행, 완료 상태 반복 확인, 실제 결과 다운로드, 실패 이메일 알림을 구성했습니다.
+- 다섯 종류의 실행 중간 폴더를 7일 보관하고 매일 09:30 KST에 정리하는 스크립트와 systemd timer를 추가했습니다.
+- 정리 중에도 캐시, 날짜별 JSON, 영구 상태와 각 종류의 최신 실행 폴더는 유지합니다.
+
 ## 1.0.1 backend-adapter / Git clean refresh - 2026-09-04
 
 - duplicate REVIEW 14건을 명시적 review decision으로 해소하여 최신 일일 실행에서 duplicate_review=0 / master commit 성공 상태를 반영했습니다.

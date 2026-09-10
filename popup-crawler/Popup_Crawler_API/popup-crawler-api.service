@@ -1,0 +1,15 @@
+[Unit]
+Description=Popup Crawler FastAPI
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/popup-crawler-api
+EnvironmentFile=/home/ubuntu/popup-crawler-api/.env
+ExecStart=/home/ubuntu/popup-crawler/.venv/bin/uvicorn app:app --host 127.0.0.1 --port 8000
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,10 @@
+[Unit]
+Description=Run Popup Crawler cleanup every day
+
+[Timer]
+OnCalendar=*-*-* 09:30:00 Asia/Seoul
+Persistent=true
+Unit=popup-crawler-cleanup.service
+
+[Install]
+WantedBy=timers.target

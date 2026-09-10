@@ -1,0 +1,12 @@
+[Unit]
+Description=Popup Crawler old run cleanup
+After=network.target
+
+[Service]
+Type=oneshot
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/home/ubuntu/popup-crawler
+ExecStart=/home/ubuntu/popup-crawler/.venv/bin/python /home/ubuntu/popup-crawler/scripts/cleanup_old_runs.py --days 7 --apply
+Nice=10
+IOSchedulingClass=idle
