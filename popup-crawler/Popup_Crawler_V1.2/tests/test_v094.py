@@ -151,7 +151,13 @@ class V094Tests(unittest.TestCase):
             ]
 
         with tempfile.TemporaryDirectory() as tmp:
-            with patch("crawlers.popply_detail._fetch_details_serial", side_effect=fake_serial):
+            with (
+                patch(
+                    "crawlers.popply_detail._fetch_http_chunk",
+                    side_effect=lambda chunk, _html_dir, **_kwargs: ([], chunk),
+                ),
+                patch("crawlers.popply_detail._fetch_details_serial", side_effect=fake_serial),
+            ):
                 result = fetch_details(rows, Path(tmp), workers=2)
 
         self.assertEqual([row["source_id"] for row in result], ["1", "2", "3", "4", "5"])

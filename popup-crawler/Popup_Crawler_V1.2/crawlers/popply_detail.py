@@ -9,6 +9,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 from bs4 import BeautifulSoup
+import requests
 
 from crawlers.popply import ROAD_LOCATION_RE, SEOUL_RE, _clean, _parse_period
 
@@ -497,6 +498,62 @@ def _fetch_details_serial(
     return results
 
 
+def _fetch_http_chunk(
+    chunk: list[tuple[int, dict]],
+    html_dir: Path,
+    *,
+    delay_ms: int,
+) -> tuple[list[tuple[int, dict]], list[tuple[int, dict]]]:
+    """Next.js가 서버에서 렌더링한 공개 HTML을 먼저 읽고 불완전한 건만 fallback한다."""
+    completed: list[tuple[int, dict]] = []
+    fallback: list[tuple[int, dict]] = []
+    session = requests.Session()
+    session.headers.update({
+        "User-Agent": "Mozilla/5.0 (compatible; PopupCrawler/1.2; low-frequency public-page fetch)"
+    })
+
+    try:
+        for offset, (index, row) in enumerate(chunk):
+            source_id = str(row["source_id"])
+            detail_url = str(row["detail_url"])
+            started = time.monotonic()
+            try:
+                response = session.get(detail_url, timeout=(5, 20))
+                html = response.content.decode("utf-8", errors="replace")
+                record = parse_detail_html(
+                    html,
+                    source_id=source_id,
+                    detail_url=detail_url,
+                    http_status=response.status_code,
+                )
+                if response.status_code == 200 and core_detail_complete(record):
+                    (html_dir / f"{source_id}.html").write_text(html, encoding="utf-8")
+                    duration = round(time.monotonic() - started, 3)
+                    record.update({
+                        "fetched_from_cache": False,
+                        "cache_recovered_after_live_failure": False,
+                        "core_detail_complete": True,
+                        "live_attempt_count": 1,
+                        "detail_transport": "http_ssr",
+                        "fetch_duration_seconds": duration,
+                        "navigation_duration_seconds": duration,
+                    })
+                    completed.append((index, record))
+                    print(f"    [POPPLY HTTP] {source_id} - ok ({duration:.2f}s)", flush=True)
+                else:
+                    fallback.append((index, row))
+                    print(f"    [POPPLY HTTP] {source_id} - browser fallback", flush=True)
+            except requests.RequestException as exc:
+                fallback.append((index, row))
+                print(f"    [POPPLY HTTP] {source_id} - {type(exc).__name__}, browser fallback", flush=True)
+
+            if offset + 1 < len(chunk) and delay_ms:
+                time.sleep(max(0.0, delay_ms / 1000.0))
+    finally:
+        session.close()
+    return completed, fallback
+
+
 def fetch_details(
     rows: list[dict],
     html_dir: Path,
@@ -542,7 +599,7 @@ def fetch_details(
     for offset, job in enumerate(live_jobs):
         chunks[offset % worker_count].append(job)
 
-    def run_chunk(chunk: list[tuple[int, dict]]) -> list[tuple[int, dict]]:
+    def run_browser_chunk(chunk: list[tuple[int, dict]]) -> list[tuple[int, dict]]:
         values = _fetch_details_serial(
             [row for _, row in chunk],
             html_dir,
@@ -553,20 +610,48 @@ def fetch_details(
             cache_ids=set(),
             cache_max_age_hours=cache_max_age_hours,
         )
-        return [(chunk[pos][0], record) for pos, record in enumerate(values)]
+        completed: list[tuple[int, dict]] = []
+        for pos, record in enumerate(values):
+            record["detail_transport"] = "playwright_fallback"
+            completed.append((chunk[pos][0], record))
+        return completed
 
+    http_completed: list[tuple[int, dict]] = []
+    browser_jobs: list[tuple[int, dict]] = []
     if worker_count == 1:
-        completed_chunks = [run_chunk(chunks[0])]
+        completed, fallback = _fetch_http_chunk(chunks[0], html_dir, delay_ms=delay_ms)
+        http_completed.extend(completed)
+        browser_jobs.extend(fallback)
     else:
-        completed_chunks = []
         with ThreadPoolExecutor(max_workers=worker_count) as executor:
-            futures = {executor.submit(run_chunk, chunk): chunk for chunk in chunks}
+            futures = {
+                executor.submit(_fetch_http_chunk, chunk, html_dir, delay_ms=delay_ms): chunk
+                for chunk in chunks
+            }
             for future in as_completed(futures):
-                completed_chunks.append(future.result())
+                completed, fallback = future.result()
+                http_completed.extend(completed)
+                browser_jobs.extend(fallback)
 
-    for completed in completed_chunks:
-        for index, record in completed:
-            ordered[index] = record
+    for index, record in http_completed:
+        ordered[index] = record
+
+    if browser_jobs:
+        browser_worker_count = min(worker_count, len(browser_jobs))
+        browser_chunks: list[list[tuple[int, dict]]] = [[] for _ in range(browser_worker_count)]
+        for offset, job in enumerate(sorted(browser_jobs)):
+            browser_chunks[offset % browser_worker_count].append(job)
+        if browser_worker_count == 1:
+            browser_completed = [run_browser_chunk(browser_chunks[0])]
+        else:
+            browser_completed = []
+            with ThreadPoolExecutor(max_workers=browser_worker_count) as executor:
+                futures = [executor.submit(run_browser_chunk, chunk) for chunk in browser_chunks]
+                for future in as_completed(futures):
+                    browser_completed.append(future.result())
+        for completed in browser_completed:
+            for index, record in completed:
+                ordered[index] = record
 
     if any(record is None for record in ordered):
         raise RuntimeError("Popply detail worker returned an incomplete result set")

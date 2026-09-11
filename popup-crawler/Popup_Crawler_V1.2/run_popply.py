@@ -323,6 +323,10 @@ def main() -> None:
             "cache_plan": cache_plan,
             "scheduled_refresh_source_ids": sorted(refresh_ids),
             "worker_count": max(1, args.detail_workers),
+            "http_ssr_count": sum(x.get("detail_transport") == "http_ssr" for x in details),
+            "playwright_fallback_count": sum(
+                x.get("detail_transport") == "playwright_fallback" for x in details
+            ),
             "live_fetch_duration_seconds": round(sum(
                 float(x.get("fetch_duration_seconds") or 0.0) for x in details
                 if not bool(x.get("fetched_from_cache"))
