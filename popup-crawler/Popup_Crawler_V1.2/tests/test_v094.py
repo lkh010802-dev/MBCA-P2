@@ -6,16 +6,19 @@ import time
 import unittest
 from datetime import date
 from pathlib import Path
+from unittest.mock import patch
 
 from crawlers.popply_detail import (
     _read_valid_cached_record,
     _recover_cache_after_live_error,
     core_detail_complete,
+    fetch_details,
     parse_detail_html,
 )
 from integration.classifier import classify_dayforyou_final, classify_popga, classify_popply
 from integration.master import update_master
 from run_daily import validate_popply
+from run_popply import plan_cache_refresh
 
 
 VALID_HTML = """
@@ -94,6 +97,64 @@ class V094Tests(unittest.TestCase):
             self.assertTrue(record["cache_recovered_after_live_failure"])
             self.assertTrue(record["core_detail_complete"])
             self.assertTrue((out / "1.html").exists())
+
+    def test_cache_refresh_plan_spreads_oldest_valid_rows_across_runs(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            cache = Path(tmp)
+            rows = []
+            now = time.time()
+            for source_id, age_hours in (("1", 70), ("2", 60), ("3", 10)):
+                html = VALID_HTML.replace("테스트 팝업", f"테스트 팝업 {source_id}")
+                path = cache / f"{source_id}.html"
+                path.write_text(html * 10, encoding="utf-8")
+                modified = now - age_hours * 3600
+                os.utime(path, (modified, modified))
+                rows.append({
+                    "source_id": source_id,
+                    "detail_url": f"https://popply.co.kr/popup/{source_id}",
+                    "name": f"테스트 팝업 {source_id}",
+                    "start_date": "2026-09-04",
+                    "end_date": "2026-09-07",
+                })
+
+            cache_ids, refresh_ids, diagnostics = plan_cache_refresh(
+                rows,
+                candidate_ids={"1", "2", "3"},
+                cache_dirs=[cache],
+                cache_max_age_hours=168,
+                refresh_after_hours=48,
+                refresh_budget=1,
+            )
+
+            self.assertEqual(refresh_ids, {"1"})
+            self.assertEqual(cache_ids, {"2", "3"})
+            self.assertEqual(diagnostics["scheduled_refresh_count"], 1)
+            self.assertEqual(diagnostics["planned_cache_count"], 2)
+
+    def test_parallel_detail_workers_preserve_input_order(self):
+        rows = [
+            {"source_id": str(source_id), "detail_url": f"https://example.com/{source_id}"}
+            for source_id in range(1, 6)
+        ]
+
+        def fake_serial(chunk, _html_dir, **_kwargs):
+            # 서로 다른 worker가 다른 속도로 끝나도 최종 결과는 원래 순서여야 한다.
+            if chunk and chunk[0]["source_id"] == "1":
+                time.sleep(0.03)
+            return [
+                {
+                    "source_id": row["source_id"],
+                    "fetch_ok": True,
+                    "fetched_from_cache": False,
+                }
+                for row in chunk
+            ]
+
+        with tempfile.TemporaryDirectory() as tmp:
+            with patch("crawlers.popply_detail._fetch_details_serial", side_effect=fake_serial):
+                result = fetch_details(rows, Path(tmp), workers=2)
+
+        self.assertEqual([row["source_id"] for row in result], ["1", "2", "3", "4", "5"])
 
     def test_popply_core_incomplete_blocks_daily_commit(self):
         with tempfile.TemporaryDirectory() as tmp:

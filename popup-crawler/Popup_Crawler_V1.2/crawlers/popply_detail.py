@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from concurrent.futures import ThreadPoolExecutor, as_completed
 import re
 import shutil
 import time
@@ -292,7 +293,7 @@ def _recover_cache_after_live_error(
     return cached
 
 
-def fetch_details(
+def _fetch_details_serial(
     rows: list[dict],
     html_dir: Path,
     *,
@@ -319,7 +320,7 @@ def fetch_details(
 
         # 상세 텍스트 파싱에 불필요한 무거운 리소스만 차단한다. JS/XHR/document는 유지한다.
         def route_handler(route):
-            if route.request.resource_type in {"image", "media", "font"}:
+            if route.request.resource_type in {"image", "media", "font", "stylesheet"}:
                 route.abort()
             else:
                 route.continue_()
@@ -358,19 +359,26 @@ def fetch_details(
             record = None
             candidate = None
             live_attempts = 0
+            page_started = time.monotonic()
+            navigation_seconds = 0.0
             try:
                 for attempt in (1, 2):
                     live_attempts = attempt
 
                     if attempt == 1:
+                        navigation_started = time.monotonic()
                         response = page.goto(
                             detail_url,
-                            wait_until="domcontentloaded",
-                            timeout=60_000,
+                            # 전체 DOMContentLoaded보다 실제 상세 필드 준비 여부가 중요하다.
+                            # commit 이후 필요한 DOM만 기다리면 느린 부가 스크립트에 덜 묶인다.
+                            wait_until="commit",
+                            timeout=30_000,
                         )
+                        navigation_seconds = time.monotonic() - navigation_started
                         page.wait_for_selector(
                             ".popupdetail-title-info",
-                            timeout=30_000,
+                            state="attached",
+                            timeout=15_000,
                         )
                         wait_ms = 8_000
                     else:
@@ -479,10 +487,88 @@ def fetch_details(
                         "live_attempt_count": live_attempts,
                     })
                     print(f" - fail ({type(exc).__name__})", flush=True)
+            record["fetch_duration_seconds"] = round(time.monotonic() - page_started, 3)
+            record["navigation_duration_seconds"] = round(navigation_seconds, 3)
             results.append(record)
             if index < total and delay_ms:
                 page.wait_for_timeout(max(0, delay_ms))
         context.close()
         browser.close()
     return results
+
+
+def fetch_details(
+    rows: list[dict],
+    html_dir: Path,
+    *,
+    delay_ms: int = 700,
+    settle_ms: int = 250,
+    headless: bool = True,
+    cache_dirs: list[Path] | None = None,
+    cache_ids: set[str] | None = None,
+    cache_max_age_hours: float = 168.0,
+    workers: int = 2,
+) -> list[dict]:
+    """캐시는 즉시 처리하고 live 상세만 제한된 수의 브라우저로 병렬 수집한다."""
+    html_dir.mkdir(parents=True, exist_ok=True)
+    cache_dirs = [Path(x) for x in (cache_dirs or []) if Path(x).exists()]
+    cache_ids = {str(x) for x in (cache_ids or set())}
+    ordered: list[dict | None] = [None] * len(rows)
+    live_jobs: list[tuple[int, dict]] = []
+
+    for index, row in enumerate(rows):
+        source_id = str(row["source_id"])
+        if source_id in cache_ids and cache_dirs:
+            cached, cached_path, age_hours = _read_valid_cached_record(
+                row, cache_dirs=cache_dirs, cache_max_age_hours=cache_max_age_hours
+            )
+            if cached is not None and cached_path is not None:
+                shutil.copy2(cached_path, html_dir / f"{source_id}.html")
+                cached["fetched_from_cache"] = True
+                cached["cache_recovered_after_live_failure"] = False
+                cached["core_detail_complete"] = True
+                cached["cache_age_hours"] = age_hours
+                cached["fetch_duration_seconds"] = 0.0
+                cached["navigation_duration_seconds"] = 0.0
+                ordered[index] = cached
+                continue
+        live_jobs.append((index, row))
+
+    if not live_jobs:
+        return [record for record in ordered if record is not None]
+
+    worker_count = min(max(1, int(workers)), len(live_jobs))
+    chunks: list[list[tuple[int, dict]]] = [[] for _ in range(worker_count)]
+    for offset, job in enumerate(live_jobs):
+        chunks[offset % worker_count].append(job)
+
+    def run_chunk(chunk: list[tuple[int, dict]]) -> list[tuple[int, dict]]:
+        values = _fetch_details_serial(
+            [row for _, row in chunk],
+            html_dir,
+            delay_ms=delay_ms,
+            settle_ms=settle_ms,
+            headless=headless,
+            cache_dirs=cache_dirs,
+            cache_ids=set(),
+            cache_max_age_hours=cache_max_age_hours,
+        )
+        return [(chunk[pos][0], record) for pos, record in enumerate(values)]
+
+    if worker_count == 1:
+        completed_chunks = [run_chunk(chunks[0])]
+    else:
+        completed_chunks = []
+        with ThreadPoolExecutor(max_workers=worker_count) as executor:
+            futures = {executor.submit(run_chunk, chunk): chunk for chunk in chunks}
+            for future in as_completed(futures):
+                completed_chunks.append(future.result())
+
+    for completed in completed_chunks:
+        for index, record in completed:
+            ordered[index] = record
+
+    if any(record is None for record in ordered):
+        raise RuntimeError("Popply detail worker returned an incomplete result set")
+    return [record for record in ordered if record is not None]
 

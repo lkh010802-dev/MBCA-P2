@@ -9,7 +9,7 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 from crawlers.popply import crawl_popply_lists, save_jsonl
-from crawlers.popply_detail import fetch_details
+from crawlers.popply_detail import _read_valid_cached_record, fetch_details
 
 
 SEOUL_TZ = ZoneInfo("Asia/Seoul")
@@ -121,13 +121,60 @@ def unchanged_active_ids(current: list[dict], previous: list[dict]) -> set[str]:
             result.add(str(row.get("source_id")))
     return result
 
+
+def plan_cache_refresh(
+    rows: list[dict],
+    *,
+    candidate_ids: set[str],
+    cache_dirs: list[Path],
+    cache_max_age_hours: float,
+    refresh_after_hours: float,
+    refresh_budget: int,
+) -> tuple[set[str], set[str], dict[str, int]]:
+    """오래된 valid cache 중 정해진 수만 live 갱신 대상으로 돌린다."""
+    usable: set[str] = set()
+    refreshable: list[tuple[float, str]] = []
+
+    for row in rows:
+        source_id = str(row.get("source_id"))
+        if source_id not in candidate_ids:
+            continue
+        record, _path, age_hours = _read_valid_cached_record(
+            row,
+            cache_dirs=cache_dirs,
+            cache_max_age_hours=max(0.0, cache_max_age_hours),
+        )
+        if record is None or age_hours is None:
+            continue
+        usable.add(source_id)
+        if age_hours >= max(0.0, refresh_after_hours):
+            refreshable.append((age_hours, source_id))
+
+    # 가장 오래된 것부터 갱신해 동일한 날에 캐시 만료가 몰리지 않게 한다.
+    refreshable.sort(reverse=True)
+    refresh_ids = {
+        source_id for _age, source_id in refreshable[:max(0, refresh_budget)]
+    }
+    cache_ids = usable - refresh_ids
+    diagnostics = {
+        "candidate_count": len(candidate_ids),
+        "usable_count": len(usable),
+        "rejected_or_missing_count": len(candidate_ids - usable),
+        "scheduled_refresh_count": len(refresh_ids),
+        "planned_cache_count": len(cache_ids),
+    }
+    return cache_ids, refresh_ids, diagnostics
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Popply 공개 목록/상세 저빈도 수집")
     parser.add_argument("--details", action="store_true", help="서울 후보의 공개 상세 DOM도 수집")
     parser.add_argument("--detail-limit", type=int, default=None, metavar="N", help="상세 수집을 앞 N건으로 제한")
     parser.add_argument("--detail-delay-ms", type=int, default=int(os.getenv("POPPLY_DETAIL_DELAY_MS", "700")), help="상세 요청 사이 대기(ms), 기본 700")
     parser.add_argument("--detail-settle-ms", type=int, default=int(os.getenv("POPPLY_DETAIL_SETTLE_MS", "250")), help="상세 DOM 확인 후 추가 안정화 대기(ms), 기본 250")
-    parser.add_argument("--detail-cache-hours", type=float, default=float(os.getenv("POPPLY_DETAIL_CACHE_HOURS", "54")), help="변경 없는 ACTIVE 상세 캐시 TTL(시간), 기본 54")
+    parser.add_argument("--detail-cache-hours", type=float, default=float(os.getenv("POPPLY_DETAIL_CACHE_HOURS", "168")), help="변경 없는 ACTIVE 상세 캐시 최대 TTL(시간), 기본 168")
+    parser.add_argument("--detail-refresh-after-hours", type=float, default=float(os.getenv("POPPLY_DETAIL_REFRESH_AFTER_HOURS", "48")), help="분산 live 갱신 후보가 되는 캐시 나이(시간), 기본 48")
+    parser.add_argument("--detail-refresh-budget", type=int, default=int(os.getenv("POPPLY_DETAIL_REFRESH_BUDGET", "20")), help="한 실행에서 분산 갱신할 unchanged ACTIVE 최대 건수, 기본 20")
+    parser.add_argument("--detail-workers", type=int, default=int(os.getenv("POPPLY_DETAIL_WORKERS", "2")), help="Popply live 상세 동시 수집 수, 기본 2")
     parser.add_argument("--no-detail-cache", action="store_true", help="이전 상세 캐시를 사용하지 않고 전부 live fetch")
     parser.add_argument("--headed", action="store_true", help="Playwright 브라우저 창 표시")
     return parser.parse_args()
@@ -139,7 +186,9 @@ def main() -> None:
     today = now.date()
     timestamp = now.strftime("%Y%m%d_%H%M%S")
     runs_base = Path("data/popply/runs")
-    previous_dirs = previous_run_dirs(runs_base, limit=6)
+    # 7일 TTL 안의 cache를 찾되 같은 날의 수동/검증 실행이 과거 run을 밀어내지 않게
+    # 최근 run을 넉넉히 탐색한다.
+    previous_dirs = previous_run_dirs(runs_base, limit=30)
     previous_dir = previous_dirs[0] if previous_dirs else None
     run_dir = runs_base / timestamp
     run_dir.mkdir(parents=True, exist_ok=True)
@@ -182,6 +231,14 @@ def main() -> None:
         detail_is_partial = len(targets) < len(normalized)
         print(f"[3/5] 공개 상세 DOM 수집/파싱: {len(targets)}건")
         cache_ids: set[str] = set()
+        refresh_ids: set[str] = set()
+        cache_plan = {
+            "candidate_count": 0,
+            "usable_count": 0,
+            "rejected_or_missing_count": 0,
+            "scheduled_refresh_count": 0,
+            "planned_cache_count": 0,
+        }
         cache_dirs: list[Path] = []
         if previous_dir and not args.no_detail_cache:
             previous_rows = load_jsonl(previous_dir / "normalized_list_preview.jsonl")
@@ -191,9 +248,17 @@ def main() -> None:
                 for prior in previous_dirs
                 if (prior / "detail_html").exists()
             ]
+            cache_ids, refresh_ids, cache_plan = plan_cache_refresh(
+                targets,
+                candidate_ids=cache_ids,
+                cache_dirs=cache_dirs,
+                cache_max_age_hours=max(0.0, args.detail_cache_hours),
+                refresh_after_hours=max(0.0, args.detail_refresh_after_hours),
+                refresh_budget=max(0, args.detail_refresh_budget),
+            )
         print(
-            f"      상세 캐시 후보: {len(cache_ids)}건 / live 우선: "
-            f"{len(targets) - len(cache_ids)}건"
+            f"      상세 캐시 사용: {len(cache_ids)}건 / 분산 갱신: {len(refresh_ids)}건 / "
+            f"live 합계: {len(targets) - len(cache_ids)}건"
         )
         details = fetch_details(
             targets,
@@ -204,6 +269,7 @@ def main() -> None:
             cache_dirs=cache_dirs,
             cache_ids=cache_ids,
             cache_max_age_hours=max(0.0, args.detail_cache_hours),
+            workers=max(1, args.detail_workers),
         )
         save_jsonl(details, run_dir / "details.jsonl")
         enriched = enrich_with_details(normalized, details, today=today)
@@ -254,6 +320,17 @@ def main() -> None:
             "failed_count": sum(not bool(x.get("fetch_ok")) for x in details),
             "cache_hit_count": sum(bool(x.get("fetched_from_cache")) for x in details),
             "live_fetch_count": sum(not bool(x.get("fetched_from_cache")) for x in details),
+            "cache_plan": cache_plan,
+            "scheduled_refresh_source_ids": sorted(refresh_ids),
+            "worker_count": max(1, args.detail_workers),
+            "live_fetch_duration_seconds": round(sum(
+                float(x.get("fetch_duration_seconds") or 0.0) for x in details
+                if not bool(x.get("fetched_from_cache"))
+            ), 3),
+            "max_live_fetch_duration_seconds": round(max([
+                float(x.get("fetch_duration_seconds") or 0.0) for x in details
+                if not bool(x.get("fetched_from_cache"))
+            ] or [0.0]), 3),
             "cache_recovery_count": sum(bool(x.get("cache_recovered_after_live_failure")) for x in details),
             "core_detail_incomplete_count": sum(not bool(x.get("core_detail_complete")) for x in details),
             "retried_live_count": sum(int(x.get("live_attempt_count") or 0) >= 2 for x in details),
