@@ -77,11 +77,48 @@ CASES = [
         intent(activities=["walk"], transport_mode="public_transit"),
         {"transport_mode": "public_transit"},
     ),
+    (
+        "now_at_station_activity_moves_start_to_target",
+        "지금 합정역에서 카페에 가고 싶어.",
+        intent(start_location_text="합정역", activities=["cafe"]),
+        {
+            "start_location_text": None,
+            "target_location_text": "합정역",
+            "target_location_scope": "place",
+        },
+    ),
+    (
+        "currently_at_station_activity_moves_start_to_target",
+        "현재 합정역에서 전시를 보고 싶어.",
+        intent(start_location_text="합정역", activities=["culture"]),
+        {
+            "start_location_text": None,
+            "target_location_text": "합정역",
+            "target_location_scope": "place",
+        },
+    ),
+    (
+        "explicit_current_state_remains_start",
+        "지금 합정역인데 여기서 카페에 가고 싶어.",
+        intent(start_location_text="합정역", activities=["cafe"]),
+        {"start_location_text": "합정역", "target_location_text": None},
+    ),
+    (
+        "explicit_departure_remains_start",
+        "지금 합정역에서 출발해서 망원에서 산책하고 싶어.",
+        intent(
+            start_location_text="합정역",
+            target_location_text="망원",
+            target_location_scope="area",
+            activities=["walk"],
+        ),
+        {"start_location_text": "합정역", "target_location_text": "망원"},
+    ),
 ]
 
 
 def main():
-    assert PARSER_VERSION == "1.4.1-start-location-priority"
+    assert PARSER_VERSION == "1.4.1-location-role-v3"
     failures = []
     for name, text, predicted, expected in CASES:
         actual, changes = postprocess_intent(text, {}, predicted)

@@ -44,6 +44,21 @@ _EXPLICIT_SPACE_ANY_RE = re.compile(
     r".{0,24}상관\s*없|상관\s*없.{0,24}(?:실내외|실내|야외|바깥|밖(?:에서|으로|이|도))"
 )
 
+# Narrow location-role guard for a frequent Korean ambiguity:
+# "지금 X에서 카페/밥/전시..." uses X as the activity location, while
+# "지금 X인데/에 있어/에서 출발..." describes the current/departure location.
+# The guard only repairs the first form when the model emitted X as start and no target.
+_DIRECT_ACTIVITY_AFTER_LOCATION_RE = re.compile(
+    r"^(?:(?:바로|먼저|좀|잠깐|친구(?:들)?(?:과|랑|하고)?|혼자)\s*)*"
+    r"(?:밥|맛집|식사|먹|카페|커피|전시|박물관|미술관|공연|"
+    r"쇼핑|산책|걷|술|맥주|소주|와인|한잔|방탈출|보드게임|오락실|게임)"
+)
+_PLACE_LOCATION_RE = re.compile(
+    r"(?:역|공항|터미널|정류장|공원|궁|타워|몰|백화점|시장|호텔|"
+    r"박물관|미술관|대학교|대학|센터|빌딩|아울렛)$"
+)
+_KNOWN_PLACE_NAMES = {"코엑스", "서울숲"}
+
 # Current policy maps culture only from explicit cultural-activity cues.
 # A landmark name or generic "구경" alone must not create culture.
 _EXPLICIT_CULTURE_CUE_RE = re.compile(r"전시|박물관|미술관|공연")
@@ -136,6 +151,25 @@ def _current_clock_plus_minutes(context: dict, minutes: int):
         return None
 
 
+def _now_activity_uses_predicted_start(user_input: str, location: str) -> bool:
+    if not location:
+        return False
+    match = re.search(
+        rf"(?:지금|현재)\s*{re.escape(location)}(?:\s*근처)?에서\s*",
+        user_input,
+    )
+    if not match:
+        return False
+    return bool(_DIRECT_ACTIVITY_AFTER_LOCATION_RE.match(user_input[match.end():]))
+
+
+def _target_scope_for_reclassified_location(location: str) -> str:
+    compact = re.sub(r"\s+", "", location or "")
+    if compact in _KNOWN_PLACE_NAMES or _PLACE_LOCATION_RE.search(compact):
+        return "place"
+    return "area"
+
+
 def postprocess_intent(user_input: str, runtime_context: dict, predicted: dict):
     """Return (normalized_prediction, changes)."""
     if not isinstance(predicted, dict):
@@ -143,6 +177,25 @@ def postprocess_intent(user_input: str, runtime_context: dict, predicted: dict):
 
     out = copy.deepcopy(predicted)
     changes = []
+
+    # Rule J: "지금/현재 X에서 [활동]" describes an activity target, not proof
+    # that the user is already at X. A real GPS start can therefore remain in use.
+    predicted_start = out.get("start_location_text")
+    if (
+        predicted_start
+        and out.get("target_location_text") is None
+        and _now_activity_uses_predicted_start(user_input, predicted_start)
+    ):
+        target_scope = _target_scope_for_reclassified_location(predicted_start)
+        changes.append({"field":"target_location_text","from":None,"to":predicted_start,
+                        "reason":"now_location_modifies_activity"})
+        out["target_location_text"] = predicted_start
+        changes.append({"field":"target_location_scope","from":out.get("target_location_scope"),
+                        "to":target_scope,"reason":"reclassified_activity_location_scope"})
+        out["target_location_scope"] = target_scope
+        changes.append({"field":"start_location_text","from":predicted_start,"to":None,
+                        "reason":"activity_location_not_current_location"})
+        out["start_location_text"] = None
 
     # Rule A: "N시간 시간 있어/비어/여유 있어" is availability, not desired duration.
     match = _AVAILABILITY_RE.search(user_input)

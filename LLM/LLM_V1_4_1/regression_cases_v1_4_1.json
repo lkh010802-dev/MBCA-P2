@@ -23,6 +23,18 @@
     }
   },
   {
+    "id": "now_modifies_activity_not_location_state",
+    "category": "location-role",
+    "text": "지금 신림역에서 밥 먹고 쉴 건데 3시간 정도 시간이 있다.",
+    "runtime_context": {"current_datetime": "2026-09-14T14:00:00+09:00"},
+    "expect": {
+      "target_location_text": "신림역",
+      "target_location_scope": "place",
+      "end_time": "17:00",
+      "activities": ["food"]
+    }
+  },
+  {
     "id": "budget_is_not_indoor",
     "category": "policy-fix",
     "text": "강남에서 3만원 안으로 가성비 좋은 조용한 카페 찾아줘.",
