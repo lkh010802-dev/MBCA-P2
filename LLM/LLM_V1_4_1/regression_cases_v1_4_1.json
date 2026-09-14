@@ -1,0 +1,309 @@
+[
+  {
+    "id": "night_drink_jongno",
+    "category": "core",
+    "text": "이따 밤에 종로에서 놀 건데 분위기 좋은 술집 있어?",
+    "expect": {
+      "target_location_text": "종로",
+      "target_location_scope": "area",
+      "start_time_period": "evening",
+      "activities": ["drink"]
+    }
+  },
+  {
+    "id": "station_is_target_not_start",
+    "category": "location-role",
+    "text": "신림역에서 3시간 동안 전시회만 보고 싶어.",
+    "expect": {
+      "target_location_text": "신림역",
+      "target_location_scope": "place",
+      "desired_duration_min_minutes": 180,
+      "desired_duration_max_minutes": 180,
+      "activities": ["culture"]
+    }
+  },
+  {
+    "id": "budget_is_not_indoor",
+    "category": "policy-fix",
+    "text": "강남에서 3만원 안으로 가성비 좋은 조용한 카페 찾아줘.",
+    "expect": {
+      "target_location_text": "강남",
+      "target_location_scope": "area",
+      "activities": ["cafe"],
+      "budget_max": 30000,
+      "budget_preference": "low"
+    }
+  },
+  {
+    "id": "explicit_indoor_weather",
+    "category": "space",
+    "text": "비가 오니까 성수에서 여자친구와 실내 전시를 보고 카페에 가고 싶어.",
+    "expect": {
+      "target_location_text": "성수",
+      "target_location_scope": "area",
+      "activities": ["culture", "cafe"],
+      "companions": ["partner"],
+      "space_preference": "indoor"
+    }
+  },
+  {
+    "id": "park_does_not_imply_outdoor",
+    "category": "policy-fix",
+    "text": "한강공원에서 카페에 갔다가 천천히 산책하고 싶어.",
+    "expect": {
+      "target_location_text": "한강공원",
+      "target_location_scope": "place",
+      "activities": ["cafe", "walk"]
+    }
+  },
+  {
+    "id": "walk_negated_public_transit",
+    "category": "transport",
+    "text": "걷기는 싫고 대중교통으로 이동해서 홍대에서 밥 먹고 싶어.",
+    "expect": {
+      "target_location_text": "홍대",
+      "target_location_scope": "area",
+      "activities": ["food"],
+      "transport_mode": "public_transit"
+    }
+  },
+  {
+    "id": "walk_activity_and_transport",
+    "category": "transport",
+    "text": "서울역에서 일정이 끝나면 남산서울타워까지 걸어서 가서 두 시간 동안 산책하고 싶어.",
+    "expect": {
+      "start_location_text": "서울역",
+      "target_location_text": "남산서울타워",
+      "target_location_scope": "place",
+      "desired_duration_min_minutes": 120,
+      "desired_duration_max_minutes": 120,
+      "activities": ["walk"],
+      "transport_mode": "walk"
+    }
+  },
+  {
+    "id": "three_location_roles_exact_times",
+    "category": "complex",
+    "text": "오후 6시에 여의도에서 일정 끝나고 성수에서 카페 갔다가 밤 9시에 잠실로 가야 해.",
+    "expect": {
+      "start_location_text": "여의도",
+      "target_location_text": "성수",
+      "target_location_scope": "area",
+      "end_location_text": "잠실",
+      "start_time": "18:00",
+      "end_time": "21:00",
+      "activities": ["cafe"]
+    }
+  },
+  {
+    "id": "two_periods_two_endpoints",
+    "category": "complex",
+    "text": "오전에 광화문에서 박물관을 보고 싶고 저녁쯤에는 강남에 약속이 있어서 가야 해.",
+    "expect": {
+      "target_location_text": "광화문",
+      "target_location_scope": "area",
+      "end_location_text": "강남",
+      "start_time_period": "am",
+      "end_time_period": "evening",
+      "activities": ["culture"]
+    }
+  },
+  {
+    "id": "future_start_target_unknown_next_endpoint",
+    "category": "complex",
+    "text": "내일 오후 5시에 사당에서 일정이 끝나. 근처에서 90분 정도 카페에 있다가 7시에 강남으로 가야 해.",
+    "expect": {
+      "start_location_text": "사당",
+      "end_location_text": "강남",
+      "start_time": "17:00",
+      "end_time": "19:00",
+      "desired_duration_min_minutes": 90,
+      "desired_duration_max_minutes": 90,
+      "activities": ["cafe"]
+    }
+  },
+  {
+    "id": "explicit_current_location_is_start",
+    "category": "location-role",
+    "text": "지금 강남인데 성수에서 쇼핑하고 카페에 간 다음 홍대입구역으로 가야 해.",
+    "expect": {
+      "start_location_text": "강남",
+      "target_location_text": "성수",
+      "target_location_scope": "area",
+      "end_location_text": "홍대입구역",
+      "activities": ["shopping", "cafe"]
+    }
+  },
+  {
+    "id": "reported_gps_conflict_daerim_to_sillim",
+    "category": "location-role",
+    "text": "지금 대림인데 8시까지 신림 가기 전에 어디 들를 데가 있을까?",
+    "runtime_context": {"current_datetime": "2026-09-14T18:00:00+09:00"},
+    "expect": {
+      "start_location_text": "대림",
+      "end_location_text": "신림",
+      "end_time": "20:00"
+    }
+  },
+  {
+    "id": "explicit_indoor_budget_partner",
+    "category": "complex",
+    "text": "남자친구랑 코엑스에서 실내 전시 보고 카페까지 가되 둘이 합쳐 5만원 안으로 쓰고 싶어.",
+    "expect": {
+      "target_location_text": "코엑스",
+      "target_location_scope": "place",
+      "activities": ["culture", "cafe"],
+      "companions": ["partner"],
+      "budget_max": 50000,
+      "space_preference": "indoor"
+    }
+  },
+  {
+    "id": "family_child_outdoor",
+    "category": "complex",
+    "text": "가족이랑 아이 데리고 어린이대공원에서 야외 산책을 두세 시간 하고 싶어.",
+    "expect": {
+      "target_location_text": "어린이대공원",
+      "target_location_scope": "place",
+      "desired_duration_min_minutes": 120,
+      "desired_duration_max_minutes": 180,
+      "activities": ["walk"],
+      "companions": ["family", "child"],
+      "space_preference": "outdoor"
+    }
+  },
+  {
+    "id": "lunch_is_meal_not_period",
+    "category": "time",
+    "text": "회사 동료랑 을지로에서 점심 먹고 싶어.",
+    "expect": {
+      "target_location_text": "을지로",
+      "target_location_scope": "area",
+      "activities": ["food"],
+      "companions": ["coworker"]
+    }
+  },
+  {
+    "id": "lunch_mark_is_period",
+    "category": "time",
+    "text": "회사 동료랑 점심쯤 을지로에서 밥 먹고 싶어.",
+    "expect": {
+      "target_location_text": "을지로",
+      "target_location_scope": "area",
+      "start_time_period": "lunch",
+      "activities": ["food"],
+      "companions": ["coworker"]
+    }
+  },
+  {
+    "id": "availability_and_desired_duration",
+    "category": "complex",
+    "text": "오후 5시부터 9시까지 시간이 있고 홍대에서 두 시간 동안 보드게임하고 싶어.",
+    "expect": {
+      "target_location_text": "홍대",
+      "target_location_scope": "area",
+      "start_time": "17:00",
+      "end_time": "21:00",
+      "desired_duration_min_minutes": 120,
+      "desired_duration_max_minutes": 120,
+      "activities": ["entertainment"]
+    }
+  },
+  {
+    "id": "relative_availability",
+    "category": "time",
+    "text": "한 시간 반 정도 시간 있어. 조용한 카페에 가고 싶어.",
+    "runtime_context": {"current_datetime": "2026-09-14T17:00:00+09:00"},
+    "expect": {
+      "end_time": "18:30",
+      "activities": ["cafe"]
+    }
+  },
+  {
+    "id": "open_ended_duration_range",
+    "category": "time",
+    "text": "지금부터 두세 시간 성수에서 쇼핑하고 카페 가고 싶어.",
+    "runtime_context": {"current_datetime": "2026-09-14T14:20:00+09:00"},
+    "expect": {
+      "target_location_text": "성수",
+      "target_location_scope": "area",
+      "desired_duration_min_minutes": 120,
+      "desired_duration_max_minutes": 180,
+      "activities": ["shopping", "cafe"]
+    }
+  },
+  {
+    "id": "space_correction_any",
+    "category": "correction",
+    "text": "망원에서 실내 카페가 좋겠어. 아냐, 밖도 상관없고 산책도 하고 싶어.",
+    "expect": {
+      "target_location_text": "망원",
+      "target_location_scope": "area",
+      "activities": ["cafe", "walk"],
+      "space_preference": "any"
+    }
+  },
+  {
+    "id": "transport_correction",
+    "category": "correction",
+    "text": "차로 가려고 했는데 아니야, 지하철로 가서 잠실에서 쇼핑할래.",
+    "expect": {
+      "target_location_text": "잠실",
+      "target_location_scope": "area",
+      "activities": ["shopping"],
+      "transport_mode": "public_transit"
+    }
+  },
+  {
+    "id": "budget_correction",
+    "category": "correction",
+    "text": "건대에서 친구랑 술 마실 건데 5만원까지, 아니 최대 3만원만 쓸래.",
+    "expect": {
+      "target_location_text": "건대",
+      "target_location_scope": "area",
+      "activities": ["drink"],
+      "companions": ["friend"],
+      "budget_max": 30000
+    }
+  },
+  {
+    "id": "specific_place_scope",
+    "category": "location-scope",
+    "text": "경복궁에서 전시를 한 시간 정도 보고 싶어.",
+    "expect": {
+      "target_location_text": "경복궁",
+      "target_location_scope": "place",
+      "desired_duration_min_minutes": 60,
+      "desired_duration_max_minutes": 60,
+      "activities": ["culture"]
+    }
+  },
+  {
+    "id": "later_friend_not_companion",
+    "category": "companion",
+    "text": "저녁 7시에 홍대에서 친구를 만나야 해. 그 전에 혼자 연남동에서 카페에 가고 싶어.",
+    "expect": {
+      "target_location_text": "연남동",
+      "target_location_scope": "area",
+      "end_location_text": "홍대",
+      "end_time": "19:00",
+      "activities": ["cafe"],
+      "companions": ["solo"]
+    }
+  },
+  {
+    "id": "current_friend_and_later_schedule",
+    "category": "complex",
+    "text": "친구랑 오후에 이태원에서 밥 먹고 카페 간 뒤 밤 10시까지 서울역에 가야 해. 가격은 상관없어.",
+    "expect": {
+      "target_location_text": "이태원",
+      "target_location_scope": "area",
+      "end_location_text": "서울역",
+      "end_time": "22:00",
+      "start_time_period": "pm",
+      "activities": ["food", "cafe"],
+      "companions": ["friend"],
+      "budget_preference": "any"
+    }
+  }
+]

@@ -31,7 +31,7 @@ from typing import Any, Callable, Dict, Optional, Tuple
 
 from intent_postprocess import postprocess_intent
 
-PARSER_VERSION = "1.4.1-candidate"
+PARSER_VERSION = "1.4.1-start-location-priority"
 
 INTENT_DEFAULTS: Dict[str, Any] = {
     "start_location_text": None,

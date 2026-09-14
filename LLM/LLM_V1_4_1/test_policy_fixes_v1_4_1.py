@@ -81,7 +81,7 @@ CASES = [
 
 
 def main():
-    assert PARSER_VERSION == "1.4.1-candidate"
+    assert PARSER_VERSION == "1.4.1-start-location-priority"
     failures = []
     for name, text, predicted, expected in CASES:
         actual, changes = postprocess_intent(text, {}, predicted)

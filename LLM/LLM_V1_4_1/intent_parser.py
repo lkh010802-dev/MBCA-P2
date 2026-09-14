@@ -42,7 +42,7 @@ PROMPT_PATH = HERE / "intent_parser_prompt_team_v1_3_COST_OPT.txt"
 SCHEMA_PATH = HERE / "user_intent_schema_team_v1_3_STRICT.json"
 DEFAULT_MODEL = "gpt-5.6-luna"
 # Prompt/schema did not change from V1.3, so keeping this key preserves prompt-cache locality.
-DEFAULT_PROMPT_CACHE_KEY = "intent-parser-team-v1-4-1-16field-candidate"
+DEFAULT_PROMPT_CACHE_KEY = "intent-parser-team-v1-4-1-start-location-priority"
 
 _PROMPT = PROMPT_PATH.read_text(encoding="utf-8")
 _SCHEMA = json.loads(SCHEMA_PATH.read_text(encoding="utf-8"))
