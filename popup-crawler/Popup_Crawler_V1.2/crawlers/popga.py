@@ -302,6 +302,7 @@ def crawl_popga(
     load_dotenv()
 
     try:
+        from playwright.sync_api import TimeoutError as PlaywrightTimeoutError
         from playwright.sync_api import sync_playwright
     except ImportError as exc:
         raise RuntimeError(
@@ -315,8 +316,13 @@ def crawl_popga(
     headless = _truthy_env("POPGA_HEADLESS", "true")
     pause = float(os.getenv("POPGA_SCROLL_PAUSE", "0.8"))
     max_scrolls = int(os.getenv("POPGA_MAX_SCROLLS", "30"))
+    fetch_start_grace_ms = int(os.getenv("POPGA_FETCH_START_GRACE_MS", "2500"))
+    fetch_wait_timeout_ms = int(os.getenv("POPGA_FETCH_WAIT_TIMEOUT_MS", "30000"))
     blocks_by_url: dict[str, dict] = {}
     scroll_rounds = 0
+    fetch_start_timeouts = 0
+    fetch_wait_rounds = 0
+    fetch_wait_timeouts = 0
 
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=headless)
@@ -361,7 +367,37 @@ def crawl_popga(
                 break
             previous_count = current_count
             previous_height = current_height
+            dom_count_before = page.locator('[id^="btn-popup-details-"]').count()
             page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
+
+            # Popga loads the next 12-card page through an intersection observer
+            # and shows a fixed spinner while React Query is fetching it. The
+            # old fixed 0.8s sleep could count an in-flight request as a stable
+            # round and stop at exactly 24 cards. Wait for either card growth or
+            # the fetch spinner, then wait for the spinner to disappear.
+            try:
+                page.wait_for_function(
+                    """
+                    previousCount =>
+                      document.querySelectorAll('[id^="btn-popup-details-"]').length > previousCount ||
+                      document.querySelector('div.fixed .spinner') !== null
+                    """,
+                    arg=dom_count_before,
+                    timeout=max(1, fetch_start_grace_ms),
+                )
+            except PlaywrightTimeoutError:
+                fetch_start_timeouts += 1
+
+            spinner = page.locator("div.fixed .spinner")
+            if spinner.count():
+                fetch_wait_rounds += 1
+                try:
+                    spinner.first.wait_for(
+                        state="hidden",
+                        timeout=max(1, fetch_wait_timeout_ms),
+                    )
+                except PlaywrightTimeoutError:
+                    fetch_wait_timeouts += 1
             page.wait_for_timeout(int(pause * 1000))
 
         # 마지막 스크롤 직후 로딩된 카드도 한 번 더 수집한다.
@@ -406,6 +442,9 @@ def crawl_popga(
         "seoul_area_code": SEOUL_AREA_CODE,
         "parser_mode": parser_mode,
         "scroll_rounds": scroll_rounds,
+        "fetch_start_timeouts": fetch_start_timeouts,
+        "fetch_wait_rounds": fetch_wait_rounds,
+        "fetch_wait_timeouts": fetch_wait_timeouts,
         "raw_detail_control_count": len(blocks),
         "parsed_count": len(items),
         "fallback_id_count": sum(x.source_id.startswith("hash_") for x in items),
