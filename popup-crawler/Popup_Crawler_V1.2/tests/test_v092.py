@@ -1,9 +1,13 @@
 from __future__ import annotations
 
+import json
+import tempfile
 import unittest
+from pathlib import Path
 
 from run_popga import (
     needs_list_retry,
+    previous_run_dir,
     unchanged_active_ids as popga_unchanged_active_ids,
 )
 from run_popply import unchanged_active_ids as popply_unchanged_active_ids
@@ -38,6 +42,33 @@ class V092Tests(unittest.TestCase):
         self.assertTrue(needs_list_retry(24, 254, min_retention=0.65))
         self.assertFalse(needs_list_retry(250, 254, min_retention=0.65))
         self.assertFalse(needs_list_retry(24, 0, min_retention=0.65))
+
+    def test_popga_cache_ignores_newer_partial_run(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            healthy = base / "20260915_080000"
+            partial = base / "20260915_100000"
+            for path, count in ((healthy, 254), (partial, 24)):
+                (path / "detail_html").mkdir(parents=True)
+                (path / "normalized_list_preview.jsonl").write_text(
+                    "{}\n" * count,
+                    encoding="utf-8",
+                )
+                (path / "normalized_with_details.jsonl").write_text(
+                    "{}\n" * count,
+                    encoding="utf-8",
+                )
+                (path / "report.json").write_text(
+                    json.dumps({
+                        "candidate_count": count,
+                        "detail_fetch": {"requested_count": count},
+                    }),
+                    encoding="utf-8",
+                )
+            self.assertEqual(
+                healthy,
+                previous_run_dir(base, min_retention=0.65),
+            )
 
     def test_popply_changed_dates_force_live_fetch(self):
         current = [self._row("2", start="2026-08-02")]

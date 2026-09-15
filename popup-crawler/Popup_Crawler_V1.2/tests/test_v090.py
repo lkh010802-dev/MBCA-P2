@@ -1,11 +1,13 @@
 from __future__ import annotations
 
+import json
 import tempfile
 import unittest
 from pathlib import Path
 
 from run_daily import (
     retention_warning,
+    newest_report,
     validate_dayforyou,
     validate_popga,
     validate_popply,
@@ -14,6 +16,26 @@ from run_integrate import get_master_commit_block_reasons
 
 
 class V090Tests(unittest.TestCase):
+    def test_baseline_ignores_newer_large_count_drop(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            old = base / "20260915_080000"
+            new = base / "20260915_100000"
+            old.mkdir()
+            new.mkdir()
+            (old / "report.json").write_text(
+                json.dumps({"candidate_count": 254}), encoding="utf-8"
+            )
+            (new / "report.json").write_text(
+                json.dumps({"candidate_count": 24}), encoding="utf-8"
+            )
+            selected, report = newest_report(
+                base,
+                source="popga",
+                min_retention=0.65,
+            )
+            self.assertEqual(old, selected)
+            self.assertEqual(254, report["candidate_count"])
     def test_retention_gate_blocks_large_source_drop(self):
         warning = retention_warning(
             "popga", 100, 271,

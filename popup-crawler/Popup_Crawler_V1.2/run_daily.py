@@ -63,19 +63,45 @@ def newest_run_dir(base: Path) -> Path | None:
     return max(candidates, key=lambda p: p.stat().st_mtime, default=None)
 
 
-def newest_report(base: Path) -> tuple[Path | None, dict[str, Any] | None]:
-    run_dir = newest_run_dir(base)
-    if not run_dir:
+def newest_report(
+    base: Path,
+    *,
+    source: str | None = None,
+    min_retention: float = 0.65,
+) -> tuple[Path | None, dict[str, Any] | None]:
+    if not base.exists():
         return None, None
-    report_path = run_dir / "report.json"
-    if not report_path.exists():
-        report_path = run_dir / "run_report.json"
-    if not report_path.exists():
-        return run_dir, None
-    try:
-        return run_dir, read_json(report_path)
-    except (OSError, json.JSONDecodeError):
-        return run_dir, None
+    reports: list[tuple[Path, dict[str, Any], int | None]] = []
+    for run_dir in base.iterdir():
+        if not run_dir.is_dir():
+            continue
+        report_path = run_dir / "report.json"
+        if not report_path.exists():
+            report_path = run_dir / "run_report.json"
+        if not report_path.exists():
+            continue
+        try:
+            report = read_json(report_path)
+        except (OSError, json.JSONDecodeError):
+            continue
+        count = source_count_from_report(source, report) if source else None
+        reports.append((run_dir, report, count))
+
+    if not reports:
+        return newest_run_dir(base), None
+    eligible = reports
+    counts = [count for _, _, count in reports if count is not None and count > 0]
+    if source and counts:
+        largest_count = max(counts)
+        eligible = [
+            item for item in reports
+            if item[2] is not None and item[2] / largest_count >= min_retention
+        ]
+    run_dir, report, _ = max(
+        eligible,
+        key=lambda item: (item[0].name, item[0].stat().st_mtime),
+    )
+    return run_dir, report
 
 
 def _display_command(command: list[str]) -> str:
@@ -664,7 +690,11 @@ def main() -> None:
     baseline_reports: dict[str, dict[str, Any] | None] = {}
     baseline_counts: dict[str, int | None] = {}
     for source, base in source_bases.items():
-        _, baseline = newest_report(base)
+        _, baseline = newest_report(
+            base,
+            source=source,
+            min_retention=args.min_source_retention,
+        )
         baseline_reports[source] = baseline
         baseline_counts[source] = source_count_from_report(source, baseline)
 
@@ -698,7 +728,14 @@ def main() -> None:
 
         if args.reuse_latest:
             print("=== v1.0.0 DAILY: 최신 source 결과 재사용 모드 ===")
-            source_dirs = {source: newest_run_dir(base) for source, base in source_bases.items()}
+            source_dirs = {
+                source: newest_report(
+                    base,
+                    source=source,
+                    min_retention=args.min_source_retention,
+                )[0]
+                for source, base in source_bases.items()
+            }
             missing = [source for source, path in source_dirs.items() if path is None]
             if missing:
                 raise RuntimeError(f"latest source run missing: {', '.join(missing)}")

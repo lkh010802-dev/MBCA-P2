@@ -34,11 +34,46 @@ def load_jsonl(path: Path) -> list[dict]:
     return rows
 
 
-def previous_run_dir(base: Path) -> Path | None:
+def previous_run_dir(
+    base: Path,
+    *,
+    min_retention: float = 0.65,
+) -> Path | None:
     if not base.exists():
         return None
-    candidates = [p for p in base.iterdir() if p.is_dir() and (p / "normalized_list_preview.jsonl").exists()]
-    return max(candidates, key=lambda p: p.stat().st_mtime, default=None)
+    candidates: list[tuple[Path, int]] = []
+    for path in base.iterdir():
+        if not path.is_dir():
+            continue
+        list_path = path / "normalized_list_preview.jsonl"
+        report_path = path / "report.json"
+        detail_path = path / "normalized_with_details.jsonl"
+        html_dir = path / "detail_html"
+        if not (
+            list_path.exists()
+            and report_path.exists()
+            and detail_path.exists()
+            and html_dir.is_dir()
+        ):
+            continue
+        try:
+            report = json.loads(report_path.read_text(encoding="utf-8"))
+            count = int(report.get("candidate_count") or 0)
+            detail = report.get("detail_fetch") or {}
+            requested = int(detail.get("requested_count") or 0)
+        except (OSError, ValueError, json.JSONDecodeError):
+            continue
+        if count > 0 and requested == count:
+            candidates.append((path, count))
+
+    if not candidates:
+        return None
+    largest_count = max(count for _, count in candidates)
+    healthy = [
+        path for path, count in candidates
+        if count / largest_count >= min_retention
+    ]
+    return max(healthy, key=lambda p: (p.name, p.stat().st_mtime), default=None)
 
 
 def unchanged_active_ids(current: list[dict], previous: list[dict]) -> set[str]:
@@ -227,7 +262,10 @@ def main() -> None:
 
     timestamp = datetime.now(SEOUL_TZ).strftime("%Y%m%d_%H%M%S")
     runs_base = Path("data/popga/runs")
-    previous_dir = previous_run_dir(runs_base)
+    previous_dir = previous_run_dir(
+        runs_base,
+        min_retention=args.list_retry_min_retention,
+    )
     previous_rows = (
         load_jsonl(previous_dir / "normalized_list_preview.jsonl")
         if previous_dir else []
