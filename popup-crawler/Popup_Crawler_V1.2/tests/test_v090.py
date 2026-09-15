@@ -31,7 +31,7 @@ class V090Tests(unittest.TestCase):
         )
         self.assertIsNone(warning)
 
-    def test_dayforyou_blocks_unresolved_llm_review(self):
+    def test_dayforyou_quarantines_small_unresolved_llm_review(self):
         with tempfile.TemporaryDirectory() as tmp:
             run_dir = Path(tmp)
             (run_dir / "final_popup_db.jsonl").write_text("{}\n", encoding="utf-8")
@@ -50,9 +50,30 @@ class V090Tests(unittest.TestCase):
                 min_source_count=10,
                 max_detail_failure_rate=0.05,
             )
-            self.assertTrue(any("manual review" in x for x in errors))
+            self.assertEqual(errors, [])
             self.assertEqual(metrics["llm_calls"], 1)
-            self.assertEqual(warnings, [])
+            self.assertTrue(any("quarantined" in x for x in warnings))
+
+    def test_dayforyou_blocks_manual_review_spike(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            run_dir = Path(tmp)
+            (run_dir / "normalized_for_integration.jsonl").write_text("{}\n", encoding="utf-8")
+            report = {
+                "seoul_total": 100,
+                "detail_success": 100,
+                "detail_failed": 0,
+                "llm_candidate_count": 11,
+                "llm_executed": True,
+                "llm_report": {"manual_review": 11, "api_calls": 2},
+            }
+            errors, _warnings, _metrics = validate_dayforyou(
+                run_dir, report,
+                previous_count=100,
+                min_retention=0.65,
+                min_source_count=10,
+                max_detail_failure_rate=0.05,
+            )
+            self.assertTrue(any("exceeds allowance" in x for x in errors))
 
     def test_popga_requires_full_detail_output(self):
         with tempfile.TemporaryDirectory() as tmp:

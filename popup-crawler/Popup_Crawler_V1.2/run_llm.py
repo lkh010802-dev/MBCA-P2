@@ -51,6 +51,7 @@ def main() -> None:
     print(f"LLM 후보: {len(candidates)}건")
     print(f"모델: {pv['model']}")
     print(f"confidence 자동반영 기준: {pv['confidence_threshold']}")
+    print(f"NON_POPUP confidence 자동반영 기준: {pv['non_popup_confidence_threshold']}")
     print(f"예상 API 호출: {pv['estimated_api_calls']}회")
     print(f".env API 키 감지: {'YES' if pv['api_key_present'] else 'NO'}")
 
@@ -65,6 +66,7 @@ def main() -> None:
             run_dir / "final_non_popup_excluded.jsonl",
         )
         save_jsonl([], run_dir / "final_insufficient_data.jsonl")
+        save_jsonl(auto_popup, run_dir / "normalized_for_integration.jsonl")
         print("LLM 후보가 없어 API를 호출하지 않았습니다.")
         return
 
@@ -97,6 +99,10 @@ def main() -> None:
     save_jsonl(
         llm_insufficient,
         run_dir / "final_insufficient_data.jsonl",
+    )
+    save_jsonl(
+        auto_popup + llm_popup + manual,
+        run_dir / "normalized_for_integration.jsonl",
     )
 
     report = {

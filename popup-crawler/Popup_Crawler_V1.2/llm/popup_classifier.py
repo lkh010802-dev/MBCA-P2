@@ -72,6 +72,9 @@ def load_config() -> dict:
         "api_key": os.getenv("OPENAI_API_KEY", "").strip(),
         "model": os.getenv("OPENAI_MODEL", "gpt-5.6-luna").strip(),
         "threshold": float(os.getenv("LLM_CONFIDENCE_THRESHOLD", "0.85")),
+        "non_popup_threshold": float(
+            os.getenv("LLM_NON_POPUP_CONFIDENCE_THRESHOLD", "0.70")
+        ),
         "batch_size": max(1, int(os.getenv("LLM_BATCH_SIZE", "10"))),
     }
 
@@ -108,12 +111,26 @@ def preview(items: list[dict]) -> dict:
         "candidate_count": len(items),
         "model": cfg["model"],
         "confidence_threshold": cfg["threshold"],
+        "non_popup_confidence_threshold": cfg["non_popup_threshold"],
         "batch_size": cfg["batch_size"],
         "estimated_api_calls": (
             math.ceil(len(items) / cfg["batch_size"]) if items else 0
         ),
         "api_key_present": bool(cfg["api_key"]),
     }
+
+
+def confidence_threshold_for(classification: str, config: dict) -> float:
+    if classification == "NON_POPUP":
+        return float(config["non_popup_threshold"])
+    return float(config["threshold"])
+
+
+def should_auto_apply(classification: str, confidence: float, config: dict) -> bool:
+    return (
+        classification in {"POPUP", "NON_POPUP", "INSUFFICIENT_DATA"}
+        and confidence >= confidence_threshold_for(classification, config)
+    )
 
 
 def classify_items(items: list[dict]) -> tuple[list[dict], dict]:
@@ -158,10 +175,11 @@ def classify_items(items: list[dict]) -> tuple[list[dict], dict]:
             returned_ids.add(sid)
             item = dict(by_id[sid])
 
-            auto_applied = (
-                decision.classification
-                in {"POPUP", "NON_POPUP", "INSUFFICIENT_DATA"}
-                and decision.confidence >= cfg["threshold"]
+            threshold = confidence_threshold_for(decision.classification, cfg)
+            auto_applied = should_auto_apply(
+                decision.classification,
+                decision.confidence,
+                cfg,
             )
 
             item.update({
@@ -169,6 +187,7 @@ def classify_items(items: list[dict]) -> tuple[list[dict], dict]:
                 "llm_classification": decision.classification,
                 "llm_confidence": decision.confidence,
                 "llm_reason": decision.reason,
+                "llm_confidence_threshold": threshold,
                 "llm_auto_applied": auto_applied,
             })
             decisions.append(item)
@@ -184,6 +203,7 @@ def classify_items(items: list[dict]) -> tuple[list[dict], dict]:
     meta = {
         "model": cfg["model"],
         "threshold": cfg["threshold"],
+        "non_popup_threshold": cfg["non_popup_threshold"],
         "batch_size": cfg["batch_size"],
         "api_calls": calls,
         "candidate_count": len(items),

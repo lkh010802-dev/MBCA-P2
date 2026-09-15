@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.2 DayForYou review quarantine hotfix - 2026-09-15
+
+- LLM confidence는 항목별로 적용하며, POPUP/INSUFFICIENT_DATA는 기존 0.85를 유지하고 NON_POPUP만 기본 0.70으로 완화했습니다.
+- DayForYou 수동 검토가 10건 이하이면서 전체의 8% 이하이면 해당 항목만 격리하고 일일 통합을 계속합니다.
+- 격리 항목을 integration의 REVIEW 입력으로 전달해 기존 master 항목이 누락·종료로 잘못 처리되지 않도록 보호합니다.
+- 검토 건수나 비율이 허용치를 넘는 급증 상황에서는 기존처럼 master 반영을 차단합니다.
+
 ## 1.2 Popply performance hotfix - 2026-09-11
 
 - 변경 없는 ACTIVE 상세 캐시의 최대 유효기간을 54시간에서 168시간으로 늘렸습니다.

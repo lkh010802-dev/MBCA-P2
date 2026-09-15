@@ -139,6 +139,20 @@ class IntegrationTests(unittest.TestCase):
         classified = classify_dayforyou_final(row)
         self.assertEqual("NON_POPUP", classified["classification"])
 
+    def test_dayforyou_manual_llm_row_stays_in_review_for_quarantine(self) -> None:
+        row = record("dayforyou", "37889", "RE;CODE X DO HO SUH")
+        row["source_record_raw"] = {
+            "llm_classification": "NON_POPUP",
+            "llm_confidence": 0.69,
+            "llm_auto_applied": False,
+        }
+        classified = classify_dayforyou_final(row)
+        self.assertEqual("REVIEW", classified["classification"])
+        self.assertEqual(
+            ["dayforyou_llm_manual_review"],
+            classified["classification_reasons"],
+        )
+
     def test_exact_place_dates_do_not_merge_different_pokemon_events(self) -> None:
         popga = record("popga", "8326", "포켓몬 무릉도원 팝업")
         day = record(

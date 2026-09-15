@@ -169,6 +169,11 @@ def classify_dayforyou_final(row: dict[str, Any]) -> dict[str, Any]:
 
     if BROKEN_TITLE_PREFIX_RE.search(name):
         return _result(row, "INSUFFICIENT_DATA", "broken_operational_title", 0.99)
+    # DayForYou's LLM fallback deliberately forwards low-confidence rows to
+    # integration. Keep them in REVIEW so they are quarantined and any matching
+    # historical master record is protected from false disappearance.
+    if raw.get("llm_auto_applied") is False:
+        return _result(row, "REVIEW", "dayforyou_llm_manual_review", 0.0)
     # Editorial roundup/list posts describe multiple popups and must not become
     # one physical place record even though the title itself contains "팝업".
     if DAYFORYOU_ROUNDUP_TITLE_RE.search(name):

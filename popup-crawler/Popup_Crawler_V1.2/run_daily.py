@@ -176,6 +176,8 @@ def validate_dayforyou(
     min_retention: float,
     min_source_count: int,
     max_detail_failure_rate: float,
+    max_manual_review_count: int = 10,
+    max_manual_review_rate: float = 0.08,
 ) -> tuple[list[str], list[str], dict[str, Any]]:
     errors: list[str] = []
     warnings: list[str] = []
@@ -187,7 +189,11 @@ def validate_dayforyou(
     if retention:
         errors.append(retention)
 
-    final_path = run_dir / "final_popup_db.jsonl"
+    final_path = run_dir / "normalized_for_integration.jsonl"
+    if not final_path.exists():
+        # Backward compatibility for source runs created before review
+        # quarantine support.
+        final_path = run_dir / "final_popup_db.jsonl"
     if not final_path.exists():
         errors.append("dayforyou: final_popup_db.jsonl missing (LLM/manual stage may be incomplete)")
 
@@ -218,8 +224,21 @@ def validate_dayforyou(
     llm_calls = int(llm_report.get("api_calls") or 0)
     if llm_candidates and not llm_executed:
         errors.append(f"dayforyou: {llm_candidates} LLM candidates remain but LLM was not executed")
-    if manual_review:
-        errors.append(f"dayforyou: {manual_review} LLM/manual review records remain")
+    manual_review_rate = manual_review / max(1, count)
+    if manual_review and (
+        manual_review > max_manual_review_count
+        or manual_review_rate > max_manual_review_rate
+    ):
+        errors.append(
+            f"dayforyou: LLM/manual review quarantine {manual_review}/{count} "
+            f"({manual_review_rate:.1%}) exceeds allowance "
+            f"(count<={max_manual_review_count}, rate<={max_manual_review_rate:.1%})"
+        )
+    elif manual_review:
+        warnings.append(
+            f"dayforyou: quarantined {manual_review}/{count} LLM/manual review "
+            "record(s); integration continues with master protection"
+        )
 
     metrics = {
         "candidate_count": count,
@@ -235,6 +254,7 @@ def validate_dayforyou(
         "llm_executed": llm_executed,
         "llm_calls": llm_calls,
         "manual_review": manual_review,
+        "manual_review_rate": round(manual_review_rate, 4),
         "output": str(final_path),
     }
     return errors, warnings, metrics
@@ -426,6 +446,18 @@ def parse_args() -> argparse.Namespace:
         help="DayForYou/Popga 상세 수집 허용 실패율. 기본 0.05",
     )
     parser.add_argument(
+        "--max-dayforyou-manual-review-count",
+        type=int,
+        default=int(os.getenv("DAILY_MAX_DAYFORYOU_MANUAL_REVIEW_COUNT", "10")),
+        help="DayForYou LLM/manual review quarantine 허용 건수. 기본 10",
+    )
+    parser.add_argument(
+        "--max-dayforyou-manual-review-rate",
+        type=float,
+        default=float(os.getenv("DAILY_MAX_DAYFORYOU_MANUAL_REVIEW_RATE", "0.08")),
+        help="DayForYou LLM/manual review quarantine 허용 비율. 기본 0.08",
+    )
+    parser.add_argument(
         "--max-popply-detail-failure-rate",
         type=float,
         default=float(os.getenv("DAILY_MAX_POPPLY_DETAIL_FAILURE_RATE", "0.06")),
@@ -457,7 +489,9 @@ def _load_source_run(source: str, run_dir: Path) -> tuple[dict[str, Any], Path]:
         raise FileNotFoundError(f"{source}: report.json missing: {run_dir}")
     report = read_json(report_path)
     if source == "dayforyou":
-        output = run_dir / "final_popup_db.jsonl"
+        output = run_dir / "normalized_for_integration.jsonl"
+        if not output.exists():
+            output = run_dir / "final_popup_db.jsonl"
     else:
         output = run_dir / "normalized_with_details.jsonl"
     return report, output
@@ -577,6 +611,10 @@ def main() -> None:
         raise SystemExit("--min-source-retention must be > 0 and <= 1")
     if not (0.0 <= args.max_detail_failure_rate <= 1.0):
         raise SystemExit("--max-detail-failure-rate must be between 0 and 1")
+    if args.max_dayforyou_manual_review_count < 0:
+        raise SystemExit("--max-dayforyou-manual-review-count must be >= 0")
+    if not (0.0 <= args.max_dayforyou_manual_review_rate <= 1.0):
+        raise SystemExit("--max-dayforyou-manual-review-rate must be between 0 and 1")
     if not (0.0 <= args.max_popply_detail_failure_rate <= 1.0):
         raise SystemExit("--max-popply-detail-failure-rate must be between 0 and 1")
     if not (0.0 <= args.max_popply_core_incomplete_rate <= 1.0):
@@ -603,6 +641,8 @@ def main() -> None:
             "min_source_retention": args.min_source_retention,
             "min_source_count": args.min_source_count,
             "max_detail_failure_rate": args.max_detail_failure_rate,
+            "max_dayforyou_manual_review_count": args.max_dayforyou_manual_review_count,
+            "max_dayforyou_manual_review_rate": args.max_dayforyou_manual_review_rate,
             "max_popply_detail_failure_rate": args.max_popply_detail_failure_rate,
             "max_popply_core_incomplete_count": args.max_popply_core_incomplete_count,
             "max_popply_core_incomplete_rate": args.max_popply_core_incomplete_rate,
@@ -759,6 +799,11 @@ def main() -> None:
                     max_detail_failure_rate=args.max_popply_detail_failure_rate,
                     max_core_incomplete_count=args.max_popply_core_incomplete_count,
                     max_core_incomplete_rate=args.max_popply_core_incomplete_rate,
+                )
+            elif source == "dayforyou":
+                validator_kwargs.update(
+                    max_manual_review_count=args.max_dayforyou_manual_review_count,
+                    max_manual_review_rate=args.max_dayforyou_manual_review_rate,
                 )
             errors, warnings, metrics = validators[source](
                 run_dir, source_report, **validator_kwargs

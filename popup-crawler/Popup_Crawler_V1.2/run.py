@@ -99,6 +99,9 @@ def run_llm_stage(run_dir: Path, auto_popup: list[dict], auto_non_popup: list[di
     save_rows(final_popup, run_dir / "final_popup_db.jsonl")
     save_rows(final_non_popup, run_dir / "final_non_popup_excluded.jsonl")
     save_rows(llm_insufficient, run_dir / "final_insufficient_data.jsonl")
+    # Manual rows must reach integration as REVIEW records. Integration
+    # quarantines them and protects matching master rows from false expiry.
+    save_rows(final_popup + manual, run_dir / "normalized_for_integration.jsonl")
 
     return {
         **llm_meta,
@@ -195,6 +198,7 @@ def main() -> None:
             save_rows(auto_popup, run_dir / "final_popup_db.jsonl")
             save_rows(auto_non_popup, run_dir / "final_non_popup_excluded.jsonl")
             save_rows([], run_dir / "final_insufficient_data.jsonl")
+            save_rows(auto_popup, run_dir / "normalized_for_integration.jsonl")
 
     report = {
         "version": "1.0.1",
