@@ -2,7 +2,10 @@ from __future__ import annotations
 
 import unittest
 
-from run_popga import unchanged_active_ids as popga_unchanged_active_ids
+from run_popga import (
+    needs_list_retry,
+    unchanged_active_ids as popga_unchanged_active_ids,
+)
 from run_popply import unchanged_active_ids as popply_unchanged_active_ids
 from run_daily import VERSION
 
@@ -30,6 +33,11 @@ class V092Tests(unittest.TestCase):
         current = [self._row("1", status="UPCOMING")]
         previous = [self._row("1", status="UPCOMING")]
         self.assertEqual(set(), popga_unchanged_active_ids(current, previous))
+
+    def test_popga_list_drop_below_gate_retries(self):
+        self.assertTrue(needs_list_retry(24, 254, min_retention=0.65))
+        self.assertFalse(needs_list_retry(250, 254, min_retention=0.65))
+        self.assertFalse(needs_list_retry(24, 0, min_retention=0.65))
 
     def test_popply_changed_dates_force_live_fetch(self):
         current = [self._row("2", start="2026-08-02")]

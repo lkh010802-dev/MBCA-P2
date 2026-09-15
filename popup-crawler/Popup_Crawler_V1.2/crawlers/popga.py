@@ -297,6 +297,9 @@ def _collect_card_blocks(page) -> list[dict]:
 
 def crawl_popga(
     output_dir: str | Path,
+    *,
+    fetch_start_grace_ms: int | None = None,
+    fetch_wait_timeout_ms: int | None = None,
 ) -> tuple[list[RawPopgaPopup], Path, dict]:
     """공개 서울 목록을 저빈도로 렌더링하고 원문 카드 블록을 보존한다."""
     load_dotenv()
@@ -316,8 +319,10 @@ def crawl_popga(
     headless = _truthy_env("POPGA_HEADLESS", "true")
     pause = float(os.getenv("POPGA_SCROLL_PAUSE", "0.8"))
     max_scrolls = int(os.getenv("POPGA_MAX_SCROLLS", "30"))
-    fetch_start_grace_ms = int(os.getenv("POPGA_FETCH_START_GRACE_MS", "2500"))
-    fetch_wait_timeout_ms = int(os.getenv("POPGA_FETCH_WAIT_TIMEOUT_MS", "30000"))
+    if fetch_start_grace_ms is None:
+        fetch_start_grace_ms = int(os.getenv("POPGA_FETCH_START_GRACE_MS", "2500"))
+    if fetch_wait_timeout_ms is None:
+        fetch_wait_timeout_ms = int(os.getenv("POPGA_FETCH_WAIT_TIMEOUT_MS", "30000"))
     blocks_by_url: dict[str, dict] = {}
     scroll_rounds = 0
     fetch_start_timeouts = 0

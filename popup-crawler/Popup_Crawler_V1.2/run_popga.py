@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import shutil
 from collections import Counter
 from datetime import date, datetime
 from pathlib import Path
@@ -52,6 +53,25 @@ def unchanged_active_ids(current: list[dict], previous: list[dict]) -> set[str]:
             result.add(str(row.get("source_id")))
     return result
 
+
+def needs_list_retry(
+    current_count: int,
+    previous_count: int,
+    *,
+    min_retention: float,
+) -> bool:
+    return (
+        previous_count > 0
+        and current_count / previous_count < min_retention
+    )
+
+
+def promote_crawl_artifacts(source_dir: Path, run_dir: Path) -> None:
+    for name in ("popga_rendered.html", "popga_body.txt", "raw_card_blocks.jsonl"):
+        source = source_dir / name
+        if source.exists():
+            shutil.copy2(source, run_dir / name)
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Popga 서울 목록 수집 및 상세 DOM 소수 검증"
@@ -85,6 +105,29 @@ def parse_args() -> argparse.Namespace:
         "--no-detail-cache",
         action="store_true",
         help="이전 실행 상세 캐시를 재사용하지 않고 전부 live fetch",
+    )
+    parser.add_argument(
+        "--list-max-attempts",
+        type=int,
+        default=max(1, int(os.getenv("POPGA_LIST_MAX_ATTEMPTS", "2"))),
+        help="이전 정상 건수보다 목록이 급감할 때의 최대 수집 시도 횟수. 기본 2",
+    )
+    parser.add_argument(
+        "--list-retry-min-retention",
+        type=float,
+        default=float(
+            os.getenv(
+                "POPGA_LIST_RETRY_MIN_RETENTION",
+                os.getenv("DAILY_MIN_SOURCE_RETENTION", "0.65"),
+            )
+        ),
+        help="이전 목록 대비 이 비율 미만이면 목록 수집을 재시도. 기본 0.65",
+    )
+    parser.add_argument(
+        "--list-retry-fetch-start-grace-ms",
+        type=int,
+        default=int(os.getenv("POPGA_LIST_RETRY_FETCH_START_GRACE_MS", "5000")),
+        help="재시도 시 다음 페이지 로딩 시작 대기시간(ms). 기본 5000",
     )
     return parser.parse_args()
 
@@ -175,14 +218,72 @@ def enrich_with_details(list_rows: list[dict], details: list[dict]) -> list[dict
 
 def main() -> None:
     args = parse_args()
+    if args.list_max_attempts < 1:
+        raise SystemExit("--list-max-attempts must be >= 1")
+    if not (0.0 < args.list_retry_min_retention <= 1.0):
+        raise SystemExit("--list-retry-min-retention must be > 0 and <= 1")
+    if args.list_retry_fetch_start_grace_ms < 1:
+        raise SystemExit("--list-retry-fetch-start-grace-ms must be >= 1")
+
     timestamp = datetime.now(SEOUL_TZ).strftime("%Y%m%d_%H%M%S")
     runs_base = Path("data/popga/runs")
     previous_dir = previous_run_dir(runs_base)
+    previous_rows = (
+        load_jsonl(previous_dir / "normalized_list_preview.jsonl")
+        if previous_dir else []
+    )
+    previous_count = len(previous_rows)
     run_dir = runs_base / timestamp
     run_dir.mkdir(parents=True, exist_ok=True)
 
     print("[1/5] Popga 공개 목록 렌더링/스크롤")
-    items, html_path, crawl_diagnostics = crawl_popga(run_dir)
+    crawl_attempts: list[dict] = []
+    crawl_results = []
+    for attempt in range(1, args.list_max_attempts + 1):
+        attempt_dir = run_dir if attempt == 1 else run_dir / f"list_retry_{attempt}"
+        items, html_path, diagnostics = crawl_popga(
+            attempt_dir,
+            fetch_start_grace_ms=(
+                None if attempt == 1 else args.list_retry_fetch_start_grace_ms
+            ),
+        )
+        crawl_results.append((items, html_path, diagnostics, attempt_dir))
+        crawl_attempts.append({
+            "attempt": attempt,
+            "count": len(items),
+            "scroll_rounds": diagnostics.get("scroll_rounds"),
+            "fetch_start_timeouts": diagnostics.get("fetch_start_timeouts"),
+            "fetch_wait_timeouts": diagnostics.get("fetch_wait_timeouts"),
+        })
+        if not needs_list_retry(
+            len(items),
+            previous_count,
+            min_retention=args.list_retry_min_retention,
+        ):
+            break
+        if attempt < args.list_max_attempts:
+            print(
+                f"      목록 급감 감지: 이전 {previous_count}건 -> {len(items)}건. "
+                f"목록만 재시도합니다 ({attempt + 1}/{args.list_max_attempts}).",
+                flush=True,
+            )
+
+    selected_index, selected = max(
+        enumerate(crawl_results),
+        key=lambda value: len(value[1][0]),
+    )
+    items, html_path, crawl_diagnostics, selected_dir = selected
+    if selected_dir != run_dir:
+        promote_crawl_artifacts(selected_dir, run_dir)
+        html_path = run_dir / "popga_rendered.html"
+    crawl_diagnostics = {
+        **crawl_diagnostics,
+        "attempt_count": len(crawl_attempts),
+        "attempts": crawl_attempts,
+        "selected_attempt": selected_index + 1,
+        "previous_candidate_count": previous_count or None,
+        "retry_min_retention": args.list_retry_min_retention,
+    }
     print(f"      렌더링 HTML: {html_path}")
 
     print("[2/5] 서울 후보 카드 파싱")
@@ -235,7 +336,6 @@ def main() -> None:
         cache_ids: set[str] = set()
         previous_html_dir = None
         if previous_dir and not args.no_detail_cache:
-            previous_rows = load_jsonl(previous_dir / "normalized_list_preview.jsonl")
             cache_ids = unchanged_active_ids(detail_items, previous_rows)
             previous_html_dir = previous_dir / "detail_html"
         print(
