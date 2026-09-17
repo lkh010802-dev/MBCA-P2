@@ -1,5 +1,36 @@
-__pycache__/
-*.pyc
-.venv/
-venv/
-.env
+# Secrets and local environment
+**/.env
+**/.env.*
+!**/.env.example
+
+# Python
+**/__pycache__/
+**/*.py[cod]
+**/.pytest_cache/
+**/.mypy_cache/
+**/.ruff_cache/
+**/.venv/
+**/venv/
+**/.audit-venv/
+
+# Frontend build and dependencies
+**/node_modules/
+**/dist/
+**/dist-ssr/
+**/.vite/
+**/.vite-cache/
+
+# Runtime caches and local databases
+**/.cache/
+**/.runtime_cache/
+**/*.sqlite
+**/*.sqlite3
+**/*.db
+
+# Logs and editor/OS files
+**/*.log
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+

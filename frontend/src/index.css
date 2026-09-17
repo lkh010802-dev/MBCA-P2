@@ -1,0 +1,157 @@
+@import './App.css';
+* { box-sizing: border-box; }
+html { background: #eef5ff; }
+body { min-width: 320px; min-height: 100svh; margin: 0; color: #25262b; font-family: Pretendard, 'Noto Sans KR', 'Apple SD Gothic Neo', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+button, textarea, input { font: inherit; }
+
+@media (max-width:899px) {
+  /* 현재 이동수단 버튼이 이전 고밀도 헤더 규칙에 의해 숨는 충돌을 해소한다. */
+  .map-topbar .transport-current-trigger { display:inline-flex; }
+}
+
+/* 휴대폰 폭에서만 적용되는 레이아웃 보정입니다. 데스크톱 스타일은 유지합니다. */
+@media (max-width: 899px) {
+  html, body, #root { width: 100%; height: 100%; max-width: 100%; overflow: hidden; overscroll-behavior: none; }
+  .results-page, .home-page, .welcome-page { width: 100%; max-width: 100%; }
+  .results-page { height: 100dvh; min-height: 0; overflow: hidden; }
+  .home-page--sheet { height: calc(100dvh - max(76px, env(safe-area-inset-top))); padding-top: 38px; padding-bottom: max(14px, env(safe-area-inset-bottom)); overflow: visible; border-radius: 28px 28px 0 0; background: #fff; }
+  .home-page--sheet .home-intro { margin-top: 10px; margin-bottom: 10px; }
+  .home-page--sheet .recommendation-form { min-height: 0; margin-top: 10px; overflow: hidden; }
+  .home-page--sheet .recommendation-form textarea { min-height: 78px; max-height: 18dvh; }
+  .home-page--sheet .recommendation-guide { margin-top: 9px; padding: 11px; }
+  .home-page--sheet .recommendation-cta { flex: none; margin-top: 10px; }
+  .map-topbar { right: 12px; left: 12px; gap: 7px; }
+  .map-topbar > span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .map-route-label { right: 14px; left: 14px; max-width: calc(100% - 28px); }
+  .map-ranking-sheet { padding-right: 14px; padding-left: 14px; }
+  .map-ranking-sheet .ranking-scroll { min-width: 0; overflow-y: auto; overscroll-behavior: contain; }
+  .map-transport-selector { left: 14px; max-width: calc(100% - 28px); }
+  .map-transport-selector button { min-width: 0; padding-right: 8px; padding-left: 8px; white-space: nowrap; }
+}
+
+@media (max-width: 899px) and (max-height: 700px) {
+  .home-page--sheet .home-intro-copy { display: none; }
+  .home-page--sheet .home-intro h1 { font-size: 25px; }
+  .home-page--sheet .recommendation-guide { padding: 9px 10px; }
+  .home-page--sheet .guide-items { gap: 5px 8px; margin-top: 8px; }
+}
+
+/* 최종 모바일 헤더 우선순위: 세 이동수단을 항상 노출하고 선택된 항목을 넓힌다. */
+@media (max-width:899px) {
+  .map-topbar .transport-current-trigger { display:none; }
+  .map-topbar .map-transport-selector,
+  .map-topbar .map-transport-selector.is-open { position:static; display:flex; grid-column:2; width:100%; max-width:none; min-width:0; margin:0; border:0; border-radius:13px; box-shadow:none; }
+  .map-topbar .map-transport-selector button { flex:0 0 48px; min-width:48px; }
+  .map-topbar .map-transport-selector button span { display:none; }
+  .map-topbar .map-transport-selector button.is-active { flex:1 1 auto; }
+  .map-topbar .map-transport-selector button.is-active span { display:inline; }
+}
+
+/* 2026 모바일 정보 밀도 개선 */
+@media (max-width: 899px) {
+  .home-page--sheet { height:calc(100dvh - max(68px,env(safe-area-inset-top))); padding:32px 20px max(16px,env(safe-area-inset-bottom)); }
+  .home-page--sheet .home-intro { display:none; }
+  .home-page--sheet .home-header { min-height:34px; }
+  .home-page--sheet .home-brand { font-size:18px; }
+  .home-page--sheet .account-button { min-height:34px; padding:0 11px; }
+  .home-page--sheet .location-card { min-height:50px; margin-top:14px; padding:8px 10px; border-radius:14px; }
+  .home-page--sheet .location-card strong { font-size:11px; }
+  .home-page--sheet .location-card small { max-width:66vw; overflow:hidden; font-size:9px; text-overflow:ellipsis; white-space:nowrap; }
+  .home-page--sheet .recommendation-form { display:flex; flex:1; flex-direction:column; gap:10px; margin-top:16px; overflow:visible; }
+  .home-page--sheet .recommendation-form > label { margin:0; font-size:14px; }
+  .home-page--sheet .recommendation-hint,
+  .home-page--sheet .recommendation-guide { display:none; }
+  .home-page--sheet .message-compose { gap:12px; }
+  .home-page--sheet .recommendation-form textarea { min-height:124px; max-height:24dvh; padding:15px; border-radius:17px; }
+  .home-page--sheet .koala-auto-button { min-height:56px; padding:10px 14px; }
+  .home-page--sheet .recommendation-cta { min-height:54px; margin-top:auto; }
+
+  .analysis-page { justify-content:center; gap:5px; }
+  .analysis-page .analysis-koala-wrap { margin-bottom:2px; }
+  .analysis-page .analysis-brand { margin-bottom:3px; }
+  .analysis-page h1 { font-size:23px; }
+  .analysis-page .analysis-status { margin-top:5px; }
+  .analysis-page .analysis-progress { margin-top:10px; }
+  .analysis-page .analysis-steps { display:none; }
+  .analysis-page .analysis-actions { margin-top:10px; }
+
+  .map-topbar { top:max(0px,env(safe-area-inset-top)); right:0; left:0; grid-template-columns:44px minmax(0,1fr); gap:5px; min-height:58px; padding:7px 9px; border-radius:0 0 16px 16px; }
+  .map-topbar > .map-topbar-title,
+  .map-topbar .transport-current-trigger { display:none; }
+  .map-topbar .results-back { grid-column:1; width:42px; min-width:42px; }
+  .map-topbar .map-transport-selector,
+  .map-topbar .map-transport-selector.is-open { position:static; display:flex; grid-column:2; width:100%; max-width:none; min-width:0; margin:0; border:0; border-radius:13px; box-shadow:none; }
+  .map-topbar .map-transport-selector button { flex:0 0 48px; min-width:48px; min-height:44px; padding:0 10px; transition:flex 180ms ease,background 180ms ease; }
+  .map-topbar .map-transport-selector button span { display:none; }
+  .map-topbar .map-transport-selector button.is-active { flex:1 1 auto; }
+  .map-topbar .map-transport-selector button.is-active span { display:inline; }
+
+  .map-ranking-sheet.is-region-mode { height:auto; max-height:calc(100dvh - 150px); padding-top:9px; padding-bottom:max(10px,env(safe-area-inset-bottom)); }
+  .map-ranking-sheet.is-region-mode .sheet-handle { margin-bottom:2px; }
+  .map-ranking-sheet.is-region-mode .ranking-heading { margin-bottom:7px; }
+  .map-ranking-sheet.is-region-mode .ranking-heading p { display:none; }
+  .map-ranking-sheet.is-region-mode .ranking-scroll { gap:7px; max-height:none; padding-bottom:2px; }
+  .map-ranking-sheet.is-region-mode .area-card { min-height:82px; padding:12px 13px; }
+
+  .map-ranking-sheet.is-place-mode .place-scroll { padding-bottom:max(100px,calc(80px + env(safe-area-inset-bottom))); scroll-padding-bottom:max(100px,calc(80px + env(safe-area-inset-bottom))); }
+  .map-ranking-sheet.is-place-mode .place-card { position:relative; min-height:88px; padding-top:12px; padding-bottom:12px; }
+  .map-ranking-sheet.is-place-mode .place-category-icon { width:60px; height:54px; border-radius:13px; }
+  .map-ranking-sheet.is-place-mode .place-card strong { padding-right:24px; font-size:14px; }
+  .map-ranking-sheet.is-place-mode .place-card small { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .place-corner-icon { position:absolute; top:8px; right:9px; font-size:15px; }
+}
+
+@media (max-width: 380px) {
+  .home-page, .welcome-page { padding-right: 16px; padding-left: 16px; }
+  .map-topbar { right: 10px; left: 10px; }
+  .map-ranking-sheet { padding-right: 10px; padding-left: 10px; }
+  .map-transport-selector button { gap: 3px; padding-right: 6px; padding-left: 6px; font-size: 10px; }
+}
+
+/* 모바일 지도 헤더: 현재 선택값만 한 줄에 유지하고 변경할 때만 메뉴를 연다. */
+@media (max-width: 899px) {
+  .map-topbar { grid-template-columns:auto minmax(0,1fr) auto; min-height:50px; padding:6px 7px; border-radius:15px; }
+  .map-topbar .results-back { min-width:44px; min-height:44px; height:44px; padding:5px 8px 5px 6px; }
+  .map-topbar .results-back b { display:none; }
+  .map-topbar > .map-topbar-title { padding:7px 9px; overflow:hidden; background:transparent; box-shadow:none; font-size:12px; text-overflow:ellipsis; white-space:nowrap; }
+  .transport-current-trigger { display:inline-flex; align-items:center; justify-content:center; gap:4px; min-width:92px; min-height:44px; padding:0 9px; border:1px solid #cfe1fa; border-radius:11px; color:#2868be; background:#eef6ff; font:inherit; font-size:10px; font-weight:900; white-space:nowrap; cursor:pointer; }
+  .transport-current-trigger i { font-style:normal; }
+  .transport-current-trigger b { color:#7896bb; font-size:10px; }
+  .map-topbar .map-transport-selector { position:absolute; top:calc(100% + 6px); right:0; left:auto; display:none; grid-column:auto; width:min(294px,calc(100vw - 24px)); max-width:none; margin:0; border-radius:13px; background:rgba(255,255,255,.98); box-shadow:0 10px 24px rgba(26,70,129,.2); }
+  .map-topbar .map-transport-selector.is-open { display:flex; }
+  .map-topbar .map-transport-selector button { flex:1; min-height:44px; justify-content:center; }
+
+  .quick-course-section { display:block; flex:none; margin-top:12px; }
+  .quick-course-heading { display:flex; align-items:flex-end; justify-content:space-between; gap:10px; margin-bottom:7px; }
+  .quick-course-heading > div { display:grid; gap:2px; }
+  .quick-course-heading strong { color:#1d385c; font-size:12px; letter-spacing:-.04em; }
+  .quick-course-heading small { color:#8a9bb0; font-size:9px; font-weight:700; }
+  .quick-course-heading > span { padding:3px 6px; border-radius:999px; color:#397ee8; background:#eaf3ff; font-size:9px; font-weight:900; }
+  .quick-course-list { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:6px; }
+  .quick-course-list button { position:relative; display:grid; align-content:start; min-width:0; min-height:86px; padding:9px 8px; border:1px solid #d9e8fb; border-radius:14px; color:#365b87; background:linear-gradient(145deg,#f7fbff,#fff); text-align:left; font:inherit; cursor:pointer; }
+  .quick-course-list button:active { border-color:#75aaf3; background:#eef6ff; transform:scale(.98); }
+  .quick-course-list button:disabled { cursor:wait; opacity:.65; }
+  .quick-course-list i { font-style:normal; font-size:17px; }
+  .quick-course-list span { display:grid; gap:3px; margin-top:5px; }
+  .quick-course-list b { overflow:hidden; font-size:10px; line-height:1.25; text-overflow:ellipsis; }
+  .quick-course-list small { color:#8295ad; font-size:8px; font-weight:700; line-height:1.3; }
+  .quick-course-list em { position:absolute; top:8px; right:8px; color:#72a1df; font-size:16px; font-style:normal; }
+  .home-page--sheet:focus-within .quick-course-section { display:none; }
+}
+
+@media (max-width: 899px) and (max-height: 700px) {
+  .home-page--sheet .recommendation-guide { display:none; }
+  .quick-course-section { margin-top:8px; }
+  .quick-course-list button { min-height:74px; padding:7px; }
+  .quick-course-list small { display:none; }
+}
+
+/* Authoritative mobile header rules; keep after legacy responsive declarations. */
+@media (max-width:899px) {
+  .map-topbar { grid-template-columns:44px minmax(0,1fr); }
+  .map-topbar .transport-current-trigger { display:none; }
+  .map-topbar .map-transport-selector,
+  .map-topbar .map-transport-selector.is-open { position:static; display:flex; grid-column:2; width:100%; min-width:0; max-width:none; margin:0; box-shadow:none; }
+  .map-topbar .map-transport-selector button { flex:0 0 48px; min-width:48px; justify-content:center; }
+  .map-topbar .map-transport-selector button.is-active { flex:1 1 auto; }
+}
