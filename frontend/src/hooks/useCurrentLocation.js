@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { API_BASE_URL } from '../api/apiConfig'
 
 export function useCurrentLocation() {
   const [location, setLocation] = useState(null)
@@ -54,10 +55,9 @@ export function useCurrentLocation() {
         // Address lookup is optional. The aligned mvp-v2 backend does not expose
         // /reverse-geocode, so never block or error the location flow on it.
         // It can be enabled explicitly when a backend providing the endpoint is used.
-        const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000'
         const addressController = new AbortController()
         const addressTimeout = window.setTimeout(() => addressController.abort(), 8000)
-        fetch(`${apiBaseUrl}/reverse-geocode?latitude=${encodeURIComponent(coords.latitude)}&longitude=${encodeURIComponent(coords.longitude)}`, { signal: addressController.signal })
+        fetch(`${API_BASE_URL}/reverse-geocode?latitude=${encodeURIComponent(coords.latitude)}&longitude=${encodeURIComponent(coords.longitude)}`, { signal: addressController.signal })
           .then((response) => {
             if (!response.ok) throw new Error('주소 조회 실패')
             return response.json()

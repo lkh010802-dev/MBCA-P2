@@ -1,4 +1,4 @@
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? 'http://127.0.0.1:8000'
+import { API_BASE_URL } from './apiConfig'
 // Real API/DB authentication is the safe default in every environment.
 // Opt into localStorage-only demo auth explicitly with VITE_AUTH_MODE=mock.
 const MOCK_AUTH = import.meta.env.VITE_AUTH_MODE === 'mock'

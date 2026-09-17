@@ -1,9 +1,7 @@
 import { measureAsync } from "../utils/performanceMetric";
 import { getTrace, audit } from "../utils/auditTrace";
 import { courseWarnings } from "../utils/contractAudit";
-
-const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL ?? "http://127.0.0.1:8000";
+import { API_BASE_URL, apiAssetUrl } from "./apiConfig";
 
 const responses = new Map();
 const pending = new Map();
@@ -136,7 +134,7 @@ export async function requestPlacePhotos(places) {
     photos: (data.photos ?? []).map((photo) => ({
       ...photo,
       image_url: photo.image_url?.startsWith("/")
-        ? `${API_BASE_URL}${photo.image_url}`
+        ? apiAssetUrl(photo.image_url)
         : photo.image_url,
     })),
   };
