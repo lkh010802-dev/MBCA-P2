@@ -62,24 +62,20 @@ export default function AdventurePanel({
       departure_datetime:
         recommendationContext?.departure_datetime ?? new Date().toISOString(),
       end_location: recommendationContext?.end_location ?? null,
-      available_time_minutes: Math.max(
-        30,
-        Number(recommendationContext?.available_time_minutes) || 180,
-      ),
+      available_time_minutes: Number(recommendationContext?.available_time_minutes),
     }),
     [recommendationContext],
   );
 
-  const ready = Boolean(area && context.start_location);
+  const ready = Boolean(area && context.start_location && Number.isFinite(context.available_time_minutes) && context.available_time_minutes > 0);
   const body = ready
     ? { area: areaPayload(area), recommendation_context: context }
     : null;
 
   const run = async (kind) => {
-    if (!body) return;
+    if (!body || loading) return;
     setLoading(kind);
     setError("");
-    setResult(null);
     try {
       if (kind === "single")
         setResult({ kind, data: await requestAdventure(body) });
@@ -150,10 +146,11 @@ export default function AdventurePanel({
 
   const places =
     result?.data?.places ?? (result?.data?.place ? [result.data.place] : []);
-  const openAndRun = (kind) => {
-    setOpen(true);
-    void run(kind);
-  };
+  const preview = result?.data?.course_preview;
+  const canUsePlaces = preview?.status === "FEASIBLE" &&
+    [preview.total_travel_time_minutes, preview.total_stay_time_minutes, preview.total_required_minutes]
+      .every((value) => typeof value === "number" && Number.isFinite(value) && value >= 0) &&
+    preview.total_required_minutes <= context.available_time_minutes;
   if (!ready) return null;
   return (
     <>
@@ -167,26 +164,27 @@ export default function AdventurePanel({
             if (event.target === event.currentTarget) setOpen(false);
           }}
         >
-          <section className="adventure-panel" role="dialog" aria-modal="true">
+          <section className="adventure-panel" role="dialog" aria-modal="true" aria-label="뜻밖의 추천">
             <button
               className="adventure-close"
               type="button"
+              aria-label="뜻밖의 추천 닫기"
               onClick={() => setOpen(false)}
             >
               ×
             </button>
-            <small>현재 지역 · {area.name}</small>
+            <small>현재 지역 · {area.name} · 여유 {context.available_time_minutes}분</small>
             <h2>평소와 다른 선택을 해볼까요?</h2>
-            <p>현재 위치와 남은 시간을 지키는 후보만 확인해요.</p>
-            <div className="adventure-actions">
+            <p>후보를 먼저 확인해 보세요. 선택하기 전까지 기존 코스는 유지돼요.</p>
+            <fieldset className="adventure-actions" disabled={Boolean(loading)} style={{ border: 0, padding: 0, margin: 0 }}>
               <button type="button" onClick={() => run("single")}>
-                깜짝 장소
+                깜짝 장소 · 한 곳 발견
               </button>
               <button type="button" onClick={() => run("course")}>
-                랜덤 코스
+                랜덤 코스 · 두 곳 함께
               </button>
               <button type="button" onClick={() => run("blind")}>
-                목적지는 비밀
+                목적지는 비밀 · 공개 후 선택
               </button>
               <button
                 className="adventure-more-toggle"
@@ -195,9 +193,9 @@ export default function AdventurePanel({
               >
                 {moreOpen ? "간단히 보기" : "더 보기"}
               </button>
-            </div>
+            </fieldset>
             {moreOpen && (
-              <div className="adventure-actions is-secondary">
+              <fieldset className="adventure-actions is-secondary" disabled={Boolean(loading)} style={{ border: 0, padding: 0 }}>
                 <button type="button" onClick={() => run("blind-course")}>
                   코스 전체를 비밀로
                 </button>
@@ -207,7 +205,7 @@ export default function AdventurePanel({
                 <button type="button" onClick={() => run("seoul")}>
                   서울 어디든 떠나기
                 </button>
-              </div>
+              </fieldset>
             )}
             {loading && (
               <div className="adventure-result">추천을 고르는 중…</div>
@@ -217,7 +215,7 @@ export default function AdventurePanel({
               <div className="adventure-result">
                 <b>{labels[result.data.category] ?? "랜덤"} 후보를 골랐어요</b>
                 <span>10분 안에 공개할 수 있어요.</span>
-                <button type="button" onClick={reveal}>
+                <button type="button" onClick={reveal} disabled={Boolean(loading)}>
                   장소 공개하기
                 </button>
               </div>
@@ -251,13 +249,13 @@ export default function AdventurePanel({
                     .join(" → ")}
                 </b>
                 <span>
-                  이동{" "}
-                  {result.data.course_preview?.total_travel_time_minutes ?? 0}분
-                  · 체류{" "}
-                  {result.data.course_preview?.total_stay_time_minutes ?? 0}분
+                  {canUsePlaces
+                    ? `총 ${preview.total_required_minutes}분 · 이동 ${preview.total_travel_time_minutes}분 · 체류 ${preview.total_stay_time_minutes}분`
+                    : "현재 시간 안에 가능한 경로인지 확인하지 못했어요. 다시 추천받아 주세요."}
                 </span>
                 <button
                   type="button"
+                  disabled={Boolean(loading) || !canUsePlaces}
                   onClick={() => {
                     onUsePlaces(places);
                     setOpen(false);

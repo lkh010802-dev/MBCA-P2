@@ -7,6 +7,8 @@ export function useCurrentLocation() {
   const [addressStatus, setAddressStatus] = useState('idle')
   const [status, setStatus] = useState('idle')
   const watchIdRef = useRef(null)
+  const addressRequestRef = useRef(null)
+  const generationRef = useRef(0)
 
   const stopWatching = useCallback(() => {
     if (watchIdRef.current !== null && navigator.geolocation) {
@@ -15,15 +17,22 @@ export function useCurrentLocation() {
     }
   }, [])
 
-  useEffect(() => stopWatching, [stopWatching])
+  const cancelRequests = useCallback(() => {
+    generationRef.current += 1
+    stopWatching()
+    addressRequestRef.current?.abort()
+    addressRequestRef.current = null
+  }, [stopWatching])
+
+  useEffect(() => cancelRequests, [cancelRequests])
 
   const clearLocation = useCallback(() => {
-    stopWatching()
+    cancelRequests()
     setLocation(null)
     setAddress(null)
     setAddressStatus('idle')
     setStatus('idle')
-  }, [stopWatching])
+  }, [cancelRequests])
 
   const requestLocation = useCallback((onSuccess, onFailure) => {
     if (!navigator.geolocation) {
@@ -32,12 +41,13 @@ export function useCurrentLocation() {
       return
     }
 
-    stopWatching()
+    cancelRequests()
+    const generation = generationRef.current
     setStatus('loading')
     let settled = false
     watchIdRef.current = navigator.geolocation.watchPosition(
       ({ coords }) => {
-        if (settled) return
+        if (settled || generation !== generationRef.current) return
         settled = true
         const nextLocation = {
           latitude: coords.latitude,
@@ -52,10 +62,9 @@ export function useCurrentLocation() {
         stopWatching()
         if (typeof onSuccess === 'function') onSuccess(nextLocation)
 
-        // Address lookup is optional. The aligned mvp-v2 backend does not expose
-        // /reverse-geocode, so never block or error the location flow on it.
-        // It can be enabled explicitly when a backend providing the endpoint is used.
+        // Ignore late address responses after location is cleared or requested again.
         const addressController = new AbortController()
+        addressRequestRef.current = addressController
         const addressTimeout = window.setTimeout(() => addressController.abort(), 8000)
         fetch(`${API_BASE_URL}/reverse-geocode?latitude=${encodeURIComponent(coords.latitude)}&longitude=${encodeURIComponent(coords.longitude)}`, { signal: addressController.signal })
           .then((response) => {
@@ -63,14 +72,15 @@ export function useCurrentLocation() {
             return response.json()
           })
           .then((result) => {
+            if (generation !== generationRef.current) return
             setAddress(result)
             setAddressStatus(result?.road_address || result?.jibun_address || result?.display_name ? 'success' : 'unavailable')
           })
-          .catch(() => setAddressStatus('unavailable'))
+          .catch(() => { if (generation === generationRef.current) setAddressStatus('unavailable') })
           .finally(() => window.clearTimeout(addressTimeout))
       },
       (error) => {
-        if (settled) return
+        if (settled || generation !== generationRef.current) return
         settled = true
         setStatus(error.code === error.PERMISSION_DENIED ? 'denied' : 'unavailable')
         stopWatching()
@@ -78,7 +88,7 @@ export function useCurrentLocation() {
       },
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 15000 },
     )
-  }, [stopWatching])
+  }, [stopWatching, cancelRequests])
 
   return { location, address, addressStatus, status, requestLocation, clearLocation }
 }
