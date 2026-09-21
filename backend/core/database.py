@@ -31,6 +31,7 @@ SessionLocal = sessionmaker(
 )
 
 
+# FastAPI 요청마다 DB 세션을 제공하고 요청 처리가 끝나면 반드시 닫는다.
 def get_db():
     db = SessionLocal()
     try:

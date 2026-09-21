@@ -4,6 +4,7 @@ from time import monotonic
 from uuid import uuid4
 
 
+# 장소 추천은 한 번에 6개씩 보여주고, 남은 후보는 15분 동안 메모리에 보관한다.
 PLACE_PAGE_SIZE = 6
 PLACE_CACHE_TTL_SECONDS = 15 * 60
 
@@ -32,6 +33,7 @@ class PlaceRecommendationPage:
     next_offset: int | None
 
 
+# 여러 요청이 동시에 캐시를 읽고 쓸 때 cursor 데이터가 꼬이지 않도록 Lock으로 보호한다.
 _place_cache: dict[str, PlaceRecommendationCacheEntry] = {}
 _place_cache_lock = Lock()
 
@@ -66,6 +68,7 @@ def create_place_recommendation_page(
             next_offset=None,
         )
 
+    # 다음 페이지가 있을 때만 새 cursor를 발급하고 전체 후보 pool을 저장한다.
     cursor = uuid4().hex
 
     now = monotonic()
@@ -94,6 +97,7 @@ def get_next_place_recommendation_page(
 ):
     """cache에 저장된 다음 6개를 외부 API 재호출 없이 반환한다."""
 
+    # 다음 페이지 요청은 외부 장소 API를 다시 호출하지 않고 저장된 후보 pool을 재사용한다.
     with _place_cache_lock:
         entry = _place_cache.get(cursor)
 

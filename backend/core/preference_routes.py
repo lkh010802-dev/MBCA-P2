@@ -15,6 +15,7 @@ from models import UserPreferencesResponse, UserPreferencesUpdateRequest
 
 
 router = APIRouter()
+# API 응답에서 활동별 취향을 항상 같은 순서로 제공하기 위한 기준 순서
 ACTIVITY_ORDER = (
     "food",
     "cafe",
@@ -26,6 +27,7 @@ ACTIVITY_ORDER = (
 )
 
 
+# 추천 서비스에서 바로 사용할 수 있는 형태로 기본 취향과 활동별 선호도를 함께 조회한다.
 def load_recommendation_preferences(db: Session, user_id: int) -> dict:
     preferences = db.scalar(
         select(UserPreference).where(UserPreference.user_id == user_id)
@@ -41,6 +43,7 @@ def load_recommendation_preferences(db: Session, user_id: int) -> dict:
             ActivityCategory.is_active.is_(True),
         )
     ).all()
+    # DB 조회 순서와 무관하게 프론트·추천 로직에서 기대하는 활동 순서를 유지한다.
     activity_rows.sort(key=lambda row: ACTIVITY_ORDER.index(row[1]))
 
     return {
@@ -57,6 +60,7 @@ def load_recommendation_preferences(db: Session, user_id: int) -> dict:
     }
 
 
+# 내부 dict 형태의 추천용 취향을 API 응답 모델로 변환한다.
 def _read_preferences(db: Session, user_id: int) -> UserPreferencesResponse:
     preferences = load_recommendation_preferences(db, user_id)
 
@@ -94,6 +98,7 @@ def update_preferences(
     db: Session = Depends(get_db),
 ):
     try:
+        # 요청된 활동 코드가 실제 활성 카테고리인지 먼저 검증한다.
         requested_codes = [
             item.activity for item in request.activity_preferences
         ]
@@ -117,6 +122,7 @@ def update_preferences(
                 detail="사용할 수 없는 활동 카테고리입니다.",
             )
 
+        # 요청에 실제 포함된 기본 취향 필드만 갱신해 기존 값을 불필요하게 덮어쓰지 않는다.
         basic_fields = {"space_preference", "transport_mode"}
         if request.model_fields_set & basic_fields:
             preferences = db.scalar(
@@ -128,6 +134,7 @@ def update_preferences(
             for field in request.model_fields_set & basic_fields:
                 setattr(preferences, field, getattr(request, field))
 
+        # 활동별 선호도는 기존 행이 있으면 수정하고, 없으면 새 행을 추가한다.
         if requested_codes:
             activity_ids = [categories_by_code[code].id for code in requested_codes]
             existing = db.scalars(
@@ -153,6 +160,7 @@ def update_preferences(
                 else:
                     preference.preference_level = item.preference_level
 
+        # 기본 취향과 활동별 취향 변경을 하나의 트랜잭션으로 확정한다.
         db.commit()
     except SQLAlchemyError as error:
         db.rollback()

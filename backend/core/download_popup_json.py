@@ -14,6 +14,7 @@ from dotenv import load_dotenv
 
 from popup_service import normalize_popup_place
 
+# 운영 팝업 원본을 내려받아 검증한 뒤 현재 파일과 백업 파일을 안전하게 교체한다.
 API_URL = "https://152-69-195-242.sslip.io/api/export/json"
 KST = timezone(timedelta(hours=9))
 OUTPUT_DIR = Path(__file__).resolve().parent / "popup_data"
@@ -21,6 +22,7 @@ POPUP_DATA_PATH = OUTPUT_DIR / "popup_places.json"
 POPUP_BACKUP_PATH = OUTPUT_DIR / "popup_places_backup.json"
 
 
+# JSON이 비어 있지 않고 KOALA 공통 장소 형식으로 최소 한 건 이상 정규화 가능한지 확인한다.
 def _validate_content(content):
     records = json.loads(content)
 
@@ -52,6 +54,7 @@ def download_today(token):
         content = response.read()
     records = _validate_content(content)
 
+    # 새 파일을 임시 파일에 먼저 기록하고 검증된 기존 파일은 백업한 뒤 원자적으로 교체한다.
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     temporary = None
     backup_temporary = None
@@ -82,6 +85,7 @@ def download_today(token):
     return POPUP_DATA_PATH, len(records)
 
 
+# 이 파일은 서버 요청 처리용이 아니라 팝업 운영 데이터를 갱신하는 수동 실행 스크립트다.
 def main():
     load_dotenv()
     token = os.environ.get("CRAWLER_API_TOKEN", "").strip()

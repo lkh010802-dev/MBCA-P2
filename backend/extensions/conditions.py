@@ -34,11 +34,29 @@ def extract_explicit_activity_location(user_message: str | None):
     if not user_message:
         return None
     normalized = " ".join(user_message.strip().split())
+    activity_pattern = r"(?:쉬|먹|마시|보|놀|걷|산책|카페|전시|문화)"
+    # 역·동 같은 접미사가 있는 장소는 가장 확실한 형태로 먼저 찾는다.
     match = re.search(
-        r"(?:^|\s)([가-힣A-Za-z0-9·._-]+(?:역|터미널|공항|공원|광장|시장|백화점|대학교|대학|병원|동|구))에서\s+.*(?:쉬|먹|마시|보|놀|걷|산책|카페|전시|문화)",
+        rf"(?:^|\s)([가-힣A-Za-z0-9·._-]+(?:역|터미널|공항|공원|광장|시장|백화점|대학교|대학|병원|동|구))에서\s+.*{activity_pattern}",
         normalized,
     )
-    return match.group(1).strip() if match else None
+    if match:
+        return match.group(1).strip()
+
+    # 성수·홍대처럼 행정 접미사가 없는 생활권 이름도 지원한다. 다만
+    # "카페에서 쉬기"의 카페처럼 장소 종류를 지역명으로 오인하지 않는다.
+    generic_place_words = {
+        "카페", "식당", "음식점", "집", "회사", "학교", "실내", "야외",
+        "밖", "근처", "주변", "여기", "어디",
+    }
+    for candidate_match in re.finditer(
+        rf"(?:^|\s)([가-힣A-Za-z0-9·._-]{{2,20}})에서\s+.*{activity_pattern}",
+        normalized,
+    ):
+        candidate = candidate_match.group(1).strip()
+        if candidate not in generic_place_words:
+            return candidate
+    return None
 
 
 def extract_explicit_end_location(user_message: str | None):

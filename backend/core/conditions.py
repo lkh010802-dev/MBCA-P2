@@ -4,6 +4,7 @@ from zoneinfo import ZoneInfo
 from models import RecommendRequest, StructuredConditions
 
 
+# 자연어 시간대 표현을 분 단위 범위로 변환하기 위한 기준
 TIME_PERIOD_RANGES = {
     "morning": (6 * 60, 11 * 60),
     "lunch": (11 * 60, 15 * 60),
@@ -107,6 +108,7 @@ def resolve_start_time(
             "start_time": conditions.start_time
         }
 
+    # 모든 시간 판단은 서버 위치와 무관하게 Asia/Seoul 기준으로 통일한다.
     now = (
         current_datetime or datetime.now(ZoneInfo("Asia/Seoul"))
     ).astimezone(ZoneInfo("Asia/Seoul"))
@@ -303,6 +305,7 @@ def calculate_time_window(
             time_window_minutes
     }
 
+# 후보별 실제 이동시간을 시작시각에 더해 혼잡도 예측에 사용할 도착 예정시각을 만든다.
 def calculate_candidate_arrival_time(
     start_datetime,
     travel_minutes

@@ -5,6 +5,7 @@ from datetime import date, datetime, time, timedelta
 from zoneinfo import ZoneInfo
 
 
+# 영업시간 계산은 자정 경계와 서버 환경 차이를 피하기 위해 서울 시간대로 통일한다.
 SEOUL_TIMEZONE = ZoneInfo("Asia/Seoul")
 DAY_CODES = ("MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN")
 TIME_PATTERN = re.compile(r"^(?:[01]\d|2[0-3]):[0-5]\d$")
@@ -50,6 +51,7 @@ def _parse_time(value, allow_24=False):
     return parsed.hour * 60 + parsed.minute
 
 
+# 전날 시작해 자정을 넘기는 영업시간도 현재 도착시각 판정에 포함한다.
 def _build_schedule(schedule, arrival_date, start_at, end_at):
     intervals = []
     exact_closed_days = set()
@@ -151,6 +153,7 @@ def evaluate_place_availability(
     ):
         raise ValueError("travel_minutes는 0 이상의 유한한 숫자여야 합니다.")
 
+    # 실제 이동 후의 서울 현지 도착시각을 기준으로 행사 기간과 영업시간을 함께 판정한다.
     arrival_at = (
         current_datetime.astimezone(SEOUL_TIMEZONE)
         + timedelta(minutes=travel_minutes)
@@ -175,6 +178,7 @@ def evaluate_place_availability(
             return _result("event_ended", arrival_at)
         return _result("unknown", arrival_at)
 
+    # 파싱된 운영 스케줄이 있을 때만 세부 영업 여부를 계산하고 불완전한 정보는 unknown으로 둔다.
     intervals, closed_days, special_days, invalid = _build_schedule(
         schedule,
         arrival_date,

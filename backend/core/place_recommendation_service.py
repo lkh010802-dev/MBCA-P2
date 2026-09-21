@@ -391,6 +391,7 @@ def build_personalized_activity_order(
     activity_order: list[str],
     activity_preferences: dict[str, int] | None,
 ):
+    # 장소별 점수는 바꾸지 않고, 다중 activity 결과를 섞기 시작하는 순서만 약하게 개인화한다.
     priorities = {4: 1, 5: 2}
     preferences = activity_preferences or {}
 
@@ -454,6 +455,7 @@ def finalize_recommended_places(
     activity 내부 정렬과 round-robin을 동일하게 적용한다.
     """
 
+    # source별 성공·실패와 관계없이 여기서 하나의 공통 후보 목록으로 수렴시킨다.
     unique_places = remove_duplicate_places(
         places
     )
@@ -586,6 +588,7 @@ def recommend_places(
         except PopupDataError:
             normalized_popup_places = []
 
+    # Kakao·현재 문화행사·팝업은 TourAPI 행정구역 조회가 실패해도 독립적으로 반환 가능한 기본 후보군이다.
     base_places = (
         normalized_kakao_places
         + normalized_seoul_culture_places
@@ -697,6 +700,7 @@ def recommend_places(
 
     # 8. Kakao와 TourAPI 후보를 합친 뒤
     # 같은 실제 장소가 중복된 경우 하나만 남긴다.
+    # source마다 다른 원본 형식은 normalize가 끝난 뒤에만 합쳐 중복 제거와 ranking을 한 번 수행한다.
     combined_places = (
         normalized_kakao_places
         + filtered_tour_places

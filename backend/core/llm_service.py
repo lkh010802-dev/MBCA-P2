@@ -9,6 +9,7 @@ load_dotenv()
 
 HERE = Path(__file__).resolve().parent
 FREEZE_DIR = HERE / "LLM" / "LLM_V1_4_FREEZE"
+# 검증 완료된 Freeze 파서를 고정 경로에서 불러와 추천 조건 추출 규격을 유지한다.
 
 # Freeze 모듈은 같은 폴더의 파일을 sibling import한다.
 sys.path.insert(0, str(FREEZE_DIR))
@@ -26,6 +27,7 @@ def parse_user_intent(
     사용자의 자연어를 LLM으로 분석하여
     LLM V1.3.1 resilience freeze의 16개 필드 JSON으로 변환한다.
     """
+    # 현재 시각과 타임존을 함께 전달해 "지금", "오늘 저녁" 같은 상대시간을 해석한다.
     return parse_intent(
         user_input,
         runtime_context={
@@ -65,6 +67,7 @@ def generate_recommendation_message(
     백엔드가 계산한 추천 결과를 이용해
     사용자에게 보여줄 결정적인 추천 문장을 생성한다.
     """
+    # 현재 메시지 생성은 재계산 없이 백엔드가 확정한 추천 결과만 문장으로 조합한다.
     del user_message
 
     target_area = recommendation_result.get("target_area")

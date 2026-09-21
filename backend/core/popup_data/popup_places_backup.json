@@ -227,8 +227,8 @@
     "source": "popup",
     "source_id": "popup_afbbceb672e5a69b",
     "name": "바이오힐 보 쇼룸 팝업 IN 성수",
-    "latitude": 37.54412193594537,
-    "longitude": 127.05449604048775,
+    "latitude": 37.54415261617268,
+    "longitude": 127.05448938699388,
     "category": "shopping",
     "category_detail": null,
     "hub_rank": null,
@@ -588,53 +588,6 @@
       "서울 팝업",
       "애니메이션",
       "캐릭터"
-    ],
-    "confidence": 0.9
-  },
-  {
-    "source": "popup",
-    "source_id": "popup_9cede9adc5478499",
-    "name": "고스티 쇼룸 서울숲 팝업",
-    "latitude": 37.5471102929,
-    "longitude": 127.0418676672,
-    "category": "shopping",
-    "category_detail": null,
-    "hub_rank": null,
-    "address": "서울 성동구 서울숲4길 12-22 B1",
-    "distance_m": null,
-    "start_date": "2026-03-20",
-    "end_date": "2026-09-14",
-    "status": "ACTIVE",
-    "venue_name": null,
-    "opening_time": "11:00",
-    "closing_time": "19:00",
-    "closed": false,
-    "operation_schedule": [
-      {
-        "days": [
-          "MON",
-          "TUE",
-          "WED",
-          "THU",
-          "FRI",
-          "SAT",
-          "SUN"
-        ],
-        "opening_time": "11:00",
-        "closing_time": "19:00",
-        "closed": false
-      }
-    ],
-    "description": "\" 다양한 디자인의 카드커버 스티커를 빠르고 실패 없는 '이지핏' 부착으로 직접 경험해 보세요 \"",
-    "image_url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20260320_107%2F1774000297517LAyO0_JPEG%2F20260320_144657_%25281%2529.jpg",
-    "detail_url": "https://dayforyou.com/getDetail?scheduleSeq=22499",
-    "official_url": "https://naver.me/xRgMlgPI",
-    "reservation_url": null,
-    "popup_categories": [],
-    "tags": [
-      "#서울숲",
-      "#고스티쇼룸",
-      "#카드커버스티커"
     ],
     "confidence": 0.9
   },
@@ -2773,7 +2726,7 @@
     "source_id": "popup_c3da058758ff06be",
     "name": "뱅크시, Still Here",
     "latitude": 37.52571671165,
-    "longitude": 126.92857345175,
+    "longitude": 126.928577630725,
     "category": "shopping",
     "category_detail": null,
     "hub_rank": null,
@@ -2909,9 +2862,9 @@
     "end_date": "2026-10-18",
     "status": "ACTIVE",
     "venue_name": "아모레성수 2층 STORY A 성수",
-    "opening_time": null,
-    "closing_time": null,
-    "closed": true,
+    "opening_time": "11:00",
+    "closing_time": "20:00",
+    "closed": false,
     "operation_schedule": [
       {
         "days": [
@@ -4060,8 +4013,8 @@
     "source": "popup",
     "source_id": "popup_e6c205698900fb92",
     "name": "바이비 팝업",
-    "latitude": 37.5289016304375,
-    "longitude": 126.96431855010997,
+    "latitude": 37.5289021957,
+    "longitude": 126.9643178514,
     "category": "food",
     "category_detail": "카테고리 없음",
     "hub_rank": null,
@@ -4124,9 +4077,9 @@
     "end_date": "2026-11-16",
     "status": "ACTIVE",
     "venue_name": "1층",
-    "opening_time": null,
-    "closing_time": null,
-    "closed": true,
+    "opening_time": "12:00",
+    "closing_time": "19:00",
+    "closed": false,
     "operation_schedule": [
       {
         "days": [
@@ -4487,9 +4440,9 @@
     "end_date": "2026-09-18",
     "status": "ACTIVE",
     "venue_name": null,
-    "opening_time": null,
-    "closing_time": null,
-    "closed": true,
+    "opening_time": "11:00",
+    "closing_time": "18:00",
+    "closed": false,
     "operation_schedule": [
       {
         "days": [
@@ -4881,73 +4834,6 @@
       "흔적특공대"
     ],
     "confidence": 0.9
-  },
-  {
-    "source": "popup",
-    "source_id": "popup_103abb799341b63a",
-    "name": "보따리제과점의 새로운 팝업,",
-    "latitude": 37.5256784276,
-    "longitude": 126.9285650938,
-    "category": "cafe",
-    "category_detail": "카테고리 없음",
-    "hub_rank": null,
-    "address": "서울 영등포구 여의대로 108 더현대 서울",
-    "distance_m": null,
-    "start_date": "2026-08-21",
-    "end_date": "2026-09-15",
-    "status": "ACTIVE",
-    "venue_name": "더현대서울 B1 유리월 팝업스튜디오",
-    "opening_time": "10:30",
-    "closing_time": "20:00",
-    "closed": false,
-    "operation_schedule": [
-      {
-        "days": [
-          "MON",
-          "TUE",
-          "WED",
-          "THU"
-        ],
-        "opening_time": "10:30",
-        "closing_time": "20:00",
-        "closed": false
-      },
-      {
-        "days": [
-          "FRI",
-          "SAT",
-          "SUN"
-        ],
-        "opening_time": "10:30",
-        "closing_time": "20:30",
-        "closed": false
-      }
-    ],
-    "description": "보따리제과점의 새로운 팝업, 아마이모찌도넛이 찾아옵니다! 퐁신한 빵과 쫄깃한 모찌 식감이 만나 완성된 새로운 스타일의 모찌 도넛을 더현대서울에서 가장 먼저 만나보세요. 📍 더현대서울 B1 유리월 팝업스튜디오 🗓 8.21(금) – 9.15(화) • 팥앙금 • 인절미 • 약과 • 녹차앙금 👉🏻 원하는 맛으로 자유롭게 구성! ✅ 4개입 세트 16,000원 ✅ 1인 최대 3박스 구매 가능 보들보들 퐁신한 반죽에 쫄깃한 모찌 식감을 더해 떡과는 또 다른 매력의 달콤한 도넛을 완성했습니다. 익숙한 팥, 인절미, 약과, 녹차의 맛을 아마이모찌도넛만의 방식으로 재해석한 특별한 한입. 더현대서울에서 가장 먼저, 아마이모찌도넛을 만나보세요. ✨ #보따리제과점 #모찌도넛 #여의도 #더현대서울 #더현대서울팝업",
-    "image_url": "https://scontent-icn2-1.cdninstagram.com/v/t51.82787-15/777238068_17953826475243612_8741501154074750180_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=103&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=oM_TIY8M5yAQ7kNvwHRmnvq&_nc_oc=Adr1tGS2qdKeHAyLYMo7XiQMEvOojGLLvKwhQTq5ddxZxir_gc_pbQlnXKm8ulRs2YM&_nc_zt=23&_nc_ht=scontent-icn2-1.cdninstagram.com&edm=AL-3X8kEAAAA&_nc_gid=4u9vNIjwVcfJYgDO-sBmtw&oh=00_AQH1bPz-mifpvYIgAa5M-DP_Rs-Zt7Il2QwQ0GPoxYFYaQ&oe=6A916AB7",
-    "detail_url": "https://dayforyou.com/getDetail?scheduleSeq=36415",
-    "official_url": "https://www.instagram.com/p/DcPny2CHbdb/",
-    "reservation_url": null,
-    "popup_categories": [
-      "F&B",
-      "카페/디저트/베이커리",
-      "실내 팝업"
-    ],
-    "tags": [
-      "여의도",
-      "여의도 팝업",
-      "아마이모찌도넛",
-      "보따리제과점",
-      "도넛 팝업",
-      "F&B",
-      "인절미",
-      "약과",
-      "녹차앙금",
-      "팥앙금",
-      "더현대 서울 팝업",
-      "더현대 서울"
-    ],
-    "confidence": 0.6357
   },
   {
     "source": "popup",
@@ -5596,63 +5482,6 @@
   },
   {
     "source": "popup",
-    "source_id": "popup_8904434bbe42200a",
-    "name": "민주킴 X 에잇세컨즈 이벤트",
-    "latitude": 37.5136847189,
-    "longitude": 127.1036598893,
-    "category": "shopping",
-    "category_detail": "패션",
-    "hub_rank": null,
-    "address": "서울 송파구 올림픽로 300",
-    "distance_m": null,
-    "start_date": "2026-08-26",
-    "end_date": "2026-09-15",
-    "status": "ACTIVE",
-    "venue_name": "롯데월드몰 2F 에잇세컨즈",
-    "opening_time": "10:30",
-    "closing_time": "22:00",
-    "closed": false,
-    "operation_schedule": [
-      {
-        "days": [
-          "MON",
-          "TUE",
-          "WED",
-          "THU",
-          "FRI",
-          "SAT",
-          "SUN"
-        ],
-        "opening_time": "10:30",
-        "closing_time": "22:00",
-        "closed": false
-      }
-    ],
-    "description": "에잇세컨즈와 디자이너 브랜드 민주킴이 두 번째 협업 컬렉션 'A Bouquet of Heart'를 출시한 기념으로 잠실에서 콜라보 이벤트를 진행합니다! 💗",
-    "image_url": "https://cdn.popga.co.kr/spot/8821/main/7b833ee8-2240-4e4e-8a5b-e05e4710129e_1788248354590_thumbnail_MAIN_W480.webp",
-    "detail_url": "https://www.popga.co.kr/popup/8821",
-    "official_url": null,
-    "reservation_url": null,
-    "popup_categories": [
-      "패션",
-      "의류"
-    ],
-    "tags": [
-      "잠실",
-      "잠실 이벤트",
-      "잠실 팝업",
-      "민주킴",
-      "에잇세컨즈",
-      "minjukim",
-      "8 seconds",
-      "출시기념이벤트",
-      "패션",
-      "패션 팝"
-    ],
-    "confidence": 0.9
-  },
-  {
-    "source": "popup",
     "source_id": "popup_a26938b31a9b0459",
     "name": "케이스티파이 X 지드래곤 MAKE iT YOURS 팝업",
     "latitude": 37.5242753124,
@@ -5828,7 +5657,7 @@
     "source_id": "popup_a701f5d134de5734",
     "name": "THE HYUNDAI ART STAGE",
     "latitude": 37.52571671165,
-    "longitude": 126.92857345175,
+    "longitude": 126.928577630725,
     "category": "culture",
     "category_detail": null,
     "hub_rank": null,
@@ -5940,6 +5769,41 @@
   },
   {
     "source": "popup",
+    "source_id": "popup_a4154c4b23b39fb0",
+    "name": "ᄐ ᅡ코 좋아하는 ᄉ ᅡ람! ᄋ ᅧᄀ ᅵ 주목🧡🧡🧡",
+    "latitude": 37.5000885236,
+    "longitude": 127.0261625229,
+    "category": "food",
+    "category_detail": null,
+    "hub_rank": null,
+    "address": "서울 서초구 강남대로 421 ᄐ ᅡ코 좋아하는 ᄉ ᅡ람! ᄋ ᅧᄀ ᅵ 주목🧡🧡🧡",
+    "distance_m": null,
+    "start_date": "2026-08-27",
+    "end_date": "2026-09-30",
+    "status": "ACTIVE",
+    "venue_name": null,
+    "opening_time": null,
+    "closing_time": null,
+    "closed": null,
+    "operation_schedule": [],
+    "description": "\" ᄐ ᅡ코 좋아하는 ᄉ ᅡ람! ᄋ ᅧᄀ ᅵ 주목🧡🧡🧡 멕시칸의 맛에 K-푸드의 감성을 \"",
+    "image_url": "https://scontent-icn2-1.cdninstagram.com/v/t51.82787-15/802334049_18617656660062229_1503466597416402576_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=110&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=vqCNw9OlCHkQ7kNvwHqq8z0&_nc_oc=AdpHMIPcT9NqXB4-hIpqSBa68CLrQ1jxWwU_vrQze0iyfaj0-_KKwBgunMe7BAqkKPY&_nc_zt=23&_nc_ht=scontent-icn2-1.cdninstagram.com&edm=AEoDcc0EAAAA&_nc_gid=iE2pdeoSSy-bb0iygLGtVQ&oh=00_AQJ2_yuR3A_iXN4YXAZ3p_qXrgncylr9pMugYIBolYtVrg&oe=6AA90737",
+    "detail_url": "https://dayforyou.com/getDetail?scheduleSeq=37886",
+    "official_url": "https://www.instagram.com/p/DdGTBkwjwJf/",
+    "reservation_url": null,
+    "popup_categories": [],
+    "tags": [
+      "#음식",
+      "#강남팝업",
+      "#ㅌㅏ코좋아하는ㅅㅏ람!ㅇㅕㄱㅣ주목🧡🧡🧡",
+      "#쿠차라",
+      "#하림오드그로서",
+      "#강남팝업스토어"
+    ],
+    "confidence": 0.9
+  },
+  {
+    "source": "popup",
     "source_id": "popup_715723780d158e27",
     "name": "디지털 인터랙티브 팝업 구역별 공간 안내",
     "latitude": 37.5577842073,
@@ -5972,65 +5836,6 @@
       "#이결어망"
     ],
     "confidence": 0.9
-  },
-  {
-    "source": "popup",
-    "source_id": "popup_d9e38eaf74dbbf48",
-    "name": "유어마인드 X 원모어백 팝업",
-    "latitude": 37.5766478726,
-    "longitude": 126.9693739674,
-    "category": "shopping",
-    "category_detail": "카테고리 없음",
-    "hub_rank": null,
-    "address": "서울 종로구 필운대로 6-1",
-    "distance_m": null,
-    "start_date": "2026-08-27",
-    "end_date": "2026-09-14",
-    "status": "ACTIVE",
-    "venue_name": "원모어백 2층",
-    "opening_time": "12:00",
-    "closing_time": "19:00",
-    "closed": false,
-    "operation_schedule": [
-      {
-        "days": [
-          "MON",
-          "TUE",
-          "WED",
-          "THU",
-          "FRI",
-          "SAT",
-          "SUN"
-        ],
-        "opening_time": "12:00",
-        "closing_time": "19:00",
-        "closed": false
-      }
-    ],
-    "description": "[팝업스토어] 책 위에 마을을 짓자 유어마인드 x 원모어백 지난 책갈피 특집과 국제도서전에서 정말 많은 분들이 오픈런으로 찾아준 유어마인드 ‘책 위에 집을 짓자’의 세계가 확장되어 원모어백에 찾아옵니다! 짧은 기간 동안 품절이 반복된 집 옆에 나무와 자동차, 버섯과 밑둥, 동물 친구들까지 총 8가지의 새로운 책갈피를 팝업스토어로 소개합니다. 여러 권에 나누어 꽂아도, 한 권 위에 나만의 마을을 구성해보아도 좋아요. 나무 밑둥 옆에 다람쥐를 둘까요? 빨간 버섯을 찾는 사슴의 이야기를 만들어볼까요? 독서를 멈추고 다시 읽기를 기다리는 시간에 옹기종기 귀여워집니다. 새로운 책갈피들은 서촌 원모어백에서 가장 먼저 만날 수 있습니다. 이어질 소개와 이벤트에 관한 자세한 소식도 기대해주세요🚨 책 위에 마을을 짓자 🔘 8.27(목) - 9.14(월) 📍서울시 종로구 필운대로 6-1, 2층 원모어백",
-    "image_url": "https://cdn.popga.co.kr/spot/8759/main/98a250fd-09a4-4d22-b036-71f31e5d5ca0_1787885359685_thumbnail_MAIN_W480.webp",
-    "detail_url": "https://www.popga.co.kr/popup/8759",
-    "official_url": null,
-    "reservation_url": null,
-    "popup_categories": [
-      "문구/아트",
-      "문구"
-    ],
-    "tags": [
-      "종로",
-      "종로 팝업",
-      "유어마인드 팝업",
-      "원모어백",
-      "문구",
-      "책갈피",
-      "굿즈",
-      "문구 팝업",
-      "원모어백",
-      "유어마인드",
-      "책갈피",
-      "책 위에 집을 짓자"
-    ],
-    "confidence": 1.0
   },
   {
     "source": "popup",
@@ -6158,57 +5963,6 @@
       "홍대/신촌"
     ],
     "confidence": 0.91
-  },
-  {
-    "source": "popup",
-    "source_id": "popup_3e5b1a8868f703b8",
-    "name": "[8월 팝업] 개구리 중사 케로로 팝업이 신촌·용산에 동시에 뜬다!",
-    "latitude": 37.5561409155,
-    "longitude": 126.9358695207,
-    "category": "shopping",
-    "category_detail": null,
-    "hub_rank": null,
-    "address": "서울 서대문구 신촌로 83 현대백화점 신촌점",
-    "distance_m": null,
-    "start_date": "2026-08-28",
-    "end_date": "2026-09-14",
-    "status": "ACTIVE",
-    "venue_name": null,
-    "opening_time": "10:30",
-    "closing_time": "22:00",
-    "closed": false,
-    "operation_schedule": [
-      {
-        "days": [
-          "MON",
-          "TUE",
-          "WED",
-          "THU",
-          "FRI",
-          "SAT",
-          "SUN"
-        ],
-        "opening_time": "10:30",
-        "closing_time": "22:00",
-        "closed": false
-      }
-    ],
-    "description": "\" 💚 [8월 팝업] 개구리 중사 케로로 팝업이 신촌·용산에 동시에 뜬다! 지구 정복을 꿈꾸 \"",
-    "image_url": "https://scontent-icn2-1.cdninstagram.com/v/t51.82787-15/788384241_18113218505012301_8301420697902418581_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=107&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=RmM3cG_3sq8Q7kNvwHp72OY&_nc_oc=AdrBU_TYznnq0QU2Go9p5pllQd5Ers2cAgGiJheYlTjJS9kpa1uywW5c7W7JobFwLWA&_nc_zt=23&_nc_ht=scontent-icn2-1.cdninstagram.com&edm=AEoDcc0EAAAA&_nc_gid=P3tvJVeGj7jLhBcqSYXByQ&oh=00_AQHnOdrpGy8N9FHfCE0e9F-dMhyl0_6ydf97UC7ThL8KZg&oe=6A96B73E",
-    "detail_url": "https://dayforyou.com/getDetail?scheduleSeq=36690",
-    "official_url": "https://www.instagram.com/p/DciQ-SwkTra/",
-    "reservation_url": null,
-    "popup_categories": [],
-    "tags": [
-      "#팝업",
-      "#신촌팝업",
-      "#💚8월팝업개구리중사케로로팝업이신촌·용산에동시에뜬다!",
-      "#ケロロ軍曹",
-      "#케로로팝업",
-      "#용산팝업",
-      "#서울팝업스토어"
-    ],
-    "confidence": 0.8071
   },
   {
     "source": "popup",
@@ -6384,132 +6138,6 @@
       "#POP-UPNewOpen"
     ],
     "confidence": 0.91
-  },
-  {
-    "source": "popup",
-    "source_id": "popup_6941d7252039c6b9",
-    "name": "개구리 중사 케로로 팝업 @신촌",
-    "latitude": 37.5567539055,
-    "longitude": 126.9364463941,
-    "category": "entertainment",
-    "category_detail": "애니/캐릭터",
-    "hub_rank": null,
-    "address": "서울 서대문구 연세로 13",
-    "distance_m": null,
-    "start_date": "2026-08-28",
-    "end_date": "2026-09-14",
-    "status": "ACTIVE",
-    "venue_name": "현대백화점 신촌점 유플렉스 지하2층 모애쿠옆 서브스트릿 스페이스",
-    "opening_time": "10:30",
-    "closing_time": "20:30",
-    "closed": false,
-    "operation_schedule": [
-      {
-        "days": [
-          "SUN",
-          "MON",
-          "TUE",
-          "WED",
-          "THU"
-        ],
-        "opening_time": "10:30",
-        "closing_time": "20:30",
-        "closed": false
-      },
-      {
-        "days": [
-          "FRI",
-          "SAT"
-        ],
-        "opening_time": "10:30",
-        "closing_time": "21:00",
-        "closed": false
-      }
-    ],
-    "description": "인기 애니메이션 <개구리 중사 케로로> 팝업스토어가 신촌에서 열립니다! 🐸💚 케로로 소대의 매력을 담은 다양한 콘텐츠를 만나보세요! ✨🛸",
-    "image_url": "https://cdn.popga.co.kr/spot/8502/main/9a160d8e-a751-4950-beaf-2407d89c1b86_1786618681320_thumbnail_MAIN_W480.webp",
-    "detail_url": "https://www.popga.co.kr/popup/8502",
-    "official_url": null,
-    "reservation_url": null,
-    "popup_categories": [
-      "애니/캐릭터",
-      "캐릭터",
-      "실내 팝업"
-    ],
-    "tags": [
-      "용산",
-      "개구리중사케로로 팝업",
-      "케로로 팝업",
-      "SUB.ST",
-      "아이파크몰 용산점",
-      "용산 팝업",
-      "애니메이션",
-      "캐릭터"
-    ],
-    "confidence": 0.9
-  },
-  {
-    "source": "popup",
-    "source_id": "popup_e88c362169975310",
-    "name": "개구리 중사 케로로 팝업 @용산",
-    "latitude": 37.5288976736,
-    "longitude": 126.9642216152,
-    "category": "entertainment",
-    "category_detail": "애니/캐릭터",
-    "hub_rank": null,
-    "address": "서울 용산구 한강대로23길 55",
-    "distance_m": null,
-    "start_date": "2026-08-28",
-    "end_date": "2026-09-14",
-    "status": "ACTIVE",
-    "venue_name": "아이파크몰 용산점 리빙파크 6층",
-    "opening_time": "10:30",
-    "closing_time": "20:30",
-    "closed": false,
-    "operation_schedule": [
-      {
-        "days": [
-          "SUN",
-          "MON",
-          "TUE",
-          "WED",
-          "THU"
-        ],
-        "opening_time": "10:30",
-        "closing_time": "20:30",
-        "closed": false
-      },
-      {
-        "days": [
-          "FRI",
-          "SAT"
-        ],
-        "opening_time": "10:30",
-        "closing_time": "21:00",
-        "closed": false
-      }
-    ],
-    "description": "인기 애니메이션 <개구리 중사 케로로> 팝업스토어가 아이파크몰 용산점에서 열립니다! 🐸💚 케로로 소대의 매력을 담은 다양한 콘텐츠를 만나보세요! ✨🛸",
-    "image_url": "https://cdn.popga.co.kr/spot/8501/main/f21a5583-06db-4dde-9833-e52b37ea2c16_1786618599301_thumbnail_MAIN_W480.webp",
-    "detail_url": "https://www.popga.co.kr/popup/8501",
-    "official_url": null,
-    "reservation_url": null,
-    "popup_categories": [
-      "애니/캐릭터",
-      "캐릭터",
-      "실내 팝업"
-    ],
-    "tags": [
-      "용산",
-      "개구리중사케로로 팝업",
-      "케로로 팝업",
-      "SUB.ST",
-      "아이파크몰 용산점",
-      "용산 팝업",
-      "애니메이션",
-      "캐릭터"
-    ],
-    "confidence": 0.9
   },
   {
     "source": "popup",
@@ -6949,63 +6577,6 @@
       "#현대아울렛가산점",
       "#아이들의놀이천국",
       "#타이거릴리"
-    ],
-    "confidence": 0.9
-  },
-  {
-    "source": "popup",
-    "source_id": "popup_f78da318e2f16d7c",
-    "name": "케로로 팝업 OPEN 1",
-    "latitude": 37.5561409155,
-    "longitude": 126.9358695207,
-    "category": "shopping",
-    "category_detail": null,
-    "hub_rank": null,
-    "address": "서울 서대문구 신촌로 83 현대백화점 신촌점",
-    "distance_m": null,
-    "start_date": "2026-08-28",
-    "end_date": "2026-09-14",
-    "status": "ACTIVE",
-    "venue_name": null,
-    "opening_time": "10:30",
-    "closing_time": "20:00",
-    "closed": false,
-    "operation_schedule": [
-      {
-        "days": [
-          "MON",
-          "TUE",
-          "WED",
-          "THU"
-        ],
-        "opening_time": "10:30",
-        "closing_time": "20:00",
-        "closed": false
-      },
-      {
-        "days": [
-          "FRI",
-          "SAT",
-          "SUN"
-        ],
-        "opening_time": "10:30",
-        "closing_time": "20:30",
-        "closed": false,
-        "special_days": [
-          "PUBLIC_HOLIDAY"
-        ]
-      }
-    ],
-    "description": "\" 행사 정보 기간 8.28(금) ~ 9.14(월) 행사 정보 장소 본관 지하 2층 모애쿠 매 \"",
-    "image_url": "https://imgprism.ehyundai.com/evntCrdInf/imgPath2/202608/24/e15833c8-d50c-4fc8-88e1-8f9072b9bc3d.png",
-    "detail_url": "https://dayforyou.com/getDetail?scheduleSeq=37335",
-    "official_url": "https://www.ehyundai.com/newPortal/SN/SN_0201000.do?evntCrdCd=E2702608499292&category=event&page=1&branchCd=B00127000",
-    "reservation_url": null,
-    "popup_categories": [],
-    "tags": [
-      "#팝업",
-      "#현대백화점신촌점",
-      "#케로로팝업OPEN①"
     ],
     "confidence": 0.9
   },
@@ -7605,43 +7176,6 @@
   },
   {
     "source": "popup",
-    "source_id": "popup_39c3d0aad54ba215",
-    "name": "D-1 | ROKID × SHINSEGAE",
-    "latitude": 37.5039351769908,
-    "longitude": 127.002413006799,
-    "category": "shopping",
-    "category_detail": null,
-    "hub_rank": null,
-    "address": "서울 서초구 신반포로 176 신세계백화점 강남점",
-    "distance_m": null,
-    "start_date": "2026-08-31",
-    "end_date": "2026-09-14",
-    "status": "ACTIVE",
-    "venue_name": null,
-    "opening_time": null,
-    "closing_time": null,
-    "closed": null,
-    "operation_schedule": [],
-    "description": "\" D-1 | ROKID × SHINSEGAE 내일, 로키드 AI 글래스를 신세계백화점 강남점 \"",
-    "image_url": "https://scontent-icn2-1.cdninstagram.com/v/t51.82787-15/790547218_18062561852598040_2170654070474880509_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=101&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=e3QWrln7Ml4Q7kNvwEEEG2Z&_nc_oc=AdoO7dpN7wrgUodZ1HmShGPpcHjc0pIUZ7wbsHwMdYAOa1hXF7MT90Wry24zl95mRG0&_nc_zt=23&_nc_ht=scontent-icn2-1.cdninstagram.com&edm=AEoDcc0EAAAA&_nc_gid=cAzgjfQJVexp73U5WZai1Q&oh=00_AQItNvMlHgzz_NXYu5RjUhMqcvNioU59wvSR_aEQww2S7A&oe=6A9A8A95",
-    "detail_url": "https://dayforyou.com/getDetail?scheduleSeq=37065",
-    "official_url": "https://www.instagram.com/p/Dcpdn4bk50C/",
-    "reservation_url": null,
-    "popup_categories": [],
-    "tags": [
-      "#팝업",
-      "#강남팝업",
-      "#D-1|ROKID×SHINSEGAE",
-      "#Rokid",
-      "#로키드",
-      "#RokidGlasses",
-      "#AI글래스",
-      "#스마트글래스"
-    ],
-    "confidence": 0.9
-  },
-  {
-    "source": "popup",
     "source_id": "popup_7dd1111751fc887d",
     "name": "[POP-UP STAGE] 르주니엘",
     "latitude": 37.5273661232786,
@@ -7935,7 +7469,7 @@
     "source_id": "popup_4ce6c71e81905aa5",
     "name": "【팝업안내】",
     "latitude": 37.52571671165,
-    "longitude": 126.92857345175,
+    "longitude": 126.928577630725,
     "category": "food",
     "category_detail": null,
     "hub_rank": null,
@@ -8083,64 +7617,6 @@
   },
   {
     "source": "popup",
-    "source_id": "popup_49a000c5b5e098b5",
-    "name": "5F 이베넛 POP-UP",
-    "latitude": 37.5137129859,
-    "longitude": 127.1043018292,
-    "category": "food",
-    "category_detail": "F&B",
-    "hub_rank": null,
-    "address": "서울 송파구 올림픽로 300 롯데월드몰",
-    "distance_m": null,
-    "start_date": "2026-09-01",
-    "end_date": "2026-09-15",
-    "status": "ACTIVE",
-    "venue_name": "잠실 롯데월드몰 5f 이베넛 팝업 행사장",
-    "opening_time": "10:30",
-    "closing_time": "22:00",
-    "closed": false,
-    "operation_schedule": [
-      {
-        "days": [
-          "MON",
-          "TUE",
-          "WED",
-          "THU",
-          "FRI",
-          "SAT",
-          "SUN"
-        ],
-        "opening_time": "10:30",
-        "closing_time": "22:00",
-        "closed": false
-      }
-    ],
-    "description": "엄선한 프리미엄 견과류에 유기농 비정제 설탕과 히말라야 핑크솔트만 더해 만든 건강한 프리미엄 견과류 정과! 어디에나 함께하는 이베넛! 가볍게 산책하는 길에도, 바쁜 하루 사이에도 부담 없이 즐기기 좋은 간식으로 딱인 만큼 팝업을 통해서 만나보세요! 💗",
-    "image_url": "https://cdn.popga.co.kr/spot/8820/main/e59c79c2-9a6c-47d8-9bac-f090e132d1aa_1788247984609_thumbnail_MAIN_W480.webp",
-    "detail_url": "https://dayforyou.com/getDetail?scheduleSeq=37080",
-    "official_url": "https://www.lwt.co.kr/ko/event/view.do?seq=1269815",
-    "reservation_url": null,
-    "popup_categories": [
-      "F&B",
-      "카페/디저트/베이커리"
-    ],
-    "tags": [
-      "잠실",
-      "잠실 팝업",
-      "잠실 롯데월드몰",
-      "이베넛",
-      "이베넛 팝업",
-      "견과류",
-      "유기농 견과류 팝업",
-      "견과류 정과",
-      "프리미엄 견과류 추천",
-      "추석 선물 추천",
-      "F&B"
-    ],
-    "confidence": 0.8375
-  },
-  {
-    "source": "popup",
     "source_id": "popup_cf101d9939bfcbda",
     "name": "FW 트렌드를 선점할 수 있는 팝업",
     "latitude": 37.54159336873,
@@ -8242,65 +7718,6 @@
       "태권V",
       "럭럭",
       "무쟈게 힙한 팝업"
-    ],
-    "confidence": 0.9
-  },
-  {
-    "source": "popup",
-    "source_id": "popup_d0125c4eaaebab2a",
-    "name": "[NEW POP-UP] 언차티드 에스테틱 퀘스트(UAQ)",
-    "latitude": 37.5273661232786,
-    "longitude": 127.027468526838,
-    "category": "shopping",
-    "category_detail": null,
-    "hub_rank": null,
-    "address": "서울 강남구 압구정로 165 현대백화점 압구정본점",
-    "distance_m": null,
-    "start_date": "2026-09-01",
-    "end_date": "2026-09-15",
-    "status": "ACTIVE",
-    "venue_name": null,
-    "opening_time": "10:30",
-    "closing_time": "20:00",
-    "closed": false,
-    "operation_schedule": [
-      {
-        "days": [
-          "MON",
-          "TUE",
-          "WED",
-          "THU"
-        ],
-        "opening_time": "10:30",
-        "closing_time": "20:00",
-        "closed": false
-      },
-      {
-        "days": [
-          "FRI",
-          "SAT",
-          "SUN"
-        ],
-        "opening_time": "10:30",
-        "closing_time": "20:30",
-        "closed": false,
-        "special_days": [
-          "PUBLIC_HOLIDAY"
-        ]
-      }
-    ],
-    "description": "\" 절제된 실루엣과 감각적인 소재, 밀도 높은 디테일로 의류, 가방, 주얼리, 뷰티제품까지 선 \"",
-    "image_url": "https://imgprism.ehyundai.com/evntCrdInf/imgPath2/202609/02/d1f5f6eb-a0de-47db-8e47-121498e26348.jpg",
-    "detail_url": "https://dayforyou.com/getDetail?scheduleSeq=37397",
-    "official_url": "https://www.ehyundai.com/newPortal/SN/SN_0201000.do?evntCrdCd=E2102609501624&category=event&page=2&branchCd=B00121000",
-    "reservation_url": null,
-    "popup_categories": [],
-    "tags": [
-      "#패션",
-      "#현대백화점압구정본점",
-      "#NEWPOP-UP",
-      "#언차티드에스테틱퀘스트",
-      "#UAQ"
     ],
     "confidence": 0.9
   },
@@ -8948,81 +8365,6 @@
   },
   {
     "source": "popup",
-    "source_id": "popup_e38ca236b9f7e836",
-    "name": "ahro 팝업스토어 IN 홍대",
-    "latitude": 37.5576717025,
-    "longitude": 126.9265766062,
-    "category": "shopping",
-    "category_detail": "카테고리 없음",
-    "hub_rank": null,
-    "address": "서울 마포구 양화로 188, 홍대 AK 플라자 1층",
-    "distance_m": null,
-    "start_date": "2026-09-01",
-    "end_date": "2026-09-14",
-    "status": "ACTIVE",
-    "venue_name": "AK플라자 홍대 1층",
-    "opening_time": "11:00",
-    "closing_time": "22:00",
-    "closed": false,
-    "operation_schedule": [
-      {
-        "days": [
-          "MON",
-          "TUE",
-          "WED",
-          "THU",
-          "FRI",
-          "SAT",
-          "SUN"
-        ],
-        "opening_time": "11:00",
-        "closing_time": "22:00",
-        "closed": false
-      }
-    ],
-    "description": "달에 피는 꽃, 금목서의 향을 담은 아로의 시그니처 풀 문 블로썸을 직접 만나볼 수 있는 ahro(아로)의 팝업스토어가 열립니다. 이번 ahro(아로)의 팝업 스토어에서는 다양한 향수와 캔들, 신제품 사쉐까지 그 향에 담긴 이야기를 보다 가까이에서 느끼실 수 있습니다 ✨ 홍대에서 ahro(아로)와 함께 가장 진한 가을을 만나보세요. 📌 POP-UP EVENT · ahro(아로)의 금목서 향을 비롯한 향수 전 종 시향 · 팝업스토어 방문 시 전 제품 15%, 풀 문 블로썸 20% 할인 · 신제품 사쉐 2종 시향 · '꽝 없는' 가챠 이벤트 진행 · 디스커버리 세트 커스텀",
-    "image_url": "https://cdn.popga.co.kr/popga-biz/145/51da9b90-a02e-4dab-b59e-883f508645ea_thumbnail_MAIN_W480.webp",
-    "detail_url": "https://dayforyou.com/getDetail?scheduleSeq=36961",
-    "official_url": "https://www.instagram.com/ahro_official/?hl=ko",
-    "reservation_url": null,
-    "popup_categories": [
-      "카테고리 없음"
-    ],
-    "tags": [
-      "홍대",
-      "홍대 팝업",
-      "홍대/신촌",
-      "AK플라자 홍대",
-      "AK플라자 홍대 팝업",
-      "AK&홍대",
-      "AK&홍대 팝업",
-      "아로",
-      "아로 팝업",
-      "ahro",
-      "ahro 팝업",
-      "AHRO",
-      "AHRO 팝업",
-      "풀 문 블로썸",
-      "Full Moon Blossom",
-      "금목서",
-      "금목서 향수",
-      "향수",
-      "향수 팝업",
-      "뷰티",
-      "뷰티 팝업",
-      "캔들",
-      "사쉐",
-      "신제품 사쉐",
-      "디스커버리 세트",
-      "디스커버리 세트 커스텀",
-      "가챠 이벤트",
-      "시향",
-      "쇼핑가능"
-    ],
-    "confidence": 0.85
-  },
-  {
-    "source": "popup",
     "source_id": "popup_d426a7e786a02a18",
     "name": "농심 X 산리오캐릭터즈 팝업 @명동",
     "latitude": 37.5625312331,
@@ -9087,6 +8429,41 @@
       "Nongshim"
     ],
     "confidence": 0.9654
+  },
+  {
+    "source": "popup",
+    "source_id": "popup_ce03a48eee29d77c",
+    "name": "누즈 본품 퍼주는 럭키드로우 핑오에서 한다고?!",
+    "latitude": 37.5412293475041,
+    "longitude": 127.058847340199,
+    "category": "shopping",
+    "category_detail": null,
+    "hub_rank": null,
+    "address": "서울 성동구 연무장길 88) 누즈 본품 퍼주는 럭키드로우 핑오에서 한다고?!",
+    "distance_m": null,
+    "start_date": "2026-09-01",
+    "end_date": "2026-09-30",
+    "status": "ACTIVE",
+    "venue_name": null,
+    "opening_time": null,
+    "closing_time": null,
+    "closed": null,
+    "operation_schedule": [],
+    "description": "\" 누즈 본품 퍼주는 럭키드로우 핑오에서 한다고?! 핑크오피스에 누즈 팝업이 돌아왔습니다 🎉 \"",
+    "image_url": "https://scontent-icn2-1.cdninstagram.com/v/t51.82787-15/791599574_18009091823950862_8277970075470719793_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=9rP5WIEsEAMQ7kNvwFfp79m&_nc_oc=AdpQspK63eo-DzFFujqGqbC4ieAFAddlzofzZVyXe3-VfDiBrhl1SQCy8onGPsAj2hg&_nc_zt=23&_nc_ht=scontent-icn2-1.cdninstagram.com&edm=AL-3X8kEAAAA&_nc_gid=iCwEadwTn2j45boqDx_SnA&oh=00_AQKmMcdd7n1Bzzed_K2O6t4jGxB0SSXHnjvRutw5AfDqSQ&oe=6AAD1907",
+    "detail_url": "https://dayforyou.com/getDetail?scheduleSeq=37885",
+    "official_url": "https://www.instagram.com/p/DcvtJnAE-je/",
+    "reservation_url": null,
+    "popup_categories": [],
+    "tags": [
+      "#팝업",
+      "#romand_pinkoffice",
+      "#누즈본품퍼주는럭키드로우핑오에서한다고?!",
+      "#누즈",
+      "#리쥬",
+      "#누즈팝업"
+    ],
+    "confidence": 0.9
   },
   {
     "source": "popup",
@@ -9412,7 +8789,7 @@
       }
     ],
     "description": "나는 무엇을 좋아하고, 어떤 가치에 마음이 가나요?💭💛 평소 무심코 했던 선택에도 어쩌면 ‘나만의 기준’이 숨어 있을지도 몰라요! 나의 취향에서 시작해 브랜드가 오래도록 지켜온 가치, 그리고 우리의 ‘가치소비’까지 이야기해 보는 시간! [함께살롱]에 여러분을 초대합니다 🏡✨ 박소은 도슨트(@soeunpark629)와 함께 ‘오래오래 함께가게’를 천천히 둘러보며 👀 2026년 새롭게 함께하는 브랜드의 비하인드 스토리와 그 안에 담긴 이야기를 만나보세요! 그리고 프라이빗한 공간에서 이어지는 [함께살롱]에서💬 질문이 담긴 카드 한 장을 뽑아 나의 취향과 가치관을 들여다보고, 💭 나는 무엇에 마음이 가는지 💭 무엇을 기준으로 선택하는지 💭 어떤 가치와 오래오래 함께하고 싶은지 서로의 이야기를 편안하게 나눠봐요🍀 브랜드를 알아가는 시간이 어느새 ‘나’를 새롭게 발견하는 시간이 되도록 당신은 어떤 가치와 오래오래 함께하고 싶나요?💛 🗓️ 일정 9월 10일(목) 📍 장소 서울특별시 성동구 연무장3길 8-27 ⏰ 회차 11:00 / 14:00 / 16:30 (총 3회) *회차별 약 90분 진행 🎟️ 참가비 10,000원 📅 예약 방법 1 카카오맵에서 ‘오래오래 함께가게’ 검색 2 예약 페이지에서 원하는 시간 선택 후 예약",
-    "image_url": "https://d8nffddmkwqeq.cloudfront.net/store/7e8d9c09%2C7297%2C48ad%2C9b73%2Cb8b986838664",
+    "image_url": "https://d8nffddmkwqeq.cloudfront.net/store/4a244d0f%2Ca2a2%2C49fa%2Cb5fa%2C877788c088d1",
     "detail_url": "https://popply.co.kr/popup/6020",
     "official_url": null,
     "reservation_url": null,
@@ -9494,53 +8871,6 @@
   },
   {
     "source": "popup",
-    "source_id": "popup_a104d1bc80c81426",
-    "name": "의도된 불균형의 미학, 에트오소메 성수 팝업",
-    "latitude": 37.54159336873,
-    "longitude": 127.056411681438,
-    "category": "shopping",
-    "category_detail": null,
-    "hub_rank": null,
-    "address": "서울 성동구 성수이로 74",
-    "distance_m": null,
-    "start_date": "2026-09-01",
-    "end_date": "2026-09-14",
-    "status": "ACTIVE",
-    "venue_name": null,
-    "opening_time": "11:00",
-    "closing_time": "22:00",
-    "closed": false,
-    "operation_schedule": [
-      {
-        "days": [
-          "MON",
-          "TUE",
-          "WED",
-          "THU",
-          "FRI",
-          "SAT",
-          "SUN"
-        ],
-        "opening_time": "11:00",
-        "closing_time": "22:00",
-        "closed": false
-      }
-    ],
-    "description": "\" 의도된 불균형의 미학, 에트오소메 성수 팝업 | 무신사 에트오소메 0 에트오소메 0 OFF \"",
-    "image_url": "https://image.msscdn.net/cms/v2/content/file_1787881217751_1821740400_o2admy.jpg",
-    "detail_url": "https://dayforyou.com/getDetail?scheduleSeq=37152",
-    "official_url": "https://www.musinsa.com/content/1541636345491912423",
-    "reservation_url": null,
-    "popup_categories": [],
-    "tags": [
-      "#패션",
-      "#의도된불균형의미학",
-      "#에트오소메성수팝업"
-    ],
-    "confidence": 0.9
-  },
-  {
-    "source": "popup",
     "source_id": "popup_38e1538aa7ebcf00",
     "name": "이누야샤 팝업 @홍대",
     "latitude": 37.5577032304,
@@ -9603,57 +8933,6 @@
       "캐릭터팝업"
     ],
     "confidence": 1.0
-  },
-  {
-    "source": "popup",
-    "source_id": "popup_99478692f4e7e0d0",
-    "name": "제품제공 | 금목서 향 좋아하는 사람 여기 주목-🌼",
-    "latitude": 37.5577842073,
-    "longitude": 126.92641730145,
-    "category": "shopping",
-    "category_detail": null,
-    "hub_rank": null,
-    "address": "서울 마포구 양화로 188",
-    "distance_m": null,
-    "start_date": "2026-09-01",
-    "end_date": "2026-09-14",
-    "status": "ACTIVE",
-    "venue_name": null,
-    "opening_time": "11:00",
-    "closing_time": "22:00",
-    "closed": false,
-    "operation_schedule": [
-      {
-        "days": [
-          "MON",
-          "TUE",
-          "WED",
-          "THU",
-          "FRI",
-          "SAT",
-          "SUN"
-        ],
-        "opening_time": "11:00",
-        "closing_time": "22:00",
-        "closed": false
-      }
-    ],
-    "description": "\" 제품제공 | 금목서 향 좋아하는 사람 여기 주목-🌼 살구 우유처럼 부드럽고 달콤한 금목서 \"",
-    "image_url": "https://scontent-icn2-1.cdninstagram.com/v/t51.82787-15/788948607_17910182253462642_6607009406725621399_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=102&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=_gsVn98xvsoQ7kNvwHhmTAh&_nc_oc=AdrAgpG2_HOaPS8xnLUKsyXNrue_QAUEH8LEdHHq1IhMgPR6Px-Eq5mJ3iCKUdTZWgc&_nc_zt=23&_nc_ht=scontent-icn2-1.cdninstagram.com&edm=AEoDcc0EAAAA&_nc_gid=NtuBC2hvzRq5pwz5bWy1kw&oh=00_AQIeBH4BI77DYfWxcKV0W_bkJWlSGNJeBcAcRoQYnCg8Rw&oe=6A9BD4A3",
-    "detail_url": "https://dayforyou.com/getDetail?scheduleSeq=37187",
-    "official_url": "https://www.instagram.com/p/DcshPPpmO2t/",
-    "reservation_url": null,
-    "popup_categories": [],
-    "tags": [
-      "#팝업",
-      "#홍대팝업",
-      "#제품제공|금목서향좋아하는사람여기주목-🌼",
-      "#ahro",
-      "#아로",
-      "#풀문블로썸",
-      "#금목서향"
-    ],
-    "confidence": 0.9
   },
   {
     "source": "popup",
@@ -9781,52 +9060,6 @@
       "편집샵"
     ],
     "confidence": 0.95
-  },
-  {
-    "source": "popup",
-    "source_id": "popup_396680f9c24da931",
-    "name": "핍스 모터사이클의 자유로운 정신을 담은 팝업",
-    "latitude": 37.5289016304375,
-    "longitude": 126.96431855010997,
-    "category": "shopping",
-    "category_detail": null,
-    "hub_rank": null,
-    "address": "서울 용산구 한강대로23길 55 아이파크몰 용산점 2F",
-    "distance_m": null,
-    "start_date": "2026-09-01",
-    "end_date": "2026-09-14",
-    "status": "ACTIVE",
-    "venue_name": null,
-    "opening_time": "10:30",
-    "closing_time": "22:00",
-    "closed": false,
-    "operation_schedule": [
-      {
-        "days": [
-          "MON",
-          "TUE",
-          "WED",
-          "THU",
-          "FRI",
-          "SAT",
-          "SUN"
-        ],
-        "opening_time": "10:30",
-        "closing_time": "22:00",
-        "closed": false
-      }
-    ],
-    "description": "\" 핍스 모터사이클의 자유로운 정신을 담은 팝업 | 무신사 핍스 모터사이클 0 핍스 모터사이클 \"",
-    "image_url": "https://image.msscdn.net/cms/v2/content/file_1787810013512_685934099_5dau25.jpg",
-    "detail_url": "https://dayforyou.com/getDetail?scheduleSeq=37154",
-    "official_url": "https://www.musinsa.com/content/1541639280674240731",
-    "reservation_url": null,
-    "popup_categories": [],
-    "tags": [
-      "#패션",
-      "#핍스모터사이클의자유로운정신을담은팝업"
-    ],
-    "confidence": 0.9
   },
   {
     "source": "popup",
@@ -10682,70 +9915,40 @@
   },
   {
     "source": "popup",
-    "source_id": "popup_5115b5346138fedb",
-    "name": "에이엔 팝업 - NOW LAB : X to Z PROJECT",
-    "latitude": 37.5257505043,
-    "longitude": 126.9285593687,
+    "source_id": "popup_a6de10198272685b",
+    "name": "루블캣과 함께하는 LETTER EVENT 💌",
+    "latitude": 37.5136847189,
+    "longitude": 127.1041007684,
     "category": "shopping",
-    "category_detail": "카테고리 없음",
+    "category_detail": null,
     "hub_rank": null,
-    "address": "서울 영등포구 여의대로 108",
+    "address": "서울 송파구 올림픽로 300 롯데월드몰",
     "distance_m": null,
     "start_date": "2026-09-03",
-    "end_date": "2026-09-14",
+    "end_date": "2026-09-30",
     "status": "ACTIVE",
-    "venue_name": "더현대 서울 6층",
-    "opening_time": "10:30",
-    "closing_time": "20:00",
-    "closed": false,
-    "operation_schedule": [
-      {
-        "days": [
-          "MON",
-          "TUE",
-          "WED",
-          "THU"
-        ],
-        "opening_time": "10:30",
-        "closing_time": "20:00",
-        "closed": false
-      },
-      {
-        "days": [
-          "FRI",
-          "SAT",
-          "SUN"
-        ],
-        "opening_time": "10:30",
-        "closing_time": "20:30",
-        "closed": false
-      }
-    ],
-    "description": "[#dududo_showroom] AEN CONTENT SHOWROOM 🔗 NOW LAB : X to Z PROJECT COMING SOON ! 📍 THE HYUNDAI SEOUL 6F dududo showroom 📅 2026. 09. 03(Thu) - 2026. 09. 14(Mon) @aen_offcl #AEN #에이엔 #A_NEW_ERA_OF_NOW #XtoZ",
-    "image_url": "https://cdn.popga.co.kr/spot/8800/main/222265fb-d75b-4357-bb52-7790ff12aea5_1788164071836_thumbnail_MAIN_W480.webp",
-    "detail_url": "https://www.popga.co.kr/popup/8800",
-    "official_url": null,
+    "venue_name": null,
+    "opening_time": null,
+    "closing_time": null,
+    "closed": null,
+    "operation_schedule": [],
+    "description": "\" 루블캣과 함께하는 LETTER EVENT 💌 응원 메시지를 엽서에 적어주세요! 정상 접수 \"",
+    "image_url": "https://scontent-icn2-1.cdninstagram.com/v/t51.82787-15/793028573_18141294580600795_1529618826581476274_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=102&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=WK511hu0zOEQ7kNvwGqnxeQ&_nc_oc=AdpIO2OK9-IG3tfS7AV57cq9s1Nmd3gywluZdtwx80xhr-7ceD7MOI_kvdKs0JoTTJ0&_nc_zt=23&_nc_ht=scontent-icn2-1.cdninstagram.com&edm=AL-3X8kEAAAA&_nc_gid=XAuTQEvC47D4txzxYW49rQ&oh=00_AQJK0OoprACeyLGRgDN5iAU3VEaYGyFxSFRFbgzFJHaO9Q&oe=6AACF7F8",
+    "detail_url": "https://dayforyou.com/getDetail?scheduleSeq=37879",
+    "official_url": "https://www.instagram.com/p/Dc0Z61KEUjN/",
     "reservation_url": null,
-    "popup_categories": [
-      "연예인/셀럽",
-      "연예인"
-    ],
+    "popup_categories": [],
     "tags": [
-      "dududo_showroom",
-      "AEN",
-      "에이엔",
-      "A_NEW_ERA_OF_NOW",
-      "XtoZ",
-      "더현대서울",
-      "더현대서울팝업",
-      "여의도",
-      "여의도팝업",
-      "연예인",
-      "연예인팝업",
-      "굿즈",
-      "굿즈팝업"
+      "#팝업",
+      "#roobliss.official",
+      "#루블캣과함께하는LETTEREVENT💌",
+      "#루블리스",
+      "#roobliss",
+      "#루블캣",
+      "#레터이벤트",
+      "#럭키드로우"
     ],
-    "confidence": 1.0
+    "confidence": 0.9
   },
   {
     "source": "popup",
@@ -13308,6 +12511,64 @@
   },
   {
     "source": "popup",
+    "source_id": "popup_8292517e357b91a6",
+    "name": "[안상규 벌꿀 챕터82'] Pop-Up",
+    "latitude": 37.510950886399996,
+    "longitude": 127.09751725755001,
+    "category": "shopping",
+    "category_detail": null,
+    "hub_rank": null,
+    "address": "서울 송파구 올림픽로 240 롯데백화점 잠실점",
+    "distance_m": null,
+    "start_date": "2026-09-07",
+    "end_date": "2026-09-23",
+    "status": "ACTIVE",
+    "venue_name": null,
+    "opening_time": "10:30",
+    "closing_time": "20:00",
+    "closed": false,
+    "operation_schedule": [
+      {
+        "days": [
+          "MON",
+          "TUE",
+          "WED",
+          "THU"
+        ],
+        "opening_time": "10:30",
+        "closing_time": "20:00",
+        "closed": false
+      },
+      {
+        "days": [
+          "FRI",
+          "SAT",
+          "SUN"
+        ],
+        "opening_time": "10:30",
+        "closing_time": "20:30",
+        "closed": false,
+        "special_days": [
+          "PUBLIC_HOLIDAY"
+        ]
+      }
+    ],
+    "description": "\" 안상규 벌꿀 챕터82' 세계양봉대회 대상의 품격을 담은 매력적인 선물세트부터, 오직 팝업에 \"",
+    "image_url": "https://minfo.lotteshopping.com/content/news/202609/SNM00000000000558399/20260907170052472_3.jpeg",
+    "detail_url": "https://dayforyou.com/getDetail?scheduleSeq=37969",
+    "official_url": "https://www.lotteshopping.com/shpgnews/shpgnewsDetail?shpgNewsNo=SNM00000000000558399",
+    "reservation_url": null,
+    "popup_categories": [],
+    "tags": [
+      "#팝업",
+      "#롯데백화점잠실점",
+      "#안상규벌꿀챕터82'",
+      "#Pop-Up"
+    ],
+    "confidence": 0.9
+  },
+  {
+    "source": "popup",
     "source_id": "popup_37c5dfc2395037a1",
     "name": "[팝사이클] 프리미엄 전기자전거 Pop-Up",
     "latitude": 37.5158906009,
@@ -13361,64 +12622,6 @@
       "#롯데백화점영등포점",
       "#팝사이클",
       "#프리미엄전기자전거Pop-Up"
-    ],
-    "confidence": 0.9
-  },
-  {
-    "source": "popup",
-    "source_id": "popup_48fccf6cd46c16fe",
-    "name": "건강 수명 충전소, 바디프랜드 팝업 스토어",
-    "latitude": 37.5039351769908,
-    "longitude": 127.002413006799,
-    "category": "shopping",
-    "category_detail": null,
-    "hub_rank": null,
-    "address": "서울 서초구 신반포로 176 신세계백화점 강남점",
-    "distance_m": null,
-    "start_date": "2026-09-07",
-    "end_date": "2026-09-15",
-    "status": "ACTIVE",
-    "venue_name": null,
-    "opening_time": "10:30",
-    "closing_time": "20:00",
-    "closed": false,
-    "operation_schedule": [
-      {
-        "days": [
-          "MON",
-          "TUE",
-          "WED",
-          "THU"
-        ],
-        "opening_time": "10:30",
-        "closing_time": "20:00",
-        "closed": false
-      },
-      {
-        "days": [
-          "FRI",
-          "SAT",
-          "SUN"
-        ],
-        "opening_time": "10:30",
-        "closing_time": "20:30",
-        "closed": false,
-        "special_days": [
-          "PUBLIC_HOLIDAY"
-        ]
-      }
-    ],
-    "description": "\" OPEN STAGE 강남점 해외패션 건강 수명 충전소, 바디프랜드 팝업 스토어 OPEN S \"",
-    "image_url": "https://www.shinsegae.com/cms12/SC00002/info/theme/__icsFiles/afieldfile/2026/09/07/0908_.jpg",
-    "detail_url": "https://dayforyou.com/getDetail?scheduleSeq=37605",
-    "official_url": "https://www.shinsegae.com/shopping/view.do?mainCd=11&pageLink=%2Fcms12%2FSC00002%2Finfo%2Ftheme%2F8633995_4465.txt&contentDtlCd=06&contentId=8633995&storeCd=SC00002&brandCd=",
-    "reservation_url": null,
-    "popup_categories": [],
-    "tags": [
-      "#패션",
-      "#신세계백화점강남점",
-      "#건강수명충전소",
-      "#바디프랜드팝업스토어"
     ],
     "confidence": 0.9
   },
@@ -13635,19 +12838,51 @@
   },
   {
     "source": "popup",
-    "source_id": "popup_34d9c35cca6a2ad9",
-    "name": "캐릭터라인 팝업",
-    "latitude": 37.5110947569,
-    "longitude": 127.0978822302,
-    "category": "entertainment",
-    "category_detail": "카테고리 없음",
+    "source_id": "popup_43acb75108c9d6b1",
+    "name": "I AM A SURFER × Hilleberg",
+    "latitude": 37.5260815482384,
+    "longitude": 127.034718039457,
+    "category": "shopping",
+    "category_detail": null,
+    "hub_rank": null,
+    "address": "서울 강남구 압구정로42길 43 I AM A SURFER × Hilleberg",
+    "distance_m": null,
+    "start_date": "2026-09-08",
+    "end_date": "2026-09-20",
+    "status": "ACTIVE",
+    "venue_name": null,
+    "opening_time": null,
+    "closing_time": null,
+    "closed": null,
+    "operation_schedule": [],
+    "description": "\" I AM A SURFER × Hilleberg BLACK LABEL LIMITED EDIT \"",
+    "image_url": "https://scontent-icn2-1.cdninstagram.com/v/t51.82787-15/793140023_17906647293498355_7537525537209897548_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=104&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=rAvshVTmUBEQ7kNvwElMp3b&_nc_oc=AdqYnfBfZ886v6cMsR9807shH6zslHDWOqOKAAI4YMQhSsJu8TxkEYZ0ebEy3q-4Nr8&_nc_zt=23&_nc_ht=scontent-icn2-1.cdninstagram.com&edm=AL-3X8kEAAAA&_nc_gid=NimAGEbbom0om0SK0ZWedg&oh=00_AQI2YA1bdG_uHHj2X2OsTwrqFtFoXDKPJ9CP68arXRfUCQ&oe=6AACF3DC",
+    "detail_url": "https://dayforyou.com/getDetail?scheduleSeq=37892",
+    "official_url": "https://www.instagram.com/p/Dc2_K-Zkyny/",
+    "reservation_url": null,
+    "popup_categories": [],
+    "tags": [
+      "#팝업",
+      "#0cs.dosan",
+      "#IAMASURFER×Hilleberg"
+    ],
+    "confidence": 0.9
+  },
+  {
+    "source": "popup",
+    "source_id": "popup_0d61500d5cbb99a6",
+    "name": "[Oura] Ring 5 Pop-Up",
+    "latitude": 37.510950886399996,
+    "longitude": 127.09751725755001,
+    "category": "shopping",
+    "category_detail": null,
     "hub_rank": null,
     "address": "서울 송파구 올림픽로 240 롯데백화점 잠실점",
     "distance_m": null,
-    "start_date": "2026-09-07",
-    "end_date": "2026-09-15",
+    "start_date": "2026-09-08",
+    "end_date": "2026-12-31",
     "status": "ACTIVE",
-    "venue_name": "롯데백화점 잠실점 2층 팝업 스테이지",
+    "venue_name": null,
     "opening_time": "10:30",
     "closing_time": "20:00",
     "closed": false,
@@ -13671,37 +12906,25 @@
         ],
         "opening_time": "10:30",
         "closing_time": "20:30",
-        "closed": false
+        "closed": false,
+        "special_days": [
+          "PUBLIC_HOLIDAY"
+        ]
       }
     ],
-    "description": "✨ CHARACTER LINE POP-UP STORE IN 잠실 ✨ 따끈따끈한 산리오 신상 피규어 제품부터 몬치치 토이스토리 핑구 등 여러분의 최애들을 한자리에 모았습니다. 산리오 러버라면 꼭 방문해 보세요 ! 📍 일시: 2026.09.07 (월) ~ 09.15 (화) 📍 장소: 잠실 롯데 백화점 2F (팝업 스테이지) 🛍️ 라인업 & 대표 상품 안내 산리오 피규어 신제품: 11,900원 ~ 15,900원 캐릭터 히퍼 제품: 11,900원 ~ 15,900원 핑구 제품: 4,500원 ~ 20,000원 몬치치 제품: 8,600원 ~ 20,000원 슬랑이/슬라임 제품: 2,000원 ~ 8,000원 헬로키티 타이니참 코스튬 에디션 XL: 350,000원 🎁 POP-UP 한정 SPECIAL EVENT EVENT 1. 행운 랜덤 뽑기 1회 10,000원 (A~H상까지, 꽝 없는 100% 당첨 럭키 뽑기!) EVENT 2. 스누피 45CM 인형 특가 고급형 45cm 스누피 인형 ~~99,000원~~ ➔ 59,000원 EVENT 3. 구매 금액별 사은품 증정 (중복 증정 불가) 2만 원 이상: 먼작귀 랜덤 마그넷 별사탕 4만 원 이상: 캐릭터 일러스트 쇼핑백 7만 원 이상: 캐릭터라인 히든상품",
-    "image_url": "https://cdn.popga.co.kr/spot/8887/main/64fa43dc-bf6a-436e-9c62-11522a9edd0a_1788705756723_thumbnail_MAIN_W480.webp",
-    "detail_url": "https://dayforyou.com/getDetail?scheduleSeq=37548",
-    "official_url": "https://www.lotteshopping.com/shpgnews/shpgnewsDetail?shpgNewsNo=SNM00000000000557702",
+    "description": "\" 작아진 디자인, 깊어진 인사이트 더 높은 정확도를 위해 새롭게 설계된 고정밀 센서로 수면, \"",
+    "image_url": "https://minfo.lotteshopping.com/content/news/202609/SNM00000000000557384/20260902182842390_0.jpeg",
+    "detail_url": "https://dayforyou.com/getDetail?scheduleSeq=37950",
+    "official_url": "https://www.lotteshopping.com/shpgnews/shpgnewsDetail?shpgNewsNo=SNM00000000000557384",
     "reservation_url": null,
-    "popup_categories": [
-      "애니/캐릭터",
-      "캐릭터"
-    ],
+    "popup_categories": [],
     "tags": [
-      "잠실",
-      "CHARACTER LINE",
-      "캐릭터라인 팝업",
-      "롯데백화점 잠실점",
-      "잠실 팝업",
-      "송파 팝업",
-      "산리오",
-      "산리오 팝업",
-      "헬로키티",
-      "몬치치",
-      "핑구",
-      "토이스토리",
-      "스누피",
-      "캐릭터 굿즈",
-      "피규어",
-      "캐릭터"
+      "#팝업",
+      "#롯데백화점잠실점",
+      "#Oura",
+      "#Ring5Pop-Up"
     ],
-    "confidence": 1.0
+    "confidence": 0.9
   },
   {
     "source": "popup",
@@ -13921,63 +13144,6 @@
   },
   {
     "source": "popup",
-    "source_id": "popup_02e42b405611720e",
-    "name": "도경수 팝업 - DOPAMINE",
-    "latitude": 37.5172332567,
-    "longitude": 126.9037159938,
-    "category": "cafe",
-    "category_detail": "카테고리 없음",
-    "hub_rank": null,
-    "address": "서울 영등포구 영중로 15",
-    "distance_m": null,
-    "start_date": "2026-09-08",
-    "end_date": "2026-09-14",
-    "status": "ACTIVE",
-    "venue_name": "영등포 타임스퀘어 B1F 사운드웨이브",
-    "opening_time": "10:30",
-    "closing_time": "22:00",
-    "closed": false,
-    "operation_schedule": [
-      {
-        "days": [
-          "MON",
-          "TUE",
-          "WED",
-          "THU",
-          "FRI",
-          "SAT",
-          "SUN"
-        ],
-        "opening_time": "10:30",
-        "closing_time": "22:00",
-        "closed": false
-      }
-    ],
-    "description": "DOH KYUNG SOO DOPAMINE - The 4th Mini Album POP-UP CAFE LUCKY DRAW EVENT [OFFLINE] 📅 2026. 09. 08 TUE - 2026. 09. 14 MON ⏰ 매일 10:30 – 22:00 (KST) 📍영등포 타임스퀘어 B1F 사운드웨이브 [ONLINE] 📅 2026. 09. 08 TUE 10:30 - 2026. 09. 14 MON 23:59 (KST) 📍사운드웨이브 몰 🔗 https://bit.ly/4zTqE2O #도경수 #DOHKYUNGSOO #DOPAMINE #DOPAMINE_POPUP",
-    "image_url": "https://cdn.popga.co.kr/spot/8880/main/65d135ce-da10-4d62-970c-f3ae386af7ec_1788508222180_thumbnail_MAIN_W480.webp",
-    "detail_url": "https://www.popga.co.kr/popup/8880",
-    "official_url": null,
-    "reservation_url": null,
-    "popup_categories": [
-      "연예인/셀럽",
-      "연예인"
-    ],
-    "tags": [
-      "도경수",
-      "DOHKYUNGSOO",
-      "DOPAMINE",
-      "DOPAMINE_POPUP",
-      "영등포",
-      "영등포팝업",
-      "타임스퀘어",
-      "타임스퀘어팝업",
-      "사운드웨이브",
-      "soundwave"
-    ],
-    "confidence": 1.0
-  },
-  {
-    "source": "popup",
     "source_id": "popup_237d0df2f6dcef3e",
     "name": "메이드바이 X 맘마 햄스토어 팝업 @성수",
     "latitude": 37.547891346,
@@ -14089,65 +13255,6 @@
       "연예인팝업"
     ],
     "confidence": 0.95
-  },
-  {
-    "source": "popup",
-    "source_id": "popup_6dd55b9650ed576d",
-    "name": "스키즘인듀싱 팝업",
-    "latitude": 37.535484364,
-    "longitude": 126.9992831248,
-    "category": "shopping",
-    "category_detail": "패션",
-    "hub_rank": null,
-    "address": "서울 용산구 이태원로 230",
-    "distance_m": null,
-    "start_date": "2026-09-08",
-    "end_date": "2026-09-14",
-    "status": "ACTIVE",
-    "venue_name": "무신사 스페이스 한남",
-    "opening_time": "12:00",
-    "closing_time": "20:00",
-    "closed": false,
-    "operation_schedule": [
-      {
-        "days": [
-          "MON",
-          "TUE",
-          "WED",
-          "THU",
-          "FRI",
-          "SAT",
-          "SUN"
-        ],
-        "opening_time": "12:00",
-        "closing_time": "20:00",
-        "closed": false
-      }
-    ],
-    "description": "스키즘인듀싱은 기존의 고정관념에서 벗어나 아카이브를 존중하되 이를 끊임없이 분열시키고 재창조하는 독창적인 감성의 컨템포러리 패션 브랜드입니다. 💗 이번 팝업에서는 26FW 신상과 콜라보 상품, 캐리오버 상품을 할인된 가격에 만나볼 수 있고, 2차 발매 예정 상품도 오프라인에서 미리 피팅해볼 수 있으니 가을 옷 미리 GET하러 떠나보세요! 😁",
-    "image_url": "https://cdn.popga.co.kr/spot/8823/main/e5e434d2-97b5-4825-a97c-9361b5adf6b6_1788314770932_thumbnail_MAIN_W480.webp",
-    "detail_url": "https://www.popga.co.kr/popup/8823",
-    "official_url": null,
-    "reservation_url": null,
-    "popup_categories": [
-      "패션",
-      "의류"
-    ],
-    "tags": [
-      "한남",
-      "한남 팝업",
-      "서울",
-      "서울 팝업",
-      "SCHISM INDUCING 팝업",
-      "보배릿 팝업",
-      "무신사 스페이스 한남",
-      "패션",
-      "팝업스토어",
-      "패션 팝업",
-      "용산",
-      "용산 팝업"
-    ],
-    "confidence": 0.9
   },
   {
     "source": "popup",
@@ -14386,84 +13493,6 @@
   },
   {
     "source": "popup",
-    "source_id": "popup_ba05926b0aee8bc1",
-    "name": "썸띵한상회 팝업 - 2026여수세계박람회",
-    "latitude": 37.5428049825,
-    "longitude": 127.0578198935,
-    "category": "entertainment",
-    "category_detail": "카테고리 없음",
-    "hub_rank": null,
-    "address": "서울 성동구 성수이로18길 5",
-    "distance_m": null,
-    "start_date": "2026-09-09",
-    "end_date": "2026-09-15",
-    "status": "ACTIVE",
-    "venue_name": "성수동2가 273-20",
-    "opening_time": "12:00",
-    "closing_time": "20:00",
-    "closed": false,
-    "operation_schedule": [
-      {
-        "days": [
-          "MON",
-          "TUE"
-        ],
-        "opening_time": "12:00",
-        "closing_time": "20:00",
-        "closed": false
-      },
-      {
-        "days": [
-          "WED"
-        ],
-        "opening_time": "14:00",
-        "closing_time": "20:00",
-        "closed": false
-      },
-      {
-        "days": [
-          "THU"
-        ],
-        "opening_time": "12:00",
-        "closing_time": "19:00",
-        "closed": false
-      },
-      {
-        "days": [
-          "FRI",
-          "SAT",
-          "SUN"
-        ],
-        "opening_time": "12:00",
-        "closing_time": "20:00",
-        "closed": false
-      }
-    ],
-    "description": "[성수 팝업] 섬에서 발견한 새로운 이야기가, 이번엔 성수로 찾아옵니다 🏝️ 여수에서 만났던 ‘썸띵한상회’가 더 맛있고 새로운 모습으로 성수에 문을 엽니다. 📋 행사 안내 기간 : 2026. 9. 9. (수) ~ 9. 15.(화) • 장소 : 서울특별시 성동구 성수동2가 273-20 • 시간 : 9/9(수) 14:00~ 20:00 9/10(목) 12:00 19:00 9/11~15(금-화): 12:00~ 20:00 섬에서 온 다양한 상품부터 섬의 재료와 이야기를 담아낸 다이닝, 직접 즐길 수 있는 체험과 이벤트까지. 익숙했던 섬을 새로운 방식으로 발견하는 7일, 성수에서 펼쳐지는 ‘썸띵한상회’를 만나보세요. 9월 9일, 성수에서 OPEN! 🌊 @함께 방문하고 싶은 친구, 가족 태그하기! #썸띵한상회 #성수팝업 #성수팝업스토어 #섬특성화사업 #2026여수세계섬박람회",
-    "image_url": "https://cdn.popga.co.kr/spot/8894/main/6b4ef42f-13cd-4e60-9297-875e13cb6cb1_1788757083402_thumbnail_MAIN_W480.webp",
-    "detail_url": "https://www.popga.co.kr/popup/8894",
-    "official_url": null,
-    "reservation_url": null,
-    "popup_categories": [
-      "라이프스타일",
-      "여행/취미/여가"
-    ],
-    "tags": [
-      "성수",
-      "성수동",
-      "성수 팝업",
-      "썸띵한상회",
-      "라이프스타일",
-      "체험형 팝업",
-      "쇼핑가능",
-      "여수",
-      "여수 팝업",
-      "2026여수세계섬박람회"
-    ],
-    "confidence": 1.0
-  },
-  {
-    "source": "popup",
     "source_id": "popup_aea6171b53f96798",
     "name": "진격의 거인 X 언더마이카 팝업",
     "latitude": 37.5630973114,
@@ -14697,7 +13726,7 @@
     "source_id": "popup_240de3d18aa4a885",
     "name": "STEREOTYPES × PAINTERS",
     "latitude": 37.52571671165,
-    "longitude": 126.92857345175,
+    "longitude": 126.928577630725,
     "category": "shopping",
     "category_detail": null,
     "hub_rank": null,
@@ -16184,9 +15213,9 @@
     "end_date": "2026-11-08",
     "status": "ACTIVE",
     "venue_name": "2층 큐엔에이",
-    "opening_time": null,
-    "closing_time": null,
-    "closed": true,
+    "opening_time": "13:00",
+    "closing_time": "19:00",
+    "closed": false,
     "operation_schedule": [
       {
         "days": [
@@ -16370,7 +15399,7 @@
     "source_id": "popup_49a738157865dc61",
     "name": "K-ART SEOUL",
     "latitude": 37.52571671165,
-    "longitude": 126.92857345175,
+    "longitude": 126.928577630725,
     "category": "culture",
     "category_detail": null,
     "hub_rank": null,
@@ -17204,6 +16233,64 @@
   },
   {
     "source": "popup",
+    "source_id": "popup_dabb766c915a8787",
+    "name": "[POP-UP] 마디타 madita",
+    "latitude": 37.5273217751,
+    "longitude": 126.8746191365,
+    "category": "shopping",
+    "category_detail": null,
+    "hub_rank": null,
+    "address": "서울 양천구 목동동로 257 현대백화점 목동점",
+    "distance_m": null,
+    "start_date": "2026-09-11",
+    "end_date": "2026-09-17",
+    "status": "ACTIVE",
+    "venue_name": null,
+    "opening_time": "10:30",
+    "closing_time": "20:00",
+    "closed": false,
+    "operation_schedule": [
+      {
+        "days": [
+          "MON",
+          "TUE",
+          "WED",
+          "THU"
+        ],
+        "opening_time": "10:30",
+        "closing_time": "20:00",
+        "closed": false
+      },
+      {
+        "days": [
+          "FRI",
+          "SAT",
+          "SUN"
+        ],
+        "opening_time": "10:30",
+        "closing_time": "20:30",
+        "closed": false,
+        "special_days": [
+          "PUBLIC_HOLIDAY"
+        ]
+      }
+    ],
+    "description": "\" 마디타가 관찰한 자연의 조각들 자연과 일상에서 발견한 유기적인 형태를 마디타만의 시선으로 \"",
+    "image_url": "https://imgprism.ehyundai.com/evntCrdInf/imgPath2/202609/09/b0cb63ae-7bf6-4e61-a341-991a7c88246b.jpg",
+    "detail_url": "https://dayforyou.com/getDetail?scheduleSeq=37957",
+    "official_url": "https://www.ehyundai.com/newPortal/SN/SN_0201000.do?evntCrdCd=E4202609503091&category=event&page=2&branchCd=B00142000",
+    "reservation_url": null,
+    "popup_categories": [],
+    "tags": [
+      "#패션",
+      "#현대백화점목동점",
+      "#POP-UP",
+      "#마디타madita"
+    ],
+    "confidence": 0.9
+  },
+  {
+    "source": "popup",
     "source_id": "popup_2f09c62677bbfb21",
     "name": "[POP-UP] 마켓카리브",
     "latitude": 37.4776190161713,
@@ -17553,64 +16640,6 @@
   },
   {
     "source": "popup",
-    "source_id": "popup_063a78e72fb059a1",
-    "name": "[POP-UP] 홍가네 집만두",
-    "latitude": 37.4776190161713,
-    "longitude": 126.88905533739,
-    "category": "shopping",
-    "category_detail": null,
-    "hub_rank": null,
-    "address": "서울 금천구 디지털로10길 9 현대아울렛 가산점",
-    "distance_m": null,
-    "start_date": "2026-09-11",
-    "end_date": "2026-09-15",
-    "status": "ACTIVE",
-    "venue_name": null,
-    "opening_time": "10:30",
-    "closing_time": "20:00",
-    "closed": false,
-    "operation_schedule": [
-      {
-        "days": [
-          "MON",
-          "TUE",
-          "WED",
-          "THU"
-        ],
-        "opening_time": "10:30",
-        "closing_time": "20:00",
-        "closed": false
-      },
-      {
-        "days": [
-          "FRI",
-          "SAT",
-          "SUN"
-        ],
-        "opening_time": "10:30",
-        "closing_time": "20:30",
-        "closed": false,
-        "special_days": [
-          "PUBLIC_HOLIDAY"
-        ]
-      }
-    ],
-    "description": "\" 홍가네집만두는 정성과 온기로 빚은 수제만두 브랜드입니다. \"",
-    "image_url": "https://imgprism.ehyundai.com/evntCrdInf/imgPath2/202605/12/edb5fe56-a80c-4827-8d77-707d4175e871.jpg",
-    "detail_url": "https://dayforyou.com/getDetail?scheduleSeq=37764",
-    "official_url": "https://www.ehyundai.com/newPortal/SN/SN_0201000.do?evntCrdCd=E7102609503608&category=event&page=1&branchCd=B00171000",
-    "reservation_url": null,
-    "popup_categories": [],
-    "tags": [
-      "#패션",
-      "#현대아울렛가산점",
-      "#POP-UP",
-      "#홍가네집만두"
-    ],
-    "confidence": 0.9
-  },
-  {
-    "source": "popup",
     "source_id": "popup_86c68732a05b238c",
     "name": "[낭만소갈비] LA갈비 Pop-Up",
     "latitude": 37.584197400389,
@@ -17897,7 +16926,7 @@
       "#모락절미",
       "#눈앞에서완성되는쫀득절미Pop-Up"
     ],
-    "confidence": 0.9
+    "confidence": 0.8941
   },
   {
     "source": "popup",
@@ -18361,6 +17390,122 @@
       "#인스탁스",
       "#후지필름",
       "#Pop-UpStore"
+    ],
+    "confidence": 0.9
+  },
+  {
+    "source": "popup",
+    "source_id": "popup_dcb419bbce3bd0b2",
+    "name": "[제이에스티나] POP-UP",
+    "latitude": 37.6552787315469,
+    "longitude": 127.061391730931,
+    "category": "shopping",
+    "category_detail": null,
+    "hub_rank": null,
+    "address": "서울 노원구 동일로 1414 롯데백화점 노원점",
+    "distance_m": null,
+    "start_date": "2026-09-11",
+    "end_date": "2026-09-17",
+    "status": "ACTIVE",
+    "venue_name": null,
+    "opening_time": "10:30",
+    "closing_time": "20:00",
+    "closed": false,
+    "operation_schedule": [
+      {
+        "days": [
+          "MON",
+          "TUE",
+          "WED",
+          "THU"
+        ],
+        "opening_time": "10:30",
+        "closing_time": "20:00",
+        "closed": false
+      },
+      {
+        "days": [
+          "FRI",
+          "SAT",
+          "SUN"
+        ],
+        "opening_time": "10:30",
+        "closing_time": "20:30",
+        "closed": false,
+        "special_days": [
+          "PUBLIC_HOLIDAY"
+        ]
+      }
+    ],
+    "description": "\" 쇼핑뉴스 | 롯데백화점 롯데백화점 지점안내 쇼핑정보 컬쳐앤라이프 매거진 고객서비스 ESG \"",
+    "image_url": "https://minfo.lotteshopping.com/content/news/202609/2026090916394856_4.jpeg",
+    "detail_url": "https://dayforyou.com/getDetail?scheduleSeq=37926",
+    "official_url": "https://www.lotteshopping.com/shpgnews/shpgnewsDetail?shpgNewsNo=SNM00000000000558958",
+    "reservation_url": null,
+    "popup_categories": [],
+    "tags": [
+      "#패션",
+      "#롯데백화점노원점",
+      "#제이에스티나",
+      "#POP-UP"
+    ],
+    "confidence": 0.9
+  },
+  {
+    "source": "popup",
+    "source_id": "popup_0a2fa17deabe3bd6",
+    "name": "[코스타노바] Pop-Up",
+    "latitude": 37.510950886399996,
+    "longitude": 127.09751725755001,
+    "category": "shopping",
+    "category_detail": null,
+    "hub_rank": null,
+    "address": "서울 송파구 올림픽로 240 롯데백화점 잠실점",
+    "distance_m": null,
+    "start_date": "2026-09-11",
+    "end_date": "2026-09-17",
+    "status": "ACTIVE",
+    "venue_name": null,
+    "opening_time": "10:30",
+    "closing_time": "20:00",
+    "closed": false,
+    "operation_schedule": [
+      {
+        "days": [
+          "MON",
+          "TUE",
+          "WED",
+          "THU"
+        ],
+        "opening_time": "10:30",
+        "closing_time": "20:00",
+        "closed": false
+      },
+      {
+        "days": [
+          "FRI",
+          "SAT",
+          "SUN"
+        ],
+        "opening_time": "10:30",
+        "closing_time": "20:30",
+        "closed": false,
+        "special_days": [
+          "PUBLIC_HOLIDAY"
+        ]
+      }
+    ],
+    "description": "\" 코스타노바 20~50% 품목 할인 잠실점 9F 코스타노바 브랜드에서는 큐티폴, 킨토, 팜파 \"",
+    "image_url": "https://minfo.lotteshopping.com/content/news/202609/20260908113302440_4.jpg",
+    "detail_url": "https://dayforyou.com/getDetail?scheduleSeq=37967",
+    "official_url": "https://www.lotteshopping.com/shpgnews/shpgnewsDetail?shpgNewsNo=SNM00000000000558481",
+    "reservation_url": null,
+    "popup_categories": [],
+    "tags": [
+      "#패션",
+      "#롯데백화점잠실점",
+      "#코스타노바",
+      "#Pop-Up"
     ],
     "confidence": 0.9
   },
@@ -18967,6 +18112,52 @@
   },
   {
     "source": "popup",
+    "source_id": "popup_e43cbcfb6e1070e3",
+    "name": "어그 × 윌리 차바리아 팝업 오픈",
+    "latitude": 37.5436284487202,
+    "longitude": 127.05661576311,
+    "category": "shopping",
+    "category_detail": null,
+    "hub_rank": null,
+    "address": "서울 성동구 성수이로 97 무신사 엠프티 성수 1F",
+    "distance_m": null,
+    "start_date": "2026-09-11",
+    "end_date": "2026-09-18",
+    "status": "ACTIVE",
+    "venue_name": null,
+    "opening_time": "11:00",
+    "closing_time": "22:00",
+    "closed": false,
+    "operation_schedule": [
+      {
+        "days": [
+          "MON",
+          "TUE",
+          "WED",
+          "THU",
+          "FRI",
+          "SAT",
+          "SUN"
+        ],
+        "opening_time": "11:00",
+        "closing_time": "22:00",
+        "closed": false
+      }
+    ],
+    "description": "\" 어그 × 윌리 차바리아 팝업 오픈 | 무신사 어그 0 어그 0 OFFLINE 어그 × 윌리 \"",
+    "image_url": "https://image.msscdn.net/thumbnails/ocmp/contents/content/file_1789115534957_c5905d73b48b.jpg",
+    "detail_url": "https://dayforyou.com/getDetail?scheduleSeq=37901",
+    "official_url": "https://www.musinsa.com/content/1544261231173436839",
+    "reservation_url": null,
+    "popup_categories": [],
+    "tags": [
+      "#패션",
+      "#어그×윌리차바리아팝업오픈"
+    ],
+    "confidence": 0.9
+  },
+  {
+    "source": "popup",
     "source_id": "popup_1187f8961744191d",
     "name": "에카사 팝업 스토어",
     "latitude": 37.5561409155,
@@ -19090,7 +18281,7 @@
   {
     "source": "popup",
     "source_id": "popup_ed0b35d5391b4df3",
-    "name": "오끼뜨 X 산리오캐릭터즈 팝업",
+    "name": "오끼뜨 산리오 캐릭터즈 콜라보 팝업",
     "latitude": 37.5425580884,
     "longitude": 127.0558018301,
     "category": "entertainment",
@@ -19146,7 +18337,7 @@
       "캐릭터",
       "패션"
     ],
-    "confidence": 1.0
+    "confidence": 0.9357
   },
   {
     "source": "popup",
@@ -19906,7 +19097,7 @@
       }
     ],
     "description": "12개월 중 10개월, 일상에 자연스럽게 스며드는 브랜드 텐먼스의 첫 팝업스토어가 성수에 문을 열어요 🤍✨ ‘A Gallery of Everyday Life’를 주제로 텐먼스의 새로운 챕터를 만나볼 수 있으니, 팝업에 방문해 텐먼스가 제안하는 일상의 스타일을 직접 만나보세요 👜",
-    "image_url": "https://cdn.popga.co.kr/spot/9015/main/0a152903-d889-45af-ba2c-45824167485b_1789308076218_thumbnail_MAIN_W480.webp",
+    "image_url": "https://cdn.popga.co.kr/spot/9015/main/a0389006-98d0-4e3c-89df-89c646b850d6_1789437670281_thumbnail_MAIN_W480.webp",
     "detail_url": "https://www.popga.co.kr/popup/9015",
     "official_url": null,
     "reservation_url": null,
@@ -19985,6 +19176,64 @@
       "포켓몬X무신사"
     ],
     "confidence": 0.9224
+  },
+  {
+    "source": "popup",
+    "source_id": "popup_b2c21489af16c1e6",
+    "name": "[마이멜로디x압소바] Pop-Up",
+    "latitude": 37.510950886399996,
+    "longitude": 127.09751725755001,
+    "category": "shopping",
+    "category_detail": null,
+    "hub_rank": null,
+    "address": "서울 송파구 올림픽로 240 롯데백화점 잠실점",
+    "distance_m": null,
+    "start_date": "2026-09-13",
+    "end_date": "2026-09-27",
+    "status": "ACTIVE",
+    "venue_name": null,
+    "opening_time": "10:30",
+    "closing_time": "20:00",
+    "closed": false,
+    "operation_schedule": [
+      {
+        "days": [
+          "MON",
+          "TUE",
+          "WED",
+          "THU"
+        ],
+        "opening_time": "10:30",
+        "closing_time": "20:00",
+        "closed": false
+      },
+      {
+        "days": [
+          "FRI",
+          "SAT",
+          "SUN"
+        ],
+        "opening_time": "10:30",
+        "closing_time": "20:30",
+        "closed": false,
+        "special_days": [
+          "PUBLIC_HOLIDAY"
+        ]
+      }
+    ],
+    "description": "\" 마이멜로디 X 압소바 [Special Promotion] 1 10만원이상 구매시 헬로키티 \"",
+    "image_url": "https://minfo.lotteshopping.com/content/news/202609/SNM00000000000559661/20260913104535957_5.jpeg",
+    "detail_url": "https://dayforyou.com/getDetail?scheduleSeq=37911",
+    "official_url": "https://www.lotteshopping.com/shpgnews/shpgnewsDetail?shpgNewsNo=SNM00000000000559661",
+    "reservation_url": null,
+    "popup_categories": [],
+    "tags": [
+      "#패션",
+      "#롯데백화점잠실점",
+      "#마이멜로디x압소바",
+      "#Pop-Up"
+    ],
+    "confidence": 0.9
   },
   {
     "source": "popup",
@@ -20336,6 +19585,64 @@
   },
   {
     "source": "popup",
+    "source_id": "popup_06633c74185bd94a",
+    "name": "[아나크] POP-UP 오픈 여성 아우터 전문관",
+    "latitude": 37.5158906009,
+    "longitude": 126.9075750605,
+    "category": "shopping",
+    "category_detail": null,
+    "hub_rank": null,
+    "address": "서울 영등포구 경인로 846 롯데백화점 영등포점",
+    "distance_m": null,
+    "start_date": "2026-09-14",
+    "end_date": "2026-09-23",
+    "status": "ACTIVE",
+    "venue_name": null,
+    "opening_time": "10:30",
+    "closing_time": "20:00",
+    "closed": false,
+    "operation_schedule": [
+      {
+        "days": [
+          "MON",
+          "TUE",
+          "WED",
+          "THU"
+        ],
+        "opening_time": "10:30",
+        "closing_time": "20:00",
+        "closed": false
+      },
+      {
+        "days": [
+          "FRI",
+          "SAT",
+          "SUN"
+        ],
+        "opening_time": "10:30",
+        "closing_time": "20:30",
+        "closed": false,
+        "special_days": [
+          "PUBLIC_HOLIDAY"
+        ]
+      }
+    ],
+    "description": "\" 하이앤드 여성 아우터 아나크 국내 유수의 내셔널브랜드에 25년간 춘,추계용 여성용 고급 아 \"",
+    "image_url": "https://minfo.lotteshopping.com/content/news/202609/SNM00000000000559378/20260915104033782_8.jpeg",
+    "detail_url": "https://dayforyou.com/getDetail?scheduleSeq=37904",
+    "official_url": "https://www.lotteshopping.com/shpgnews/shpgnewsDetail?shpgNewsNo=SNM00000000000559378",
+    "reservation_url": null,
+    "popup_categories": [],
+    "tags": [
+      "#패션",
+      "#롯데백화점영등포점",
+      "#아나크",
+      "#POP-UP오픈여성아우터전문관"
+    ],
+    "confidence": 0.91
+  },
+  {
+    "source": "popup",
     "source_id": "popup_e4877fef38299833",
     "name": "[임명진 떡갈비] Pop-Up",
     "latitude": 37.6145929759749,
@@ -20391,57 +19698,6 @@
       "#Pop-Up"
     ],
     "confidence": 0.9
-  },
-  {
-    "source": "popup",
-    "source_id": "popup_94a6606096fd751f",
-    "name": "달려 팝업",
-    "latitude": 37.5063885831,
-    "longitude": 126.9580627962,
-    "category": "entertainment",
-    "category_detail": "카테고리 없음",
-    "hub_rank": null,
-    "address": "서울 동작구 흑석로 84",
-    "distance_m": null,
-    "start_date": "2026-09-14",
-    "end_date": "2026-09-15",
-    "status": "ACTIVE",
-    "venue_name": "중앙대학교 서울캠퍼스 정문 잔디광장 & 영신관 앞 일대",
-    "opening_time": "13:00",
-    "closing_time": "18:00",
-    "closed": false,
-    "operation_schedule": [
-      {
-        "days": [
-          "MON",
-          "TUE"
-        ],
-        "opening_time": "13:00",
-        "closing_time": "18:00",
-        "closed": false
-      }
-    ],
-    "description": "[2026 달려 POP-UP STORE] 2026 달려를 맞이해 110년의 시간을 담아 십이간지 푸앙을 만나볼 수 있는 팝업스토어를 운영합니다. 📍 운영 안내 - 장소: 정문 잔디광장 & 영신관 앞 일대 - 기간: 9/14(월) - 9/15(화) / 양일 13:00-18:00 - 내용 · 굿즈존 / 커스텀존 / 포토존 구성 · 십이간지 푸앙 굿즈 판매 · 커스텀 티셔츠 제작 📍 팝업스토어 품목 안내 - 십이지신 푸앙 인형 (9,000원) - 카드스티커 (2,000원) - 노트패드 (4,000원) - 포스트잇 (1,000원) - L홀더 (1,500원) - 스티커 43종 (1,000원) - 아크릴 키링 20종 (1,700원) 📍 커스텀 티셔츠 프린팅 - 티셔츠 가격: 5,000원 - 커스텀 디자인 요소별 가격 상이 (추가 비용) 굿즈부터 커스텀 제작, 포토존까지 달려에서만 만나볼 수 있는 특별한 공간을 준비했으니 많은 관심과 참여 부탁드립니다. #중앙대학교_개교_110주년_기념_마라톤 #달려 #110년을_달려_세계의_중앙으로",
-    "image_url": "https://cdn.popga.co.kr/spot/8904/main/c8d654ff-275f-4229-a232-8a367f918519_1788825031706_thumbnail_MAIN_W480.webp",
-    "detail_url": "https://www.popga.co.kr/popup/8904",
-    "official_url": null,
-    "reservation_url": null,
-    "popup_categories": [
-      "애니/캐릭터",
-      "캐릭터"
-    ],
-    "tags": [
-      "중앙대학교_개교_110주년_기념_마라톤",
-      "달려",
-      "110년을_달려_세계의_중앙으로",
-      "달려팝업",
-      "마라톤",
-      "중앙대학교팝업",
-      "중앙대",
-      "동작",
-      "동작팝업"
-    ],
-    "confidence": 1.0
   },
   {
     "source": "popup",
@@ -20565,6 +19821,74 @@
   },
   {
     "source": "popup",
+    "source_id": "popup_c0caea779b0d3815",
+    "name": "메시아 팝업 - 발레 클로젯",
+    "latitude": 37.5254307922,
+    "longitude": 126.9287972423,
+    "category": "shopping",
+    "category_detail": "패션",
+    "hub_rank": null,
+    "address": "서울 영등포구 여의대로 108",
+    "distance_m": null,
+    "start_date": "2026-09-14",
+    "end_date": "2026-09-20",
+    "status": "ACTIVE",
+    "venue_name": "더현대 서울",
+    "opening_time": "10:30",
+    "closing_time": "20:00",
+    "closed": false,
+    "operation_schedule": [
+      {
+        "days": [
+          "MON",
+          "TUE",
+          "WED",
+          "THU"
+        ],
+        "opening_time": "10:30",
+        "closing_time": "20:00",
+        "closed": false
+      },
+      {
+        "days": [
+          "FRI",
+          "SAT",
+          "SUN"
+        ],
+        "opening_time": "10:30",
+        "closing_time": "20:30",
+        "closed": false
+      }
+    ],
+    "description": "아름다운 실루엣을 완성하는 발레웨어 브랜드 '메시아(messiah)'가 더현대 서울에 찾아옵니다! 🩰 새롭게 선보이는 레오타드부터 풍성한 라인의 스커트와 팬츠, 데일리로 활용하기 좋은 발레 티셔츠까지 팝업을 빛낸 핫한 베스트 제품들을 한자리에서 만나보세요. 나만의 발레 스타일을 완성해 줄 특별한 웨어들을 직접 경험하고 소장해 보세요. ✨",
+    "image_url": "https://cdn.popga.co.kr/spot/9066/main/3982d731-c23f-495d-b3f9-e963b72cac41_1789446427249_thumbnail_MAIN_W480.webp",
+    "detail_url": "https://www.popga.co.kr/popup/9066",
+    "official_url": null,
+    "reservation_url": null,
+    "popup_categories": [
+      "패션",
+      "라이프스타일",
+      "의류",
+      "스포츠/레저"
+    ],
+    "tags": [
+      "여의도",
+      "여의도 팝업",
+      "메시아 팝업",
+      "더현대 서울",
+      "패션",
+      "발레복",
+      "레오타드",
+      "쇼핑가능",
+      "발레",
+      "발레복 추천",
+      "발레복 팝업",
+      "스포츠"
+    ],
+    "confidence": 0.9
+  },
+  {
+    "source": "popup",
     "source_id": "popup_455e023ffbfa7cf5",
     "name": "에퓨어 팝업",
     "latitude": 37.5137129859,
@@ -20622,10 +19946,75 @@
   },
   {
     "source": "popup",
+    "source_id": "popup_e13a2641ff4e15fb",
+    "name": "유메유메 팝업",
+    "latitude": 37.5257999703,
+    "longitude": 126.9284122544,
+    "category": "shopping",
+    "category_detail": "패션",
+    "hub_rank": null,
+    "address": "서울 영등포구 여의대로 108",
+    "distance_m": null,
+    "start_date": "2026-09-14",
+    "end_date": "2026-09-20",
+    "status": "ACTIVE",
+    "venue_name": "더현대 서울 KREAM 매장 3F",
+    "opening_time": "10:30",
+    "closing_time": "20:00",
+    "closed": false,
+    "operation_schedule": [
+      {
+        "days": [
+          "MON",
+          "TUE",
+          "WED",
+          "THU"
+        ],
+        "opening_time": "10:30",
+        "closing_time": "20:00",
+        "closed": false
+      },
+      {
+        "days": [
+          "FRI",
+          "SAT",
+          "SUN"
+        ],
+        "opening_time": "10:30",
+        "closing_time": "20:30",
+        "closed": false
+      }
+    ],
+    "description": "네덜란드 암스테르담 기반의 컨템포러리 브랜드 유메유메(YUME YUME)가 더현대 서울 KREAM 매장을 찾아옵니다! 🖤 독창적인 실루엣과 조형적이고 미니멀한 디자인 디테일로 사랑받는 유메유메의 시그니처 풋웨어와 다채로운 라인업을 직접 만나보세요. 오직 더현대 서울 팝업에서만 제공되는 전 품목 특별 할인 혜택과 구매 사은품 기회도 함께 준비되어 있습니다. ✨",
+    "image_url": "https://cdn.popga.co.kr/spot/9064/main/dcf94e13-beee-47be-8499-156493921399_1789446210735_thumbnail_MAIN_W480.webp",
+    "detail_url": "https://www.popga.co.kr/popup/9064",
+    "official_url": null,
+    "reservation_url": null,
+    "popup_categories": [
+      "패션",
+      "의류",
+      "잡화(가방/신발/모자)"
+    ],
+    "tags": [
+      "여의도",
+      "유메유메",
+      "YUME YUME",
+      "유메유메 팝업",
+      "더현대 서울",
+      "KREAM",
+      "패션",
+      "패션 팝업",
+      "신발",
+      "가방"
+    ],
+    "confidence": 0.9
+  },
+  {
+    "source": "popup",
     "source_id": "popup_7869b5e929d8fe8f",
     "name": "이번 주 F&B 팝업 소식 HOT 5",
     "latitude": 37.52571671165,
-    "longitude": 126.92857345175,
+    "longitude": 126.928577630725,
     "category": "food",
     "category_detail": null,
     "hub_rank": null,
@@ -20716,14 +20105,51 @@
   },
   {
     "source": "popup",
+    "source_id": "popup_bfb673954b4115fe",
+    "name": "좋은 가죽은 두고두고 오래동안 쓸 수 있는데",
+    "latitude": 37.52571671165,
+    "longitude": 126.928577630725,
+    "category": "shopping",
+    "category_detail": null,
+    "hub_rank": null,
+    "address": "서울 영등포구 여의대로 108 더현대 서울",
+    "distance_m": null,
+    "start_date": "2026-09-14",
+    "end_date": "2026-10-04",
+    "status": "ACTIVE",
+    "venue_name": null,
+    "opening_time": null,
+    "closing_time": null,
+    "closed": null,
+    "operation_schedule": [],
+    "description": "\" 좋은 가죽은 두고두고 오래동안 쓸 수 있는데 오늘 소개드리는 #일비종떼 의 동전지갑이 오래 \"",
+    "image_url": "https://scontent-icn2-1.cdninstagram.com/v/t51.82787-15/807684739_18584772229070399_6370237920302918275_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=104&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=MVc2dp_UtXYQ7kNvwEJ0Mxo&_nc_oc=Adq_SI7Mg6WAfOe-n4oOScbwajd7OJ7lobjHs1fgx9F0UkkJ_NhADcANI_4Y54sYuac&_nc_zt=23&_nc_ht=scontent-icn2-1.cdninstagram.com&edm=AEoDcc0EAAAA&_nc_gid=asEpLyTuSZFA31kJyWrZ2g&oh=00_AQLZdhU0EFqgKye2evhjtxsisfxUAZArDWMQNgPo4e9lWg&oe=6AACF3E0",
+    "detail_url": "https://dayforyou.com/getDetail?scheduleSeq=37888",
+    "official_url": "https://www.instagram.com/p/DdOPglnieUd/",
+    "reservation_url": null,
+    "popup_categories": [],
+    "tags": [
+      "#패션",
+      "#더현대팝업",
+      "#좋은가죽은두고두고오래동안쓸수있는데",
+      "#일비종떼",
+      "#제품제공",
+      "#셔츠코디",
+      "#레더가방",
+      "#더현대서울"
+    ],
+    "confidence": 0.9
+  },
+  {
+    "source": "popup",
     "source_id": "popup_e6d8c3e258438881",
-    "name": "카누 팝업 - KANU MARKET",
+    "name": "카누 마켓 팝업 : KANU MARKET POP-UP",
     "latitude": 37.5052832084,
     "longitude": 127.0042807438,
     "category": "cafe",
     "category_detail": "카테고리 없음",
     "hub_rank": null,
-    "address": "서울 서초구 신반포로 176",
+    "address": "서울 서초구 신반포로 176 신세계백화점 강남점",
     "distance_m": null,
     "start_date": "2026-09-14",
     "end_date": "2026-09-20",
@@ -20757,8 +20183,8 @@
     ],
     "description": "[KANU MARKET POP-UP] 당신의 커피 일상을 바꿀 새로운 발견, KANU MARKET이 신세계 강남점에 찾아옵니다 ☕ 카누의 다양한 제품 라인업부터 2026 카누 바리스타 챔피언십 리미티드 에디션, 팝업에서만 만날 수 있는 스페셜 할인 혜택까지! 여기에 역대 카누 바리스타 챔피언십 파이널리스트가 직접 선보이는 리미티드 에디션 원두커피의 특별한 브루잉 시음까지 준비되어 있습니다 ✨ ⠀ 📢 KANU MARKET POP-UP 📍 장소 : 신세계 백화점 강남점 B1 스위트 파크 📅 일정 : 2026.09.14(월)~09.20(일) *백화점 운영 시간과 동일하게 운영됩니다. KANU MARKET POP-UP에서만 만나는 특별한 일주일 ☕ 카누 바리스타 챔피언십 리미티드 에디션부터 KANU 제품 구매 혜택까지 한자리에서 만나보세요! 여기에 역대 파이널리스트 5인의 스페셜 브루잉 시음까지 함께합니다 😊 📌 2025 KANU BC 파이널리스트 커피 시연 📍 장소 : 신세계 백화점 강남점 B1 스위트 파크 📍 일정 : 2026.09.18(금)~09.20(일) ※일자별 시연 스케줄은 이미지로 확인해주세요 ⠀ KANU가 생각한 프리미엄 원두커피의 기준 ☕ “FIRST BOLD, LAST CLEAN”",
     "image_url": "https://cdn.popga.co.kr/spot/8948/main/6303b281-bac6-44b9-9bad-7ad379ac1241_1788998039787_thumbnail_MAIN_W480.webp",
-    "detail_url": "https://www.popga.co.kr/popup/8948",
-    "official_url": null,
+    "detail_url": "https://dayforyou.com/getDetail?scheduleSeq=37963",
+    "official_url": "https://www.shinsegae.com/shopping/view.do?mainCd=11&pageLink=%2Fcms12%2FSC00002%2Finfo%2Ftheme%2F8639530_4465.txt&contentDtlCd=06&contentId=8639530&storeCd=SC00002&brandCd=",
     "reservation_url": null,
     "popup_categories": [
       "F&B",
@@ -20781,7 +20207,7 @@
       "아이스아메리카노",
       "KANUBC"
     ],
-    "confidence": 1.0
+    "confidence": 0.7429
   },
   {
     "source": "popup",
@@ -20841,6 +20267,120 @@
   },
   {
     "source": "popup",
+    "source_id": "popup_bf796e6780d6f4d8",
+    "name": "플루아플레아 Pop-Up",
+    "latitude": 37.5633418057,
+    "longitude": 126.8031199303,
+    "category": "shopping",
+    "category_detail": null,
+    "hub_rank": null,
+    "address": "서울 강서구 하늘길 38 롯데백화점 김포공항점",
+    "distance_m": null,
+    "start_date": "2026-09-14",
+    "end_date": "2026-10-08",
+    "status": "ACTIVE",
+    "venue_name": null,
+    "opening_time": "10:30",
+    "closing_time": "20:00",
+    "closed": false,
+    "operation_schedule": [
+      {
+        "days": [
+          "MON",
+          "TUE",
+          "WED",
+          "THU"
+        ],
+        "opening_time": "10:30",
+        "closing_time": "20:00",
+        "closed": false
+      },
+      {
+        "days": [
+          "FRI",
+          "SAT",
+          "SUN"
+        ],
+        "opening_time": "10:30",
+        "closing_time": "20:30",
+        "closed": false,
+        "special_days": [
+          "PUBLIC_HOLIDAY"
+        ]
+      }
+    ],
+    "description": "\" 플루아플레아 100년 이상의 역사를 간직한 프랑스 명문 테너리에서 현지의 까다로운 기준을 \"",
+    "image_url": "https://minfo.lotteshopping.com/content/news/202609/SNM00000000000559785/20260914102059244_3.jpeg",
+    "detail_url": "https://dayforyou.com/getDetail?scheduleSeq=37959",
+    "official_url": "https://www.lotteshopping.com/shpgnews/shpgnewsDetail?shpgNewsNo=SNM00000000000559785",
+    "reservation_url": null,
+    "popup_categories": [],
+    "tags": [
+      "#팝업",
+      "#롯데백화점김포공항점",
+      "#플루아플레아Pop-Up"
+    ],
+    "confidence": 0.9
+  },
+  {
+    "source": "popup",
+    "source_id": "popup_aedfe1164f9bc065",
+    "name": "노티카 FW 26, 팝업에서 먼저 만나다",
+    "latitude": 37.5290508215,
+    "longitude": 126.9641480053,
+    "category": "shopping",
+    "category_detail": "패션",
+    "hub_rank": null,
+    "address": "서울 용산구 한강대로23길 55 아이파크몰 용산점 2F",
+    "distance_m": null,
+    "start_date": "2026-09-15",
+    "end_date": "2026-09-30",
+    "status": "ACTIVE",
+    "venue_name": "무신사 메가스토어 용산",
+    "opening_time": "10:30",
+    "closing_time": "22:00",
+    "closed": false,
+    "operation_schedule": [
+      {
+        "days": [
+          "MON",
+          "TUE",
+          "WED",
+          "THU",
+          "FRI",
+          "SAT",
+          "SUN"
+        ],
+        "opening_time": "10:30",
+        "closing_time": "22:00",
+        "closed": false
+      }
+    ],
+    "description": "바다와 항해 문화에서 영감받아 실용적인 아메리칸 캐주얼을 전개하는 브랜드, 노티카 (Nautica)가 무신사 메가스토어 용산에서 FW 26 팝업 스토어를 진행합니다! ☃️🪾 이번 팝업은 1990년대 노티카의 아카이브를 현대적인 감각으로 재해석한 FW 26 컬렉션으로 채웠습니다. 패딩과 플리스 등 시즌을 대표하는 든든한 아우터 라인업을 중심으로, 노티카 특유의 헤리티지가 돋보이는 다채로운 데일리룩을 제안하니 많은 관심 부탁드립니다. ♥️",
+    "image_url": "https://cdn.popga.co.kr/spot/9051/main/2b144bd4-0d65-4b08-9256-ad4f4c959384_1789370422946_thumbnail_MAIN_W480.webp",
+    "detail_url": "https://dayforyou.com/getDetail?scheduleSeq=37905",
+    "official_url": "https://www.musinsa.com/content/1546447575462816512",
+    "reservation_url": null,
+    "popup_categories": [
+      "패션",
+      "의류"
+    ],
+    "tags": [
+      "용산",
+      "용산 팝업",
+      "노티카",
+      "가을옷쇼핑",
+      "겨울옷쇼핑",
+      "FW신상",
+      "스트릿브랜드",
+      "NAUTICA",
+      "패션",
+      "패션 팝업"
+    ],
+    "confidence": 0.7643
+  },
+  {
+    "source": "popup",
     "source_id": "popup_59714a2fe0642e3e",
     "name": "리센느 팝업",
     "latitude": 37.5255614545,
@@ -20852,7 +20392,7 @@
     "distance_m": null,
     "start_date": "2026-09-15",
     "end_date": "2026-09-23",
-    "status": "UPCOMING",
+    "status": "ACTIVE",
     "venue_name": "더현대 서울 5층 에픽서울",
     "opening_time": "10:30",
     "closing_time": "20:00",
@@ -20919,7 +20459,7 @@
     "distance_m": null,
     "start_date": "2026-09-15",
     "end_date": "2026-09-23",
-    "status": "UPCOMING",
+    "status": "ACTIVE",
     "venue_name": "대림창고 옆",
     "opening_time": "11:00",
     "closing_time": "20:00",
@@ -20942,8 +20482,8 @@
     ],
     "description": "전자담배의 새로운 기준, '릴X토니노 람보르기니 그라운드'에서 가장 먼저 만나보세요! 📍팝업 위치: 서울특별시 성동구 성수이로 72 [사전예약방법] 📋 구글폼 접수: https://forms.gle/j29p5HKgrkC3bHNdA [사전예약기간] 🗓️ 2026. 09. 4(금) ~ 09. 23(수) 🕐 23일 11AM 사전예약 마감입니다. [팝업운영기간] 🗓️2026. 09. 15(화) ~ 09. 23(수), 총 9일 🕐오전 11시 ~ 오후 8시 릴X토니노 람보르기니 그라운드 팝업스토어 사전예약 완료하고, 현장에서 즐길 수 있는 가챠 참여 기회까지 받아보세요! ※ 19세 미만은 보호자 동반 여부와 관계없이 행사장에 입장할 수 없습니다. ※ 현장에서 신분증(주민등록증, 운전면허증, 모바일 신분증 등)을 확인합니다. 신분증을 지참하지 않았거나 본인 확인이 어려운 경우 입장이 제한될 수 있습니다.",
     "image_url": "https://cdn.popga.co.kr/spot/8897/main/44a7001b-26b6-4aeb-ba0c-01100338b983_1788758521871_thumbnail_MAIN_W480.webp",
-    "detail_url": "https://www.popga.co.kr/popup/8897",
-    "official_url": null,
+    "detail_url": "https://dayforyou.com/getDetail?scheduleSeq=37521",
+    "official_url": "https://naver.me/xNpsXlQD",
     "reservation_url": "https://forms.gle/ckP8XnKzbHTBgzWeA",
     "popup_categories": [
       "디지털/테크",
@@ -20980,7 +20520,7 @@
     "distance_m": null,
     "start_date": "2026-09-15",
     "end_date": "2026-09-21",
-    "status": "UPCOMING",
+    "status": "ACTIVE",
     "venue_name": "AK PLAZA 홍대점 1층",
     "opening_time": "11:00",
     "closing_time": "22:00",
@@ -21046,7 +20586,7 @@
     "distance_m": null,
     "start_date": "2026-09-15",
     "end_date": "2026-10-01",
-    "status": "UPCOMING",
+    "status": "ACTIVE",
     "venue_name": "모펀 AK PLAZA 홍대점",
     "opening_time": "11:00",
     "closing_time": "22:00",
@@ -21085,6 +20625,338 @@
       "게임",
       "쯔꾸르 공포 게임",
       "모펀카페 팝업"
+    ],
+    "confidence": 0.9
+  },
+  {
+    "source": "popup",
+    "source_id": "popup_0fdd649ded4b9be8",
+    "name": "🌸 RESCENE ‘MEMORIES OF RESCENE’ 팝업",
+    "latitude": 37.52571671165,
+    "longitude": 126.928577630725,
+    "category": "shopping",
+    "category_detail": null,
+    "hub_rank": null,
+    "address": "서울 영등포구 여의대로 108 더현대 서울",
+    "distance_m": null,
+    "start_date": "2026-09-15",
+    "end_date": "2026-09-23",
+    "status": "ACTIVE",
+    "venue_name": null,
+    "opening_time": null,
+    "closing_time": null,
+    "closed": null,
+    "operation_schedule": [],
+    "description": "\" - 🌸 RESCENE ‘MEMORIES OF RESCENE’ POP-UP 더현대 서울에서 \"",
+    "image_url": "https://scontent-icn2-1.cdninstagram.com/v/t51.82787-15/808285084_18110741207608252_7813349853432933248_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=111&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=lDUI0OT3wpwQ7kNvwE-HEQj&_nc_oc=AdqTtk5D353MxG6GFCqAataaZKc6y_ApWoL9VnkK0Lf7A0DF5AQmUF1KIwFp2cLGFTU&_nc_zt=23&_nc_ht=scontent-icn2-1.cdninstagram.com&edm=AEoDcc0EAAAA&_nc_gid=zSTf95cnl1Ld2A_6B2TgWg&oh=00_AQJh6NVGozEAZ6sdhYx4mqbBxdsecdyq0AESFD9C8Buchw&oe=6AAD177A",
+    "detail_url": "https://dayforyou.com/getDetail?scheduleSeq=37882",
+    "official_url": "https://www.instagram.com/p/DdOPo_aCGey/",
+    "reservation_url": null,
+    "popup_categories": [],
+    "tags": [
+      "#팝업",
+      "#서울팝업",
+      "#🌸RESCENE‘MEMORIESOFRESCENE’팝업",
+      "#리센느",
+      "#RESCENE",
+      "#리센느팝업",
+      "#더현대서울",
+      "#リセンヌ"
+    ],
+    "confidence": 0.9
+  },
+  {
+    "source": "popup",
+    "source_id": "popup_2ca392f60ad30735",
+    "name": "UFC & Rolling Stones POP-UP",
+    "latitude": 37.510950886399996,
+    "longitude": 127.09751725755001,
+    "category": "shopping",
+    "category_detail": null,
+    "hub_rank": null,
+    "address": "서울 송파구 올림픽로 240 롯데백화점 잠실점",
+    "distance_m": null,
+    "start_date": "2026-09-16",
+    "end_date": "2026-09-21",
+    "status": "ACTIVE",
+    "venue_name": null,
+    "opening_time": "10:30",
+    "closing_time": "20:00",
+    "closed": false,
+    "operation_schedule": [
+      {
+        "days": [
+          "MON",
+          "TUE",
+          "WED",
+          "THU"
+        ],
+        "opening_time": "10:30",
+        "closing_time": "20:00",
+        "closed": false
+      },
+      {
+        "days": [
+          "FRI",
+          "SAT",
+          "SUN"
+        ],
+        "opening_time": "10:30",
+        "closing_time": "20:30",
+        "closed": false,
+        "special_days": [
+          "PUBLIC_HOLIDAY"
+        ]
+      }
+    ],
+    "description": "\" 「UFC & Rolling Stones」 The Rolling Stones 와 UFC SP \"",
+    "image_url": "https://minfo.lotteshopping.com/content/news/202609/SNM00000000000558231/20260906171707415_6.jpeg",
+    "detail_url": "https://dayforyou.com/getDetail?scheduleSeq=37920",
+    "official_url": "https://www.lotteshopping.com/shpgnews/shpgnewsDetail?shpgNewsNo=SNM00000000000558231",
+    "reservation_url": null,
+    "popup_categories": [],
+    "tags": [
+      "#패션",
+      "#롯데백화점잠실점",
+      "#UFC&RollingStonesPOP-UP"
+    ],
+    "confidence": 0.9
+  },
+  {
+    "source": "popup",
+    "source_id": "popup_06648891b0816e73",
+    "name": "[마켓틸다] Pop-Up 수입 프리미엄 생활용품",
+    "latitude": 37.5633418057,
+    "longitude": 126.8031199303,
+    "category": "shopping",
+    "category_detail": null,
+    "hub_rank": null,
+    "address": "서울 강서구 하늘길 38 롯데백화점 김포공항점",
+    "distance_m": null,
+    "start_date": "2026-09-16",
+    "end_date": "2026-11-01",
+    "status": "ACTIVE",
+    "venue_name": null,
+    "opening_time": "10:30",
+    "closing_time": "20:00",
+    "closed": false,
+    "operation_schedule": [
+      {
+        "days": [
+          "MON",
+          "TUE",
+          "WED",
+          "THU"
+        ],
+        "opening_time": "10:30",
+        "closing_time": "20:00",
+        "closed": false
+      },
+      {
+        "days": [
+          "FRI",
+          "SAT",
+          "SUN"
+        ],
+        "opening_time": "10:30",
+        "closing_time": "20:30",
+        "closed": false,
+        "special_days": [
+          "PUBLIC_HOLIDAY"
+        ]
+      }
+    ],
+    "description": "\" [마켓틸다] 깐깐하게 선택하고 검증된 베스트 리빙 셀렉트샵 프리미엄 라인의 수입 생활 용품 \"",
+    "image_url": "https://minfo.lotteshopping.com/content/news/202607/SNM00000000000545744/20260715133759109_5.jpeg",
+    "detail_url": "https://dayforyou.com/getDetail?scheduleSeq=37951",
+    "official_url": "https://www.lotteshopping.com/shpgnews/shpgnewsDetail?shpgNewsNo=SNM00000000000559662",
+    "reservation_url": null,
+    "popup_categories": [],
+    "tags": [
+      "#뷰티",
+      "#롯데백화점김포공항점",
+      "#마켓틸다",
+      "#Pop-Up수입프리미엄생활용품"
+    ],
+    "confidence": 0.9
+  },
+  {
+    "source": "popup",
+    "source_id": "popup_e2d43675abb63745",
+    "name": "[아디다스] POP-UP STORE",
+    "latitude": 37.510950886399996,
+    "longitude": 127.09751725755001,
+    "category": "culture",
+    "category_detail": null,
+    "hub_rank": null,
+    "address": "서울 송파구 올림픽로 240 롯데백화점 잠실점",
+    "distance_m": null,
+    "start_date": "2026-09-16",
+    "end_date": "2026-09-21",
+    "status": "ACTIVE",
+    "venue_name": null,
+    "opening_time": "10:30",
+    "closing_time": "20:00",
+    "closed": false,
+    "operation_schedule": [
+      {
+        "days": [
+          "MON",
+          "TUE",
+          "WED",
+          "THU"
+        ],
+        "opening_time": "10:30",
+        "closing_time": "20:00",
+        "closed": false
+      },
+      {
+        "days": [
+          "FRI",
+          "SAT",
+          "SUN"
+        ],
+        "opening_time": "10:30",
+        "closing_time": "20:30",
+        "closed": false,
+        "special_days": [
+          "PUBLIC_HOLIDAY"
+        ]
+      }
+    ],
+    "description": "\" 아디다스는 스포츠를 통해 새로운 경험과 영감을 제공하며, 이번 ‘Road to Trail’ \"",
+    "image_url": "https://minfo.lotteshopping.com/content/news/202609/SNM00000000000560059/20260915120327303_7.jpeg",
+    "detail_url": "https://dayforyou.com/getDetail?scheduleSeq=37964",
+    "official_url": "https://www.lotteshopping.com/shpgnews/shpgnewsDetail?shpgNewsNo=SNM00000000000560059",
+    "reservation_url": null,
+    "popup_categories": [],
+    "tags": [
+      "#전시",
+      "#롯데백화점잠실점",
+      "#아디다스",
+      "#POP-UPSTORE"
+    ],
+    "confidence": 0.9
+  },
+  {
+    "source": "popup",
+    "source_id": "popup_33b8a98a32b5392c",
+    "name": "[아베크엘] 가을의 시작을 알리는 POP-UP",
+    "latitude": 37.5158906009,
+    "longitude": 126.9075750605,
+    "category": "shopping",
+    "category_detail": null,
+    "hub_rank": null,
+    "address": "서울 영등포구 경인로 846 롯데백화점 영등포점",
+    "distance_m": null,
+    "start_date": "2026-09-16",
+    "end_date": "2026-09-20",
+    "status": "ACTIVE",
+    "venue_name": null,
+    "opening_time": "10:30",
+    "closing_time": "20:00",
+    "closed": false,
+    "operation_schedule": [
+      {
+        "days": [
+          "MON",
+          "TUE",
+          "WED",
+          "THU"
+        ],
+        "opening_time": "10:30",
+        "closing_time": "20:00",
+        "closed": false
+      },
+      {
+        "days": [
+          "FRI",
+          "SAT",
+          "SUN"
+        ],
+        "opening_time": "10:30",
+        "closing_time": "20:30",
+        "closed": false,
+        "special_days": [
+          "PUBLIC_HOLIDAY"
+        ]
+      }
+    ],
+    "description": "\" 가을(간절기) 인기 상품 50~70% \"",
+    "image_url": "https://minfo.lotteshopping.com/content/news/202608/SNM00000000000554457/20260821164459338_6.jpeg",
+    "detail_url": "https://dayforyou.com/getDetail?scheduleSeq=37922",
+    "official_url": "https://www.lotteshopping.com/shpgnews/shpgnewsDetail?shpgNewsNo=SNM00000000000559602",
+    "reservation_url": null,
+    "popup_categories": [],
+    "tags": [
+      "#패션",
+      "#롯데백화점영등포점",
+      "#아베크엘",
+      "#가을의시작을알리는POP-UP"
+    ],
+    "confidence": 0.9
+  },
+  {
+    "source": "popup",
+    "source_id": "popup_205c0739b9045384",
+    "name": "비비앙 구름 호텔 팝업",
+    "latitude": 37.5431657789,
+    "longitude": 127.0545238603,
+    "category": "shopping",
+    "category_detail": "뷰티",
+    "hub_rank": null,
+    "address": "서울 성동구 연무장7길 6",
+    "distance_m": null,
+    "start_date": "2026-09-16",
+    "end_date": "2026-09-30",
+    "status": "ACTIVE",
+    "venue_name": "비비앙 성수 플래그십 스토어",
+    "opening_time": "11:00",
+    "closing_time": "21:00",
+    "closed": false,
+    "operation_schedule": [
+      {
+        "days": [
+          "MON",
+          "TUE",
+          "WED",
+          "THU",
+          "FRI"
+        ],
+        "opening_time": "11:00",
+        "closing_time": "21:00",
+        "closed": false
+      },
+      {
+        "days": [
+          "SAT",
+          "SUN"
+        ],
+        "opening_time": "11:00",
+        "closing_time": "21:30",
+        "closed": false
+      }
+    ],
+    "description": "포근한 구름의 향을 가득 담은 비비앙의 '구름 호텔(GUREUM HOTEL)' 팝업스토어가 성수 플래그십 스토어에서 개최됩니다! ☁️ 공간에 가득 찬 특별한 향기와 포근한 구름 테마의 무드를 감상하며 지친 일상 속 특별한 휴식을 경험해 보세요. 재미있는 3가지 체크인 미션을 해결하고 꽝 없는 럭키드로우에 참여해 핸드크림, 섬유향수 본품 등 푸짐한 선물도 받아 가실 수 있습니다. 나만의 특별한 구름 레이어링 조합을 찾고 향기로운 호캉스를 직접 즐겨보세요! ✨",
+    "image_url": "https://cdn.popga.co.kr/spot/9061/main/2b9ef481-b271-4c65-82ed-ecd09cedb79c_1789434085600_thumbnail_MAIN_W480.webp",
+    "detail_url": "https://www.popga.co.kr/popup/9061",
+    "official_url": null,
+    "reservation_url": null,
+    "popup_categories": [
+      "뷰티",
+      "향수"
+    ],
+    "tags": [
+      "성수",
+      "비비앙",
+      "BiBiANG",
+      "비비앙 팝업",
+      "GUREUM HOTEL",
+      "비비앙 성수 플래그십 스토어",
+      "성수 팝업",
+      "뷰티",
+      "향수",
+      "두 손 가득 쇼핑"
     ],
     "confidence": 0.9
   },
@@ -21147,7 +21019,7 @@
   {
     "source": "popup",
     "source_id": "popup_1fb687bffc2d2a51",
-    "name": "에딧뎁트 NEO LOCAL 팝업",
+    "name": "에디트 뎁트 팝업 - NEO LOCAL",
     "latitude": 37.5259756004,
     "longitude": 126.9283046142,
     "category": "culture",
@@ -21158,7 +21030,7 @@
     "start_date": "2026-09-17",
     "end_date": "2026-09-30",
     "status": "UPCOMING",
-    "venue_name": "더현대 서울 B1 POP-UP ICONIC",
+    "venue_name": "더현대 서울 지하 1층 POP-UP ICONIC",
     "opening_time": "10:30",
     "closing_time": "20:00",
     "closed": false,
@@ -21220,7 +21092,7 @@
       "토크",
       "토크 프로그램"
     ],
-    "confidence": 1.0
+    "confidence": 0.946
   },
   {
     "source": "popup",
@@ -21555,6 +21427,118 @@
   },
   {
     "source": "popup",
+    "source_id": "popup_27ca830b052c5803",
+    "name": "리프트바운드 팝업 - 리그 오브 레전드 TCG @용산",
+    "latitude": 37.529830275,
+    "longitude": 126.9644361256,
+    "category": "entertainment",
+    "category_detail": "엔터테인먼트",
+    "hub_rank": null,
+    "address": "서울 용산구 한강대로23길 55",
+    "distance_m": null,
+    "start_date": "2026-09-18",
+    "end_date": "2026-09-30",
+    "status": "UPCOMING",
+    "venue_name": "아이파크몰 용산점",
+    "opening_time": "10:30",
+    "closing_time": "22:00",
+    "closed": false,
+    "operation_schedule": [
+      {
+        "days": [
+          "MON",
+          "TUE",
+          "WED",
+          "THU",
+          "FRI",
+          "SAT",
+          "SUN"
+        ],
+        "opening_time": "10:30",
+        "closing_time": "22:00",
+        "closed": false
+      }
+    ],
+    "description": "리그 오브 레전드(LoL) 세계관을 담은 새로운 트레이딩 카드 게임(TCG) '리프트바운드'가 한국 런칭을 기념하여 찾아옵니다! ⚔️ 이번 행사에서는 리그 오브 레전드 챔피언들과 함께하는 전략적이고 특별한 플레이 체험을 가장 먼저 만나보실 수 있습니다. 전략 카드 게임 팬들과 롤 유저들의 마음을 설레게 할 완성도 높은 실물 카드와 전장을 직접 경험해보세요 ✨",
+    "image_url": "https://cdn.popga.co.kr/spot/9044/main/4a11462e-8d97-401b-99e4-e28dec930ec9_1789367338502_thumbnail_MAIN_W480.webp",
+    "detail_url": "https://www.popga.co.kr/popup/9044",
+    "official_url": null,
+    "reservation_url": "https://booking.naver.com/booking/12/bizes/1734005/items/8044173?area=bmp&startDateTime=2026-09-14T00%3A00%3A00%2B09%3A00",
+    "popup_categories": [
+      "엔터테인먼트",
+      "게임"
+    ],
+    "tags": [
+      "용산",
+      "용산 팝업",
+      "리프트바운드",
+      "리프트바운드 팝업",
+      "아이파크몰 용산점",
+      "GGX",
+      "게임",
+      "체험형 팝업",
+      "사전 예약"
+    ],
+    "confidence": 0.9
+  },
+  {
+    "source": "popup",
+    "source_id": "popup_0cc27745ff776a44",
+    "name": "리프트바운드 팝업 - 리그 오브 레전드 TCG @을지로",
+    "latitude": 37.5657600422,
+    "longitude": 127.0070796298,
+    "category": "entertainment",
+    "category_detail": "엔터테인먼트",
+    "hub_rank": null,
+    "address": "서울 중구 을지로 264",
+    "distance_m": null,
+    "start_date": "2026-09-18",
+    "end_date": "2026-09-23",
+    "status": "UPCOMING",
+    "venue_name": "젠지 GGX",
+    "opening_time": "12:00",
+    "closing_time": "20:00",
+    "closed": false,
+    "operation_schedule": [
+      {
+        "days": [
+          "MON",
+          "TUE",
+          "WED",
+          "THU",
+          "FRI",
+          "SAT",
+          "SUN"
+        ],
+        "opening_time": "12:00",
+        "closing_time": "20:00",
+        "closed": false
+      }
+    ],
+    "description": "리그 오브 레전드(LoL) 세계관을 담은 새로운 트레이딩 카드 게임(TCG) '리프트바운드'가 한국 런칭을 기념하여 찾아옵니다! ⚔️ 이번 행사에서는 리그 오브 레전드 챔피언들과 함께하는 전략적이고 특별한 플레이 체험을 가장 먼저 만나보실 수 있습니다. 전략 카드 게임 팬들과 롤 유저들의 마음을 설레게 할 완성도 높은 실물 카드와 전장을 직접 경험해보세요 ✨",
+    "image_url": "https://cdn.popga.co.kr/spot/9049/main/70e3d0d9-0f12-4bc3-91ff-68ac26a54355_1789367601383_thumbnail_MAIN_W480.webp",
+    "detail_url": "https://www.popga.co.kr/popup/9049",
+    "official_url": null,
+    "reservation_url": "https://booking.naver.com/booking/12/bizes/1734005/items/8052921?area=bmp&startDateTime=2026-09-23T00%3A00%3A00%2B09%3A00",
+    "popup_categories": [
+      "엔터테인먼트",
+      "게임"
+    ],
+    "tags": [
+      "용산",
+      "용산 팝업",
+      "리프트바운드",
+      "리프트바운드 팝업",
+      "아이파크몰 용산점",
+      "GGX",
+      "게임",
+      "체험형 팝업",
+      "사전 예약"
+    ],
+    "confidence": 0.9
+  },
+  {
+    "source": "popup",
     "source_id": "popup_19de89abb8c5de51",
     "name": "아스토믹 팝업 IN 더 리버몰 강동점",
     "latitude": 37.5666602103625,
@@ -21781,6 +21765,69 @@
   },
   {
     "source": "popup",
+    "source_id": "popup_94065257fd2779da",
+    "name": "타하타 팝업 - ULULU HAUS",
+    "latitude": 37.5198646853,
+    "longitude": 127.0399597223,
+    "category": "shopping",
+    "category_detail": "라이프스타일",
+    "hub_rank": null,
+    "address": "서울 강남구 선릉로 733",
+    "distance_m": null,
+    "start_date": "2026-09-18",
+    "end_date": "2026-09-20",
+    "status": "UPCOMING",
+    "venue_name": "울루루 하우스",
+    "opening_time": null,
+    "closing_time": null,
+    "closed": true,
+    "operation_schedule": [
+      {
+        "days": [
+          "FRI",
+          "SAT"
+        ],
+        "opening_time": "10:00",
+        "closing_time": "19:00",
+        "closed": false
+      },
+      {
+        "days": [
+          "SUN"
+        ],
+        "opening_time": "10:00",
+        "closing_time": "16:00",
+        "closed": false
+      }
+    ],
+    "description": "요가웨어 브랜드 타하타(ThaHaTha)가 울루루 하우스에서 특별한 단독 팝업스토어를 개최합니다! 🧘 3일 동안만 진행되는 이번 팝업에서는 타하타의 감각적인 요가 제품들을 직접 만나볼 수 있습니다. 더불어 울룰루 하우스가 제안하는 스페셜 클래스와 특별한 움직임의 순간을 함께 경험해 보세요. ✨ 몸과 마음에 온전한 휴식을 선물하는 타하타의 무드를 만끽하며, 나만의 웰니스 여정을 시작해 보세요. 💛",
+    "image_url": "https://cdn.popga.co.kr/spot/9067/main/68678704-1358-4c91-98d7-dcead8064110_1789446509331_thumbnail_MAIN_W480.webp",
+    "detail_url": "https://www.popga.co.kr/popup/9067",
+    "official_url": null,
+    "reservation_url": null,
+    "popup_categories": [
+      "라이프스타일",
+      "여행/취미/여가",
+      "건강/헬스"
+    ],
+    "tags": [
+      "강남",
+      "강남 팝업",
+      "울루루하우스",
+      "요가",
+      "요가 팝업",
+      "타하타 팝업",
+      "타하타",
+      "ThaHaTha",
+      "스포츠",
+      "강남/서초",
+      "선릉",
+      "선릉 팝업"
+    ],
+    "confidence": 0.9
+  },
+  {
+    "source": "popup",
     "source_id": "popup_097e970c9af12512",
     "name": "틈결 X 에스더버니 X 스탠다드브레드 팝업",
     "latitude": 37.505238155,
@@ -21867,20 +21914,13 @@
     "end_date": "2026-10-11",
     "status": "UPCOMING",
     "venue_name": "한국관광공사 하이커 그라운드 2층, 3층, 5층",
-    "opening_time": null,
-    "closing_time": null,
-    "closed": true,
+    "opening_time": "10:00",
+    "closing_time": "20:00",
+    "closed": false,
     "operation_schedule": [
       {
         "days": [
-          "MON"
-        ],
-        "opening_time": null,
-        "closing_time": null,
-        "closed": true
-      },
-      {
-        "days": [
+          "MON",
           "TUE",
           "WED",
           "THU",
@@ -21897,7 +21937,7 @@
     "image_url": "https://cdn.popga.co.kr/spot/8729/main/b3d99952-6825-4186-a7fe-78b95ea1a3a2_1788502138728_thumbnail_MAIN_W480.webp",
     "detail_url": "https://www.popga.co.kr/popup/8729",
     "official_url": null,
-    "reservation_url": "https://www.popply.co.kr/popup/5831}",
+    "reservation_url": null,
     "popup_categories": [
       "애니/캐릭터",
       "캐릭터",
@@ -22072,6 +22112,118 @@
       "운동복 쇼핑"
     ],
     "confidence": 1.0
+  },
+  {
+    "source": "popup",
+    "source_id": "popup_e26089bea6e70042",
+    "name": "달솜 팝업",
+    "latitude": 37.5201398041,
+    "longitude": 127.0271180336,
+    "category": "shopping",
+    "category_detail": "패션",
+    "hub_rank": null,
+    "address": "서울 강남구 논현로151길 13",
+    "distance_m": null,
+    "start_date": "2026-09-19",
+    "end_date": "2026-09-20",
+    "status": "UPCOMING",
+    "venue_name": "1층",
+    "opening_time": null,
+    "closing_time": null,
+    "closed": true,
+    "operation_schedule": [
+      {
+        "days": [
+          "SAT",
+          "SUN"
+        ],
+        "opening_time": "12:00",
+        "closing_time": "20:00",
+        "closed": false
+      }
+    ],
+    "description": "달솜의 첫 번째 팝업이 신사에서 열려요! 화면으로만 보던 옷들을 직접 만져보고 입어보며 나에게 어울리는 달솜을 찾아보세요. 25FW, 26SS 그리고 팝업에서 최초로 공개하는 26FW 미공개 신상까지 한자리에서 만나보실 수 있습니다. 💛 이번 주말, 신사에서 달솜의 새로운 컬렉션을 직접 즐겨보세요 ✨",
+    "image_url": "https://cdn.popga.co.kr/spot/9053/main/0064f8ee-25f6-48cd-865c-131318fd68b1_1789373632799_thumbnail_MAIN_W480.webp",
+    "detail_url": "https://www.popga.co.kr/popup/9053",
+    "official_url": null,
+    "reservation_url": null,
+    "popup_categories": [
+      "패션",
+      "의류"
+    ],
+    "tags": [
+      "강남",
+      "강남 팝업",
+      "강남/서초",
+      "신사",
+      "신사 팝업",
+      "달솜",
+      "패션",
+      "쇼핑가능",
+      "방문 시 선물 증정",
+      "DALSOM"
+    ],
+    "confidence": 0.9
+  },
+  {
+    "source": "popup",
+    "source_id": "popup_94b7077d3cbf4281",
+    "name": "도각도각 연주회",
+    "latitude": 37.5562450938,
+    "longitude": 126.9127195576,
+    "category": "shopping",
+    "category_detail": "디지털/테크",
+    "hub_rank": null,
+    "address": "서울 마포구 월드컵로14길 42",
+    "distance_m": null,
+    "start_date": "2026-09-19",
+    "end_date": "2026-09-20",
+    "status": "UPCOMING",
+    "venue_name": "지하 1층 왓키 베스트와이",
+    "opening_time": null,
+    "closing_time": null,
+    "closed": true,
+    "operation_schedule": [
+      {
+        "days": [
+          "SAT"
+        ],
+        "opening_time": "15:00",
+        "closing_time": "19:00",
+        "closed": false
+      },
+      {
+        "days": [
+          "SUN"
+        ],
+        "opening_time": "15:00",
+        "closing_time": "18:00",
+        "closed": false
+      }
+    ],
+    "description": "손끝으로 느끼는 타건의 즐거움! 그루브스톤의 두 번째 미니 팝업스토어, '도각도각 연주회'가 망원 왓키 베스트와이에서 개최됩니다. ⌨️✨ 베일에 싸여 있던 GV10X 반저소음 스위치와 새롭게 선보이는 G-Dock 신제품 타건 체험은 물론, 차기작 발표회까지 키보드 덕후들의 심장을 뛰게 할 다채로운 라인업이 준비되어 있습니다. 3개의 스탬프 미션을 완료하고 100% 당첨 럭키드로우에 도전해 보세요! 최대 기계식 키보드 당첨의 기회와 함께 신제품 현장 예약 구매 혜택 및 기존 유저를 위한 실리콘 흡음재 무상 증정 이벤트도 놓치지 마세요. 🎁",
+    "image_url": "https://cdn.popga.co.kr/popga-biz/160/707b72be-414a-4df4-9115-2731a8e9f5a1_thumbnail_MAIN_W480.webp",
+    "detail_url": "https://www.popga.co.kr/popup/9059",
+    "official_url": null,
+    "reservation_url": null,
+    "popup_categories": [
+      "디지털/테크",
+      "전자기기"
+    ],
+    "tags": [
+      "홍대",
+      "그루브스톤",
+      "Groovestone",
+      "키보드",
+      "타건샵",
+      "왓키",
+      "망원",
+      "도각도각 연주회",
+      "체험형 팝업",
+      "홍대/신촌",
+      "전자제품"
+    ],
+    "confidence": 0.9
   },
   {
     "source": "popup",
@@ -22540,6 +22692,72 @@
   },
   {
     "source": "popup",
+    "source_id": "popup_c6e6c42694449f72",
+    "name": "명탐정 코난 팝업 - 윈드 페스티벌",
+    "latitude": 37.557775215,
+    "longitude": 126.9264123982,
+    "category": "entertainment",
+    "category_detail": "애니/캐릭터",
+    "hub_rank": null,
+    "address": "서울 마포구 양화로 188",
+    "distance_m": null,
+    "start_date": "2026-09-21",
+    "end_date": "2026-10-08",
+    "status": "UPCOMING",
+    "venue_name": "AK PLAZA 홍대 3층",
+    "opening_time": "11:00",
+    "closing_time": "22:00",
+    "closed": false,
+    "operation_schedule": [
+      {
+        "days": [
+          "MON",
+          "TUE",
+          "WED",
+          "THU",
+          "FRI"
+        ],
+        "opening_time": "11:00",
+        "closing_time": "22:00",
+        "closed": false
+      },
+      {
+        "days": [
+          "SAT",
+          "SUN"
+        ],
+        "opening_time": "10:30",
+        "closing_time": "22:00",
+        "closed": false
+      }
+    ],
+    "description": "순간과 추억을 간직하는 공간 모모리(MOMORY)에서 명탐정 코난 윈드 페스티벌 팝업을 AK PLAZA 홍대점에서 선보여요! 🕵️💙 렌티큘러 엽서부터 홀로그램 캔뱃지, 증명사진 아크릴 키링, 와이드 티켓 엽서까지 다양한 신상품을 만나볼 수 있어요 ✨ 랜덤 럭키드로우도 준비되어 있으니, 명탐정 코난 팬이라면 홍대에서 새로운 굿즈와 함께 특별한 추억을 만들어보세요! 🎁🍃",
+    "image_url": "https://cdn.popga.co.kr/spot/9052/main/da204f61-6b9a-4486-b932-583aa5c812de_1789373090468_thumbnail_MAIN_W480.webp",
+    "detail_url": "https://www.popga.co.kr/popup/9052",
+    "official_url": null,
+    "reservation_url": null,
+    "popup_categories": [
+      "애니/캐릭터",
+      "캐릭터"
+    ],
+    "tags": [
+      "홍대",
+      "명탐정 코난",
+      "명탐정 코난 팝업",
+      "코난 팝업",
+      "명탐정코난",
+      "윈드 페스티벌",
+      "AK플라자 홍대",
+      "홍대 팝업",
+      "애니메이션",
+      "캐릭터",
+      "굿즈",
+      "홍대/신촌"
+    ],
+    "confidence": 0.9
+  },
+  {
+    "source": "popup",
     "source_id": "popup_c4ab5ac040da33ca",
     "name": "디드 팝업",
     "latitude": 37.5113825324,
@@ -22664,6 +22882,120 @@
       "intel"
     ],
     "confidence": 0.9
+  },
+  {
+    "source": "popup",
+    "source_id": "popup_768cacf63e13a2f0",
+    "name": "아따맘마 팝업 - 우리 집으로 놀러와",
+    "latitude": 37.5509534589,
+    "longitude": 126.92106067,
+    "category": "entertainment",
+    "category_detail": "애니/캐릭터",
+    "hub_rank": null,
+    "address": "서울 마포구 어울마당로 65",
+    "distance_m": null,
+    "start_date": "2026-09-22",
+    "end_date": "2026-10-18",
+    "status": "UPCOMING",
+    "venue_name": "상상마당 디자인스퀘어",
+    "opening_time": "11:00",
+    "closing_time": "21:00",
+    "closed": false,
+    "operation_schedule": [
+      {
+        "days": [
+          "MON",
+          "TUE",
+          "WED",
+          "THU",
+          "FRI",
+          "SAT",
+          "SUN"
+        ],
+        "opening_time": "11:00",
+        "closing_time": "21:00",
+        "closed": false
+      }
+    ],
+    "description": "홍대 디자인스퀘어 아따맘마 팝업스토어 오픈 예정! 아침저녁으로 쌀쌀해진 요즘, 찬 바람 불 때 가장 먼저 생각나는 따뜻한 가족!🏠 아따맘마가 포근한 가을 팝업스토어가 오픈해요 🍂 올가을, 바쁜 일상 속 작은 쉼표가 필요하다면 아따맘마네로 놀러 오세요!🍁",
+    "image_url": "https://cdn.popga.co.kr/spot/9042/main/b92bf2df-cfc9-432a-bf6d-cc36b6a93832_1789358323779_thumbnail_MAIN_W480.webp",
+    "detail_url": "https://www.popga.co.kr/popup/9042",
+    "official_url": null,
+    "reservation_url": null,
+    "popup_categories": [
+      "애니/캐릭터",
+      "캐릭터"
+    ],
+    "tags": [
+      "홍대",
+      "홍대 팝업",
+      "아따맘마 팝업",
+      "상상마당 디자인스퀘어",
+      "캐릭터",
+      "애니메이션",
+      "쇼핑가능",
+      "홍대/신촌"
+    ],
+    "confidence": 0.9
+  },
+  {
+    "source": "popup",
+    "source_id": "popup_be39b51f1a462289",
+    "name": "클리오 풍년다방 팝업",
+    "latitude": 37.5434156444,
+    "longitude": 127.0408716461,
+    "category": "shopping",
+    "category_detail": "카테고리 없음",
+    "hub_rank": null,
+    "address": "서울 성동구 뚝섬로 273",
+    "distance_m": null,
+    "start_date": "2026-09-22",
+    "end_date": "2026-10-27",
+    "status": "UPCOMING",
+    "venue_name": "서울국제정원박람회 클리오 K-뷰티가든",
+    "opening_time": "12:00",
+    "closing_time": "19:00",
+    "closed": false,
+    "operation_schedule": [
+      {
+        "days": [
+          "MON",
+          "TUE",
+          "WED",
+          "THU",
+          "FRI",
+          "SAT",
+          "SUN"
+        ],
+        "opening_time": "12:00",
+        "closing_time": "19:00",
+        "closed": false
+      }
+    ],
+    "description": "가을 제철열매로 무르익은, 클리오 풍년다방이 문을 엽니다-☕️🍂 탐스럽게 익은 알밤부터 대추, 홍시, 도토리, 무화과까지 가을의 빛깔을 차곡차곡 담아 준비했습니다. 메이크업 쇼부터 1:1 이미지 컨설팅, 스페셜 게스트 유튜버 시네님의 팬밋업까지! 풍년다방에서만 즐길 수 있는 특별한 차림도 놓치지 마세요-★ 📍서울국제정원박람회 K-뷰티가든 📅 9/22(화) ~ 10/27(화) ⏰ 12:00 ~ 19:00 *추석 당일 휴업 사전예약 9/14(월) 오후 2시 OPEN 네이버 플레이스 및 클리오 인스타그램 프로필 링크에서 예약 가능합니다. 올 가을, 풍년다방에서 정답게 뵙겠습니다-🍁",
+    "image_url": "https://cdn.popga.co.kr/spot/9039/main/3bbd373f-898f-4f46-8189-a87042ce23ed_1789362027450_thumbnail_MAIN_W480.webp",
+    "detail_url": "https://www.popga.co.kr/popup/9039",
+    "official_url": null,
+    "reservation_url": "https://m.place.naver.com/popupstore/2071088201/booking?entry=ple",
+    "popup_categories": [
+      "뷰티",
+      "화장품"
+    ],
+    "tags": [
+      "클리오",
+      "CLIO",
+      "풍년다방",
+      "서울국제정원박람회",
+      "풍년다방팝업스토어",
+      "클리오 팝업 : 풍년다방",
+      "뚝섬",
+      "성수",
+      "뚝섬팝업",
+      "성수팝업",
+      "뷰티",
+      "뷰티팝업"
+    ],
+    "confidence": 1.0
   },
   {
     "source": "popup",
@@ -22859,6 +23191,63 @@
   },
   {
     "source": "popup",
+    "source_id": "popup_91f40663a004876a",
+    "name": "초가구야공주 팝업 @용산",
+    "latitude": 37.5288841087,
+    "longitude": 126.9640575785,
+    "category": "entertainment",
+    "category_detail": "애니/캐릭터",
+    "hub_rank": null,
+    "address": "서울 용산구 한강대로23길 55",
+    "distance_m": null,
+    "start_date": "2026-09-23",
+    "end_date": "2026-10-18",
+    "status": "UPCOMING",
+    "venue_name": "용산 아이파크몰 리빙파크 6층 MOAE:KU",
+    "opening_time": "10:30",
+    "closing_time": "20:30",
+    "closed": false,
+    "operation_schedule": [
+      {
+        "days": [
+          "MON",
+          "TUE",
+          "WED",
+          "THU",
+          "FRI",
+          "SAT",
+          "SUN"
+        ],
+        "opening_time": "10:30",
+        "closing_time": "20:30",
+        "closed": false
+      }
+    ],
+    "description": "가상 세계 ‘츠쿠요미’의 분위기를 직접 만나볼 수 있는 초가구야공주 X MOAE 콜라보팝업이 용산에 찾아와요 🌕✨ 콜라보 카페와 함께 팝업스토어도 운영될 예정이니, 초가구야공주를 좋아한다면 특별하게 꾸며진 공간을 만나보세요 💜",
+    "image_url": "https://cdn.popga.co.kr/spot/9041/main/943070f2-5944-425b-a782-888e7fc72635_1789355613981_thumbnail_MAIN_W480.webp",
+    "detail_url": "https://www.popga.co.kr/popup/9041",
+    "official_url": null,
+    "reservation_url": null,
+    "popup_categories": [
+      "애니/캐릭터",
+      "캐릭터"
+    ],
+    "tags": [
+      "용산",
+      "초가구야공주",
+      "MOAE:KU",
+      "모애쿠",
+      "용산 아이파크몰",
+      "용산 팝업",
+      "초가구야공주 팝업",
+      "콜라보 카페",
+      "애니메이션",
+      "캐릭터"
+    ],
+    "confidence": 0.9
+  },
+  {
+    "source": "popup",
     "source_id": "popup_b470bb39d9000516",
     "name": "다모여 페스타",
     "latitude": 37.5577458059,
@@ -22902,7 +23291,7 @@
     "image_url": "https://cdn.popga.co.kr/spot/8838/main/a7e7fd65-1d74-447b-ad62-faf7540ba354_1788338233942_thumbnail_MAIN_W480.webp",
     "detail_url": "https://www.popga.co.kr/popup/8838",
     "official_url": null,
-    "reservation_url": null,
+    "reservation_url": "https://booking.naver.com/booking/12/bizes/1729370",
     "popup_categories": [
       "애니/캐릭터",
       "캐릭터"
@@ -22918,7 +23307,8 @@
       "디지몬 어드벤처",
       "프리큐어",
       "아이엠스타",
-      "캐릭터"
+      "캐릭터",
+      "사전 예약"
     ],
     "confidence": 0.9
   },
@@ -22992,6 +23382,57 @@
   },
   {
     "source": "popup",
+    "source_id": "popup_467829e92f4cc060",
+    "name": "SPIN-OFF 26",
+    "latitude": 37.5441833,
+    "longitude": 127.0544827,
+    "category": "shopping",
+    "category_detail": "기타",
+    "hub_rank": null,
+    "address": "서울 성동구 연무장7길 13",
+    "distance_m": null,
+    "start_date": "2026-09-29",
+    "end_date": "2026-09-29",
+    "status": "UPCOMING",
+    "venue_name": "B1",
+    "opening_time": "19:00",
+    "closing_time": "22:00",
+    "closed": false,
+    "operation_schedule": [
+      {
+        "days": [
+          "MON",
+          "TUE",
+          "WED",
+          "THU",
+          "FRI",
+          "SAT",
+          "SUN"
+        ],
+        "opening_time": "19:00",
+        "closing_time": "22:00",
+        "closed": false
+      }
+    ],
+    "description": "오프라인에서 잘되는 브랜드는 무엇이 다를까요? 🤔 SPIN-OFF 26은 지난 11년 동안 오프라인 경험을 만들어 온 스위트스팟이 주최하는 브랜드 실무자 세션이에요. 완성된 결과 대신, 거기에 다다르기까지의 고민과 선택을 직접 듣는 자리예요 ✨ 9월의 주제는 '메시지'. 브랜드가 전하려는 메시지는 오프라인에서 어떻게 표현될까요? 어노브와 러쉬의 실무자가 메시지를 공간과 경험으로 풀어온 과정과 그때의 판단 기준을 이야기합니다 🎤 ✔️ 사전 신청 후 참석 확정 안내를 받은 분만 참여 가능합니다. ✔️ 신청은 2026.09.21(월)까지, 당첨자는 09.22(화) 개별 안내드립니다. ✔️ 좌석이 한정되어 현장 방문만으로는 입장이 어렵습니다.",
+    "image_url": "https://cdn.popga.co.kr/popga-biz/1/1ee31586-2c3a-4233-9211-efe6a0b72490_thumbnail_MAIN_W480.webp",
+    "detail_url": "https://www.popga.co.kr/popup/9075",
+    "official_url": null,
+    "reservation_url": null,
+    "popup_categories": [
+      "기타"
+    ],
+    "tags": [
+      "성수",
+      "스핀오프 26",
+      "스위트스팟",
+      "성수 팝업",
+      "성수 이벤트"
+    ],
+    "confidence": 0.9
+  },
+  {
+    "source": "popup",
     "source_id": "popup_15990d83332e313b",
     "name": "소피텔 서울 팝업 - The Secret Check-in",
     "latitude": 37.5254534688,
@@ -23050,6 +23491,62 @@
       "호텔",
       "체험형 팝업",
       "포토존"
+    ],
+    "confidence": 0.9
+  },
+  {
+    "source": "popup",
+    "source_id": "popup_85ed0f574384b7fd",
+    "name": "더웍스 페스타 - 몰티즈와 리트리버",
+    "latitude": 37.5439484805,
+    "longitude": 127.0550986969,
+    "category": "entertainment",
+    "category_detail": "애니/캐릭터",
+    "hub_rank": null,
+    "address": "서울 성동구 연무장7길 16",
+    "distance_m": null,
+    "start_date": "2026-10-01",
+    "end_date": "2026-10-11",
+    "status": "UPCOMING",
+    "venue_name": "한서빌딩 1F",
+    "opening_time": "11:00",
+    "closing_time": "20:00",
+    "closed": false,
+    "operation_schedule": [
+      {
+        "days": [
+          "MON",
+          "TUE",
+          "WED",
+          "THU",
+          "FRI",
+          "SAT",
+          "SUN"
+        ],
+        "opening_time": "11:00",
+        "closing_time": "20:00",
+        "closed": false
+      }
+    ],
+    "description": "몰티즈와 리트리버가 성수에서 열리는 더웍스 페스타에 찾아옵니다! 🐶 귀여운 캐릭터 라인업과 새롭게 선보이는 다채로운 오리지널 굿즈를 한자리에서 만나보세요. ✨ 현장을 가득 채울 특별하고 즐거운 이벤트들도 함께 준비되어 있으니 놓치지 말고 방문해 보세요!",
+    "image_url": "https://cdn.popga.co.kr/spot/9048/main/35dd4bcb-6fce-4c42-8365-1fe8df5df205_1789365184510_thumbnail_MAIN_W480.webp",
+    "detail_url": "https://www.popga.co.kr/popup/9048",
+    "official_url": null,
+    "reservation_url": null,
+    "popup_categories": [
+      "애니/캐릭터",
+      "캐릭터"
+    ],
+    "tags": [
+      "성수",
+      "성수동",
+      "성수 팝업",
+      "성수동 팝업",
+      "더웍스 페스타",
+      "몰티즈 팝업",
+      "리트리버 팝업",
+      "한서빌딩",
+      "캐릭터"
     ],
     "confidence": 0.9
   },
@@ -23124,72 +23621,6 @@
   },
   {
     "source": "popup",
-    "source_id": "popup_4c47535eeb4a6735",
-    "name": "세븐틴 팝업 - 스머프 : 사라진 멜로디를 찾아서",
-    "latitude": 37.5257280647,
-    "longitude": 126.9287008006,
-    "category": "entertainment",
-    "category_detail": "연예인/셀럽",
-    "hub_rank": null,
-    "address": "서울 영등포구 여의대로 108",
-    "distance_m": null,
-    "start_date": "2026-10-01",
-    "end_date": "2026-10-18",
-    "status": "UPCOMING",
-    "venue_name": "더현대서울 B1 ICONIC",
-    "opening_time": "10:30",
-    "closing_time": "20:00",
-    "closed": false,
-    "operation_schedule": [
-      {
-        "days": [
-          "MON",
-          "TUE",
-          "WED",
-          "THU"
-        ],
-        "opening_time": "10:30",
-        "closing_time": "20:00",
-        "closed": false
-      },
-      {
-        "days": [
-          "FRI",
-          "SAT",
-          "SUN"
-        ],
-        "opening_time": "10:30",
-        "closing_time": "20:30",
-        "closed": false
-      }
-    ],
-    "description": "세븐틴과 글로벌 IP 스머프가 만나는 전시형 팝업을 진행합니다! 💙 '음악의 신' 세계관을 확장, 포탈 너머 스머프 마을을 탐험하는 인터랙티브 경험 캐릭터, 아티스트, MD가 결합된 압도적 몰입 공간을 더현대 서울에서 만나보세요! 😃",
-    "image_url": "https://cdn.popga.co.kr/spot/9002/main/3973ba8d-4813-465f-acea-08a6f88ea1c4_1789115290079_thumbnail_MAIN_W480.webp",
-    "detail_url": "https://www.popga.co.kr/popup/9002",
-    "official_url": null,
-    "reservation_url": null,
-    "popup_categories": [
-      "연예인/셀럽",
-      "애니/캐릭터",
-      "캐릭터",
-      "연예인"
-    ],
-    "tags": [
-      "여의도",
-      "여의도 팝업",
-      "더현대서울",
-      "더현대서울 팝업",
-      "스머프",
-      "스머프 팝업",
-      "세븐틴",
-      "세븐틴 팝업",
-      "캐릭터",
-      "연예인"
-    ],
-    "confidence": 0.9
-  },
-  {
-    "source": "popup",
     "source_id": "popup_de2f99fd69d91dd1",
     "name": "에이레네 팝업",
     "latitude": 37.5255298239,
@@ -23253,12 +23684,346 @@
   },
   {
     "source": "popup",
+    "source_id": "popup_c1fa1e86672088aa",
+    "name": "우사하나 팝업",
+    "latitude": 37.5288571182,
+    "longitude": 126.9641876946,
+    "category": "entertainment",
+    "category_detail": "애니/캐릭터",
+    "hub_rank": null,
+    "address": "서울 용산구 한강대로23길 55",
+    "distance_m": null,
+    "start_date": "2026-10-01",
+    "end_date": "2026-12-27",
+    "status": "UPCOMING",
+    "venue_name": "아이파크몰 용산점 리빙파크",
+    "opening_time": "10:30",
+    "closing_time": "22:00",
+    "closed": false,
+    "operation_schedule": [
+      {
+        "days": [
+          "MON",
+          "TUE",
+          "WED",
+          "THU",
+          "FRI",
+          "SAT",
+          "SUN"
+        ],
+        "opening_time": "10:30",
+        "closing_time": "22:00",
+        "closed": false
+      }
+    ],
+    "description": "산리오의 우사하나 팝업이 열려요! 🌼 알록달록하고 귀여운 우사하나의 매력이 가득한 공간을 만나보세요✨ 자세한 내용은 COMING SOON ❤️🧡",
+    "image_url": "https://cdn.popga.co.kr/spot/9047/main/08ba309f-2ec4-4caa-a413-7ceff3da2365_1789365137203_thumbnail_MAIN_W480.webp",
+    "detail_url": "https://www.popga.co.kr/popup/9047",
+    "official_url": null,
+    "reservation_url": null,
+    "popup_categories": [
+      "애니/캐릭터",
+      "캐릭터"
+    ],
+    "tags": [
+      "용산",
+      "용산 팝업",
+      "SANRIO",
+      "USAHANA",
+      "산리오 팝업",
+      "산리오",
+      "산리오Q",
+      "우사하나",
+      "산리오",
+      "캐릭터",
+      "애니메이션"
+    ],
+    "confidence": 0.9
+  },
+  {
+    "source": "popup",
+    "source_id": "popup_b511cb13d3c4607d",
+    "name": "Collectible Con: TCG 이벤트",
+    "latitude": 37.5414643923,
+    "longitude": 127.0561245171,
+    "category": "entertainment",
+    "category_detail": "카테고리 없음",
+    "hub_rank": null,
+    "address": "서울 성동구 성수이로 72",
+    "distance_m": null,
+    "start_date": "2026-10-02",
+    "end_date": "2026-10-03",
+    "status": "UPCOMING",
+    "venue_name": "스테이지 엑스 성수 차봇",
+    "opening_time": null,
+    "closing_time": null,
+    "closed": true,
+    "operation_schedule": [
+      {
+        "days": [
+          "FRI",
+          "SAT"
+        ],
+        "opening_time": "11:00",
+        "closing_time": "20:00",
+        "closed": false
+      }
+    ],
+    "description": "Collectible Con Korea 2026 🇰🇷 ​Collectible Con이 드디어 한국에 상륙합니다. ​국내 인기 벤더부터 해외 유통사, 아티스트, 그레이딩 서비스, 브랜드, 연사, 글로벌 파트너까지 — 컬렉터블의 모든 것을 한자리에서 만나보세요. ​포켓몬, 원피스, Magic: The Gathering, Lorcana, 스포츠 카드, 디자이너 토이, 애니메이션 굿즈, 아트까지. 어떤 걸 모으든 상관없습니다. 모든 컬렉터를 위한 자리니까요. ​한정 상품을 둘러보고, 토크 세션과 현장 이벤트를 즐기고, 전 세계에서 모인 수천 명의 컬렉터들과 함께하세요. ​오랜 컬렉터든 이제 막 입문한 분이든 — 사고, 트레이드하고, 배우고, 연결되는 곳. Collectible Con에서 만나요!",
+    "image_url": "https://d8nffddmkwqeq.cloudfront.net/store/62f70f61%2C91f9%2C49c0%2C8eed%2Cadcbce667e71",
+    "detail_url": "https://popply.co.kr/popup/6037",
+    "official_url": null,
+    "reservation_url": "https://linktr.ee/collectiblecon?utm_source=linktree_profile_share&ltsid=9b171ccb-db2e-4a21-a81c-4c3f4d62507d",
+    "popup_categories": [
+      "카테고리 없음"
+    ],
+    "tags": [
+      "tcg",
+      "카드쇼",
+      "포켓몬카드",
+      "스포츠카드",
+      "원피스카드",
+      "성수",
+      "pokèmon",
+      "카드깡",
+      "tcgcommunity",
+      "성수팝업",
+      "캐릭터",
+      "캐릭터팝업"
+    ],
+    "confidence": 0.9
+  },
+  {
+    "source": "popup",
+    "source_id": "popup_7a04c72779d4481b",
+    "name": "굿스마일컴퍼니 팝업",
+    "latitude": 37.5578112654,
+    "longitude": 126.9264293392,
+    "category": "entertainment",
+    "category_detail": "카테고리 없음",
+    "hub_rank": null,
+    "address": "서울 마포구 양화로 188",
+    "distance_m": null,
+    "start_date": "2026-10-02",
+    "end_date": "2026-10-15",
+    "status": "UPCOMING",
+    "venue_name": "AK플라자 홍대 1층",
+    "opening_time": "11:00",
+    "closing_time": "22:00",
+    "closed": false,
+    "operation_schedule": [
+      {
+        "days": [
+          "MON",
+          "TUE",
+          "WED",
+          "THU",
+          "FRI"
+        ],
+        "opening_time": "11:00",
+        "closing_time": "22:00",
+        "closed": false
+      },
+      {
+        "days": [
+          "SAT",
+          "SUN"
+        ],
+        "opening_time": "10:30",
+        "closing_time": "22:00",
+        "closed": false
+      }
+    ],
+    "description": "📢 굿스마일컴퍼니 팝업스토어 by PW ──FIND YOUR GOOD SMILE 취향은 정해두는 게 아니라, 마주치는 것── 다가오는 10월, 굿스마일컴퍼니의 특별한 팝업스토어가 홍대에 문을 엽니다✨ 한정판과 특전, 다양한 상품 라인업까지 한 곳에서 만나보세요! 📅 10/2(금) ~ 10/15(목) 📍 홍대 AK플라자 1F #굿스마일컴퍼니PW #홍대AK플라자",
+    "image_url": "https://cdn.popga.co.kr/spot/9028/main/1c40a5ff-7a37-4564-9346-10b2570ce81e_1789340048770_thumbnail_MAIN_W480.webp",
+    "detail_url": "https://www.popga.co.kr/popup/9028",
+    "official_url": null,
+    "reservation_url": null,
+    "popup_categories": [
+      "애니/캐릭터",
+      "캐릭터"
+    ],
+    "tags": [
+      "홍대",
+      "굿스마일컴퍼니",
+      "GOOD SMILE COMPANY",
+      "AK PLAZA 홍대",
+      "홍대 팝업",
+      "마포 팝업",
+      "피규어",
+      "캐릭터",
+      "굿즈",
+      "애니메이션",
+      "홍대/신촌"
+    ],
+    "confidence": 1.0
+  },
+  {
+    "source": "popup",
+    "source_id": "popup_4909964e071732c9",
+    "name": "므온트 팝업",
+    "latitude": 37.5273661233,
+    "longitude": 127.0274685268,
+    "category": "shopping",
+    "category_detail": "패션",
+    "hub_rank": null,
+    "address": "서울 강남구 압구정로 165",
+    "distance_m": null,
+    "start_date": "2026-10-02",
+    "end_date": "2026-10-22",
+    "status": "UPCOMING",
+    "venue_name": "현대백화점 압구정점",
+    "opening_time": "11:00",
+    "closing_time": "19:00",
+    "closed": false,
+    "operation_schedule": [
+      {
+        "days": [
+          "MON",
+          "TUE",
+          "WED",
+          "THU",
+          "FRI",
+          "SAT",
+          "SUN"
+        ],
+        "opening_time": "11:00",
+        "closing_time": "19:00",
+        "closed": false
+      }
+    ],
+    "description": "이번 팝업에서는 므온트의 신상 웨딩밴드 라인과 신상 주얼리를 가장 먼저 만나보실 수 있으며, 팝업 기간 단 3주간 다이아몬드 반지 특별 할인도 함께 진행됩니다! 💍 프로포즈 링 또는 다이아몬드 링 구매를 계획하고 계신 분들은 현대백화점 압구정본점에서 특별한 혜택과 함께 만나보세요.",
+    "image_url": "https://cdn.popga.co.kr/spot/9050/main/467d5db0-6c7b-40e6-885b-b27f2c27152e_1789369882072_thumbnail_MAIN_W480.webp",
+    "detail_url": "https://www.popga.co.kr/popup/9050",
+    "official_url": null,
+    "reservation_url": "https://booking.naver.com/booking/6/bizes/1425583/items/8024469?startDate=2026-10-02",
+    "popup_categories": [
+      "패션",
+      "주얼리/시계"
+    ],
+    "tags": [
+      "강남",
+      "강남 팝업",
+      "강남/서초",
+      "압구정",
+      "압구정 팝업",
+      "웨딩반지",
+      "므온트",
+      "MUONT",
+      "프로포즈 링",
+      "다이아몬드 링",
+      "사전 예약",
+      "패션"
+    ],
+    "confidence": 0.9
+  },
+  {
+    "source": "popup",
+    "source_id": "popup_e2414cffbaca638e",
+    "name": "스킨앤랩 링거 팩토리 성수 팝업",
+    "latitude": 37.5439484805,
+    "longitude": 127.0550986969,
+    "category": "shopping",
+    "category_detail": "뷰티",
+    "hub_rank": null,
+    "address": "서울 성동구 연무장7길 16",
+    "distance_m": null,
+    "start_date": "2026-10-02",
+    "end_date": "2026-10-19",
+    "status": "UPCOMING",
+    "venue_name": "성수포탈",
+    "opening_time": null,
+    "closing_time": null,
+    "closed": null,
+    "operation_schedule": [],
+    "description": "Welcome to RINGER FACTORY! 💜 피부 갈증엔 물보다 빠르게, 스킨앤랩 베리어덤 링거앰플 💦 이번 팝업에서 스킨앤랩 링거앰플만의 특별한 수분 충전 매커니즘 OPEN > FILL > LOCK 과정을 다양한 게임을 통해 직접 경험해보세요!",
+    "image_url": "https://cdn.popga.co.kr/spot/9073/main/b24f9eeb-2e35-4bce-92f2-862bd38bc572_1789457353673_thumbnail_MAIN_W480.webp",
+    "detail_url": "https://www.popga.co.kr/popup/9073",
+    "official_url": null,
+    "reservation_url": null,
+    "popup_categories": [
+      "뷰티",
+      "화장품"
+    ],
+    "tags": [
+      "성수",
+      "성수 팝업",
+      "스킨앤랩",
+      "스킨앤랩 링거 팩토리",
+      "SKINNLAB",
+      "뷰티",
+      "뷰티 팝업"
+    ],
+    "confidence": 0.9
+  },
+  {
+    "source": "popup",
+    "source_id": "popup_67b3ca74295fdd7a",
+    "name": "고길동의 낯선 강원랜드",
+    "latitude": 37.5510973,
+    "longitude": 126.9214939,
+    "category": "entertainment",
+    "category_detail": "카테고리 없음",
+    "hub_rank": null,
+    "address": "서울 마포구 어울마당로 68",
+    "distance_m": null,
+    "start_date": "2026-10-03",
+    "end_date": "2026-10-11",
+    "status": "UPCOMING",
+    "venue_name": "스타스퀘어 1~2층",
+    "opening_time": "14:00",
+    "closing_time": "21:00",
+    "closed": false,
+    "operation_schedule": [
+      {
+        "days": [
+          "MON",
+          "TUE",
+          "WED",
+          "THU",
+          "FRI",
+          "SAT",
+          "SUN"
+        ],
+        "opening_time": "14:00",
+        "closing_time": "21:00",
+        "closed": false
+      }
+    ],
+    "description": "강원랜드와 고길동 , 세기의 콜라보 ! < 고길동의 낯선 강원랜드 > : 지금이야 , 우리의 오해가 풀리는 시간 ! 우연히 강원랜드의 캠페인 영상을 본 뒤 , 홀연히 사라진 고길동 ?! 고길동이 강원랜드로 떠났다는데 ... 대체 그 이유가 무엇일까 ? “ 이거 영 남 일 같지가 않아서 말이야 , 그 억울함 좀 싹 풀어주려고 내가 직접 나섰다 이 말씀이야 !” ‘우리가 미처 몰랐던 낯선 강원랜드 ’​, 강원랜드 홍보대사를 자처한 고길동이 이번 팝업에 그대로 옮겨왔다 ! 강원랜드의 낯선 매력을 담은 공간들을 하나씩 둘러보며 그동안 쌓여왔던 오해를 고길동과 함께 풀어보자 ! “내가 직접 가서 보고 느낀 걸 다 가져왔으니까 , 이제 여러분들이 직접 확인해 보시라고 !” 📅 일시 : 2026.10.03( 토 ) ~ 2026.10.11( 일 ) ⏰ 운영시간 : 2026.10.03( 토 ) ~ 10.10( 토 ) | 14:00 ~ 21:00 2026.10.11( 일 ) | 14:00 ~ 19:00 📍 장소 : 서울특별시 마포구 어울마당로 68 스타스퀘어 1~2 층 * 방문 전 확인해주세요 - 모든 방문객은 현장 웨이팅 등록 후 입장합니다 . - 입장 약 10 분 전 카카오톡 알림이 발송됩니다 . - 카카오톡 이용이 어려운 경우 문자 또는 이메일로 안내됩니다 .",
+    "image_url": "https://cdn.popga.co.kr/popga-biz/134/fdf95ca8-aa36-4ca8-b7a6-710762443ca0_thumbnail_MAIN_W480.webp",
+    "detail_url": "https://www.popga.co.kr/popup/9062",
+    "official_url": null,
+    "reservation_url": null,
+    "popup_categories": [
+      "엔터테인먼트",
+      "애니/캐릭터",
+      "캐릭터"
+    ],
+    "tags": [
+      "홍대",
+      "고길동",
+      "강원랜드",
+      "둘리",
+      "아기공룡 둘리",
+      "하이원",
+      "홍대 팝업",
+      "캐릭터 팝업",
+      "포토존",
+      "홍대/신촌",
+      "애니메이션",
+      "체험형 팝업"
+    ],
+    "confidence": 1.0
+  },
+  {
+    "source": "popup",
     "source_id": "popup_37748f93341226b4",
     "name": "유메모리 팝업",
     "latitude": 37.5553448959,
     "longitude": 126.9303249214,
     "category": "entertainment",
-    "category_detail": "애니/캐릭터",
+    "category_detail": "카테고리 없음",
     "hub_rank": null,
     "address": "서울 마포구 와우산로 161",
     "distance_m": null,
@@ -23285,7 +24050,7 @@
         "closed": false
       }
     ],
-    "description": "치이카와, 산리오, 산엑스, 포켓몬 등 다양한 캐릭터 굿즈를 만날 수 있는 유메모리의 첫 단독 팝업이 홍대 콜테 스페이스에서 열려요 🧸💛 평소 쉽게 만나보기 힘들었던 각국의 신상 굿즈부터 추억의 고전 굿즈까지 다양하게 준비되어 있어요 ✨ 단 3일간 진행되는 팝업에서 귀여운 캐릭터 굿즈들을 가득 만나보세요 🍁🛍️",
+    "description": "유메모리 첫 단독 팝업 스토어 OPEN🧸🍁 단 3일간만 진행하는! 홍대입구역 캐릭터 팝업 스토어로 여러분을 초대합니다 ( › - ‹ ) 💛 치이카와•산리오•산엑스•포켓몬 등! 쉽게 만나보기 힘든 각국 신상 / 고전 굿즈들이 가득한 팝업 𓆸 ⡱ 📆 26.10.03(토) ~ 26.10.05(월) 🕐 13:00 ~ 19:00 📍콜테(마포구 와우산로 161, 2F) @colte.space 🙋🏻‍♀️ 무료 입장 ⋆ 개최 및 참여 마켓 : @yumemori__ 🌳 ⋆ 오시는 순서대로 입장 가능하며, 웨이팅 등록은 오전 11시부터 가능합니다. (현장 상황에 따라 변동 사항 발생 시, 당일 스토리로 공지해 드립니다) ⋆ 웨이팅 등록 후, 카카오톡으로 호출 해드립니다. ⋆ 결제는 계좌 이체 및 카드 결제로 가능합니다. ⋆ 행사 관련 문의는 @yumemori__ 인스타그램으로 DM 연락 주세요! ⋆ 별도의 주차 공간이 없으므로, 근처 공용 주차장을 이용하시거나 대중교통 이용을 권장 드립니다. 다양하고 귀여운 물품들을 정말 오랫동안 많이 준비했어요! 프리뷰도 요일별로 구분하여 업로드 예정입니다☺ 시간 되시는 분들은 놀러오셔서 저희랑 같이 놀아요••💛💛 #홍대소품샵 #캐릭터팝업 #소품샵 #소품샵투어 #캐릭터플리마켓",
     "image_url": "https://cdn.popga.co.kr/spot/9025/main/e0f16aa7-27fa-43ed-a450-72b586579012_1789339997693_thumbnail_MAIN_W480.webp",
     "detail_url": "https://www.popga.co.kr/popup/9025",
     "official_url": null,
@@ -23307,7 +24072,7 @@
       "캐릭터",
       "굿즈"
     ],
-    "confidence": 0.9
+    "confidence": 1.0
   },
   {
     "source": "popup",
@@ -23495,6 +24260,47 @@
       "스톤마스터",
       "패션",
       "BLACKYAK"
+    ],
+    "confidence": 0.9
+  },
+  {
+    "source": "popup",
+    "source_id": "popup_4afd13c7d368ba38",
+    "name": "킥둥쓰 팝업",
+    "latitude": 37.5473526953,
+    "longitude": 127.0531990774,
+    "category": "entertainment",
+    "category_detail": "애니/캐릭터",
+    "hub_rank": null,
+    "address": "서울 성동구 아차산로5길 24-14",
+    "distance_m": null,
+    "start_date": "2026-10-09",
+    "end_date": "2026-10-18",
+    "status": "UPCOMING",
+    "venue_name": null,
+    "opening_time": null,
+    "closing_time": null,
+    "closed": null,
+    "operation_schedule": [],
+    "description": "성수동에 킥둥쓰가 팝업스토어로 찾아옵니다! 🛹 'KICK OFF THE WALL : KICKDOONGS BREAK OUT'이라는 슬로건 아래 펼쳐지는 유니크한 세계관과 오리지널 캐릭터 감성을 현장에서 만나보세요. 킥플립의 개성 가득한 캐릭터 굿즈와 감각적으로 꾸며진 성수동 공간에서 특별한 스트리트 무드를 직접 경험하고 다채로운 즐거움을 만끽할 수 있습니다. COMMING SOON..✨",
+    "image_url": "https://cdn.popga.co.kr/spot/9074/main/b75f5571-a2da-4dbe-a47a-4fcdd566058a_1789447414073_thumbnail_MAIN_W480.webp",
+    "detail_url": "https://www.popga.co.kr/popup/9074",
+    "official_url": null,
+    "reservation_url": null,
+    "popup_categories": [
+      "애니/캐릭터",
+      "연예인/셀럽",
+      "캐릭터",
+      "연예인"
+    ],
+    "tags": [
+      "성수",
+      "킥둥쓰",
+      "KICKDOONGS",
+      "성수 팝업",
+      "캐릭터 팝업",
+      "캐릭터",
+      "문구"
     ],
     "confidence": 0.9
   },

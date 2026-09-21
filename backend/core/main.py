@@ -49,6 +49,8 @@ from map_service import (
 from poi import load_poi_candidates
 
 from activity_score import load_poi_activity_scores
+from local_resd_candidates import load_local_resd_candidates
+from local_resd_congestion_adapter import D4DirectCongestionAdapter
 
 from congestion_service import get_congestion_data
 
@@ -60,6 +62,7 @@ from stay_time_validation import (
 from course_order_optimizer import optimize_course_order
 
 
+# 추천 요청의 단계별 실행 시간을 서버 로그로 남겨 병목 구간을 확인한다.
 performance_logger = logging.getLogger("uvicorn.error")
 
 
@@ -113,6 +116,7 @@ def recommend(
     }
     metrics_lock = Lock()
 
+    # 외부 API·LLM·데이터 로딩별 호출 횟수와 누적 시간을 공통 방식으로 측정한다.
     def measured(name, function):
         def call(*args, **kwargs):
             started = perf_counter()
@@ -150,6 +154,9 @@ def recommend(
                 "activity_score",
                 load_poi_activity_scores,
             ),
+            # 421 행정동 후보는 D4 생활인구 기반 상대 혼잡도 추론과 함께 서비스에 연결한다.
+            load_local_resd_candidates_fn=load_local_resd_candidates,
+            d4_congestion_adapter=D4DirectCongestionAdapter(),
             get_congestion_data_fn=measured(
                 "congestion",
                 get_congestion_data,
@@ -181,6 +188,7 @@ def recommend(
         )
 
 
+# /recommend 라우터에 추천 함수를 주입해 API 계층과 추천 서비스의 역할을 분리한다.
 app.include_router(create_region_router(recommend))
 
 

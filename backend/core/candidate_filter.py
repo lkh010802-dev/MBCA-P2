@@ -2,6 +2,7 @@ import math
 
 
 # 1. 시간 계산에 사용하는 기본 기준값
+# 다음 일정에 늦지 않도록 체류 가능시간 계산에서 고정 여유시간을 확보한다.
 TIME_BUFFER_MINUTES = 10
 
 # 전체 시간 중 이동시간이 차지하는 비율 기준
@@ -162,6 +163,7 @@ def classify_travel_time(
         + candidate_to_end_location_travel_minutes
     )
 
+    # 종료시각이 없으면 비율 대신 절대 이동시간 기준으로 후보 부담을 분류한다.
     # 전체 시간창을 알 수 없으면
     # 이동시간 비율은 계산할 수 없다.
     if time_window_minutes is None:
@@ -233,6 +235,7 @@ def preselect_candidates_by_detour(
     최종 이동시간 판단에는 사용하지 않는다.
     """
 
+    # 종료지가 있을 때는 직행 거리와 후보 경유 거리의 차이를 우회거리로 본다.
     # 후보지역을 들르지 않고
     # 시작 위치 → 종료 위치로 바로 이동했을 때의 직선거리
     direct_distance_km = calculate_straight_distance_km(
@@ -313,6 +316,7 @@ def preselect_candidates_by_distance(
     실제 이동시간은 이후 지도 API에서 다시 계산한다.
     """
 
+    # 지도 API 호출 전에 저비용 직선거리 계산으로 실제 이동시간 조회 대상을 줄인다.
     candidate_results = []
 
     for candidate in candidates:

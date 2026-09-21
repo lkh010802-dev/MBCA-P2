@@ -29,6 +29,7 @@ SEOUL_RECOMMENDABLE_API_CATEGORIES = (
     SEOUL_FESTIVAL_CATEGORY_PREFIX,
 )
 
+# 추천 요청마다 약 2만 건을 다시 조회하지 않도록 추천 가능 행사 원본을 6시간 캐시한다.
 # 전체 데이터는 약 2만 건이므로 추천 요청마다 다시 받지 않는다.
 # 프로세스별 메모리 캐시이며 서버 재시작 시 자연스럽게 초기화된다.
 SEOUL_CULTURE_CACHE_TTL_SECONDS = 6 * 60 * 60
@@ -241,6 +242,7 @@ def _request_event_page(
     }
 
 
+# 서울시 API는 최대 1000건 단위로 페이지를 순회하며 이후 로컬 기준으로 다시 필터링한다.
 def fetch_seoul_culture_events(
     category: str | None = SEOUL_EXHIBITION_CATEGORY,
     page_size: int = 1000,
@@ -636,6 +638,7 @@ def is_seoul_location(event: dict):
     )
 
 
+# 추천 제외 사유를 한 함수에서 순서대로 판정해 카테고리·기간·온라인·좌표·대상 제한 기준을 일관되게 유지한다.
 def get_event_exclusion_reason(
     event: dict,
     reference_date: date | datetime | None = None,
@@ -701,6 +704,7 @@ def should_include_seoul_culture_event(
     ) is None
 
 
+# 문화행사 고유 ID는 cultcode를 우선하고 없으면 핵심 필드 해시로 안정적인 대체 ID를 만든다.
 def _extract_source_id(event: dict):
     """문화포털 상세 URL의 cultcode를 우선 고유 ID로 사용한다."""
 
@@ -736,6 +740,7 @@ def _normalize_is_free(value: str | None):
     return None
 
 
+# 운영시간 원문은 파싱 결과와 별도로 보존해 해석하지 못한 정보도 유실되지 않게 한다.
 def _operation_hours_raw_blocks(value: str | None):
     """운영시간 원문을 내용을 바꾸지 않고 줄 단위 배열로 보존한다."""
 

@@ -27,9 +27,17 @@ from ranking import (
     calculate_final_score,
     convert_travel_minutes_to_score,
 )
+from local_resd_candidates import LocalResdCandidateError
 
 
 MAX_REGION_TRAVEL_WORKERS = 3
+# 421 행정동도 121 POI와 같은 비용 상한을 따르도록, 직선거리 선별과 실제 경로 평가 수를 분리한다.
+MAX_LOCAL_RESD_PRESELECT_CANDIDATES = 20
+MAX_LOCAL_RESD_TRAVEL_CANDIDATES = 5
+# 행정동 점포 집계가 제공하는 활동만 421 branch의 activity score에 반영한다.
+LOCAL_RESD_ACTIVITY_TYPES = frozenset({
+    "food", "cafe", "drink", "entertainment",
+})
 ACTIVITY_PREFERENCE_BONUSES = {
     4: 0.1,
     5: 0.2,
@@ -119,6 +127,163 @@ def _get_candidate_travel_pair(
     return start_to_candidate, candidate_to_end
 
 
+def _load_local_resd_candidate_records(load_local_resd_candidates_fn):
+    # ML support master가 없는 배포 환경에서도 기존 121 추천은 계속 동작해야 한다.
+    try:
+        return load_local_resd_candidates_fn().to_dict("records")
+    except (LocalResdCandidateError, OSError, ValueError):
+        return []
+
+
+def _select_local_resd_api_candidates(
+    candidates,
+    *,
+    start_location,
+    end_location,
+    activities,
+    activity_preferences,
+):
+    # 저비용 직선거리/detour 선별 뒤에만 활동 점수를 적용해 421개 전체에 경로 API를 호출하지 않는다.
+    if end_location is not None:
+        preselected = preselect_candidates_by_detour(
+            candidates=candidates,
+            start_latitude=float(start_location["y"]),
+            start_longitude=float(start_location["x"]),
+            end_latitude=float(end_location["y"]),
+            end_longitude=float(end_location["x"]),
+            limit=MAX_LOCAL_RESD_PRESELECT_CANDIDATES,
+        )
+    else:
+        preselected = preselect_candidates_by_distance(
+            candidates=candidates,
+            start_latitude=float(start_location["y"]),
+            start_longitude=float(start_location["x"]),
+            limit=MAX_LOCAL_RESD_PRESELECT_CANDIDATES,
+        )
+
+    # walk·culture·shopping만 요청된 경우에는 임의 점수를 만들지 않고 has_activity=False 경로를 사용한다.
+    supported_activities = [
+        activity for activity in activities if activity in LOCAL_RESD_ACTIVITY_TYPES
+    ]
+    for candidate in preselected:
+        candidate["candidate_source"] = "local_resd"
+        candidate["AREA_NM"] = candidate["ADM_NM"]
+        candidate["activity_match_score"] = _calculate_activity_match_score(
+            candidate,
+            supported_activities,
+            activity_preferences,
+        )
+
+    distance_ranked = sorted(
+        preselected,
+        key=lambda candidate: candidate["start_to_candidate_km"],
+    )
+    if not supported_activities:
+        return distance_ranked[:MAX_LOCAL_RESD_TRAVEL_CANDIDATES], supported_activities
+
+    activity_ranked = sorted(
+        preselected,
+        key=lambda candidate: candidate["activity_match_score"],
+        reverse=True,
+    )
+    selected = []
+    selected_codes = set()
+    # 활동 상위 3개를 먼저 확보하고, 남은 자리는 가까운 후보로 채운다.
+    for candidate in activity_ranked[:3]:
+        selected.append(candidate)
+        selected_codes.add(candidate["LOCAL_RESD_CODE"])
+    for candidate in distance_ranked:
+        if candidate["LOCAL_RESD_CODE"] not in selected_codes:
+            selected.append(candidate)
+            selected_codes.add(candidate["LOCAL_RESD_CODE"])
+        if len(selected) >= MAX_LOCAL_RESD_TRAVEL_CANDIDATES:
+            break
+    return selected, supported_activities
+
+
+def _evaluate_local_resd_candidates(
+    candidates,
+    *,
+    start_location,
+    end_location,
+    start_datetime,
+    time_window_minutes,
+    desired_duration_minutes,
+    transport_mode,
+    supported_activities,
+    get_travel_fn,
+    d4_congestion_adapter,
+):
+    # travel pair만 병렬화한다. 체류 가능성·ML 혼잡도·최종 점수는 순서가 보장된 메인 흐름에서 계산한다.
+    with ThreadPoolExecutor(max_workers=MAX_REGION_TRAVEL_WORKERS) as executor:
+        travel_pairs = list(executor.map(
+            lambda candidate: _get_candidate_travel_pair(
+                candidate,
+                start_location=start_location,
+                end_location=end_location,
+                transport_mode=transport_mode,
+                get_travel_fn=get_travel_fn,
+            ),
+            candidates,
+        ))
+
+    recommended = []
+    extended = []
+    for candidate, travel_pair in zip(candidates, travel_pairs):
+        if travel_pair is None:
+            continue
+        start_to_candidate, candidate_to_end = travel_pair
+        candidate["start_to_candidate_travel_minutes"] = start_to_candidate["duration_min"]
+        candidate["candidate_to_end_travel_minutes"] = candidate_to_end["duration_min"]
+        candidate["available_stay_minutes"] = calculate_available_stay_minutes(
+            time_window_minutes,
+            start_to_candidate["duration_min"],
+            candidate_to_end["duration_min"],
+        )
+        candidate["duration_feasibility"] = check_duration_feasibility(
+            candidate["available_stay_minutes"], desired_duration_minutes,
+        )
+        candidate["travel_time_classification"] = classify_travel_time(
+            time_window_minutes,
+            start_to_candidate["duration_min"],
+            candidate_to_end["duration_min"],
+        )
+        candidate["arrival_datetime"] = calculate_candidate_arrival_time(
+            start_datetime,
+            start_to_candidate["duration_min"],
+        )
+        if time_window_minutes is not None:
+            candidate["travel_score"] = convert_travel_ratio_to_score(
+                candidate["travel_time_classification"]["travel_ratio"]
+            )
+        else:
+            candidate["travel_score"] = convert_travel_minutes_to_score(
+                candidate["travel_time_classification"]["total_travel_minutes"]
+            )
+
+        # request start_datetime은 모든 후보의 공통 ML issue time이며, arrival_datetime만 후보별로 달라진다.
+        # adapter의 중립 fallback도 후보를 제외하지 않고 final score에 반영한다.
+        candidate.update(d4_congestion_adapter.predict(
+            candidate["LOCAL_RESD_CODE"],
+            start_datetime,
+            candidate["arrival_datetime"],
+        ))
+        candidate["forecast_congestion"] = None
+        candidate["final_score"] = calculate_final_score(
+            activity_score=candidate["activity_match_score"],
+            travel_score=candidate["travel_score"],
+            congestion_score=candidate["congestion_score"],
+            has_activity=bool(supported_activities),
+        )
+        if candidate["duration_feasibility"]["is_feasible"] is False:
+            continue
+        if candidate["travel_time_classification"]["travel_level"] == "extended":
+            extended.append(candidate)
+        else:
+            recommended.append(candidate)
+    return recommended, extended
+
+
 def recommend_regions(
     request: RecommendRequest,
     *,
@@ -130,6 +295,8 @@ def recommend_regions(
     load_poi_activity_scores_fn,
     get_congestion_data_fn,
     find_proactive_suggestion_fn,
+    load_local_resd_candidates_fn=None,
+    d4_congestion_adapter=None,
     stored_preferences=None,
 ):
 
@@ -186,7 +353,10 @@ def recommend_regions(
     )
     
     # 10. 전체 POI를 불러온 뒤 우회거리 기준으로 1차 후보를 선별한다.
-    all_candidates = load_poi_candidates_fn()
+    all_candidates = [
+        {**candidate, "candidate_source": "poi121"}
+        for candidate in load_poi_candidates_fn()
+    ]
 
     # 실제 시작 위치를 좌표 형태로 변환한다.
     if resolved_start_location["source"] == "text":
@@ -573,6 +743,7 @@ def recommend_regions(
         scored_candidates.append({
             "AREA_CD": row["AREA_CD"],
             "AREA_NM": row["AREA_NM"],
+            "candidate_source": "poi121",
             "latitude": candidate_location_map[row["AREA_CD"]]["latitude"],
             "longitude": candidate_location_map[row["AREA_CD"]]["longitude"],
             "detour_distance_km": distance_map[row["AREA_CD"]]["detour_distance_km"],
@@ -792,6 +963,38 @@ def recommend_regions(
 
         else:
             recommended_candidates.append(candidate)
+
+    # 명시적 target-location의 기존 121 의미는 유지하고, 일반 추천에만
+    # ML 지원 행정동 후보를 추가한다.
+    if (
+        target_location is None
+        and load_local_resd_candidates_fn is not None
+        and d4_congestion_adapter is not None
+    ):
+        local_candidates = _load_local_resd_candidate_records(
+            load_local_resd_candidates_fn
+        )
+        local_api_candidates, supported_activities = _select_local_resd_api_candidates(
+            local_candidates,
+            start_location=start_location,
+            end_location=end_location,
+            activities=conditions.activities,
+            activity_preferences=activity_preferences,
+        )
+        local_recommended, local_extended = _evaluate_local_resd_candidates(
+            local_api_candidates,
+            start_location=start_location,
+            end_location=end_location,
+            start_datetime=resolved_datetimes["start_datetime"],
+            time_window_minutes=time_window["time_window_minutes"],
+            desired_duration_minutes=conditions.desired_duration_minutes,
+            transport_mode=conditions.transport_mode,
+            supported_activities=supported_activities,
+            get_travel_fn=get_travel_fn,
+            d4_congestion_adapter=d4_congestion_adapter,
+        )
+        recommended_candidates.extend(local_recommended)
+        extended_candidates.extend(local_extended)
     # 추천 가능한 후보를 최종 추천점수가 높은 순서대로 정렬한다.
     recommended_candidates.sort(
         key=lambda candidate: candidate["final_score"],
@@ -830,7 +1033,8 @@ def recommend_regions(
             # 다른 지역 추천 목록에서는 제외한다.
             if (
                 current_area_candidate is not None
-                and candidate["AREA_CD"] == current_area_candidate["AREA_CD"]
+                and candidate.get("candidate_source") == "poi121"
+                and candidate.get("AREA_CD") == current_area_candidate["AREA_CD"]
             ):
                 continue
 

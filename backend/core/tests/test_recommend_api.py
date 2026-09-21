@@ -52,6 +52,12 @@ def activity_scores(candidates):
 
 class RecommendAPITests(unittest.TestCase):
     def setUp(self):
+        self.local_resd_patcher = patch(
+            "main.load_local_resd_candidates",
+            return_value=pd.DataFrame(),
+        )
+        self.local_resd_patcher.start()
+        self.addCleanup(self.local_resd_patcher.stop)
         self.proactive_patcher = patch(
             "main.find_proactive_suggestion",
             return_value=None,

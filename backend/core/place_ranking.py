@@ -27,6 +27,7 @@ def calculate_distance_score(
     return round(score, 2)
 
 
+# 실제 장소 랭킹은 거리 점수를 기본으로 하고 신뢰 가능한 실내·야외 선호만 소폭 가점한다.
 def add_place_ranking_scores(
     places: list[dict],
     space_preference: str | None = None,
@@ -97,6 +98,7 @@ def calculate_place_score(
     ):
         return round(distance_score, 2)
 
+    # 공간 유형이 mixed면 약한 가점만 주고, 선호와 일치할 때도 분류 신뢰도에 따라 가점을 제한한다.
     space_type = place.get("space_type")
     confidence = place.get("space_type_confidence")
 

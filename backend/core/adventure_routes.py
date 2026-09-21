@@ -26,6 +26,7 @@ from models import (
 )
 
 
+# 모험 추천 API는 일반 지역추천과 별도로 퀘스트·서울 가챠·장소/코스 가챠·블라인드 공개 흐름을 제공한다.
 router = APIRouter()
 
 
@@ -76,6 +77,7 @@ def recommend_adventure_course(request: AdventureRequest):
         ) from error
 
 
+# 블라인드 가챠는 장소 정보를 즉시 노출하지 않고 토큰만 발급한 뒤 별도 reveal 요청에서 결과를 공개한다.
 @router.post(
     "/recommend/adventure/blind",
     response_model=BlindAdventureResponse,

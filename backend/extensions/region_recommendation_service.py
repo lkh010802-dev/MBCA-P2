@@ -1,5 +1,6 @@
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
+from threading import Lock
 from audit_trace import record
 
 from models import RecommendRequest, StructuredConditions
@@ -34,10 +35,61 @@ from ranking import (
     convert_travel_minutes_to_score,
 )
 
+try:
+    # koala-1.1 Core에서 제공한다. 현재 Core로 실행할 때도 Override 자체는
+    # import 가능해야 하므로 의존성이 없으면 ML 후보만 비활성화한다.
+    from local_resd_candidates import LocalResdCandidateError
+except ImportError:
+    class LocalResdCandidateError(RuntimeError):
+        pass
+
 
 MAX_REGION_TRAVEL_WORKERS = 3
 NEARBY_MAX_ONE_WAY_MINUTES = 20
 MAX_ROUTE_CORRIDOR_DETOUR_KM = 1.5
+MAX_LOCAL_RESD_PRESELECT_CANDIDATES = 20
+MAX_LOCAL_RESD_TRAVEL_CANDIDATES = 5
+LOCAL_RESD_ACTIVITY_TYPES = frozenset({
+    "food", "cafe", "drink", "entertainment",
+})
+ACTIVITY_PREFERENCE_BONUSES = {4: 0.1, 5: 0.2}
+AUTO_COURSE_VARIETY_POOL_SIZE = 8
+AUTO_COURSE_MAX_SCORE_GAP = 0.75
+_auto_course_rotation = {}
+_auto_course_rotation_lock = Lock()
+
+
+def _rotate_auto_course_candidates(candidates, *, rotation_key, limit=3):
+    """Rotate only similarly scored feasible candidates between repeated requests."""
+    if len(candidates) <= limit:
+        return candidates
+    best_score = float(candidates[0].get("final_score", 0))
+    quality_pool = [
+        candidate
+        for candidate in candidates[:AUTO_COURSE_VARIETY_POOL_SIZE]
+        if best_score - float(candidate.get("final_score", 0)) <= AUTO_COURSE_MAX_SCORE_GAP
+    ]
+    if len(quality_pool) <= limit:
+        return candidates
+    with _auto_course_rotation_lock:
+        offset = _auto_course_rotation.get(rotation_key, 0) % len(quality_pool)
+        _auto_course_rotation[rotation_key] = (offset + limit) % len(quality_pool)
+    rotated = quality_pool[offset:] + quality_pool[:offset]
+    pool_ids = {id(candidate) for candidate in quality_pool}
+    return rotated + [candidate for candidate in candidates if id(candidate) not in pool_ids]
+
+
+def _merge_stored_preferences(conditions, stored_preferences):
+    if not stored_preferences:
+        return {}
+    if conditions.space_preference is None:
+        conditions.space_preference = stored_preferences.get("space_preference")
+    if conditions.transport_mode == "auto":
+        conditions.transport_mode = (
+            stored_preferences.get("transport_mode")
+            or conditions.transport_mode
+        )
+    return stored_preferences.get("activity_preferences") or {}
 
 
 def _get_candidate_travel_pair(
@@ -80,6 +132,181 @@ def _get_candidate_travel_pair(
     return start_to_candidate, candidate_to_end
 
 
+def _load_local_resd_candidate_records(load_local_resd_candidates_fn):
+    """Load optional koala-1.1 ML candidates without breaking 121 POI fallback."""
+    if load_local_resd_candidates_fn is None:
+        return []
+    try:
+        return load_local_resd_candidates_fn().to_dict("records")
+    except (LocalResdCandidateError, OSError, ValueError, AttributeError):
+        return []
+
+
+def _local_activity_match_score(candidate, activities, activity_preferences):
+    scores = []
+    for activity in activities:
+        score = candidate.get(f"{activity}_score")
+        if score is None:
+            continue
+        preference = activity_preferences.get(activity)
+        scores.append(min(
+            5.0,
+            float(score) + ACTIVITY_PREFERENCE_BONUSES.get(preference, 0),
+        ))
+    return sum(scores) / len(scores) if scores else 0
+
+
+def _select_local_resd_api_candidates(
+    candidates,
+    *,
+    start_location,
+    end_location,
+    activities,
+    activity_preferences,
+):
+    if end_location is not None:
+        preselected = preselect_candidates_by_detour(
+            candidates=candidates,
+            start_latitude=float(start_location["y"]),
+            start_longitude=float(start_location["x"]),
+            end_latitude=float(end_location["y"]),
+            end_longitude=float(end_location["x"]),
+            limit=MAX_LOCAL_RESD_PRESELECT_CANDIDATES,
+        )
+    else:
+        preselected = preselect_candidates_by_distance(
+            candidates=candidates,
+            start_latitude=float(start_location["y"]),
+            start_longitude=float(start_location["x"]),
+            limit=MAX_LOCAL_RESD_PRESELECT_CANDIDATES,
+        )
+
+    supported_activities = [
+        activity for activity in activities
+        if activity in LOCAL_RESD_ACTIVITY_TYPES
+    ]
+    for candidate in preselected:
+        candidate["candidate_source"] = "local_resd"
+        candidate["AREA_NM"] = candidate["ADM_NM"]
+        candidate["activity_match_score"] = _local_activity_match_score(
+            candidate,
+            supported_activities,
+            activity_preferences,
+        )
+
+    distance_ranked = sorted(
+        preselected,
+        key=lambda candidate: candidate["start_to_candidate_km"],
+    )
+    if not supported_activities:
+        return distance_ranked[:MAX_LOCAL_RESD_TRAVEL_CANDIDATES], supported_activities
+
+    activity_ranked = sorted(
+        preselected,
+        key=lambda candidate: candidate["activity_match_score"],
+        reverse=True,
+    )
+    selected = []
+    selected_codes = set()
+    for candidate in activity_ranked[:3]:
+        selected.append(candidate)
+        selected_codes.add(candidate["LOCAL_RESD_CODE"])
+    for candidate in distance_ranked:
+        if candidate["LOCAL_RESD_CODE"] not in selected_codes:
+            selected.append(candidate)
+            selected_codes.add(candidate["LOCAL_RESD_CODE"])
+        if len(selected) >= MAX_LOCAL_RESD_TRAVEL_CANDIDATES:
+            break
+    return selected, supported_activities
+
+
+def _evaluate_local_resd_candidates(
+    candidates,
+    *,
+    start_location,
+    end_location,
+    start_datetime,
+    available_time_minutes,
+    desired_stay_minutes,
+    transport_mode,
+    supported_activities,
+    get_travel_fn,
+    d4_congestion_adapter,
+    nearby_only=False,
+):
+    with ThreadPoolExecutor(max_workers=MAX_REGION_TRAVEL_WORKERS) as executor:
+        travel_pairs = list(executor.map(
+            lambda candidate: _get_candidate_travel_pair(
+                candidate,
+                start_location=start_location,
+                end_location=end_location,
+                transport_mode=transport_mode,
+                get_travel_fn=get_travel_fn,
+            ),
+            candidates,
+        ))
+
+    recommended = []
+    extended = []
+    for candidate, travel_pair in zip(candidates, travel_pairs):
+        if travel_pair is None:
+            continue
+        start_to_candidate, candidate_to_end = travel_pair
+        if nearby_only and start_to_candidate["duration_min"] > NEARBY_MAX_ONE_WAY_MINUTES:
+            continue
+
+        candidate["start_to_candidate_travel_minutes"] = start_to_candidate["duration_min"]
+        candidate["candidate_to_end_travel_minutes"] = candidate_to_end["duration_min"]
+        candidate["start_to_candidate_transport"] = start_to_candidate
+        candidate["candidate_to_end_transport"] = candidate_to_end
+        candidate["available_stay_minutes"] = calculate_available_stay_minutes(
+            available_time_minutes,
+            start_to_candidate["duration_min"],
+            candidate_to_end["duration_min"],
+        )
+        candidate["duration_feasibility"] = check_duration_feasibility(
+            candidate["available_stay_minutes"],
+            desired_stay_minutes,
+        )
+        candidate["travel_time_classification"] = classify_travel_time(
+            available_time_minutes,
+            start_to_candidate["duration_min"],
+            candidate_to_end["duration_min"],
+        )
+        candidate["arrival_datetime"] = calculate_candidate_arrival_time(
+            start_datetime,
+            start_to_candidate["duration_min"],
+        )
+        if available_time_minutes is not None:
+            candidate["travel_score"] = convert_travel_ratio_to_score(
+                candidate["travel_time_classification"]["travel_ratio"]
+            )
+        else:
+            candidate["travel_score"] = convert_travel_minutes_to_score(
+                candidate["travel_time_classification"]["total_travel_minutes"]
+            )
+
+        candidate.update(d4_congestion_adapter.predict(
+            candidate["LOCAL_RESD_CODE"],
+            start_datetime,
+            candidate["arrival_datetime"],
+        ))
+        candidate["forecast_congestion"] = None
+        candidate["final_score"] = calculate_final_score(
+            activity_score=candidate["activity_match_score"],
+            travel_score=candidate["travel_score"],
+            congestion_score=candidate["congestion_score"],
+            has_activity=bool(supported_activities),
+        )
+        if candidate["duration_feasibility"]["is_feasible"] is False:
+            continue
+        if candidate["travel_time_classification"]["travel_level"] == "extended":
+            extended.append(candidate)
+        else:
+            recommended.append(candidate)
+    return recommended, extended
+
+
 def recommend_regions(
     request: RecommendRequest,
     *,
@@ -91,6 +318,8 @@ def recommend_regions(
     load_poi_activity_scores_fn,
     get_congestion_data_fn,
     find_proactive_suggestion_fn,
+    load_local_resd_candidates_fn=None,
+    d4_congestion_adapter=None,
     stored_preferences=None,
 ):
 
@@ -138,6 +367,10 @@ def recommend_regions(
     conditions.activities = infer_activity_sequence(
         request.user_message,
         conditions.activities,
+    )
+    activity_preferences = _merge_stored_preferences(
+        conditions,
+        stored_preferences,
     )
 
 
@@ -216,7 +449,10 @@ def recommend_regions(
     )
     
     # 10. 전체 POI를 불러온 뒤 우회거리 기준으로 1차 후보를 선별한다.
-    all_candidates = load_poi_candidates_fn()
+    all_candidates = [
+        {**candidate, "candidate_source": "poi121"}
+        for candidate in load_poi_candidates_fn()
+    ]
 
     # 실제 시작 위치를 좌표 형태로 변환한다.
     if resolved_start_location["source"] == "text":
@@ -642,6 +878,7 @@ def recommend_regions(
     for _, row in selected_activity_scores.iterrows():
         scored_candidates.append({
             "AREA_CD": row["AREA_CD"],
+            "candidate_source": "poi121",
             # 사용자가 직접 적은 활동 지역은 가장 가까운 POI의 점수만 빌린다.
             # 화면 이름은 점수 원본 지역명이 아니라 사용자의 지역명을 유지한다.
             "AREA_NM": candidate_name_map[row["AREA_CD"]],
@@ -881,6 +1118,40 @@ def recommend_regions(
 
         else:
             recommended_candidates.append(candidate)
+
+    # koala-1.1의 421 행정동 후보는 사용자가 특정 활동 지역을 직접
+    # 지정하지 않은 일반 추천에만 추가한다. 모델이나 history가 준비되지
+    # 않으면 기존 121 POI 결과만 사용한다.
+    if (
+        target_location is None
+        and load_local_resd_candidates_fn is not None
+        and d4_congestion_adapter is not None
+    ):
+        local_candidates = _load_local_resd_candidate_records(
+            load_local_resd_candidates_fn
+        )
+        local_api_candidates, supported_activities = _select_local_resd_api_candidates(
+            local_candidates,
+            start_location=start_location,
+            end_location=end_location,
+            activities=conditions.activities,
+            activity_preferences=activity_preferences,
+        )
+        local_recommended, local_extended = _evaluate_local_resd_candidates(
+            local_api_candidates,
+            start_location=start_location,
+            end_location=end_location,
+            start_datetime=resolved_datetimes["start_datetime"],
+            available_time_minutes=final_available_time,
+            desired_stay_minutes=desired_stay_minutes,
+            transport_mode=conditions.transport_mode,
+            supported_activities=supported_activities,
+            get_travel_fn=get_travel_fn,
+            d4_congestion_adapter=d4_congestion_adapter,
+            nearby_only=(request.auto_course or requests_nearby(request.user_message)),
+        )
+        recommended_candidates.extend(local_recommended)
+        extended_candidates.extend(local_extended)
     # 추천 가능한 후보를 최종 추천점수가 높은 순서대로 정렬한다.
     recommended_candidates.sort(
         key=lambda candidate: candidate["final_score"],
@@ -916,13 +1187,27 @@ def recommend_regions(
 
     if target_location is None:
 
-        for candidate in recommended_candidates:
+        selectable_candidates = recommended_candidates
+        if request.auto_course:
+            selectable_candidates = _rotate_auto_course_candidates(
+                recommended_candidates,
+                rotation_key=(
+                    round(float(start_location["y"]), 3),
+                    round(float(start_location["x"]), 3),
+                    int(final_available_time or 0),
+                    conditions.transport_mode,
+                    tuple(conditions.activities),
+                ),
+            )
+
+        for candidate in selectable_candidates:
 
             # 현재 지역은 별도로 보여주므로
             # 다른 지역 추천 목록에서는 제외한다.
             if (
                 current_area_candidate is not None
-                and candidate["AREA_CD"] == current_area_candidate["AREA_CD"]
+                and candidate.get("candidate_source") == "poi121"
+                and candidate.get("AREA_CD") == current_area_candidate["AREA_CD"]
             ):
                 continue
 

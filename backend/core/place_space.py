@@ -1,6 +1,7 @@
 import re
 
 
+# 공간 유형은 근거가 불충분하거나 상충하면 억지로 추정하지 않고 unknown으로 유지한다.
 UNKNOWN_SPACE = {
     "space_type": "unknown",
     "space_type_confidence": "unknown",
@@ -89,6 +90,7 @@ def _text_values(place: dict, fields: tuple[str, ...]):
     return values
 
 
+# 명시적 실내/야외 표현은 가장 강한 근거로 사용하며 서로 충돌하면 unknown 처리한다.
 def _explicit_result(values: list[str]):
     has_mixed = any(
         pattern.search(value)
@@ -127,6 +129,7 @@ def _category_tokens(values: list[str]):
     }
 
 
+# 카테고리 기반 판정은 명시 표현보다 낮은 medium 신뢰도로 기록한다.
 def _category_result(values: list[str]):
     tokens = _category_tokens(values)
     has_indoor = bool(tokens.intersection(INDOOR_CATEGORY_TOKENS))
@@ -164,6 +167,7 @@ def _venue_result(values: list[str], *, allow_outdoor: bool):
     return None
 
 
+# 출처별 사용 가능한 필드가 다르므로 명시 표현 → 카테고리 → 장소명 순으로 보수적으로 판정한다.
 def classify_place_space(place: dict):
     """공통 장소 dict를 보수적으로 분류하며 입력값은 변경하지 않는다."""
 

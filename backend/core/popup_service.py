@@ -7,6 +7,7 @@ from functools import lru_cache
 from pathlib import Path
 
 
+# 운영 다운로드 파일을 우선 사용하고 읽기 실패 시 프로젝트에 포함된 스냅샷으로 fallback한다.
 PROJECT_DIR = Path(__file__).resolve().parent
 POPUP_DATA_PATH = PROJECT_DIR / "popup_data" / "popup_places.json"
 FALLBACK_POPUP_DATA_PATH = PROJECT_DIR / "data" / "20260908_popup_places.json"
@@ -44,6 +45,7 @@ def _time_to_minutes(value):
     return int(hour) * 60 + int(minute)
 
 
+# 자정을 넘기는 영업시간은 closing < opening인 경우 closes_next_day로 명시해 후속 영업 판정에 전달한다.
 def _normalize_operation_schedule(schedule):
     if not isinstance(schedule, list):
         return []
@@ -121,6 +123,7 @@ def _get_operation_schedule_status(schedule):
     return "partial" if valid_count else "unparsed"
 
 
+# 외부 팝업 원본의 필수 식별자·좌표·카테고리를 검증하고 KOALA 공통 place dict로 맞춘다.
 def normalize_popup_place(popup: dict):
     """팝업 한 건을 KOALA의 공통 place dict로 정규화한다."""
 
@@ -168,6 +171,7 @@ def normalize_popup_place(popup: dict):
     return normalized
 
 
+# 파일 수정시각과 크기를 캐시 키에 포함해 데이터 파일이 교체되면 자동으로 새 내용을 읽는다.
 @lru_cache(maxsize=2)
 def _load_popup_places_cached(
     file_path: str,
@@ -217,6 +221,7 @@ def load_popup_places(file_path: str | Path):
     )))
 
 
+# 운영 파일 장애가 추천 전체 장애로 이어지지 않도록 검증된 기본 스냅샷까지 순서대로 시도한다.
 def load_current_popup_places():
     """운영 팝업 파일을 읽고 실패하면 기본 스냅샷으로 대체한다."""
 

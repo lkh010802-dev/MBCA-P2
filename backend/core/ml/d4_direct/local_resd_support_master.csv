@@ -1,0 +1,428 @@
+﻿LOCAL_RESD_CODE,GU_NM,ADM_NM,latitude,longitude,status,basis,coordinate_base_date
+11110515,종로구,청운효자동,37.584414385936604,126.96991651604945,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11110530,종로구,사직동,37.57388840525494,126.97037619175327,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11110540,종로구,삼청동,37.58836398163187,126.9812055076862,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11110550,종로구,부암동,37.596961510001385,126.96354444532562,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11110560,종로구,평창동,37.61568673941524,126.96812530181234,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11110570,종로구,무악동,37.57711070122112,126.9585859348616,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11110580,종로구,교남동,37.57106506620217,126.96411811103566,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11110600,종로구,가회동,37.5825143958977,126.98654713132102,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11110615,종로구,종로1·2·3·4가동,37.57518528813232,126.98986485053656,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11110630,종로구,종로5·6가동,37.57285780741533,127.00439894623658,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11110640,종로구,이화동,37.5797204470763,127.00302254037204,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11110650,종로구,혜화동,37.58747076483707,126.9974297101878,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11110670,종로구,창신1동,37.572369443144154,127.01380357602436,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11110680,종로구,창신2동,37.5760273446602,127.01018843883438,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11110690,종로구,창신3동,37.578954029897034,127.013222000896,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11110700,종로구,숭인1동,37.57718300178883,127.0168909772371,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11110710,종로구,숭인2동,37.57449032656732,127.02034256684597,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11140520,중구,소공동,37.5642594920064,126.97437465855599,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11140540,중구,회현동,37.556941148458634,126.97710183280657,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11140550,중구,명동,37.56395209959056,126.9843038782104,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11140570,중구,필동,37.55686556464431,126.993771149423,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11140580,중구,장충동,37.55556242223276,127.00216590259741,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11140590,중구,광희동,37.56515662458764,127.00376431261665,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11140605,중구,을지로동,37.56662083276559,126.99656119705611,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11140615,중구,신당동,37.56569210595639,127.01370442509956,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11140625,중구,다산동,37.55493363005261,127.00835540729577,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11140635,중구,약수동,37.550149165040075,127.0102877563196,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11140645,중구,청구동,37.55688154526405,127.01518810572776,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11140650,중구,신당5동,37.563635437990044,127.02186697405534,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11140665,중구,동화동,37.56071035196907,127.01865207211186,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11140670,중구,황학동,37.568535403839746,127.02084551335274,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11140680,중구,중림동,37.55734687556799,126.96603675491988,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11170510,용산구,후암동,37.54990605100825,126.98061491206398,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11170520,용산구,용산2가동,37.53788420269669,126.9850862619161,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11170530,용산구,남영동,37.544030144342685,126.97482813759616,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11170555,용산구,청파동,37.54758204055195,126.96684283192828,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11170560,용산구,원효로1동,37.537495408252425,126.9665577401168,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11170570,용산구,원효로2동,37.533852989034074,126.95246013795598,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11170580,용산구,효창동,37.54281226202835,126.96094385757252,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11170590,용산구,용문동,37.537978945760614,126.9585129115375,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11170625,용산구,한강로동,37.52912655499286,126.96859204653519,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11170630,용산구,이촌1동,37.515173197406796,126.97175816894635,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11170640,용산구,이촌2동,37.52285667139623,126.95420569523418,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11170650,용산구,이태원1동,37.533361434025736,126.99324192768383,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11170660,용산구,이태원2동,37.541761099639785,126.99205553526164,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11170685,용산구,한남동,37.53752703631995,127.00517607447887,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11170690,용산구,서빙고동,37.51962208116122,126.98891983883854,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11170700,용산구,보광동,37.52688656464262,127.00090075322181,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11200520,성동구,왕십리2동,37.56145032979958,127.02772584042485,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11200535,성동구,왕십리도선동,37.566853348208234,127.0296046665425,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11200540,성동구,마장동,37.56741937568361,127.04059649638522,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11200550,성동구,사근동,37.55812217202703,127.04539502648356,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11200560,성동구,행당1동,37.559088547312655,127.03617444721861,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11200570,성동구,행당2동,37.5566748701803,127.0296559258404,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11200580,성동구,응봉동,37.55088020432641,127.03372259009394,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11200590,성동구,금호1가동,37.55358526077018,127.0249814003626,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11200615,성동구,금호2·3가동,37.5514032501719,127.01996838515215,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11200620,성동구,금호4가동,37.54539125166023,127.02415991032932,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11200645,성동구,옥수동,37.54084673506269,127.02058090615985,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11200650,성동구,성수1가1동,37.540791332530915,127.04226677228658,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11200660,성동구,성수1가2동,37.54901480279943,127.04364926158478,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11200670,성동구,성수2가1동,37.53635428066979,127.05530803688112,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11200690,성동구,성수2가3동,37.54557041044132,127.05808293720814,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11200720,성동구,송정동,37.55237272122614,127.06426370755457,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11200790,성동구,용답동,37.55891671134626,127.05747187210913,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11215710,광진구,화양동,37.54324390138352,127.07320119815216,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11215730,광진구,군자동,37.55304259273891,127.07370763570502,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11215740,광진구,중곡1동,37.56209982895351,127.07768466187608,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11215750,광진구,중곡2동,37.55890884923199,127.08457877924445,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11215760,광진구,중곡3동,37.56791072851757,127.0820171189633,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11215770,광진구,중곡4동,37.56387418406834,127.0944942960025,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11215780,광진구,능동,37.550590554691226,127.0817905559127,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11215810,광진구,광장동,37.5478233553055,127.10471417377578,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11215820,광진구,자양1동,37.53559067032293,127.08045419494673,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11215830,광진구,자양2동,37.52910326555997,127.082751609447,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11215840,광진구,자양3동,37.53136751036126,127.0710179110892,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11215847,광진구,자양4동,37.53375148270095,127.06362077888211,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11215850,광진구,구의1동,37.54163211251187,127.08571871787608,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11215860,광진구,구의2동,37.55110383060903,127.09485700989057,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11215870,광진구,구의3동,37.53695833919027,127.09422214119542,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11230515,,,,,unresolved,Code is in the 427-code persisted July grid but absent from the local boundary attribute table.,
+11230533,,,,,unresolved,Code is in the 427-code persisted July grid but absent from the local boundary attribute table.,
+11230545,동대문구,제기동,37.58374918917926,127.03722491037442,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11230560,동대문구,전농1동,37.5792193009695,127.05095450414544,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11230570,동대문구,전농2동,37.58069769868446,127.06111795896524,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11230600,동대문구,답십리1동,37.571278503721494,127.0518761358907,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11230610,동대문구,답십리2동,37.570779741922046,127.06103594203772,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11230650,동대문구,장안1동,37.56623854270281,127.06852151151799,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11230660,동대문구,장안2동,37.57564237757684,127.07207253596218,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11230705,동대문구,청량리동,37.58884133351543,127.04521583820197,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11230710,동대문구,회기동,37.59371704662172,127.05151151249818,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11230720,동대문구,휘경1동,37.59195521151609,127.06260089490198,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11230730,동대문구,휘경2동,37.58664122155814,127.06582196976376,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11230740,동대문구,이문1동,37.597367756636665,127.06044644744226,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11230750,동대문구,이문2동,37.602840760954315,127.06751568064756,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11260520,중랑구,면목2동,37.58928758931136,127.07783998592889,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11260540,중랑구,면목4동,37.57361839650883,127.08537351083689,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11260550,중랑구,면목5동,37.582517848993604,127.07887986969023,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11260565,중랑구,면목본동,37.588316302726504,127.08937931268702,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11260570,중랑구,면목7동,37.57713869652403,127.09279811735098,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11260575,중랑구,면목3·8동,37.58448864865937,127.09834894921478,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11260580,중랑구,상봉1동,37.601722190031246,127.08944596669103,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11260590,중랑구,상봉2동,37.59432122000666,127.08401544440768,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11260600,중랑구,중화1동,37.602593131707756,127.08307079249029,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11260610,중랑구,중화2동,37.59918214926954,127.07502868330813,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11260620,중랑구,묵1동,37.61372626864534,127.0825331177435,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11260630,중랑구,묵2동,37.61082639576223,127.07462286959209,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11260655,중랑구,망우본동,37.60213729942756,127.10744238255651,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11260660,중랑구,망우3동,37.59188488948864,127.10282853449866,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11260680,중랑구,신내1동,37.61316301894402,127.1040404559993,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11260690,중랑구,신내2동,37.61098377132038,127.09158727506438,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11290525,성북구,성북동,37.596682560973086,126.99413157361296,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11290555,성북구,삼선동,37.58655341600024,127.01170664109027,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11290575,성북구,동선동,37.59364936526623,127.01851494313725,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11290580,성북구,돈암1동,37.5997512247639,127.0243979974789,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11290590,성북구,돈암2동,37.597081808393376,127.01160062733939,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11290600,성북구,안암동,37.587727429075,127.02722030564944,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11290610,성북구,보문동,37.58282574667491,127.019131110602,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11290620,성북구,정릉1동,37.60327988975747,127.0169816313324,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11290630,성북구,정릉2동,37.6036748004553,127.00849936160412,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11290640,성북구,정릉3동,37.61209721422326,126.99458907395925,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11290650,성북구,정릉4동,37.62394790643647,126.99489573795174,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11290660,성북구,길음1동,37.60822380496022,127.01974253741099,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11290685,성북구,길음2동,37.60828699863293,127.02716357769661,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11290705,성북구,종암동,37.59744130222464,127.0338655663544,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11290715,성북구,월곡1동,37.60783381336307,127.03655113496855,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11290725,성북구,월곡2동,37.60322828551561,127.04540285768414,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11290760,성북구,장위1동,37.61509910201749,127.04465531413493,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11290770,성북구,장위2동,37.61234881851903,127.05189851637876,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11290780,성북구,장위3동,37.61825824415933,127.0534496155744,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11290810,성북구,석관동,37.6082777980111,127.06135820022955,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11305534,강북구,삼양동,37.62380428868456,127.01492968722432,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11305535,강북구,미아동,37.62864309436131,127.02638883519194,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11305545,강북구,송중동,37.61767249440493,127.03298279299752,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11305555,강북구,송천동,37.61818616221834,127.02490801579245,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11305575,강북구,삼각산동,37.617159321924866,127.01652450879376,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11305595,강북구,번1동,37.637556556604686,127.03061063724937,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11305603,강북구,번2동,37.629488097185344,127.03474513511775,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11305608,강북구,번3동,37.623687171073804,127.04218516462423,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11305615,강북구,수유1동,37.629736584691535,127.01001804547504,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11305625,강북구,수유2동,37.64542125291993,127.01936444970752,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11305635,강북구,수유3동,37.64050081602873,127.0234479816533,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11305645,강북구,우이동,37.66035447679863,127.00048797579123,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11305660,강북구,인수동,37.637404497601196,127.00354865058914,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11320511,도봉구,창1동,37.64709095363224,127.0435421848268,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11320512,도봉구,창2동,37.64251175089508,127.03676722305994,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11320513,도봉구,창3동,37.637294067594105,127.0417248150406,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11320514,도봉구,창4동,37.65271939890658,127.05090872417641,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11320515,도봉구,창5동,37.655372012034405,127.04278935914127,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11320521,도봉구,도봉1동,37.68532167788634,127.02679778401415,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11320522,도봉구,도봉2동,37.681255193375854,127.04770287585043,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11320660,도봉구,쌍문1동,37.65306899201099,127.0195154641068,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11320670,도봉구,쌍문2동,37.65710973995211,127.03691781546135,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11320680,도봉구,쌍문3동,37.647663176319256,127.03058770377831,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11320681,도봉구,쌍문4동,37.65542909080761,127.03042069507889,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11320690,도봉구,방학1동,37.665044536942005,127.0434766779,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11320700,도봉구,방학2동,37.669186295008274,127.03269149593727,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11320710,도봉구,방학3동,37.66318978820645,127.02356305220692,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11350560,노원구,월계1동,37.62192645123404,127.05833874307359,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11350570,노원구,월계2동,37.63397443662367,127.05129556031416,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11350580,노원구,월계3동,37.62445849820948,127.06482860037718,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11350595,노원구,공릉1동,37.62421359048598,127.07255402951252,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11350600,노원구,공릉2동,37.63162280304811,127.09432249506925,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11350611,노원구,하계1동,37.63851388338586,127.07506781460467,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11350612,노원구,하계2동,37.635046598206856,127.06496545757862,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11350619,노원구,중계본동,37.64862956029472,127.08602025048936,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11350621,노원구,중계1동,37.650149144390674,127.07370053434063,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11350624,노원구,중계4동,37.6593638153405,127.08251576123078,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11350625,노원구,중계2·3동,37.64343990486525,127.06589381844819,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11350630,노원구,상계1동,37.683386740050516,127.06511600533342,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11350640,노원구,상계2동,37.656651730099334,127.06709978404773,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11350665,노원구,상계3·4동,37.67578068936106,127.08421924436513,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11350670,노원구,상계5동,37.6660097432899,127.06999859656644,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11350695,노원구,상계6·7동,37.648661921505315,127.0601009540446,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11350700,노원구,상계8동,37.6665247886579,127.05350419948564,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11350710,노원구,상계9동,37.6676001789483,127.06218174276178,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11350720,노원구,상계10동,37.659718205237624,127.05838384002365,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11380510,은평구,녹번동,37.6053074276667,126.93457423491218,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11380520,은평구,불광1동,37.61687031191834,126.93865930639444,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11380530,은평구,불광2동,37.624278481106536,126.9286985980209,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11380551,은평구,갈현1동,37.62519440728682,126.91473674351462,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11380552,은평구,갈현2동,37.617980440247344,126.91245228296496,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11380560,은평구,구산동,37.611069069484294,126.90730850089211,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11380570,은평구,대조동,37.61225631412212,126.92315430200333,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11380580,은평구,응암1동,37.598344889409674,126.92706515302606,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11380590,은평구,응암2동,37.59209293284852,126.92289573051869,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11380600,은평구,응암3동,37.588925886449964,126.91755421999953,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11380625,은평구,역촌동,37.604571668373666,126.91462028140646,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11380631,은평구,신사1동,37.59913959401423,126.90850613115018,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11380632,은평구,신사2동,37.592855185603774,126.90619969347135,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11380640,은평구,증산동,37.58412801110361,126.90593994411573,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11380650,은평구,수색동,37.58559044588536,126.89453100974193,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11380690,은평구,진관동,37.639677486667644,126.93782386644159,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11410520,서대문구,천연동,37.571319721250255,126.95665379997612,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11410555,서대문구,북아현동,37.55929066651417,126.95501977408274,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11410565,서대문구,충현동,37.563940922724264,126.95831845101772,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11410585,서대문구,신촌동,37.56407643317198,126.94157911276272,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11410615,서대문구,연희동,37.57222914112915,126.93279368219697,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11410620,서대문구,홍제1동,37.58340464927799,126.94431942770214,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11410640,서대문구,홍제3동,37.59238566839417,126.95161457074971,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11410655,서대문구,홍제2동,37.5843862225309,126.95251351109069,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11410660,서대문구,홍은1동,37.60063502571679,126.94693500941555,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11410685,서대문구,홍은2동,37.58717111813668,126.93212975395721,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11410690,서대문구,남가좌1동,37.57181730797944,126.91627891495776,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11410700,서대문구,남가좌2동,37.57792795122207,126.92134585397136,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11410710,서대문구,북가좌1동,37.575415832385346,126.90809660799601,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11410720,서대문구,북가좌2동,37.58117695778763,126.91333901643482,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11440555,마포구,아현동,37.55185145997078,126.95270622333175,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11440565,마포구,공덕동,37.54931858311926,126.95794544371073,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11440585,마포구,도화동,37.53864443661967,126.9491082934914,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11440590,마포구,용강동,37.541528824116206,126.94221269453057,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11440600,마포구,대흥동,37.55203679439328,126.94146542485014,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11440610,마포구,염리동,37.549897943227116,126.94753736798991,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11440630,마포구,신수동,37.54565609183146,126.93479349004932,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11440655,마포구,서강동,37.54673042494956,126.92603137736549,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11440660,마포구,서교동,37.554748203604305,126.92093741014604,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11440680,마포구,합정동,37.54696313646489,126.90895726408252,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11440690,마포구,망원1동,37.55361939110702,126.89975187239374,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11440700,마포구,망원2동,37.55898789792071,126.90017656995818,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11440710,마포구,연남동,37.56301789857707,126.92153721212672,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11440720,마포구,성산1동,37.56200198093562,126.91184566491778,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11440730,마포구,성산2동,37.5683288225168,126.9019676692876,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11440740,마포구,상암동,37.57072681252416,126.8799013723198,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11470510,양천구,목1동,37.52751897696383,126.8744350483545,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11470520,양천구,목2동,37.543632286524186,126.87428709976574,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11470530,양천구,목3동,37.545167079747266,126.8655511516293,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11470540,양천구,목4동,37.53535352120895,126.86695625154138,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11470550,양천구,목5동,37.536051814231314,126.87988223605903,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11470560,양천구,신월1동,37.5312693402027,126.83448924865066,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11470570,양천구,신월2동,37.523421400025605,126.84632618908844,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11470580,양천구,신월3동,37.53244791286604,126.8274622544351,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11470590,양천구,신월4동,37.5221553792003,126.83985298743963,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11470600,양천구,신월5동,37.54090147481223,126.82943634950774,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11470610,양천구,신월6동,37.515984638597054,126.84216228969589,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11470611,양천구,신월7동,37.51905408119345,126.83060460525489,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11470620,양천구,신정1동,37.51890558922772,126.85967071647734,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11470630,양천구,신정2동,37.51940751839752,126.8747941810261,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11470640,양천구,신정3동,37.51180579533966,126.84109375659908,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11470650,양천구,신정4동,37.52541053717016,126.85761808729362,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11470670,양천구,신정6동,37.51588413419531,126.86976721055247,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11470680,양천구,신정7동,37.50987690497119,126.8654078861592,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11500510,강서구,염창동,37.55454520476246,126.87180120828401,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11500520,강서구,등촌1동,37.55585907314213,126.85960946358887,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11500530,강서구,등촌2동,37.54584428867267,126.86002715195826,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11500535,강서구,등촌3동,37.561203672656454,126.84619487822765,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11500540,강서구,화곡1동,37.53377339824753,126.84092178638488,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11500550,강서구,화곡2동,37.53226193404131,126.85438253599702,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11500560,강서구,화곡3동,37.543994229750375,126.83430510651473,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11500570,강서구,화곡4동,37.536081121077224,126.85859669629482,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11500590,강서구,화곡본동,37.54263553921597,126.8481181700332,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11500591,강서구,화곡6동,37.55172120779546,126.85123073884633,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11500593,강서구,화곡8동,37.5342670501176,126.84877254326584,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11500603,강서구,가양1동,37.571877757986776,126.8349083627667,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11500604,강서구,가양2동,37.566768570491085,126.85435657114945,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11500605,강서구,가양3동,37.56080688567012,126.86109859371331,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11500611,강서구,발산1동,37.55050734848394,126.82526262883391,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11500615,강서구,우장산동,37.550612286818144,126.84113170383483,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11500620,강서구,공항동,37.55586445485257,126.79489872496043,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11500630,강서구,방화1동,37.568606381003924,126.81757767642426,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11500640,강서구,방화2동,37.58271579446699,126.80402721536713,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11500641,강서구,방화3동,37.58211517967764,126.81759043741711,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11530510,구로구,신도림동,37.51003042890603,126.88217455329435,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11530520,구로구,구로1동,37.493140791434506,126.87539785213748,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11530530,구로구,구로2동,37.49687647734125,126.87991772675927,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11530540,구로구,구로3동,37.48487337152801,126.89491407012791,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11530550,구로구,구로4동,37.49160785791387,126.89030933815866,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11530560,구로구,구로5동,37.50199248336309,126.88855064719604,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11530595,구로구,가리봉동,37.4826938586967,126.88805981739047,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11530720,구로구,고척1동,37.50070753917363,126.86370020850326,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11530730,구로구,고척2동,37.50589528946058,126.85346855317425,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11530740,구로구,개봉1동,37.50000348527695,126.84912607232607,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11530750,구로구,개봉2동,37.49257200826471,126.85648507626141,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11530760,구로구,개봉3동,37.48653805002534,126.85221978290694,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11530770,구로구,오류1동,37.49686838486981,126.84164828125368,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11530780,구로구,오류2동,37.48530010825139,126.83845109869235,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11530790,구로구,수궁동,37.498437275879,126.82601667762225,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11530800,구로구,항동,37.48103540643092,126.82459597435523,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11545510,금천구,가산동,37.47666103357112,126.88379100951835,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11545610,금천구,독산1동,37.46430812834484,126.89249586876194,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11545620,금천구,독산2동,37.46394956234613,126.9027325061949,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11545630,금천구,독산3동,37.47578648273017,126.90460564391243,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11545640,금천구,독산4동,37.469174934990164,126.90409065919044,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11545670,금천구,시흥1동,37.45241050128898,126.90014758777994,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11545680,금천구,시흥2동,37.45090389127474,126.91982345748195,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11545690,금천구,시흥3동,37.44007788366038,126.9059994969856,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11545700,금천구,시흥4동,37.46006939114424,126.90930858609613,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11545710,금천구,시흥5동,37.44746217597069,126.91235682959584,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11560515,영등포구,영등포본동,37.51367496255471,126.9095313909987,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11560535,영등포구,영등포동,37.521592872118525,126.90759899246935,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11560540,영등포구,여의동,37.52850588617169,126.92847099392806,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11560550,영등포구,당산1동,37.523902490898955,126.89677919382825,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11560560,영등포구,당산2동,37.53410793909964,126.90237127225083,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11560585,영등포구,도림동,37.509110993681766,126.90055841844062,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11560605,영등포구,문래동,37.51653104290298,126.89105895893623,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11560610,영등포구,양평1동,37.525457145698965,126.88671763971365,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11560620,영등포구,양평2동,37.5435059970646,126.89059071666264,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11560630,영등포구,신길1동,37.51243124414786,126.91947941198471,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11560650,영등포구,신길3동,37.50623847652173,126.90577252333985,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11560660,영등포구,신길4동,37.50688054974495,126.91282913784796,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11560670,영등포구,신길5동,37.50096045272282,126.90551183636444,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11560680,영등포구,신길6동,37.49879079868906,126.91358769840639,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11560690,영등포구,신길7동,37.50594151265639,126.91956274962499,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11560700,영등포구,대림1동,37.4936786716921,126.90521632771198,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11560710,영등포구,대림2동,37.48962037499291,126.90050278538573,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11560720,영등포구,대림3동,37.50000139399184,126.89714174256736,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11590510,동작구,노량진1동,37.51223600498241,126.94895756386154,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11590520,동작구,노량진2동,37.51095606046411,126.93780925886973,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11590530,동작구,상도1동,37.498370954151085,126.95335247460342,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11590540,동작구,상도2동,37.503681172488186,126.94187035012968,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11590550,동작구,상도3동,37.49756521413237,126.93293305285712,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11590560,동작구,상도4동,37.497421395637474,126.94066953166201,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11590605,동작구,흑석동,37.505425567767396,126.96223695944242,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11590620,동작구,사당1동,37.47978707094298,126.97751814443798,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11590630,동작구,사당2동,37.4971961851188,126.97483041066664,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11590640,동작구,사당3동,37.4887533877174,126.97097640544433,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11590650,동작구,사당4동,37.480539120210786,126.97075901411424,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11590651,동작구,사당5동,37.4857991656726,126.96495934124819,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11590660,동작구,대방동,37.506904346785774,126.92804646320221,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11590670,동작구,신대방1동,37.48998355362549,126.91067182478216,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11590680,동작구,신대방2동,37.49457868750513,126.92166858873973,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11620525,관악구,보라매동,37.49039974832167,126.93257621055308,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11620545,관악구,청림동,37.489562714550054,126.95948142431104,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11620565,관악구,성현동,37.48955017536756,126.95104666804404,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11620575,관악구,행운동,37.48097457347199,126.96055286014861,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11620585,관악구,낙성대동,37.46768894029681,126.95984289748863,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11620595,관악구,청룡동,37.47805693847175,126.94581009291261,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11620605,관악구,은천동,37.486999157015006,126.94209910768258,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11620615,관악구,중앙동,37.484151501950144,126.95065911679299,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11620625,관악구,인헌동,37.46970064847438,126.96756079204378,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11620630,관악구,남현동,37.464112574718754,126.97776851777893,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11620645,관악구,서원동,37.480599369694694,126.9333321975063,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11620655,관악구,신원동,37.47939536547366,126.92661359761081,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11620665,관악구,서림동,37.47286133709402,126.94149157317014,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11620685,,신사동,,,ambiguous,Multiple coordinate-master records share this administrative-dong name; no verified LOCAL_RESD-to-GU source is available for this code.,
+11620695,관악구,신림동,37.487141485361676,126.92716834843439,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11620715,관악구,난향동,37.461503010692994,126.91852417057156,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11620725,관악구,조원동,37.48282393739562,126.90734837201855,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11620735,관악구,대학동,37.45291180077865,126.94851992424488,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11620745,관악구,삼성동,37.46085125122221,126.93008899279089,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11620765,관악구,미성동,37.47592801100392,126.91547510527289,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11620775,관악구,난곡동,37.47063731225289,126.92113781755063,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11650510,서초구,서초1동,37.48693621959034,127.02010071753386,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11650520,서초구,서초2동,37.488827840993515,127.0279084815158,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11650530,서초구,서초3동,37.48552032976027,127.00945352840274,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11650531,서초구,서초4동,37.49894700322976,127.01981434940069,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11650540,서초구,잠원동,37.51707916844568,127.0127365981253,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11650550,서초구,반포본동,37.504211930369756,126.98755711591077,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11650560,서초구,반포1동,37.50552854498551,127.01676258680854,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11650570,서초구,반포2동,37.5072251163875,126.99596199011802,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11650580,서초구,반포3동,37.51232748681355,127.0039762404528,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11650581,서초구,반포4동,37.499550847837554,127.00335351814246,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11650590,서초구,방배본동,37.49505080369265,126.98772525225633,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11650600,서초구,방배1동,37.48487657075542,126.99625990421465,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11650610,서초구,방배2동,37.47320684571777,126.98842329346489,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11650620,서초구,방배3동,37.474372293671784,126.99792242924471,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11650621,서초구,방배4동,37.48983214800983,126.9909787654723,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11650651,서초구,양재1동,37.46950102697912,127.02249760589403,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11650652,서초구,양재2동,37.45115402843906,127.04575099026727,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11650660,서초구,내곡동,37.45585967998231,127.07063207403087,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11680510,강남구,신사동,37.52607707001956,127.02018462082195,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11680521,강남구,논현1동,37.51187040873826,127.02649925040386,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11680531,강남구,논현2동,37.515240141202646,127.03621124169008,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11680545,강남구,압구정동,37.52975209629902,127.03431375538989,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11680565,강남구,청담동,37.52439198312922,127.0504643545918,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11680580,강남구,삼성1동,37.51530460236231,127.06080236117062,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11680590,강남구,삼성2동,37.51185762490659,127.04877717924893,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11680600,강남구,대치1동,37.49336324567495,127.05908990695539,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11680610,강남구,대치2동,37.500987717186156,127.06565725839755,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11680630,강남구,대치4동,37.501565383800546,127.05475387158496,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11680640,강남구,역삼1동,37.500844784476854,127.0354992129773,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11680650,강남구,역삼2동,37.498483745787354,127.0448956405536,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11680655,강남구,도곡1동,37.488887630988174,127.04101124281277,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11680656,강남구,도곡2동,37.48827577813092,127.04979821738351,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11680660,강남구,개포1동,37.47778225487519,127.06232344430141,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11680670,강남구,개포2동,37.48467371192643,127.06901071391324,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11680675,,,,,unresolved,Code is in the 427-code persisted July grid but absent from the local boundary attribute table.,
+11680690,강남구,개포4동,37.4753334623477,127.0534104224387,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11680700,강남구,세곡동,37.47065896045449,127.10430471022731,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11680720,강남구,일원본동,37.48230858183132,127.08454753472907,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11680730,강남구,일원1동,37.49346641471844,127.08924198266317,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11680750,강남구,수서동,37.486920789504076,127.10014331573326,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11710510,송파구,풍납1동,37.53843740879784,127.11465978748609,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11710520,송파구,풍납2동,37.530166596863936,127.1081631715332,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11710531,송파구,거여1동,37.49475341526544,127.1418632962619,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11710532,송파구,거여2동,37.49229747247786,127.14712943011442,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11710540,송파구,마천1동,37.49531801643279,127.1560123533637,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11710550,송파구,마천2동,37.50053186982019,127.15064880026851,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11710561,송파구,방이1동,37.50985495184957,127.12245403758456,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11710562,송파구,방이2동,37.51324707823729,127.11389239832886,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11710566,송파구,오륜동,37.51742908368724,127.12883478391255,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11710570,송파구,오금동,37.504005006398884,127.13402038204771,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11710580,송파구,송파1동,37.507178390894516,127.11036603748379,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11710590,송파구,송파2동,37.50285327140593,127.11700935047544,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11710600,송파구,석촌동,37.50272627662853,127.102512861206,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11710610,송파구,삼전동,37.50190262643,127.09188811170459,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11710620,송파구,가락본동,37.49701947568584,127.12165364978524,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11710631,송파구,가락1동,37.495188036557906,127.1082726969906,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11710632,송파구,가락2동,37.49585319511965,127.13076632543239,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11710641,송파구,문정1동,37.488442547785425,127.12690361127498,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11710642,송파구,문정2동,37.48119700347705,127.11914070811916,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11710646,송파구,장지동,37.48297410479405,127.13150468915408,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11710647,송파구,위례동,37.48160003843367,127.14122822339581,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11710650,송파구,잠실본동,37.505988081813,127.08262036435455,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11710670,송파구,잠실2동,37.517428757288116,127.0793422657173,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11710680,송파구,잠실3동,37.513897785640744,127.09423926144318,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11710690,송파구,잠실4동,37.520699873377005,127.10916170298351,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11710710,송파구,잠실6동,37.519772696089056,127.09946286944148,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11710720,송파구,잠실7동,37.50731818586357,127.07388407307312,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11740515,강동구,강일동,37.568941555055844,127.17335593261106,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11740525,,,,,unresolved,Code is in the 427-code persisted July grid but absent from the local boundary attribute table.,
+11740526,,,,,unresolved,Code is in the 427-code persisted July grid but absent from the local boundary attribute table.,
+11740530,강동구,명일1동,37.550349656425965,127.14594542752718,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11740540,강동구,명일2동,37.5482356282677,127.15428068215364,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11740550,강동구,고덕1동,37.56170549965007,127.1509360299723,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11740560,강동구,고덕2동,37.56510404552236,127.16275591995506,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11740570,강동구,암사1동,37.551848353416204,127.13459552389928,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11740580,강동구,암사2동,37.557032765809176,127.12368637087998,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11740590,강동구,암사3동,37.56118673697552,127.13863787716065,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11740600,강동구,천호1동,37.546325270985555,127.1385483052433,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11740610,강동구,천호2동,37.54499235441519,127.12200900494912,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11740620,강동구,천호3동,37.53969320519594,127.1333093652252,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11740640,강동구,성내1동,37.52869173607982,127.12554029189974,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11740650,강동구,성내2동,37.5344021208695,127.12770527282203,confirmed,Existing confirmed SGIS-to-LOCAL_RESD crosswalk and coordinate-master ADM_CD.,20250630
+11740660,강동구,성내3동,37.52834798933413,127.13377233119397,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11740685,강동구,길동,37.539696134225785,127.14596657583363,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11740690,강동구,둔촌1동,37.523065111626615,127.14041863789221,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630
+11740700,강동구,둔촌2동,37.53130853053462,127.14724355485939,confirmed,Unique exact administrative-dong name in LOCAL boundary attributes and coordinate master; GU derived only from coordinate-master ADM_CD prefix mapping.,20250630

@@ -15,6 +15,7 @@ router = APIRouter()
 bearer_scheme = HTTPBearer(auto_error=False)
 
 
+# 인증 실패 응답 형식을 한곳에서 통일한다.
 def unauthorized_error():
     return HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
@@ -23,6 +24,7 @@ def unauthorized_error():
     )
 
 
+# 보호된 API에서 Bearer 토큰을 검증하고 현재 사용자 객체를 반환한다.
 def get_current_user(
     credentials: HTTPAuthorizationCredentials | None = Depends(bearer_scheme),
     db: Session = Depends(get_db),
@@ -42,6 +44,7 @@ def get_current_user(
     return user
 
 
+# 로그인 여부가 선택적인 API용 의존성이다. 토큰이 없으면 익명 사용자로 처리한다.
 def get_optional_current_user(
     credentials: HTTPAuthorizationCredentials | None = Depends(bearer_scheme),
     db: Session = Depends(get_db),
@@ -67,6 +70,7 @@ def get_optional_current_user(
     status_code=status.HTTP_201_CREATED,
 )
 def signup(request: SignupRequest, db: Session = Depends(get_db)):
+    # DB 제약조건 예외 전에 동일 이메일을 먼저 확인해 명확한 409 응답을 제공한다.
     existing_user = db.scalar(
         select(User).where(User.email == request.email)
     )
@@ -76,6 +80,7 @@ def signup(request: SignupRequest, db: Session = Depends(get_db)):
             detail="이미 사용 중인 이메일입니다.",
         )
 
+    # 비밀번호 원문은 저장하지 않고 해시값만 사용자 레코드에 기록한다.
     user = User(
         email=request.email,
         password_hash=hash_password(request.password),
@@ -98,6 +103,7 @@ def signup(request: SignupRequest, db: Session = Depends(get_db)):
 
 @router.post("/auth/login", response_model=AccessTokenResponse)
 def login(request: LoginRequest, db: Session = Depends(get_db)):
+    # 이메일과 비밀번호를 검증한 뒤 성공한 경우에만 access token을 발급한다.
     user = db.scalar(
         select(User).where(User.email == request.email)
     )

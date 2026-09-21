@@ -26,6 +26,7 @@ def recommend_actual_places(
     recommend_places_fn,
     create_page_fn,
 ):
+    # 선택한 추천 지역과 사용자 조건을 실제 장소 추천 서비스에 전달한다.
     ranked_places = recommend_places_fn(
         area_name=request.area_name,
         latitude=request.latitude,
@@ -38,6 +39,7 @@ def recommend_actual_places(
         activity_preferences=request.activity_preferences,
     )
 
+    # 최초 추천 결과를 cursor 기반 페이지로 저장해 추가 장소 요청에 재사용한다.
     page = create_page_fn(
         area_name=request.area_name,
         places=ranked_places,
@@ -113,6 +115,7 @@ def validate_place_selection(
         place.model_dump()
         for place in request.selected_places
     ]
+    # 장소별 최소·권장 체류시간을 합산해 선택 자체가 가능한지 먼저 검사한다.
     validation_result = validate_stay_time_fn(
         [
             {
@@ -125,6 +128,7 @@ def validate_place_selection(
         ],
         request.available_time_minutes,
     )
+    # 선택 단계에서는 좌표 기반 예상 이동시간으로 빠르게 사전검증한다.
     estimated_travel_result = calculate_estimated_travel_fn(
         start_latitude=request.start_latitude,
         start_longitude=request.start_longitude,

@@ -52,6 +52,19 @@ def test_activity_area_is_detected_independently_from_gps():
     )
 
 
+def test_activity_area_without_administrative_suffix_is_detected():
+    assert (
+        extract_explicit_activity_location(
+            "성수에서 오후 3시부터 6시까지 친구랑 카페 갔다가 전시 보고 싶어"
+        )
+        == "성수"
+    )
+
+
+def test_generic_place_type_is_not_mistaken_for_activity_area():
+    assert extract_explicit_activity_location("카페에서 쉬고 싶어") is None
+
+
 def test_nearby_and_mountain_require_explicit_language():
     assert requests_nearby("이 주변에서 잠깐 쉬고 싶어") is True
     assert allows_mountain_activity("신림 가기 전에 어디 들를까?", []) is False

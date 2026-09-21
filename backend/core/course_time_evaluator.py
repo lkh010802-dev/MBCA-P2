@@ -15,6 +15,7 @@ def evaluate_course_time(
     transport_mode: str = "auto",
     travel_cache: dict | None = None,
 ) -> dict:
+    # 체류시간 사전검증과 실제 directed leg 이동시간을 같은 선택 순서에 대해 합산한다.
     stay_time_result = validate_selected_places_stay_time(
         selected_places,
         available_time_minutes,
@@ -24,6 +25,7 @@ def evaluate_course_time(
         selected_places,
         end_location,
     )
+    # 단독 course 계산은 cache 없이도 동작하고, 순서 최적화는 공유 cache를 전달해 중복 조회를 줄인다.
     if travel_cache is None:
         travel_time_result = calculate_route_travel_times(
             legs,
@@ -43,6 +45,7 @@ def evaluate_course_time(
     )
     remaining_time_minutes = available_time_minutes - total_required_minutes
 
+    # 남은 시간이 음수면 장소·이동시간 세부값은 보존하되 코스 상태만 INFEASIBLE로 표시한다.
     return {
         "legs": travel_time_result["legs"],
         "total_stay_time_minutes": total_stay_time_minutes,

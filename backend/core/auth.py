@@ -22,6 +22,7 @@ import jwt
 from dotenv import load_dotenv
 
 
+# JWT 서명 키는 코드에 직접 넣지 않고 .env에서 읽는다.
 load_dotenv()
 
 JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY")
@@ -38,6 +39,7 @@ def create_access_token(user_id: int) -> str:
         minutes=ACCESS_TOKEN_EXPIRE_MINUTES
     )
 
+    # sub에는 사용자 ID, exp에는 토큰 만료 시각을 담는다.
     payload = {
         "sub": str(user_id),
         "exp": expire,
@@ -51,6 +53,7 @@ def create_access_token(user_id: int) -> str:
 
 # JWT Access Token을 해석해서 사용자 ID를 반환
 def decode_access_token(token: str) -> int:
+    # 서명과 만료시간을 검증하고 필수 claim(sub, exp)이 있는지도 확인한다.
     payload = jwt.decode(
         token,
         JWT_SECRET_KEY,

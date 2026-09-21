@@ -11,6 +11,7 @@ load_dotenv()
 KAKAO_REST_API_KEY = os.getenv("KAKAO_REST_API_KEY")
 ACTUAL_ROUTE_WALK_THRESHOLD_KM = 1.5
 PUBLIC_TRANSIT_WALK_FALLBACK_MAX_DISTANCE_M = 500
+# 실제 경로 계산은 이동수단별 함수를 공통 duration_min 형식으로 맞춰 추천 로직에서 사용한다.
 
 
 # 2. Kakao API 요청에 사용할 인증 헤더 생성
@@ -207,6 +208,7 @@ def search_places_by_category(
     )
 
 
+# 카테고리 코드로 찾기 어려운 장소 유형은 키워드 검색을 보조적으로 사용한다.
 def search_places_by_keyword(
     latitude: float,
     longitude: float,
@@ -724,9 +726,11 @@ def get_travel(
             end_y
         )
 
+        # 대중교통 경로가 정상 조회되면 실제 경로 결과를 그대로 사용한다.
         if transit is not None:
             return transit
 
+        # 대중교통 경로가 없더라도 500m 이내의 근거리는 도보 결과로 보완한다.
         if is_nearby(
             start_x,
             start_y,

@@ -48,6 +48,7 @@ class User(Base):
     )
 
 
+# 사용자 1명당 1행으로 공간 선호와 기본 이동수단을 저장한다.
 class UserPreference(Base):
     __tablename__ = "user_preferences"
 
@@ -87,6 +88,7 @@ class UserPreference(Base):
         server_onupdate=func.current_timestamp(),
     )
 
+# 추천에서 사용하는 활동 코드와 활성화 여부를 관리하는 기준 테이블
 class ActivityCategory(Base):
     __tablename__ = "activity_categories"
 
@@ -126,9 +128,11 @@ class ActivityCategory(Base):
     )
 
 
+# 사용자와 활동 카테고리를 연결해 활동별 1~5 선호도를 저장한다.
 class UserActivityPreference(Base):
     
     __tablename__ = "user_activity_preferences"
+    # 같은 사용자의 같은 활동은 한 번만 저장하고 선호도는 DB에서도 1~5로 제한한다.
     __table_args__ = (
         UniqueConstraint(
             "user_id",

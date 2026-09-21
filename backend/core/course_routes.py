@@ -15,6 +15,7 @@ def calculate_course(
     request: CourseCalculationRequest,
     optimize_course_order_fn,
 ):
+    # 코스 최적화 내부 규격에 맞추기 위해 장소 category를 activity 필드로 변환한다.
     selected_places = []
     for place in request.selected_places:
         place_data = place.model_dump()
@@ -34,6 +35,7 @@ def calculate_course(
             transport_mode=request.transport_mode,
         )
 
+        # 출발 시각이 있으면 최적 방문 순서대로 도착 시각과 영업 가능 여부를 계산한다.
         if request.departure_datetime is not None:
             cursor = request.departure_datetime
             places_with_availability = []
@@ -60,6 +62,7 @@ def calculate_course(
 
             course_result["optimized_places"] = places_with_availability
 
+        # 내부 계산에만 사용한 보조 필드는 최종 API 응답에서 제거한다.
         cleaned_optimized_places = []
 
         for place in course_result["optimized_places"]:
@@ -72,12 +75,14 @@ def calculate_course(
 
         return course_result
 
+    # 입력 조건상 코스를 구성할 수 없는 경우는 클라이언트 요청 오류로 반환한다.
     except ValueError as error:
         raise HTTPException(
             status_code=400,
             detail=str(error),
         ) from error
 
+    # 실제 이동시간 계산 등 실행 단계 실패는 외부 연동 오류로 구분한다.
     except RuntimeError as error:
         raise HTTPException(
             status_code=502,

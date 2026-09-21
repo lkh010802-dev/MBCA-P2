@@ -263,6 +263,7 @@ class StructuredConditions(BaseModel):
         return value
 
 
+# 실제 장소 추천 pagination 및 장소 선택 단계 요청 모델
 class PlaceRecommendMoreRequest(BaseModel):
     """기존 실제 장소 추천의 다음 후보 페이지 요청."""
 
@@ -338,6 +339,7 @@ class PlaceSelectionValidationRequest(BaseModel):
     available_time_minutes: int = Field(gt=0)
 
 
+# 최종 코스 계산에 사용하는 위치·장소·시간 조건 모델
 class CourseLocationRequest(BaseModel):
     latitude: float = Field(ge=-90, le=90)
     longitude: float = Field(ge=-180, le=180)
@@ -383,6 +385,7 @@ class CourseCalculationRequest(BaseModel):
         return self
 
 
+# 추천 전반에서 공통으로 사용하는 활동 코드와 1~5 선호도 타입
 ActivityCode = Literal[
     "food",
     "cafe",
@@ -476,6 +479,7 @@ class PlaceRecommendRequest(BaseModel):
     ] = Field(default_factory=dict)
 
 
+# 모험/랜덤 추천 기능에서 사용하는 요청·응답 모델
 class AdventureAreaRequest(BaseModel):
     area_name: str
     latitude: float = Field(ge=-90, le=90)
@@ -519,6 +523,7 @@ class AdventureRequest(BaseModel):
     recommendation_context: AdventureRecommendationContextRequest
 
 
+# 서울 가챠 기능에서 지역 후보와 추천 문맥을 전달하는 모델
 class SeoulGachaAreaRequest(BaseModel):
     AREA_NM: str
     latitude: float = Field(ge=-90, le=90)
@@ -696,6 +701,7 @@ class ActivityPreferenceUpdate(BaseModel):
     preference_level: PreferenceLevel
 
 
+# 로그인 사용자의 공간·이동수단·활동별 취향 저장 요청
 class UserPreferencesUpdateRequest(BaseModel):
     space_preference: Literal["indoor", "outdoor", "any"] | None = None
     transport_mode: Literal[
@@ -709,6 +715,7 @@ class UserPreferencesUpdateRequest(BaseModel):
     )
 
     @model_validator(mode="after")
+    # 한 요청에서 같은 활동을 두 번 보내 서로 다른 선호도가 충돌하는 것을 막는다.
     def validate_unique_activities(self):
         activities = [item.activity for item in self.activity_preferences]
         if len(activities) != len(set(activities)):

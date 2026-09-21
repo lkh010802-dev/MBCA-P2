@@ -69,6 +69,12 @@ class RecommendPreferencesTest(unittest.TestCase):
         cls.client = TestClient(app)
 
     def setUp(self):
+        self.local_resd_patcher = patch(
+            "main.load_local_resd_candidates",
+            return_value=pd.DataFrame(),
+        )
+        self.local_resd_patcher.start()
+        self.addCleanup(self.local_resd_patcher.stop)
         self.db = Mock()
         self.user = User(
             id=1,

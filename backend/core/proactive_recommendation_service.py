@@ -10,6 +10,7 @@ from seoul_culture_service import (
 )
 
 
+# 선제 추천은 시작 위치 2km 이내에서 종료가 임박한 팝업·문화행사를 소수만 실제 이동 검증한다.
 MAX_DISTANCE_M = 2000
 MAX_TRAVEL_CANDIDATES = 3
 MAX_DETOUR_TRAVEL_MINUTES = 15
@@ -96,6 +97,7 @@ def find_proactive_suggestion(
     get_travel_fn=get_travel,
     evaluate_availability_fn=evaluate_place_availability,
 ):
+    # 외부 팝업/문화 데이터 오류가 일반 추천 전체를 막지 않도록 각 소스 실패는 빈 후보로 처리한다.
     """종료가 임박했고 실제로 방문 가능한 팝업·문화행사 한 곳을 찾는다."""
 
     latitude = float(start_location["y"])
@@ -135,6 +137,7 @@ def find_proactive_suggestion(
         if not 0 <= days_left <= ENDING_SOON_DAYS:
             continue
 
+        # 요청 활동과 맞는 행사를 우선하되 오늘 종료되는 행사는 짧은 우회 제안 후보로도 허용한다.
         activity_matches = (
             not requested_activities
             or place.get("category") in requested_activities
@@ -166,6 +169,7 @@ def find_proactive_suggestion(
                 (priority, days_left, distance_m, suggestion_type, place)
             )
 
+    # 우선순위 → 종료까지 남은 일수 → 직선거리 순으로 정렬한 뒤 상위 후보만 실제 경로를 조회한다.
     candidates.sort(key=lambda item: item[:3])
 
     for _, days_left, _, suggestion_type, place in candidates[
@@ -203,6 +207,7 @@ def find_proactive_suggestion(
             if remaining_minutes is None or remaining_minutes < minimum_stay:
                 continue
 
+            # 다음 일정이 있으면 후보 방문 후 다음 장소까지의 이동시간까지 포함해 체류 가능시간을 다시 계산한다.
             fits_before_next_schedule = None
             visitable_minutes = remaining_minutes
 

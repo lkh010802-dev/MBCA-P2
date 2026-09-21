@@ -6,6 +6,7 @@ def convert_congestion_to_score(
     추천 계산용 1~5점으로 변환한다.
     """
 
+    # 이 매핑은 서울시 공식 121 POI 혼잡도에만 사용한다.
     score_map = {
         "여유": 5,
         "보통": 4,
@@ -55,6 +56,7 @@ def calculate_final_score(
     - 혼잡도: 40%
     """
 
+    # activity score가 없는 후보(예: 421의 비지원 activity)는 이동·혼잡도만으로 비교한다.
     if has_activity:
         final_score = (
             activity_score * 0.5

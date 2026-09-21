@@ -9,6 +9,7 @@ from zoneinfo import ZoneInfo
 load_dotenv()
 
 SEOUL_API_KEY = os.getenv("SEOUL_API_KEY")
+# 이 모듈은 서울시 공식 121 POI 혼잡도용이며 421 행정동 D4 혼잡도와는 별도 경로다.
 
 
 def get_congestion_data(area_code: str):
@@ -36,6 +37,7 @@ def get_congestion_data(area_code: str):
     if not isinstance(data, dict):
         return None
 
+    # 원본 응답은 도착시간 기준 예측 혼잡도를 선택하는 단계에서 다시 해석한다.
     return data
 
 
@@ -59,6 +61,7 @@ def get_nearest_forecast_congestion(
         if not forecasts:
             return None
 
+        # 후보 도착 예정시각과 시간 차이가 가장 작은 서울시 예측 구간을 선택한다.
         nearest_forecast = min(
             forecasts,
             key=lambda forecast: abs(

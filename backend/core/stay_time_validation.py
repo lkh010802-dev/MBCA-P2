@@ -17,6 +17,7 @@ def validate_selected_places_stay_time(
     selected_places: list[dict],
     available_time_minutes: int,
 ) -> dict:
+    # 선택 단계에서는 장소별 기본/명시 체류시간만 먼저 확인하고 실제 경로 시간은 course 단계에 맡긴다.
     stay_durations_minutes = []
     minimum_stay_durations_minutes = []
 
@@ -39,6 +40,7 @@ def validate_selected_places_stay_time(
         minimum_stay_durations_minutes
     )
 
+    # 최소 체류시간도 넘으면 즉시 불가능, 권장 체류시간만 넘으면 실제 이동시간을 포함해 재검증한다.
     if total_minimum_stay_duration_minutes > available_time_minutes:
         status = IMPOSSIBLE_BY_STAY_TIME
     elif total_stay_duration_minutes > available_time_minutes:
@@ -142,6 +144,7 @@ def calculate_estimated_route_travel_minutes(
     best_order = None
     best_travel_minutes = None
 
+    # 최대 선택 장소 수의 모든 순서를 비교하지만, 이는 외부 API 없이 직선거리 휴리스틱만 사용하는 사전검증이다.
     for order in permutations(selected_places):
 
         total_travel_minutes = 0

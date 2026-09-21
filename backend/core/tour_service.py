@@ -21,6 +21,7 @@ HUB_PLACE_API_URL = (
     "LocgoHubTarService1/"
     "areaBasedList1"
 )
+# 관광공사 데이터 공개 시차를 고려해 현재월부터 최대 6개월을 역순 조회한다.
 TOUR_BASE_YM_LOOKBACK_MONTHS = 6
 
 # 서울 25개 자치구 → TourAPI 시군구 코드
@@ -152,6 +153,7 @@ def filter_places_by_distance(
     return filtered_places
 
 
+# 자치구 코드와 기준월로 관광공사 후보를 조회하며 단건 응답도 항상 list 형태로 통일한다.
 def get_hub_places(
     gu_code: str,
     base_ym: str,
@@ -203,6 +205,7 @@ def get_hub_places(
     return items
 
 
+# 최신월에 데이터가 아직 없을 수 있으므로 제한된 lookback 범위에서 가장 최근 공개 월을 찾는다.
 def get_latest_hub_places(
     gu_code: str,
     reference_date: date | None = None,

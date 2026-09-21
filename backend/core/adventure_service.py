@@ -25,6 +25,7 @@ from stay_time_validation import (
 )
 
 
+# 실제 방문 가능성을 검증하는 후보 수를 제한해 장소·경로 API 호출 비용을 통제한다.
 MAX_GACHA_VALIDATION_CANDIDATES = 3
 MAX_COURSE_GACHA_PLACE_CANDIDATES = 20
 MAX_COURSE_GACHA_VALIDATION_COMBINATIONS = 3
@@ -93,6 +94,7 @@ def recommend_random_quest(activity: str, *, choice_fn=choice):
     }
 
 
+# 서울 가챠는 지정 지역을 우선하고, 없으면 추천 후보군 안에서 무작위로 한 지역을 선택한다.
 def recommend_seoul_gacha(
     request: SeoulGachaRequest,
     *,
@@ -161,6 +163,7 @@ def recommend_single_place_gacha(
         activity_preferences=context.activity_preferences,
     )
     
+    # 단일 장소 가챠도 랜덤 선택 전에 체류시간·실제 경로·영업 가능 여부를 먼저 검증한다.
     open_candidates = []
     unknown_candidates = []
 
@@ -231,6 +234,7 @@ def recommend_single_place_gacha(
         else:
             unknown_candidates.append(candidate)
 
+    # 영업 확인 후보를 우선하고, 확인 불가(unknown)는 방문 불가로 단정하지 않고 fallback으로 사용한다.
     candidates = open_candidates or unknown_candidates
     if not candidates:
         raise NoAdventureCandidateError
@@ -327,6 +331,7 @@ def _distance_between_places_m(first: dict, second: dict) -> float:
 
     return 6371000 * c
 
+# 2장소 가챠는 동일 장소와 지나치게 가까운 조합을 제외한 뒤 검증 가능한 조합 수만 남긴다.
 def _course_gacha_combinations(places: list[dict], prefer_diverse: bool):
     pairs = [
         pair
@@ -391,6 +396,7 @@ def recommend_two_place_gacha(
         ranked_places,
         prefer_diverse=len(context.activities) > 1,
     )
+    # 활동 다양성과 실제 영업 확인 개수를 기준으로 후보 pool을 나눠 최종 랜덤 선택의 우선순위를 유지한다.
     pools = {
         True: {2: [], 1: [], 0: []},
         False: {2: [], 1: [], 0: []},

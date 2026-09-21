@@ -6,6 +6,7 @@ from time import monotonic
 from typing import Callable
 
 
+# 블라인드 가챠 결과는 10분 동안만 메모리에 보관하며 single/course 종류를 구분한다.
 BLIND_ADVENTURE_TTL_SECONDS = 10 * 60
 
 
@@ -20,6 +21,7 @@ class BlindAdventureCacheEntry:
     kind: str
 
 
+# 동시 요청에서 토큰 저장·만료 정리가 충돌하지 않도록 캐시 접근을 Lock으로 보호한다.
 _blind_adventure_cache: dict[str, BlindAdventureCacheEntry] = {}
 _blind_adventure_cache_lock = Lock()
 
@@ -42,6 +44,7 @@ def store_blind_adventure(
     now_fn: Callable[[], float] = monotonic,
     token_fn: Callable[[int], str] = token_urlsafe,
 ) -> str:
+    # 원본 결과가 외부에서 변경되지 않도록 깊은 복사본을 캐시에 저장한다.
     now = now_fn()
     with _blind_adventure_cache_lock:
         _purge_expired_entries(now)
@@ -62,6 +65,7 @@ def get_blind_adventure(
     kind: str = "single",
     now_fn: Callable[[], float] = monotonic,
 ) -> dict:
+    # 조회 시에도 복사본을 반환해 캐시에 저장된 결과 자체는 변경되지 않게 한다.
     now = now_fn()
     with _blind_adventure_cache_lock:
         _purge_expired_entries(now)

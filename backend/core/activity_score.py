@@ -4,6 +4,11 @@ from pathlib import Path
 import pandas as pd
 
 
+DATA_DIR = Path(__file__).resolve().parent / "data"
+DEFAULT_STORE_FILE = DATA_DIR / "서울시 상권분석서비스(점포-행정동)_2025년.csv"
+DEFAULT_POI_MAPPING_FILE = DATA_DIR / "poi121_매핑결과.csv"
+
+
 # 1. 서울시 상권 업종명을 우리 서비스의 활동 카테고리로 묶음
 # 예:
 # 한식음식점, 중식음식점 ... → food
@@ -421,6 +426,7 @@ def add_category_activity_scores(score_df):
     return result_df
 
 
+# 동일 데이터 파일 조합의 활동 점수는 반복 계산 비용을 줄이기 위해 메모리에 캐시한다.
 @lru_cache(maxsize=4)
 def _load_poi_activity_scores_cached(
     store_file: str,
@@ -467,8 +473,8 @@ def _load_poi_activity_scores_cached(
 
 
 def load_poi_activity_scores(
-    store_file="data/서울시 상권분석서비스(점포-행정동)_2025년.csv",
-    mapping_file="data/poi121_매핑결과.csv"
+    store_file=DEFAULT_STORE_FILE,
+    mapping_file=DEFAULT_POI_MAPPING_FILE,
 ):
     """
     점포 데이터와 POI-행정동 매핑 데이터를 이용해
@@ -478,6 +484,7 @@ def load_poi_activity_scores(
     food / cafe / drink / entertainment 점수를 사용할 수 있다.
     """
 
+    # 호출자에서 원본 캐시 DataFrame을 수정하지 못하도록 복사본을 반환한다.
     cached_scores = _load_poi_activity_scores_cached(
         str(Path(store_file).resolve()),
         str(Path(mapping_file).resolve()),
@@ -553,4 +560,3 @@ if __name__ == "__main__":
             ]
         ].head(30)
     )
-
