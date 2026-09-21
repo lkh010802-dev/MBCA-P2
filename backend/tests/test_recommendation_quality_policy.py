@@ -65,6 +65,14 @@ def test_generic_place_type_is_not_mistaken_for_activity_area():
     assert extract_explicit_activity_location("카페에서 쉬고 싶어") is None
 
 
+def test_current_location_prompt_is_not_mistaken_for_activity_area():
+    message = (
+        "현재 위치에서 지금 운영 중인 장소를 이용해 서로 다른 분위기의 "
+        "3시간 코스 후보를 추천해줘."
+    )
+    assert extract_explicit_activity_location(message) is None
+
+
 def test_nearby_and_mountain_require_explicit_language():
     assert requests_nearby("이 주변에서 잠깐 쉬고 싶어") is True
     assert allows_mountain_activity("신림 가기 전에 어디 들를까?", []) is False

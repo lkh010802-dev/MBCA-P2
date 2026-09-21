@@ -350,7 +350,15 @@ def recommend_regions(
         conditions.space_preference = request.preferred_space
     if not conditions.activities and request.preferred_activities:
         conditions.activities = request.preferred_activities
-    explicit_activity_location = extract_explicit_activity_location(request.user_message)
+    # 자동 코스는 GPS와 사용자가 선택한 시간이 이미 구조화되어 있다.
+    # 프론트 안내 문구의 "현재 위치에서 ... 장소"를 실제 목적 지역으로
+    # 다시 해석하면 "위치" 같은 일반어가 강제 target이 될 수 있으므로
+    # 자유 입력 추천에서만 명시적 활동 지역을 복구한다.
+    explicit_activity_location = (
+        None
+        if request.auto_course
+        else extract_explicit_activity_location(request.user_message)
+    )
     if explicit_activity_location is not None:
         conditions.target_location_text = explicit_activity_location
         conditions.target_location_scope = "area"

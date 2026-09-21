@@ -47,7 +47,7 @@ def extract_explicit_activity_location(user_message: str | None):
     # "카페에서 쉬기"의 카페처럼 장소 종류를 지역명으로 오인하지 않는다.
     generic_place_words = {
         "카페", "식당", "음식점", "집", "회사", "학교", "실내", "야외",
-        "밖", "근처", "주변", "여기", "어디",
+        "밖", "근처", "주변", "여기", "어디", "위치", "현재위치", "장소",
     }
     for candidate_match in re.finditer(
         rf"(?:^|\s)([가-힣A-Za-z0-9·._-]{{2,20}})에서\s+.*{activity_pattern}",
