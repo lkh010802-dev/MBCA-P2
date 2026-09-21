@@ -47,6 +47,7 @@ import {
   saveCourse,
 } from "../api/accountApi";
 import { audit } from "../utils/auditTrace";
+import { useCourseTravelEstimate } from "../hooks/useCourseTravelEstimate";
 import iconBack from "../assets/images/icon-back.png";
 import koalaSearching from "../assets/images/koala-searching.png";
 import koalaComplete from "../assets/images/koala-complete.png";
@@ -356,16 +357,6 @@ function normalizePlace(place, index) {
     imageAttributionUrl:
       place.image_attribution_url ?? place.imageAttributionUrl ?? null,
   };
-}
-
-function straightDistanceMinutes(from, to) {
-  if (!from || !to || from.latitude == null || to.latitude == null) return 0;
-  const latKm = (to.latitude - from.latitude) * 111;
-  const lonKm = (to.longitude - from.longitude) * 88;
-  return Math.max(
-    1,
-    Math.round((Math.sqrt(latKm ** 2 + lonKm ** 2) / 4.5) * 60),
-  );
 }
 
 function distanceMetersBetween(from, to) {
@@ -1234,19 +1225,13 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
     (sum, place) => sum + place.stayMinutes,
     0,
   );
-  const estimatedTravel =
-    selectedPlaces.reduce(
-      (sum, place, index) =>
-        sum +
-        straightDistanceMinutes(
-          index === 0 ? startLocation : selectedPlaces[index - 1],
-          place,
-        ),
-      0,
-    ) +
-    (selectedPlaces.length && result.mapContext?.end
-      ? straightDistanceMinutes(selectedPlaces.at(-1), result.mapContext.end)
-      : 0);
+  const travelEstimate = useCourseTravelEstimate({
+    startLocation,
+    selectedPlaces,
+    endLocation: result.mapContext?.end,
+    transportMode,
+  });
+  const estimatedTravel = travelEstimate.travelMinutes;
   const rawAvailableTimeMinutes =
     manualAvailableTimeMinutes ??
     result.mapContext?.available_time_minutes ??
@@ -1291,15 +1276,24 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
         : currentHours * 60 + Number(value);
     setTimeBudgetDraft(Math.max(30, Math.min(480, nextMinutes)));
   };
-  const displayedTravel =
-    courseResult?.course?.total_travel_time_minutes ?? estimatedTravel;
+  const actualTravel = courseResult?.course?.total_travel_time_minutes;
+  const displayedTravel = actualTravel ?? estimatedTravel ?? 0;
   const displayedStay =
     courseResult?.course?.total_stay_time_minutes ?? estimatedStay;
+  const estimatedTotal =
+    estimatedTravel == null ? null : estimatedTravel + estimatedStay;
   const displayedTotal =
-    courseResult?.course?.total_required_minutes ??
-    displayedTravel + displayedStay;
+    courseResult?.course?.total_required_minutes ?? estimatedTotal;
   const hasActualTime = courseResult?.course?.total_required_minutes != null;
-  const timeGaugeOver = displayedTotal > availableTimeMinutes;
+  const timeGaugeOver =
+    displayedTotal != null && displayedTotal > availableTimeMinutes;
+  const timeCalculationLabel = hasActualTime
+    ? `실제 계산 ${displayedTotal}분`
+    : displayedTotal != null
+      ? `사전 계산 ${displayedTotal}분`
+      : travelEstimate.status === "loading"
+        ? "실제 경로 계산 중"
+        : "이동시간 계산 불가";
   useEffect(() => {
     audit("frontend_display", {
       frontend_display: {
@@ -2924,11 +2918,15 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
                     {selectedPlaces.length > 0 ? (
                       <section
                         className={`time-budget${timeGaugeOver ? " is-over" : ""}`}
-                        aria-label={`사용 가능 ${availableTimeMinutes}분 중 ${hasActualTime ? "실제 계산" : "예상"} ${displayedTotal}분`}
+                        aria-label={`사용 가능 ${availableTimeMinutes}분 중 ${timeCalculationLabel}`}
                       >
                       <div>
                         <b>
-                          {timeGaugeOver
+                          {displayedTotal == null
+                            ? travelEstimate.status === "loading"
+                              ? "이동시간 계산 중"
+                              : "이동시간 확인 불가"
+                            : timeGaugeOver
                             ? `${displayedTotal - availableTimeMinutes}분 초과`
                             : `${displayedTotal}분 사용`}
                         </b>
@@ -2958,7 +2956,11 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
                       <small>
                         {hasActualTime
                           ? "파랑은 실제 경로 이동 · 나머지는 장소에서 보내는 시간"
-                          : "파랑은 예상 이동 · 코스 계산 후 실제 시간으로 바뀌어요"}
+                          : travelEstimate.status === "ready"
+                            ? "선택한 교통수단의 실제 경로로 미리 계산했어요"
+                            : travelEstimate.status === "loading"
+                              ? "선택한 교통수단의 실제 경로를 계산하고 있어요"
+                              : "이동 경로를 확인할 수 있어야 총시간을 표시해요"}
                       </small>
                       </section>
                     ) : (
@@ -2972,11 +2974,15 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
                         className={`place-picker-summary${calculationStatus === "warning" ? " is-warning" : ""}`}
                       >
                         <b>
-                          {hasActualTime ? "실제 계산" : "예상"}{" "}
-                          {displayedTotal}분
+                          {hasActualTime ? "실제 계산" : "사전 계산"}{" "}
+                          {displayedTotal == null ? "확인 중" : `${displayedTotal}분`}
                         </b>
                         <span>
-                          이동 {displayedTravel}분 · 체류 {displayedStay}분
+                          {displayedTotal == null
+                            ? travelEstimate.status === "loading"
+                              ? "실제 이동 경로를 확인하고 있어요"
+                              : "이동시간을 확인할 수 없어요"
+                            : `이동 ${displayedTravel}분 · 체류 ${displayedStay}분`}
                         </span>
                       </div>
                     )}
