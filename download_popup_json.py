@@ -2,7 +2,6 @@
 
 import json
 import os
-import shutil
 import sys
 import tempfile
 from datetime import datetime, timedelta, timezone
@@ -14,12 +13,10 @@ from dotenv import load_dotenv
 
 from popup_service import normalize_popup_place
 
-# 운영 팝업 원본을 내려받아 검증한 뒤 현재 파일과 백업 파일을 안전하게 교체한다.
+# 운영 팝업 원본을 내려받아 검증한 뒤 날짜별 JSON 파일로 안전하게 저장한다.
 API_URL = "https://152-69-195-242.sslip.io/api/export/json"
 KST = timezone(timedelta(hours=9))
 OUTPUT_DIR = Path(__file__).resolve().parent / "popup_data"
-POPUP_DATA_PATH = OUTPUT_DIR / "popup_places.json"
-POPUP_BACKUP_PATH = OUTPUT_DIR / "popup_places_backup.json"
 
 
 # JSON이 비어 있지 않고 KOALA 공통 장소 형식으로 최소 한 건 이상 정규화 가능한지 확인한다.
@@ -35,62 +32,52 @@ def _validate_content(content):
     return records
 
 
-def _is_valid_popup_file(path):
-    try:
-        _validate_content(path.read_bytes())
-    except (OSError, ValueError, json.JSONDecodeError):
-        return False
-
-    return True
-
-
 def download_today(token):
     date = datetime.now(KST).strftime("%Y%m%d")
+    target_path = OUTPUT_DIR / f"{date}_popup_places.json"
+
     request = Request(
         f"{API_URL}?date={date}",
         headers={"Authorization": f"Bearer {token}", "Accept": "application/json"},
     )
+
     with urlopen(request, timeout=120) as response:
         content = response.read()
+
     records = _validate_content(content)
 
-    # 새 파일을 임시 파일에 먼저 기록하고 검증된 기존 파일은 백업한 뒤 원자적으로 교체한다.
+    # 새 파일을 임시 파일에 먼저 기록한 뒤 날짜별 운영 파일로 원자적으로 교체한다.
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     temporary = None
-    backup_temporary = None
+
     try:
-        with tempfile.NamedTemporaryFile(dir=OUTPUT_DIR, suffix=".tmp", delete=False) as file:
+        with tempfile.NamedTemporaryFile(
+            dir=OUTPUT_DIR,
+            suffix=".tmp",
+            delete=False,
+        ) as file:
             temporary = Path(file.name)
             file.write(content)
 
-        if POPUP_DATA_PATH.exists() and _is_valid_popup_file(POPUP_DATA_PATH):
-            with tempfile.NamedTemporaryFile(
-                dir=OUTPUT_DIR,
-                suffix=".backup.tmp",
-                delete=False,
-            ) as file:
-                backup_temporary = Path(file.name)
-            shutil.copy2(POPUP_DATA_PATH, backup_temporary)
-            backup_temporary.replace(POPUP_BACKUP_PATH)
-            backup_temporary = None
-
-        temporary.replace(POPUP_DATA_PATH)
+        temporary.replace(target_path)
         temporary = None
     finally:
         if temporary is not None:
             temporary.unlink(missing_ok=True)
-        if backup_temporary is not None:
-            backup_temporary.unlink(missing_ok=True)
 
-    return POPUP_DATA_PATH, len(records)
+    return target_path, len(records)
 
 
 # 이 파일은 서버 요청 처리용이 아니라 팝업 운영 데이터를 갱신하는 수동 실행 스크립트다.
 def main():
     load_dotenv()
     token = os.environ.get("CRAWLER_API_TOKEN", "").strip()
+
     if not token:
-        print("실패: .env에 CRAWLER_API_TOKEN을 설정해 주세요.", file=sys.stderr)
+        print(
+            "실패: .env에 CRAWLER_API_TOKEN을 설정해 주세요.",
+            file=sys.stderr,
+        )
         return 1
 
     try:
@@ -101,13 +88,26 @@ def main():
             403: "다운로드 권한이 없습니다.",
             404: "오늘 날짜의 JSON 파일이 없습니다. 크롤링 완료 후 다시 실행해 주세요.",
         }
-        print("실패: " + messages.get(error.code, f"서버 응답 오류 (HTTP {error.code})"), file=sys.stderr)
+        print(
+            "실패: "
+            + messages.get(
+                error.code,
+                f"서버 응답 오류 (HTTP {error.code})",
+            ),
+            file=sys.stderr,
+        )
         return 1
     except (URLError, TimeoutError):
-        print("실패: 서버 연결 또는 응답 시간에 문제가 있습니다. 잠시 후 다시 실행해 주세요.", file=sys.stderr)
+        print(
+            "실패: 서버 연결 또는 응답 시간에 문제가 있습니다. 잠시 후 다시 실행해 주세요.",
+            file=sys.stderr,
+        )
         return 1
     except (ValueError, OSError) as error:
-        print(f"실패: JSON 확인 또는 파일 저장 오류: {error}", file=sys.stderr)
+        print(
+            f"실패: JSON 확인 또는 파일 저장 오류: {error}",
+            file=sys.stderr,
+        )
         return 1
 
     print(f"다운로드 완료: {count}건")

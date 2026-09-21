@@ -1377,73 +1377,22 @@ LightGBM Artifact	421 행정동 미래 상대 생활인구 예측
 
 Popup 정보는 계속 변경되므로 정기적으로 갱신해야 한다.
 
-현재 개발환경에서는 사용자의 로컬 PC에서 자동 갱신한다.
+AWS 서버의 정기 Scheduler가 `download_popup_json.py`를 실행해 KST 날짜 기준
+`popup_data/YYYYMMDD_popup_places.json`을 생성하거나 같은 날짜 파일을 원자적으로 교체한다.
+다운로드 응답은 JSON 형식, 비어 있지 않은 목록, 최소 한 건 이상의 정상화 가능 레코드를
+확인한 뒤에만 저장하므로 실패한 다운로드가 기존 날짜 파일을 훼손하지 않는다.
 
-Windows Task Scheduler
+FastAPI는 요청 시점의 KST 기준으로 다음 순서로 파일을 선택한다.
 
-↓
+- 08:40 이전: 전날 `YYYYMMDD_popup_places.json` → `data/popup_places_fallback.json`
+- 08:40 이후: 당일 `YYYYMMDD_popup_places.json` → 전날 파일 → `data/popup_places_fallback.json`
 
-download_popup_json.py
+`data/popup_places_fallback.json`은 날짜별 운영 파일을 읽을 수 없을 때만 사용하는
+Git 추적 고정 스냅샷이다. 날짜별 파일은 경로·수정시각·크기를 캐시 키로 사용하므로,
+다운로더가 파일을 교체하면 서버 재시작 없이 다음 요청부터 새 데이터를 읽는다.
 
-↓
-
-Popup 데이터 Source 호출
-
-↓
-
-응답 검증 및 정규화
-
-↓
-
-popup_places.json 갱신
-
-↓
-
-FastAPI가 최신 데이터 사용
-
-현재 개발 단계에서는 정상적으로 동작하지만 운영 서비스가 개인 PC에 의존해서는 안 된다.
-
-
-
-38. Popup 데이터 — AWS 배포 후 목표
-
-AWS 배포 이후에는 Popup 데이터 갱신 책임을 서버로 이전한다.
-
-목표:
-
-AWS 운영환경
-
-↓
-
-정기 Scheduler
-
-↓
-
-download_popup_json.py
-
-↓
-
-Popup 데이터 Source
-
-↓
-
-응답 검증
-
-↓
-
-운영 Popup 데이터 자동 갱신
-
-↓
-
-FastAPI가 최신 데이터 사용
-
-따라서 AWS 배포 후에는:
-
-개발자의 PC가 꺼져 있어도 Popup 데이터가 자동 갱신되는 구조
-
-가 된다.
-
-구체적인 Scheduler 방식은 실제 AWS 아키텍처가 확정된 뒤 결정한다.
+다운로드 작업은 추천 API 요청과 분리되어 있으며, AWS 배포 후에도 서버 Scheduler가
+정기 실행한다. 구체적인 Scheduler 구현 방식은 배포 환경에 맞게 설정한다.
 
 
 

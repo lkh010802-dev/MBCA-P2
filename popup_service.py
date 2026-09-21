@@ -5,13 +5,15 @@ import re
 from copy import deepcopy
 from functools import lru_cache
 from pathlib import Path
+from datetime import datetime, time, timedelta, timezone
 
-
-# 운영 다운로드 파일을 우선 사용하고 읽기 실패 시 프로젝트에 포함된 스냅샷으로 fallback한다.
+# KST 08:40을 기준으로 날짜별 운영 파일을 선택하고, 실패 시 이전 데이터와 기본 스냅샷으로 fallback한다.
 PROJECT_DIR = Path(__file__).resolve().parent
-POPUP_DATA_PATH = PROJECT_DIR / "popup_data" / "popup_places.json"
-FALLBACK_POPUP_DATA_PATH = PROJECT_DIR / "data" / "20260908_popup_places.json"
+POPUP_DATA_DIR = PROJECT_DIR / "popup_data"
+FALLBACK_POPUP_DATA_PATH = PROJECT_DIR / "data" / "popup_places_fallback.json"
 
+KST = timezone(timedelta(hours=9))
+POPUP_SWITCH_TIME = time(8, 40)
 
 _OPERATION_TIME_PATTERN = re.compile(
     r"^(?:[01]\d|2[0-3]):[0-5]\d$|^24:00$"
@@ -221,11 +223,40 @@ def load_popup_places(file_path: str | Path):
     )))
 
 
+def _get_popup_data_paths(now=None):
+    """현재 KST 시각에 따라 사용할 날짜별 팝업 파일의 우선순위를 반환한다."""
+
+    if now is None:
+        now = datetime.now(KST)
+    elif now.tzinfo is None:
+        now = now.replace(tzinfo=KST)
+    else:
+        now = now.astimezone(KST)
+
+    today = now.date()
+    yesterday = today - timedelta(days=1)
+
+    yesterday_path = (
+        POPUP_DATA_DIR / f"{yesterday:%Y%m%d}_popup_places.json"
+    )
+
+    if now.time() < POPUP_SWITCH_TIME:
+        return (yesterday_path,)
+
+    today_path = (
+        POPUP_DATA_DIR / f"{today:%Y%m%d}_popup_places.json"
+    )
+
+    return (today_path, yesterday_path)
+
+
 # 운영 파일 장애가 추천 전체 장애로 이어지지 않도록 검증된 기본 스냅샷까지 순서대로 시도한다.
 def load_current_popup_places():
-    """운영 팝업 파일을 읽고 실패하면 기본 스냅샷으로 대체한다."""
+    """현재 시각에 맞는 운영 팝업 파일을 읽고 실패하면 이전 데이터로 대체한다."""
 
-    for path in (POPUP_DATA_PATH, FALLBACK_POPUP_DATA_PATH):
+    paths = (*_get_popup_data_paths(), FALLBACK_POPUP_DATA_PATH)
+
+    for path in paths:
         try:
             places = load_popup_places(path)
         except PopupDataError:
