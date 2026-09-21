@@ -2595,9 +2595,11 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
                       </b>
                       <button
                         type="button"
-                        onClick={() => {
+                        aria-expanded={sheetExpanded}
+                        onClick={(event) => {
+                          event.stopPropagation();
                           setFocusedStopIndex(null);
-                          setSheetExpanded(false);
+                          setSheetExpanded((expanded) => !expanded);
                         }}
                       >
                         전체 코스 보기
@@ -2709,13 +2711,35 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
                     )}
                     {!courseConfirmed && replacementPlace && (
                       <div className="course-replacement">
+                        <div className="replacement-target-picker">
+                          <strong>어느 장소를 바꿀까요?</strong>
+                          <div>
+                            {visiblePlaces.map((place, index) => (
+                              <button
+                                key={place.id}
+                                type="button"
+                                className={
+                                  replacementTarget?.id === place.id
+                                    ? "is-active"
+                                    : ""
+                                }
+                                onClick={() => {
+                                  setFocusedStopIndex(index);
+                                  setReplacementPreviewOpen(false);
+                                }}
+                              >
+                                {index + 1}. {place.name}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
                         <button
                           type="button"
                           onClick={() =>
                             setReplacementPreviewOpen((open) => !open)
                           }
                         >
-                          다른 장소로 바꾸고 싶어요{" "}
+                          <b>{replacementTarget.name}</b> 바꾸기{" "}
                           <span>
                             {replacementPreviewOpen ? "접기" : "후보 보기"}
                           </span>
@@ -2738,12 +2762,12 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
                               )}
                             </span>
                             <p>
-                              <small>{replacementTarget.name} 대신</small>
+                              <small>{replacementTarget.name} 대신 추천</small>
                               <b>{replacementPlace.name}</b>
                               <em>{recommendationReason(replacementPlace)}</em>
                             </p>
                             <button type="button" onClick={confirmReplacement}>
-                              이 장소로 교체
+                              {replacementPlace.name}(으)로 교체
                             </button>
                           </div>
                         )}

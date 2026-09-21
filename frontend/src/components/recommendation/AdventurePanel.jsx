@@ -10,6 +10,10 @@ import {
   revealBlindAdventure,
   revealBlindAdventureCourse,
 } from "../../api/adventureApi";
+import {
+  adventureSignature,
+  rememberAdventure,
+} from "../../utils/adventureDiversity";
 
 const labels = {
   food: "맛집",
@@ -50,6 +54,17 @@ export default function AdventurePanel({
   const [error, setError] = useState("");
   const [moreOpen, setMoreOpen] = useState(false);
   const initialModeHandled = useRef(false);
+  const recentSignatures = useRef(
+    (() => {
+      try {
+        return JSON.parse(
+          window.sessionStorage.getItem("koala-adventure-history") ?? "[]",
+        );
+      } catch {
+        return [];
+      }
+    })(),
+  );
   const context = useMemo(
     () => ({
       activities: recommendationContext?.activities?.length
@@ -77,10 +92,27 @@ export default function AdventurePanel({
     setLoading(kind);
     setError("");
     try {
-      if (kind === "single")
-        setResult({ kind, data: await requestAdventure(body) });
-      if (kind === "course")
-        setResult({ kind, data: await requestAdventureCourse(body) });
+      if (kind === "single" || kind === "course") {
+        const request =
+          kind === "single" ? requestAdventure : requestAdventureCourse;
+        let data = null;
+        for (let attempt = 0; attempt < 3; attempt += 1) {
+          data = await request(body);
+          const signature = adventureSignature(data);
+          if (!recentSignatures.current.includes(signature) || attempt === 2)
+            break;
+        }
+        const signature = adventureSignature(data);
+        recentSignatures.current = rememberAdventure(
+          recentSignatures.current,
+          signature,
+        );
+        window.sessionStorage.setItem(
+          "koala-adventure-history",
+          JSON.stringify(recentSignatures.current),
+        );
+        setResult({ kind, data });
+      }
       if (kind === "blind")
         setResult({
           kind,

@@ -3,6 +3,11 @@ import { useCurrentLocation } from "../hooks/useCurrentLocation";
 import koalaPeeking from "../assets/images/koala-peeking.webp";
 import TimeWheel from "../components/common/TimeWheel";
 import {
+  addAppointmentTime,
+  needsAppointmentTimeClarification,
+  suggestedAppointmentHours,
+} from "../utils/timeIntent";
+import {
   deleteSavedCourse,
   getMe,
   getPreferences,
@@ -37,6 +42,8 @@ function HomePage({
   const [courseMinutes, setCourseMinutes] = useState(0);
   const [quickCourseError, setQuickCourseError] = useState("");
   const [pendingAdventureMode, setPendingAdventureMode] = useState(null);
+  const [appointmentPromptOpen, setAppointmentPromptOpen] = useState(false);
+  const [pendingAppointmentMessage, setPendingAppointmentMessage] = useState("");
   const quickCourseRequestRef = useRef(false);
   const {
     location,
@@ -161,7 +168,23 @@ function HomePage({
     event.preventDefault();
     if (quickCourseRequestRef.current) return;
     if (!message.trim()) return;
+    if (needsAppointmentTimeClarification(message)) {
+      setPendingAppointmentMessage(message.trim());
+      setAppointmentPromptOpen(true);
+      return;
+    }
     onRecommend({ message, location, preferences: account?.preferences });
+  };
+
+  const submitAppointmentTime = (hour) => {
+    const clarifiedMessage = addAppointmentTime(pendingAppointmentMessage, hour);
+    setMessage(clarifiedMessage);
+    setAppointmentPromptOpen(false);
+    onRecommend({
+      message: clarifiedMessage,
+      location,
+      preferences: account?.preferences,
+    });
   };
 
   const confirmAutoCourseTime = () => {
@@ -461,6 +484,52 @@ function HomePage({
                 이 시간으로 추천받기
               </button>
             </div>
+          </section>
+        </div>
+      )}
+      {appointmentPromptOpen && (
+        <div
+          className="time-picker-backdrop"
+          role="presentation"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget)
+              setAppointmentPromptOpen(false);
+          }}
+        >
+          <section
+            className="time-picker-dialog appointment-time-dialog"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="appointment-time-title"
+          >
+            <div className="time-picker-head">
+              <span aria-hidden="true">🕒</span>
+              <div>
+                <small>다음 일정 시간 확인</small>
+                <h2 id="appointment-time-title">약속이 몇 시인가요?</h2>
+                <p>도착 시간에 늦지 않는 코스를 계산할게요.</p>
+              </div>
+            </div>
+            <div className="appointment-time-options">
+              {suggestedAppointmentHours(pendingAppointmentMessage).map(
+                (hour) => (
+                  <button
+                    key={hour}
+                    type="button"
+                    onClick={() => submitAppointmentTime(hour)}
+                  >
+                    {hour < 12 ? "오전" : "오후"} {hour > 12 ? hour - 12 : hour}시
+                  </button>
+                ),
+              )}
+            </div>
+            <button
+              className="appointment-time-cancel"
+              type="button"
+              onClick={() => setAppointmentPromptOpen(false)}
+            >
+              문장 다시 입력하기
+            </button>
           </section>
         </div>
       )}
