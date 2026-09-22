@@ -11,13 +11,18 @@ from sqlalchemy.orm import Session
 
 from auth_routes import get_current_user
 from database import engine, get_db
-from db_models import ExcludedPlace, SavedCourse, User
+from db_models import ExcludedPlace, FavoritePlace, SavedCourse, User, UserInteraction
 from models import (
     ExcludedPlaceCreate,
     ExcludedPlaceResponse,
+    FavoritePlaceCreate,
+    FavoritePlaceResponse,
+    PersonalizationProfileResponse,
     SavedCourseCreate,
     SavedCourseResponse,
+    UserInteractionCreate,
 )
+from personalization_service import build_personalization_profile
 
 
 router = APIRouter()
@@ -27,6 +32,8 @@ def ensure_user_data_tables() -> None:
     """Create extension-owned tables before requests begin."""
     SavedCourse.__table__.create(bind=engine, checkfirst=True)
     ExcludedPlace.__table__.create(bind=engine, checkfirst=True)
+    FavoritePlace.__table__.create(bind=engine, checkfirst=True)
+    UserInteraction.__table__.create(bind=engine, checkfirst=True)
 
 
 @router.post(
@@ -142,3 +149,90 @@ def restore_excluded_place(
         db.delete(item)
         db.commit()
     return Response(status_code=status.HTTP_204_NO_CONTENT)
+
+
+@router.get("/users/me/favorite-places", response_model=list[FavoritePlaceResponse])
+def list_favorite_places(
+    user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    return list(
+        db.scalars(
+            select(FavoritePlace)
+            .where(FavoritePlace.user_id == user.id)
+            .order_by(FavoritePlace.created_at.desc(), FavoritePlace.id.desc())
+            .limit(200)
+        )
+    )
+
+
+@router.post(
+    "/users/me/favorite-places",
+    response_model=FavoritePlaceResponse,
+    status_code=status.HTTP_201_CREATED,
+)
+def add_favorite_place(
+    request: FavoritePlaceCreate,
+    user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    # 중복 클릭은 새 행을 만들지 않고 저장된 스냅샷만 최신 정보로 갱신한다.
+    item = db.scalar(
+        select(FavoritePlace).where(
+            FavoritePlace.user_id == user.id,
+            FavoritePlace.place_key == request.place_key,
+        )
+    )
+    if item is None:
+        item = FavoritePlace(user_id=user.id, **request.model_dump())
+        db.add(item)
+    else:
+        item.place_name = request.place_name
+        item.category = request.category
+        item.place_data = request.place_data
+    db.commit()
+    db.refresh(item)
+    return item
+
+
+@router.delete(
+    "/users/me/favorite-places/{place_key}",
+    status_code=status.HTTP_204_NO_CONTENT,
+)
+def remove_favorite_place(
+    place_key: str,
+    user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    item = db.scalar(
+        select(FavoritePlace).where(
+            FavoritePlace.user_id == user.id,
+            FavoritePlace.place_key == place_key,
+        )
+    )
+    if item is not None:
+        db.delete(item)
+        db.commit()
+    return Response(status_code=status.HTTP_204_NO_CONTENT)
+
+
+@router.post("/users/me/interactions", status_code=status.HTTP_204_NO_CONTENT)
+def record_user_interaction(
+    request: UserInteractionCreate,
+    user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    db.add(UserInteraction(user_id=user.id, **request.model_dump()))
+    db.commit()
+    return Response(status_code=status.HTTP_204_NO_CONTENT)
+
+
+@router.get(
+    "/users/me/personalization",
+    response_model=PersonalizationProfileResponse,
+)
+def read_personalization_profile(
+    user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    return build_personalization_profile(db, user.id)

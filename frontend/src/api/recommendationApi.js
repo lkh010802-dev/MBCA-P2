@@ -10,6 +10,7 @@ export async function requestRecommendation(
     preferences,
     fastAutoCourse = false,
     autoCourseDurationMinutes = null,
+    token = null,
   },
   { signal } = {},
 ) {
@@ -36,6 +37,7 @@ export async function requestRecommendation(
         headers: {
           "Content-Type": "application/json",
           "X-Koala-Trace-Id": getTrace(),
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
         },
         signal: timeoutController.signal,
         body: JSON.stringify({

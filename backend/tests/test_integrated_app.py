@@ -21,6 +21,9 @@ EXPECTED_EXTENSION_PATHS = {
     "/recommend/adventure/blind/course/reveal",
     "/recommend/adventure/quest",
     "/recommend/adventure/seoul",
+    "/users/me/favorite-places",
+    "/users/me/interactions",
+    "/users/me/personalization",
 }
 
 

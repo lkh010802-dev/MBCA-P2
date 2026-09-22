@@ -203,3 +203,40 @@ class ExcludedPlace(Base):
     place_name: Mapped[str] = mapped_column(String(255), nullable=False)
     created_at: Mapped[DateTime] = mapped_column(DateTime, nullable=False, server_default=func.current_timestamp())
 
+
+class FavoritePlace(Base):
+    """사용자가 직접 저장한 장소 원본을 보관해 다른 기기에서도 재사용한다."""
+
+    __tablename__ = "favorite_places"
+    __table_args__ = (
+        UniqueConstraint("user_id", "place_key", name="uq_favorite_place_user_key"),
+    )
+
+    id: Mapped[int] = mapped_column(BIGINT(unsigned=True), primary_key=True, autoincrement=True)
+    user_id: Mapped[int] = mapped_column(
+        BIGINT(unsigned=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True
+    )
+    place_key: Mapped[str] = mapped_column(String(255), nullable=False)
+    place_name: Mapped[str] = mapped_column(String(255), nullable=False)
+    category: Mapped[str | None] = mapped_column(String(50), nullable=True)
+    place_data: Mapped[dict] = mapped_column(JSON, nullable=False)
+    created_at: Mapped[DateTime] = mapped_column(DateTime, nullable=False, server_default=func.current_timestamp())
+
+
+class UserInteraction(Base):
+    """명시적 선호를 덮지 않는 보조 개인화 신호만 기록한다."""
+
+    __tablename__ = "user_interactions"
+
+    id: Mapped[int] = mapped_column(BIGINT(unsigned=True), primary_key=True, autoincrement=True)
+    user_id: Mapped[int] = mapped_column(
+        BIGINT(unsigned=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True
+    )
+    event_type: Mapped[str] = mapped_column(String(32), nullable=False, index=True)
+    place_key: Mapped[str | None] = mapped_column(String(255), nullable=True)
+    place_name: Mapped[str | None] = mapped_column(String(255), nullable=True)
+    category: Mapped[str | None] = mapped_column(String(50), nullable=True, index=True)
+    context_hour: Mapped[int | None] = mapped_column(TINYINT(unsigned=True), nullable=True)
+    context_day: Mapped[str | None] = mapped_column(String(12), nullable=True)
+    context_data: Mapped[dict] = mapped_column(JSON, nullable=False)
+    created_at: Mapped[DateTime] = mapped_column(DateTime, nullable=False, server_default=func.current_timestamp(), index=True)

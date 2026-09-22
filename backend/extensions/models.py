@@ -782,3 +782,40 @@ class ExcludedPlaceResponse(ExcludedPlaceCreate):
     id: int
     user_id: int
     created_at: datetime
+
+
+class FavoritePlaceCreate(BaseModel):
+    place_key: str = Field(min_length=1, max_length=255)
+    place_name: str = Field(min_length=1, max_length=255)
+    category: str | None = Field(default=None, max_length=50)
+    place_data: dict = Field(default_factory=dict)
+
+
+class FavoritePlaceResponse(FavoritePlaceCreate):
+    model_config = ConfigDict(from_attributes=True)
+    id: int
+    user_id: int
+    created_at: datetime
+
+
+class UserInteractionCreate(BaseModel):
+    event_type: Literal[
+        "place_view",
+        "place_select",
+        "favorite",
+        "hide",
+        "course_confirm",
+        "course_open",
+    ]
+    place_key: str | None = Field(default=None, max_length=255)
+    place_name: str | None = Field(default=None, max_length=255)
+    category: str | None = Field(default=None, max_length=50)
+    context_hour: int | None = Field(default=None, ge=0, le=23)
+    context_day: Literal["weekday", "weekend"] | None = None
+    context_data: dict = Field(default_factory=dict)
+
+
+class PersonalizationProfileResponse(BaseModel):
+    activity_preferences: dict[str, int] = Field(default_factory=dict)
+    context_activity_preferences: dict[str, dict[str, int]] = Field(default_factory=dict)
+    interaction_count: int = 0

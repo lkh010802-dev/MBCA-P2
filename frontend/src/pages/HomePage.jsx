@@ -9,11 +9,17 @@ import {
 } from "../utils/timeIntent";
 import {
   deleteSavedCourse,
+  getExcludedPlaces,
+  getFavoritePlaces,
   getMe,
+  getPersonalizationProfile,
   getPreferences,
   getSavedCourses,
   isMockAuthEnabled,
   login,
+  recordInteraction,
+  removeFavoritePlace,
+  restoreExcludedPlace,
   signup,
   updatePreferences,
 } from "../api/accountApi";
@@ -35,6 +41,8 @@ function HomePage({
   const [accountMode, setAccountMode] = useState("login");
   const [accountError, setAccountError] = useState("");
   const [savedCourses, setSavedCourses] = useState([]);
+  const [favoritePlaces, setFavoritePlaces] = useState([]);
+  const [excludedPlaces, setExcludedPlaces] = useState([]);
   const [savedCourseNotice, setSavedCourseNotice] = useState("");
   const [pendingQuickCourse, setPendingQuickCourse] = useState(null);
   const [timePickerOpen, setTimePickerOpen] = useState(false);
@@ -83,10 +91,20 @@ function HomePage({
   useEffect(() => {
     if (!account?.token) {
       setSavedCourses([]);
+      setFavoritePlaces([]);
+      setExcludedPlaces([]);
       return;
     }
-    getSavedCourses(account.token)
-      .then(setSavedCourses)
+    Promise.all([
+      getSavedCourses(account.token),
+      getFavoritePlaces(account.token),
+      getExcludedPlaces(account.token),
+    ])
+      .then(([courses, favorites, excluded]) => {
+        setSavedCourses(courses);
+        setFavoritePlaces(favorites);
+        setExcludedPlaces(excluded);
+      })
       .catch((requestError) => setAccountError(requestError.message));
   }, [account?.token]);
 
@@ -103,6 +121,10 @@ function HomePage({
 
   const openSavedCourse = (course) => {
     if (onOpenSavedCourse?.(course)) {
+      void recordInteraction(account?.token, {
+        event_type: "course_open",
+        context_data: { area_name: course.area_name ?? null, course_id: course.id },
+      }).catch(() => {});
       setAccountOpen(false);
       setSavedCourseNotice("");
       return;
@@ -110,6 +132,28 @@ function HomePage({
     setSavedCourseNotice(
       "이전 저장 형식이라 지도 복원이 어려워요. 새로 저장한 코스부터 다시 열 수 있어요.",
     );
+  };
+
+  const removeFavorite = async (placeKey) => {
+    try {
+      await removeFavoritePlace(account.token, placeKey);
+      setFavoritePlaces((current) =>
+        current.filter((place) => place.place_key !== placeKey),
+      );
+    } catch (requestError) {
+      setAccountError(requestError.message);
+    }
+  };
+
+  const restorePlace = async (placeKey) => {
+    try {
+      await restoreExcludedPlace(account.token, placeKey);
+      setExcludedPlaces((current) =>
+        current.filter((place) => place.place_key !== placeKey),
+      );
+    } catch (requestError) {
+      setAccountError(requestError.message);
+    }
   };
 
   useEffect(() => {
@@ -232,11 +276,12 @@ function HomePage({
         password: form.get("password"),
       });
       localStorage.setItem("koala-token", session.access_token);
-      const [user, preferences] = await Promise.all([
+      const [user, preferences, personalization] = await Promise.all([
         getMe(session.access_token),
         getPreferences(session.access_token),
+        getPersonalizationProfile(session.access_token),
       ]);
-      onAccountChange({ token: session.access_token, user, preferences });
+      onAccountChange({ token: session.access_token, user, preferences, personalization });
       setAccountOpen(false);
     } catch (requestError) {
       setAccountError(requestError.message);
@@ -546,6 +591,11 @@ function HomePage({
             {account?.user ? (
               <form onSubmit={savePreferences}>
                 <h2>{account.user.nickname}님의 선호</h2>
+                <p className="personalization-summary">
+                  {account.personalization?.interaction_count
+                    ? `${account.personalization.interaction_count}개의 선택을 추천에 반영하고 있어요.`
+                    : "장소를 저장하고 코스를 확정하면 취향을 학습해요."}
+                </p>
                 {isMockAuthEnabled() && (
                   <p className="mock-auth-notice">
                     개발용 임시 계정 · 이 기기에만 저장돼요
@@ -604,6 +654,49 @@ function HomePage({
                   ))}
                 </fieldset>
                 <section className="saved-course-list">
+                  <b>즐겨찾기 장소</b>
+                  {favoritePlaces.length ? (
+                    favoritePlaces.map((place) => (
+                      <div key={place.place_key}>
+                        <button
+                          className="saved-course-open"
+                          type="button"
+                          onClick={() => {
+                            setMessage(`${place.place_name}을 포함해서 지금 갈 코스를 추천해줘.`);
+                            setAccountOpen(false);
+                          }}
+                        >
+                          <strong>{place.place_name}</strong>
+                          <small>{place.category ?? "저장한 장소"} · 코스에 넣기</small>
+                        </button>
+                        <button type="button" onClick={() => removeFavorite(place.place_key)}>
+                          삭제
+                        </button>
+                      </div>
+                    ))
+                  ) : (
+                    <small>즐겨찾기한 장소가 아직 없어요.</small>
+                  )}
+                </section>
+                <section className="saved-course-list">
+                  <b>숨긴 장소</b>
+                  {excludedPlaces.length ? (
+                    excludedPlaces.map((place) => (
+                      <div key={place.place_key}>
+                        <span className="saved-course-open">
+                          <strong>{place.place_name}</strong>
+                          <small>추천에서 제외 중</small>
+                        </span>
+                        <button type="button" onClick={() => restorePlace(place.place_key)}>
+                          복원
+                        </button>
+                      </div>
+                    ))
+                  ) : (
+                    <small>숨긴 장소가 없어요.</small>
+                  )}
+                </section>
+                <section className="saved-course-list">
                   <b>저장한 코스</b>
                   {savedCourses.length ? (
                     savedCourses.map((course) => (
@@ -645,6 +738,7 @@ function HomePage({
                       token: null,
                       user: null,
                       preferences: null,
+                      personalization: null,
                     });
                     setAccountOpen(false);
                   }}

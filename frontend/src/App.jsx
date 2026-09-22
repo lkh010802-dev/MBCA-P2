@@ -4,7 +4,7 @@ import AnalysisLoading from './components/recommendation/AnalysisLoading'
 import { useRecommendation } from './hooks/useRecommendation'
 import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { removeSession, writeSession } from './utils/sessionStore'
-import { getMe, getPreferences } from './api/accountApi'
+import { getMe, getPersonalizationProfile, getPreferences } from './api/accountApi'
 
 const RecommendationPage = lazy(() => import('./pages/RecommendationPage'))
 
@@ -35,9 +35,9 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem('koala-token')
     if (!token) return
-    Promise.all([getMe(token), getPreferences(token)])
-      .then(([user, preferences]) => setAccount({ token, user, preferences }))
-      .catch(() => { localStorage.removeItem('koala-token'); setAccount({ token: null, user: null, preferences: null }) })
+    Promise.all([getMe(token), getPreferences(token), getPersonalizationProfile(token)])
+      .then(([user, preferences, personalization]) => setAccount({ token, user, preferences, personalization }))
+      .catch(() => { localStorage.removeItem('koala-token'); setAccount({ token: null, user: null, preferences: null, personalization: null }) })
   }, [])
 
   const handleRecommendation = async (payload) => {
@@ -50,7 +50,8 @@ function App() {
     setResult(null)
     removeSession('koala-result')
     setView('loading')
-    const response = await request(payload, { signal: controller.signal })
+    // 인증 토큰은 서버가 DB의 명시적·행동 기반 취향을 불러올 때만 사용한다.
+    const response = await request({ ...payload, token: account.token }, { signal: controller.signal })
     if (currentRequestId !== requestId.current) return
     recommendationController.current = null
     if (response) {

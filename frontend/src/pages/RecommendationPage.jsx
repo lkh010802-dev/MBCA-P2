@@ -42,8 +42,12 @@ import {
   validatePlaceSelection,
 } from "../api/placesApi";
 import {
+  addFavoritePlace,
   excludePlace,
   getExcludedPlaces,
+  getFavoritePlaces,
+  recordInteraction,
+  removeFavoritePlace,
   saveCourse,
 } from "../api/accountApi";
 import { audit } from "../utils/auditTrace";
@@ -647,6 +651,7 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
   const [calculated, setCalculated] = useState(Boolean(restoredCourse?.course));
   const [places, setPlaces] = useState([]);
   const [excludedPlaceKeys, setExcludedPlaceKeys] = useState(() => new Set());
+  const [favoritePlaceKeys, setFavoritePlaceKeys] = useState(() => new Set());
   const photoLookupAttemptedRef = useRef(new Set());
   const [placeSourceFilter, setPlaceSourceFilter] = useState("all");
   const [placeCursor, setPlaceCursor] = useState(null);
@@ -659,14 +664,22 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
     let cancelled = false;
     if (!account?.token) {
       setExcludedPlaceKeys(new Set());
+      setFavoritePlaceKeys(new Set());
       return undefined;
     }
-    getExcludedPlaces(account.token)
-      .then((items) => {
-        if (!cancelled)
+    Promise.all([
+      getExcludedPlaces(account.token),
+      getFavoritePlaces(account.token),
+    ])
+      .then(([excluded, favorites]) => {
+        if (!cancelled) {
           setExcludedPlaceKeys(
-            new Set((items ?? []).map((item) => item.place_key)),
+            new Set((excluded ?? []).map((item) => item.place_key)),
           );
+          setFavoritePlaceKeys(
+            new Set((favorites ?? []).map((item) => item.place_key)),
+          );
+        }
       })
       .catch(() => {
         /* 저장 기능 장애가 핵심 추천을 막지 않게 한다. */
@@ -1138,8 +1151,63 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
       );
       setCalculated(false);
       setCourseResult(null);
+      void recordInteraction(account.token, {
+        event_type: "hide",
+        place_key: placeKey,
+        place_name: place.name,
+        category: place.category,
+        context_data: { area_name: selectedArea?.name ?? null },
+      }).catch(() => {});
     } catch (error) {
       setPlaceError(error.message ?? "이 장소를 숨기지 못했어요.");
+    }
+  };
+
+  const toggleFavoritePlace = async (place) => {
+    if (!account?.token) {
+      onOpenAccount?.();
+      return;
+    }
+    const placeKey = placeIdentity(place);
+    const isFavorite = favoritePlaceKeys.has(placeKey);
+    try {
+      if (isFavorite) {
+        await removeFavoritePlace(account.token, placeKey);
+      } else {
+        await addFavoritePlace(account.token, {
+          place_key: placeKey,
+          place_name: place.name,
+          category: place.category,
+          // 다른 기기에서도 코스에 다시 넣을 수 있는 최소 정보만 보관한다.
+          place_data: {
+            id: place.id,
+            source_id: place.source_id ?? null,
+            name: place.name,
+            address: place.address ?? null,
+            category: place.category,
+            latitude: place.latitude,
+            longitude: place.longitude,
+            image_url: place.imageUrl ?? null,
+          },
+        });
+      }
+      setFavoritePlaceKeys((current) => {
+        const next = new Set(current);
+        if (isFavorite) next.delete(placeKey);
+        else next.add(placeKey);
+        return next;
+      });
+      if (!isFavorite) {
+        void recordInteraction(account.token, {
+          event_type: "favorite",
+          place_key: placeKey,
+          place_name: place.name,
+          category: place.category,
+          context_data: { area_name: selectedArea?.name ?? null },
+        }).catch(() => {});
+      }
+    } catch (error) {
+      setPlaceError(error.message ?? "즐겨찾기를 변경하지 못했어요.");
     }
   };
 
@@ -1214,6 +1282,14 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
       return;
     }
     const nextPreferredId = preferredPlaceId ?? place.id;
+    // 선택 기록은 추천을 막지 않도록 실패를 무시하는 비동기 보조 요청이다.
+    void recordInteraction(account?.token, {
+      event_type: "place_select",
+      place_key: placeIdentity(place),
+      place_name: place.name,
+      category: place.category,
+      context_data: { area_name: selectedArea?.name ?? null },
+    }).catch(() => {});
     setPreferredPlaceId(nextPreferredId);
     setFocusedStopIndex(selectedPlaces.length);
     setSelectedPlaces([
@@ -2146,6 +2222,19 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
       setSheetExpanded(false);
       setCalculationStatus("ready");
       if (account?.token) {
+        // 확정은 개인화에서 가장 신뢰할 수 있는 행동이므로 코스의 각 활동을 기록한다.
+        orderedPlacesToConfirm.forEach((place) => {
+          void recordInteraction(account.token, {
+            event_type: "course_confirm",
+            place_key: placeIdentity(place),
+            place_name: place.name,
+            category: place.category,
+            context_data: {
+              area_name: selectedArea?.name ?? null,
+              transport_mode: transportMode,
+            },
+          }).catch(() => {});
+        });
         setServerSaveStatus("saving");
         try {
           await saveCourse(account.token, {
@@ -3067,6 +3156,9 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
                         const selected = selectedPlaces.some(
                           (item) => item.id === place.id,
                         );
+                        const favorite = favoritePlaceKeys.has(
+                          placeIdentity(place),
+                        );
                         const spaceLabel =
                           place.space_type === "indoor"
                             ? "실내"
@@ -3181,6 +3273,25 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
                                 </span>
                               )
                             )}
+                            <button
+                              className={`place-favorite-button${favorite ? " is-active" : ""}`}
+                              type="button"
+                              onClick={() => toggleFavoritePlace(place)}
+                              aria-label={
+                                favorite
+                                  ? `${place.name} 즐겨찾기 해제`
+                                  : `${place.name} 즐겨찾기`
+                              }
+                              title={
+                                account?.token
+                                  ? favorite
+                                    ? "즐겨찾기 해제"
+                                    : "즐겨찾기에 저장"
+                                  : "로그인하면 장소를 저장할 수 있어요"
+                              }
+                            >
+                              {favorite ? "★" : "☆"}
+                            </button>
                             <button
                               className="place-hide-button"
                               type="button"
