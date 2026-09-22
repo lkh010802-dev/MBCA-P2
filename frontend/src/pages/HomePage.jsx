@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useCurrentLocation } from "../hooks/useCurrentLocation";
 import koalaPeeking from "../assets/images/koala-peeking.webp";
 import TimeWheel from "../components/common/TimeWheel";
+import PromptHelpDialog from "../components/home/PromptHelpDialog";
 import {
   addAppointmentTime,
   needsAppointmentTimeClarification,
@@ -40,6 +41,7 @@ function HomePage({
   const [accountOpen, setAccountOpen] = useState(false);
   const [accountMode, setAccountMode] = useState("login");
   const [accountError, setAccountError] = useState("");
+  const [promptHelpOpen, setPromptHelpOpen] = useState(false);
   const [savedCourses, setSavedCourses] = useState([]);
   const [favoritePlaces, setFavoritePlaces] = useState([]);
   const [excludedPlaces, setExcludedPlaces] = useState([]);
@@ -53,6 +55,7 @@ function HomePage({
   const [appointmentPromptOpen, setAppointmentPromptOpen] = useState(false);
   const [pendingAppointmentMessage, setPendingAppointmentMessage] = useState("");
   const quickCourseRequestRef = useRef(false);
+  const messageInputRef = useRef(null);
 
   // 진입 버튼의 의미와 모달 첫 화면을 일치시킨다. 이전 회원가입 상태는 재사용하지 않는다.
   const openAccount = () => {
@@ -64,6 +67,15 @@ function HomePage({
     setAccountOpen(false);
     setAccountMode("login");
     setAccountError("");
+  };
+
+  const usePromptExample = (example) => {
+    setMessage(example);
+    setPromptHelpOpen(false);
+    requestAnimationFrame(() => {
+      messageInputRef.current?.focus();
+      messageInputRef.current?.setSelectionRange(example.length, example.length);
+    });
   };
   const {
     location,
@@ -401,14 +413,27 @@ function HomePage({
         </span>
       </button>
       <form className="recommendation-form" onSubmit={handleSubmit}>
-        <label htmlFor="recommendation-message">
-          어떤 시간을 보내고 싶으세요?
-        </label>
+        <div className="recommendation-label-row">
+          <label htmlFor="recommendation-message">
+            어떤 시간을 보내고 싶으세요?
+          </label>
+          <button
+            className="prompt-help-trigger"
+            type="button"
+            aria-label="자연어 질문 작성 도움말 열기"
+            aria-expanded={promptHelpOpen}
+            onClick={() => setPromptHelpOpen(true)}
+          >
+            <span>입력 도움말</span>
+            <b aria-hidden="true">?</b>
+          </button>
+        </div>
         <p className="recommendation-hint">
           현재 위치·남은 시간·하고 싶은 일을 편하게 적어주세요.
         </p>
         <div className="message-compose">
           <textarea
+            ref={messageInputRef}
             id="recommendation-message"
             value={message}
             onChange={(event) => setMessage(event.target.value)}
@@ -802,6 +827,11 @@ function HomePage({
           </div>
         </div>
       )}
+      <PromptHelpDialog
+        open={promptHelpOpen}
+        onClose={() => setPromptHelpOpen(false)}
+        onSelectExample={usePromptExample}
+      />
     </main>
   );
 }

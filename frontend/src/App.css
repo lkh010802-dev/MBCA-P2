@@ -489,6 +489,73 @@ body:has(.adventure-backdrop) .results-divider { pointer-events:none; }
 /* KOALA 핵심 흐름 리뉴얼 */
 .message-compose { position:relative; display:grid; gap:8px; margin-top:8px; }
 .message-compose textarea { margin-top:0; }
+.recommendation-label-row { display:flex; align-items:center; justify-content:space-between; gap:10px; }
+.recommendation-label-row label { color:var(--ink-strong); font-size:14px; font-weight:800; letter-spacing:-.04em; }
+.prompt-help-trigger { display:inline-flex; flex:none; min-height:32px; padding:0 8px 0 10px; align-items:center; gap:6px; border:1px solid #cbd5e2; border-radius:999px; color:#687c95; background:#f5f7fa; font:inherit; font-size:10px; font-weight:800; cursor:pointer; transition:border-color 160ms ease,color 160ms ease,background 160ms ease,transform 160ms ease; }
+.prompt-help-trigger b { display:grid; width:19px; height:19px; place-items:center; border-radius:50%; color:#fff; background:#8799af; font-size:11px; line-height:1; }
+.prompt-help-trigger:hover { border-color:#8db8ef; color:#286fda; background:#eef6ff; }
+.prompt-help-trigger:hover b { background:#397ee8; }
+.prompt-help-trigger:active { transform:scale(.95); }
+.prompt-help-trigger:focus-visible { outline:3px solid rgba(67,139,255,.2); outline-offset:2px; }
+.prompt-help-backdrop { position:fixed; z-index:120; inset:0; display:grid; padding:20px; place-items:center; background:rgba(16,35,61,.48); backdrop-filter:blur(5px); }
+.prompt-help-dialog { display:grid; width:min(100%,500px); max-height:min(88dvh,760px); overflow-y:auto; gap:16px; padding:22px; border-radius:24px; background:#fff; box-shadow:0 24px 70px rgba(10,38,78,.3); }
+.prompt-help-dialog > header { display:grid; grid-template-columns:38px minmax(0,1fr) 36px; align-items:start; gap:11px; }
+.prompt-help-dialog > header > span { display:grid; width:38px; height:38px; place-items:center; border-radius:13px; color:#2474df; background:#eaf3ff; font-size:17px; font-weight:900; }
+.prompt-help-dialog h2 { margin:1px 0 4px; color:#183d6b; font-size:19px; letter-spacing:-.04em; }
+.prompt-help-dialog header p { margin:0; color:#7187a2; font-size:11px; line-height:1.5; }
+.prompt-help-close { display:grid; width:36px; height:36px; padding:0; place-items:center; border:0; border-radius:50%; color:#7890ad; background:#f0f5fb; font:inherit; font-size:23px; line-height:1; cursor:pointer; }
+.prompt-help-formula { display:grid; grid-template-columns:1fr auto 1fr auto 1fr; align-items:center; gap:7px; }
+.prompt-help-formula span { display:grid; min-width:0; min-height:58px; padding:9px 7px; place-items:center; border:1px solid #d7e6f8; border-radius:13px; color:#3f628c; background:#f7faff; font-size:11px; font-weight:800; text-align:center; }
+.prompt-help-formula span b { display:grid; width:20px; height:20px; margin-bottom:3px; place-items:center; border-radius:50%; color:#fff; background:#3981ec; font-size:10px; }
+.prompt-help-formula > i { color:#9ab0ca; font-size:14px; font-style:normal; font-weight:900; }
+.prompt-help-spec,
+.prompt-help-rules { display:grid; gap:9px; padding:13px 14px; border:1px solid #dce8f6; border-radius:15px; background:#f8fbff; }
+.prompt-help-spec > strong,
+.prompt-help-rules > strong { color:#234d7e; font-size:12px; }
+.prompt-help-spec dl { display:grid; gap:8px; margin:0; }
+.prompt-help-spec dl > div { display:grid; grid-template-columns:108px minmax(0,1fr); align-items:start; gap:9px; }
+.prompt-help-spec dt { color:#315b8d; font-size:10px; font-weight:900; }
+.prompt-help-spec dt b { display:inline-block; min-width:29px; margin-right:5px; padding:2px 4px; border-radius:5px; color:#fff; background:#3d82e7; font-size:8px; text-align:center; }
+.prompt-help-spec dl > div:nth-child(3) dt b { color:#35679f; background:#dcecff; }
+.prompt-help-spec dl > div:nth-child(4) dt b { color:#637990; background:#e8edf3; }
+.prompt-help-spec dd { margin:0; color:#60758f; font-size:10px; font-weight:700; line-height:1.45; word-break:keep-all; }
+.prompt-help-rules ul { display:grid; gap:6px; margin:0; padding:0; list-style:none; }
+.prompt-help-rules li { position:relative; padding-left:13px; color:#60758f; font-size:10px; line-height:1.45; word-break:keep-all; }
+.prompt-help-rules li::before { content:'•'; position:absolute; left:1px; color:#4083df; font-weight:900; }
+.prompt-help-rules li b { color:#315f96; }
+.prompt-help-features { display:grid; gap:9px; }
+.prompt-help-feature-heading { display:flex; align-items:baseline; justify-content:space-between; gap:10px; }
+.prompt-help-feature-heading strong { color:#294d79; font-size:12px; }
+.prompt-help-feature-heading small { color:#7e91a8; font-size:9px; font-weight:700; }
+.prompt-help-feature-list { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.prompt-help-feature-list article { display:grid; grid-template-columns:30px minmax(0,1fr); align-items:start; gap:8px; padding:11px; border:1px solid #dce8f6; border-radius:14px; background:#fbfdff; }
+.prompt-help-feature-list article > i { display:grid; width:30px; height:30px; place-items:center; border-radius:10px; background:#eaf3ff; font-size:15px; font-style:normal; font-weight:900; }
+.prompt-help-feature-list article > div { display:grid; min-width:0; gap:3px; }
+.prompt-help-feature-list article strong { color:#234d7e; font-size:11px; }
+.prompt-help-feature-list article b { color:#4d73a0; font-size:9px; line-height:1.35; }
+.prompt-help-feature-list article p { margin:1px 0 0; color:#70839a; font-size:9px; font-weight:600; line-height:1.45; word-break:keep-all; }
+.prompt-help-examples { display:grid; gap:8px; }
+.prompt-help-example-heading { display:flex; align-items:baseline; justify-content:space-between; gap:10px; }
+.prompt-help-example-heading strong { color:#294d79; font-size:12px; }
+.prompt-help-example-heading small { color:#7e91a8; font-size:9px; font-weight:700; }
+.prompt-help-examples > button { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:3px 10px; min-height:58px; padding:10px 12px; border:1px solid #d5e4f7; border-radius:14px; color:#244e80; background:#fff; text-align:left; font:inherit; cursor:pointer; transition:border-color 160ms ease,background 160ms ease,transform 160ms ease; }
+.prompt-help-examples > button:hover { border-color:#81b1f0; background:#f4f9ff; }
+.prompt-help-examples > button:active { transform:scale(.99); }
+.prompt-help-examples small { grid-column:1; color:#6e9ad4; font-size:9px; font-weight:900; }
+.prompt-help-examples span { grid-column:1; overflow-wrap:normal; font-size:12px; font-weight:800; line-height:1.4; word-break:keep-all; }
+.prompt-help-examples i { grid-column:2; grid-row:1 / 3; align-self:center; color:#4385df; font-size:17px; font-style:normal; }
+.prompt-help-note { margin:0; padding:10px 12px; border-radius:12px; color:#58718e; background:#f2f6fb; font-size:10px; font-weight:700; line-height:1.5; }
+
+@media (max-width:599px) {
+  .prompt-help-trigger { min-height:34px; padding-right:8px; padding-left:10px; }
+  .prompt-help-backdrop { align-items:center; padding:16px; }
+  .prompt-help-dialog { width:min(100%,440px); max-height:min(88dvh,720px); overflow-y:auto; padding:20px 18px; border-radius:22px; }
+  .prompt-help-dialog h2 { font-size:18px; }
+  .prompt-help-spec dl > div { grid-template-columns:96px minmax(0,1fr); }
+  .prompt-help-feature-list { grid-template-columns:1fr; }
+  .prompt-help-feature-heading { display:grid; gap:2px; }
+  .prompt-help-example-heading { display:grid; gap:2px; }
+}
 .koala-auto-button { display:grid; grid-template-columns:auto minmax(0,1fr) auto; align-items:center; gap:10px; width:100%; min-height:64px; padding:11px 13px; border:2px solid #82b6ff; border-radius:17px; color:#174f99; background:linear-gradient(125deg,#eaf4ff 0%,#f8fbff 62%,#eaf4ff 100%); box-shadow:0 8px 20px rgba(38,112,218,.14); text-align:left; font:inherit; cursor:pointer; transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease; }
 .koala-auto-button:hover { border-color:#3385f4; box-shadow:0 11px 25px rgba(38,112,218,.22); transform:translateY(-1px); }
 .koala-auto-icon { display:grid; width:38px; height:38px; place-items:center; border-radius:12px; color:#fff; background:linear-gradient(135deg,#1764ee,#4a9aff); box-shadow:0 6px 13px rgba(28,105,225,.22); font-size:19px; }
