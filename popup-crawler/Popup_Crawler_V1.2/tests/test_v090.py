@@ -144,6 +144,24 @@ class V090Tests(unittest.TestCase):
         )
         self.assertEqual([], reasons)
 
+    def test_large_review_count_at_safe_rate_is_quarantined_without_blocking(self):
+        reasons = get_master_commit_block_reasons(
+            [{"classification": "REVIEW"} for _ in range(30)],
+            [],
+            [{"popup_id": "preview_1"}],
+            popup_record_count=600,
+        )
+        self.assertEqual([], reasons)
+
+    def test_large_review_rate_still_blocks_master_commit(self):
+        reasons = get_master_commit_block_reasons(
+            [{"classification": "REVIEW"} for _ in range(30)],
+            [],
+            [{"popup_id": "preview_1"}],
+            popup_record_count=100,
+        )
+        self.assertTrue(any(reason.startswith("classification_quarantine_rate=") for reason in reasons))
+
     def test_master_commit_is_allowed_for_clean_nonempty_canonical(self):
         reasons = get_master_commit_block_reasons([], [], [{"popup_id": "preview_1"}])
         self.assertEqual(reasons, [])

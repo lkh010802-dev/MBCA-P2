@@ -88,12 +88,17 @@ def get_master_commit_block_reasons(
     apply_rate_gate = popup_record_count is not None
     effective_popup_count = popup_record_count or max(1, len(canonical) + duplicate_quarantine_count)
 
-    if len(classification_review) > max_classification_review_commit:
+    classification_rate = len(classification_review) / max(1, effective_popup_count)
+    # When the denominator is known, use the quarantine rate as the production
+    # gate. A source may publish many same-type non-popup rows in one batch; the
+    # rows are already excluded from today's snapshot and protected in master,
+    # so an absolute count alone must not stop delivery. Keep the count gate for
+    # callers that cannot provide a reliable total.
+    if not apply_rate_gate and len(classification_review) > max_classification_review_commit:
         reasons.append(
             f"classification_quarantine={len(classification_review)} "
             f"> allowed={max_classification_review_commit}"
         )
-    classification_rate = len(classification_review) / max(1, effective_popup_count)
     if apply_rate_gate and classification_review and classification_rate > max_review_quarantine_rate:
         reasons.append(
             f"classification_quarantine_rate={classification_rate:.1%} "
@@ -313,7 +318,11 @@ def main() -> None:
     )
     tolerated_classification_review_count = (
         len(classification_review)
-        if 0 < len(classification_review) <= args.max_classification_review_commit
+        if classification_review
+        and not any(
+            reason.startswith("classification_quarantine")
+            for reason in master_commit_block_reasons
+        )
         else 0
     )
     tolerated_duplicate_review_count = (

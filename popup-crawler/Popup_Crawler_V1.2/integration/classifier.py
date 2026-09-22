@@ -73,6 +73,7 @@ DAYFORYOU_ROUNDUP_TITLE_RE = re.compile(
 )
 BROKEN_TITLE_PREFIX_RE = re.compile(r"^\s*(?:장소|주소|기간|일시)\s*[:：]", re.I)
 CULTURAL_NON_POPUP_CATEGORIES = {"전시", "페스티벌"}
+POPGA_NON_POPUP_EVENT_TYPES = {"FESTIVAL", "EXHIBITION", "EVENT", "PERFORMANCE"}
 
 
 def _result(
@@ -104,7 +105,11 @@ def classify_popga(row: dict[str, Any]) -> dict[str, Any]:
     if EXPLICIT_POPUP_RE.search(name):
         return _result(row, "POPUP", "explicit_popup_title_signal", 0.99)
 
-    if event_type in {"FESTIVAL", "EXHIBITION", "EVENT"}:
+    # Popga can add a large batch of ordinary cultural listings at once. Keep
+    # known non-store source types out of the manual-review queue so a harmless
+    # feed expansion cannot block the daily export. An explicit popup title is
+    # still handled above and therefore remains POPUP.
+    if event_type in POPGA_NON_POPUP_EVENT_TYPES:
         return _result(
             row,
             "NON_POPUP",

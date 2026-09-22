@@ -129,6 +129,33 @@ class IntegrationTests(unittest.TestCase):
         classified = classify_popga(row)
         self.assertEqual("NON_POPUP", classified["classification"])
 
+    def test_regular_performance_batch_is_non_popup(self) -> None:
+        rows = []
+        for index in range(30):
+            row = record("popga", str(9000 + index), f"일반 공연 {index}")
+            row["event_type_raw"] = "PERFORMANCE"
+            rows.append(classify_popga(row))
+
+        self.assertTrue(all(row["classification"] == "NON_POPUP" for row in rows))
+        self.assertTrue(
+            all(
+                row["classification_reasons"] == ["explicit_non_store_type_performance"]
+                for row in rows
+            )
+        )
+
+    def test_explicit_popup_title_overrides_performance_type(self) -> None:
+        row = record("popga", "9998", "공연 굿즈 팝업스토어")
+        row["event_type_raw"] = "PERFORMANCE"
+        classified = classify_popga(row)
+        self.assertEqual("POPUP", classified["classification"])
+
+    def test_unknown_popga_type_stays_in_review(self) -> None:
+        row = record("popga", "9999", "새로운 유형의 행사")
+        row["event_type_raw"] = "NEW_UNKNOWN_TYPE"
+        classified = classify_popga(row)
+        self.assertEqual("REVIEW", classified["classification"])
+
     def test_dayforyou_promotion_is_rechecked(self) -> None:
         row = record(
             "dayforyou",
