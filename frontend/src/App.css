@@ -663,12 +663,12 @@ body:has(.adventure-backdrop) .results-divider { pointer-events:none; }
 .course-replacement { display:grid; gap:7px; }
 .course-replacement > button { display:flex; align-items:center; justify-content:space-between; width:100%; min-height:40px; padding:0 11px; border:1px solid #d7e4f3; border-radius:12px; color:#4d6d91; background:#f8fbff; font:inherit; font-size:10px; font-weight:900; cursor:pointer; }
 .course-replacement > button span { color:#2474df; }
-.course-replacement > div { display:grid; grid-template-columns:auto minmax(0,1fr) auto; align-items:center; gap:9px; padding:10px; border:1px solid #cfe2f8; border-radius:13px; background:#fff; }
+.course-replacement > div { display:grid; grid-template-columns:auto minmax(0,1fr); align-items:center; gap:9px; padding:10px; border:1px solid #cfe2f8; border-radius:13px; background:#fff; }
 .course-replacement p { display:grid; min-width:0; gap:2px; margin:0; }
 .course-replacement p small { color:#899bb0; font-size:9px; }
-.course-replacement p b { overflow:hidden; color:#234e80; font-size:12px; text-overflow:ellipsis; white-space:nowrap; }
-.course-replacement p em { color:#3b79c6; font-size:9px; font-style:normal; }
-.course-replacement > div > button { min-height:34px; padding:0 9px; border:0; border-radius:10px; color:#fff; background:#287cf2; font:inherit; font-size:9px; font-weight:900; cursor:pointer; }
+.course-replacement p b { display:-webkit-box; overflow:hidden; color:#234e80; font-size:12px; line-height:1.35; overflow-wrap:normal; word-break:keep-all; -webkit-box-orient:vertical; -webkit-line-clamp:2; }
+.course-replacement p em { overflow-wrap:normal; color:#3b79c6; font-size:9px; font-style:normal; line-height:1.4; word-break:keep-all; }
+.course-replacement > div > button { grid-column:1 / -1; width:100%; min-height:38px; padding:0 12px; border:0; border-radius:10px; color:#fff; background:#287cf2; font:inherit; font-size:10px; font-weight:900; cursor:pointer; }
 @keyframes auto-course-progress { from { transform:translateX(-75%); } to { transform:translateX(135%); } }
 
 .guide-complete { display:grid; justify-items:center; gap:9px; padding:22px 16px; border:1px solid #d7e7f9; border-radius:20px; background:linear-gradient(150deg,#f5faff,#fff); text-align:center; }

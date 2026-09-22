@@ -745,6 +745,7 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
   const didDrag = useRef(false);
   const requestingRouteKeys = useRef(new Set());
   const loadMoreRequestRef = useRef(false);
+  const placeScrollRef = useRef(null);
   const dividerDragRef = useRef(null);
   const placeRequestGenerationRef = useRef(0);
   const calculationRequest = useRef(0);
@@ -1118,6 +1119,12 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
         setPreferredPlaceId(null);
         setCalculated(false);
         setCourseResult(null);
+        // 교체된 목록은 새 목록으로 인식할 수 있도록 렌더링 직후 첫 장소로 이동한다.
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            placeScrollRef.current?.scrollTo({ top: 0, behavior: "smooth" });
+          });
+        });
       }
       setNextOffset(data.next_offset ?? null);
       setHasMorePlaces(Boolean(data.has_more));
@@ -2856,7 +2863,7 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
                               <em>{recommendationReason(replacementPlace)}</em>
                             </p>
                             <button type="button" onClick={confirmReplacement}>
-                              {replacementPlace.name}(으)로 교체
+                              이 장소로 교체
                             </button>
                           </div>
                         )}
@@ -3151,7 +3158,10 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
                         </button>
                       </div>
                     )}
-                    <div className="ranking-scroll place-scroll">
+                    <div
+                      className="ranking-scroll place-scroll"
+                      ref={placeScrollRef}
+                    >
                       {filteredPlaces.map((place) => {
                         const selected = selectedPlaces.some(
                           (item) => item.id === place.id,

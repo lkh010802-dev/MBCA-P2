@@ -288,12 +288,43 @@ button, textarea, input { font: inherit; }
   .quick-course-list small { display:none; }
 }
 
-/* Authoritative mobile header rules; keep after legacy responsive declarations. */
+/* 모바일 헤더의 최종 규칙: 현재 이동수단만 보이고, 선택할 때 메뉴를 펼친다. */
 @media (max-width:899px) {
-  .map-topbar { grid-template-columns:44px minmax(0,1fr); }
-  .map-topbar .transport-current-trigger { display:none; }
-  .map-topbar .map-transport-selector,
-  .map-topbar .map-transport-selector.is-open { position:static; display:flex; grid-column:2; width:100%; min-width:0; max-width:none; margin:0; box-shadow:none; }
-  .map-topbar .map-transport-selector button { flex:0 0 48px; min-width:48px; justify-content:center; }
-  .map-topbar .map-transport-selector button.is-active { flex:1 1 auto; }
+  .map-topbar {
+    right:12px;
+    left:12px;
+    grid-template-columns:44px minmax(0,1fr) auto;
+    min-height:52px;
+    padding:5px 7px;
+  }
+  .map-topbar > .map-topbar-title { display:block; min-width:0; }
+  .map-topbar .results-back { grid-column:1; width:44px; min-width:44px; }
+  .map-topbar .transport-current-trigger {
+    display:inline-flex;
+    grid-column:3;
+    min-width:88px;
+    min-height:40px;
+  }
+  .map-topbar .map-transport-selector {
+    position:absolute;
+    top:calc(100% + 6px);
+    right:0;
+    left:auto;
+    display:none;
+    width:min(280px,calc(100vw - 24px));
+    max-width:none;
+    margin:0;
+    border:1px solid #cfe1fa;
+    border-radius:13px;
+    background:rgba(255,255,255,.98);
+    box-shadow:0 10px 24px rgba(26,70,129,.2);
+  }
+  .map-topbar .map-transport-selector.is-open { display:flex; }
+  .map-topbar .map-transport-selector button {
+    flex:1 1 0;
+    min-width:0;
+    min-height:44px;
+    justify-content:center;
+  }
+  .map-topbar .map-transport-selector button span { display:inline; }
 }

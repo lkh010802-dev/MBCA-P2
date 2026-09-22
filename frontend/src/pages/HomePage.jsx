@@ -53,6 +53,18 @@ function HomePage({
   const [appointmentPromptOpen, setAppointmentPromptOpen] = useState(false);
   const [pendingAppointmentMessage, setPendingAppointmentMessage] = useState("");
   const quickCourseRequestRef = useRef(false);
+
+  // 진입 버튼의 의미와 모달 첫 화면을 일치시킨다. 이전 회원가입 상태는 재사용하지 않는다.
+  const openAccount = () => {
+    setAccountMode("login");
+    setAccountError("");
+    setAccountOpen(true);
+  };
+  const closeAccount = () => {
+    setAccountOpen(false);
+    setAccountMode("login");
+    setAccountError("");
+  };
   const {
     location,
     address,
@@ -85,7 +97,7 @@ function HomePage({
   }, [account?.preferences?.activity_preferences]);
 
   useEffect(() => {
-    if (accountRequestId > 0) setAccountOpen(true);
+    if (accountRequestId > 0) openAccount();
   }, [accountRequestId]);
 
   useEffect(() => {
@@ -339,7 +351,7 @@ function HomePage({
         <button
           className="account-button"
           type="button"
-          onClick={() => setAccountOpen(true)}
+          onClick={openAccount}
         >
           {account?.user ? account.user.nickname : "로그인"}
         </button>
@@ -584,7 +596,7 @@ function HomePage({
             <button
               className="account-close"
               type="button"
-              onClick={() => setAccountOpen(false)}
+              onClick={closeAccount}
             >
               ×
             </button>
