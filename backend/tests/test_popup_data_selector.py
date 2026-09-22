@@ -11,7 +11,9 @@ sys.path.insert(0, str(BACKEND_DIR / "core"))
 sys.path.insert(0, str(BACKEND_DIR / "extensions"))
 
 from popup_data_selector import (
+    filter_recommendable_popup_places,
     get_popup_data_candidates,
+    is_sales_centered_without_experience,
     load_popup_places_for_date,
 )
 from models import PlaceRecommendRequest
@@ -103,6 +105,92 @@ def test_loader_returns_empty_without_raising_when_no_data_exists(tmp_path):
     )
 
     assert places == []
+
+
+def test_sales_focused_gift_popups_are_not_recommendable():
+    gift_popups = [
+        {
+            "name": "[신지어부가] 전복 선물세트 Pop-Up",
+            "description": "완도 수산물로 만든 건강한 한 끼",
+            "tags": ["#전복선물세트Pop-Up"],
+        },
+        {
+            "name": "[스톤헨지] 추석 Gift Pop-Up",
+            "description": "행사상품 35~60% OFF 및 단독 특가 안내",
+            "tags": ["#추석GiftPop-Up"],
+        },
+    ]
+
+    assert all(
+        is_sales_centered_without_experience(place)
+        for place in gift_popups
+    )
+    assert filter_recommendable_popup_places(gift_popups) == []
+
+
+def test_discount_popup_with_an_experience_is_kept():
+    popup = {
+        "name": "향수 브랜드 팝업",
+        "description": (
+            "오픈 기념 20% 할인과 함께 향을 직접 시향하고 "
+            "나만의 향을 만드는 체험을 제공합니다."
+        ),
+    }
+
+    assert not is_sales_centered_without_experience(popup)
+    assert filter_recommendable_popup_places([popup]) == [popup]
+
+
+def test_limited_goods_popup_is_kept_despite_purchase_benefits():
+    popup = {
+        "name": "캐릭터 콜라보 팝업",
+        "description": (
+            "팝업 한정 굿즈와 신제품을 공개하며 "
+            "5만원 이상 구매 시 포토카드를 증정합니다."
+        ),
+    }
+
+    assert not is_sales_centered_without_experience(popup)
+
+
+def test_benefit_only_card_notice_is_filtered():
+    popup = {
+        "name": "NH농협 / 우리카드 최대 6개월 무이자 할부",
+        "description": "type=gift",
+    }
+
+    assert is_sales_centered_without_experience(popup)
+
+
+def test_loader_logs_and_filters_sales_only_popups(tmp_path, caplog):
+    path = tmp_path / "20260921_popup_places.json"
+    path.write_text(
+        json.dumps(
+            [
+                {
+                    **_popup("체험 팝업"),
+                    "description": "현장에서 직접 시향할 수 있습니다.",
+                },
+                {
+                    **_popup("추석 Gift Pop-Up"),
+                    "description": "행사상품 35~60% OFF",
+                },
+            ],
+            ensure_ascii=False,
+        ),
+        encoding="utf-8",
+    )
+
+    with caplog.at_level("INFO", logger="uvicorn.error"):
+        places = load_popup_places_for_date(
+            now=datetime(2026, 9, 21, 9, tzinfo=KST),
+            data_dir=tmp_path,
+        )
+
+    assert [place["name"] for place in places] == ["체험 팝업"]
+    assert "count=1" in caplog.text
+    assert "excluded_sales=1" in caplog.text
+    assert "raw_count=2" in caplog.text
 
 
 def test_place_request_forwards_reference_date_to_recommendation_service():
