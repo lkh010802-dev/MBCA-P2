@@ -1,5 +1,5 @@
 from typing import Annotated, Any, Literal
-from datetime import datetime
+from datetime import date, datetime
 
 from pydantic import (
     BaseModel,
@@ -482,6 +482,9 @@ class PlaceRecommendRequest(BaseModel):
         ActivityCode,
         PreferenceLevel,
     ] = Field(default_factory=dict)
+
+    # 일정에서 전달된 날짜가 있으면 해당 날짜의 팝업 데이터를 우선한다.
+    reference_date: date | None = None
 
 
 class AdventureAreaRequest(BaseModel):

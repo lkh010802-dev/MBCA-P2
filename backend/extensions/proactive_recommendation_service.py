@@ -1,18 +1,16 @@
 from datetime import date, datetime
-from pathlib import Path
 
 from activity_duration_policy import get_activity_duration_policy
 from candidate_filter import calculate_available_stay_minutes
 from map_service import get_travel
 from place_availability import SEOUL_TIMEZONE, evaluate_place_availability
-from popup_service import load_popup_places
+from popup_data_selector import load_popup_places_for_date
 from seoul_culture_service import (
     calculate_distance_m,
     get_nearby_current_seoul_culture_places,
 )
 
 
-POPUP_DATA_PATH = Path(__file__).resolve().parent / "data" / "20260908_popup_places.json"
 MAX_DISTANCE_M = 2000
 MAX_TRAVEL_CANDIDATES = 3
 MAX_DETOUR_TRAVEL_MINUTES = 15
@@ -96,7 +94,7 @@ def find_proactive_suggestion(
     transport_mode,
     activities=None,
     *,
-    load_popup_places_fn=load_popup_places,
+    load_popup_places_fn=load_popup_places_for_date,
     load_culture_places_fn=get_nearby_current_seoul_culture_places,
     get_travel_fn=get_travel,
     evaluate_availability_fn=evaluate_place_availability,
@@ -111,7 +109,7 @@ def find_proactive_suggestion(
     candidates = []
 
     try:
-        popup_places = load_popup_places_fn(POPUP_DATA_PATH)
+        popup_places = load_popup_places_fn(reference_date=departure_date)
     except Exception:
         popup_places = []
 

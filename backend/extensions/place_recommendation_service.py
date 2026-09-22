@@ -1,5 +1,4 @@
 from datetime import date, datetime
-from pathlib import Path
 import logging
 
 from map_service import (
@@ -26,11 +25,11 @@ from seoul_culture_service import (
     calculate_distance_m,
     get_nearby_current_exhibitions,
 )
-from popup_service import PopupDataError, load_popup_places
+from popup_data_selector import load_popup_places_for_date
+from popup_service import PopupDataError
 
 logger = logging.getLogger("uvicorn.error")
 
-POPUP_DATA_PATH = Path(__file__).resolve().parent / "data" / "20260908_popup_places.json"
 POPUP_MAX_DISTANCE_M = 2000
 POPUP_ACTIVITIES = frozenset({
     "shopping", "entertainment", "food", "cafe", "culture",
@@ -496,6 +495,7 @@ def recommend_places(
     budget_preference: str | None,
     space_preference: str | None,
     activity_preferences: dict[str, int] | None = None,
+    reference_date: date | None = None,
 ):
     """
     추천된 지역을 기준으로 실제 방문 장소를 추천한다.
@@ -588,10 +588,11 @@ def recommend_places(
     if POPUP_ACTIVITIES.intersection(active_activities):
         try:
             normalized_popup_places = filter_current_nearby_popup_places(
-                load_popup_places(POPUP_DATA_PATH),
+                load_popup_places_for_date(reference_date),
                 active_activities,
                 latitude,
                 longitude,
+                reference_date=reference_date,
             )
         except PopupDataError as error:
             logger.warning("[popup-data-error] %s", error)
