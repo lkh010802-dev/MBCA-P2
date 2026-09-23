@@ -1,4 +1,4 @@
-from naver_image_service import _select_image, lookup_place_photos
+from naver_image_service import _query_variants, _select_image, lookup_place_photos
 
 def test_enrichment_is_optional_without_credentials(monkeypatch):
     monkeypatch.delenv("NAVER_CLIENT_ID", raising=False)
@@ -15,3 +15,10 @@ def test_image_selection_prefers_matching_place_title():
 
 def test_no_valid_https_image_returns_none():
     assert _select_image("장소", [{"title": "장소", "link": "http://unsafe.example/a.jpg"}]) is None
+
+
+def test_image_queries_start_specific_and_finish_with_place_name():
+    queries = _query_variants("어니언 성수", "서울 성동구 아차산로 9길", "cafe")
+    assert queries[0] == "어니언 성수 성동구 카페 매장"
+    assert queries[-1] == "어니언 성수"
+    assert len(queries) == len(set(queries))

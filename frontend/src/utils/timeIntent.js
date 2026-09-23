@@ -1,12 +1,15 @@
-const APPOINTMENT_WORDS = /(약속|일정|만나|미팅|예약|도착해야|가야\s*해)/;
+const APPOINTMENT_WORDS =
+  /(약속|일정|만나|미팅|예약|도착(?:해야|하기)|가야\s*(?:해|하는데)|들어가야|출발해야)/;
 const VAGUE_TIME_WORDS = /(아침|점심|오후|저녁|밤)/;
+const RELATIVE_DEADLINE_WORDS =
+  /(이따(?:가)?|그\s*때까지|그\s*전(?:에)?|가기\s*전(?:에)?|도착하기\s*전(?:에)?)/;
 const EXPLICIT_CLOCK = /(오전|오후)?\s*\d{1,2}\s*(?:시|:\s*\d{2})/;
 
 export function needsAppointmentTimeClarification(message) {
   const text = String(message ?? "").trim();
   return (
     APPOINTMENT_WORDS.test(text) &&
-    VAGUE_TIME_WORDS.test(text) &&
+    (VAGUE_TIME_WORDS.test(text) || RELATIVE_DEADLINE_WORDS.test(text)) &&
     !EXPLICIT_CLOCK.test(text)
   );
 }

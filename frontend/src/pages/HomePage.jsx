@@ -36,10 +36,12 @@ function HomePage({
   account,
   onAccountChange,
   accountRequestId = 0,
+  onAccountClose,
 }) {
   const [message, setMessage] = useState("");
   const [accountOpen, setAccountOpen] = useState(false);
   const [accountMode, setAccountMode] = useState("login");
+  const [accountSection, setAccountSection] = useState("taste");
   const [accountError, setAccountError] = useState("");
   const [promptHelpOpen, setPromptHelpOpen] = useState(false);
   const [savedCourses, setSavedCourses] = useState([]);
@@ -60,6 +62,7 @@ function HomePage({
   // 진입 버튼의 의미와 모달 첫 화면을 일치시킨다. 이전 회원가입 상태는 재사용하지 않는다.
   const openAccount = () => {
     setAccountMode("login");
+    setAccountSection("taste");
     setAccountError("");
     setAccountOpen(true);
   };
@@ -67,6 +70,7 @@ function HomePage({
     setAccountOpen(false);
     setAccountMode("login");
     setAccountError("");
+    onAccountClose?.();
   };
 
   const usePromptExample = (example) => {
@@ -288,7 +292,8 @@ function HomePage({
     const form = new FormData(event.currentTarget);
     setAccountError("");
     try {
-      if (accountMode === "signup") {
+      const wasSignup = accountMode === "signup";
+      if (wasSignup) {
         await signup({
           email: form.get("email"),
           password: form.get("password"),
@@ -306,7 +311,8 @@ function HomePage({
         getPersonalizationProfile(session.access_token),
       ]);
       onAccountChange({ token: session.access_token, user, preferences, personalization });
-      setAccountOpen(false);
+      setAccountSection("taste");
+      setAccountOpen(wasSignup);
     } catch (requestError) {
       setAccountError(requestError.message);
     }
@@ -446,6 +452,11 @@ function HomePage({
             spellCheck={false}
             placeholder={"예) 지금 신림역이고 카페에서 쉬다가 산책하고 싶어."}
           />
+          {(quickCourseError || error) && (
+            <p className="recommendation-error" role="alert">
+              {quickCourseError || error}
+            </p>
+          )}
           <button
             className="koala-auto-button"
             type="button"
@@ -472,9 +483,9 @@ function HomePage({
             </div>
             <div className="home-adventure-cards">
               {[
-                ["blind-course", "🎁", "블라인드 코스", "목적지는 나중에 공개"],
-                ["course", "🎲", "랜덤 코스", "고민 없이 바로 출발"],
-                ["quest", "✓", "오늘의 퀘스트", "작지만 새로운 도전"],
+                ["blind-course", "🎁", "미스터리 가이드", "목적지는 도착하면 공개"],
+                ["course", "🎲", "랜덤 코스", "완성된 코스를 바로 받기"],
+                ["quest", "✓", "오늘의 퀘스트", "코스마다 작은 미션"],
               ].map(([mode, icon, title, copy]) => (
                 <button key={mode} type="button" onClick={() => { setPendingAdventureMode(mode); setTimePickerOpen(true); }}>
                   <i>{icon}</i><b>{title}</b><small>{copy}</small>
@@ -483,9 +494,6 @@ function HomePage({
             </div>
           </section>
         </div>
-        {(quickCourseError || error) && (
-          <p className="recommendation-error">{quickCourseError || error}</p>
-        )}
         <button
           className="recommendation-cta"
           type="submit"
@@ -629,7 +637,11 @@ function HomePage({
             </button>
             {account?.user ? (
               <form onSubmit={savePreferences}>
-                <h2>{account.user.nickname}님의 선호</h2>
+                <div className="account-page-heading">
+                  <small>내 코알라</small>
+                  <h2>{account.user.nickname}님, 취향에 맞춰드릴게요</h2>
+                  <p>설정한 내용은 장소 순서와 이동 방법을 정할 때 사용돼요.</p>
+                </div>
                 <p className="personalization-summary">
                   {account.personalization?.interaction_count
                     ? `${account.personalization.interaction_count}개의 선택을 추천에 반영하고 있어요.`
@@ -640,6 +652,27 @@ function HomePage({
                     개발용 임시 계정 · 이 기기에만 저장돼요
                   </p>
                 )}
+                <nav className="account-section-tabs" aria-label="내 코알라 메뉴">
+                  <button
+                    type="button"
+                    className={accountSection === "taste" ? "is-active" : ""}
+                    onClick={() => setAccountSection("taste")}
+                  >
+                    내 취향
+                  </button>
+                  <button
+                    type="button"
+                    className={accountSection === "library" ? "is-active" : ""}
+                    onClick={() => setAccountSection("library")}
+                  >
+                    저장한 목록
+                  </button>
+                </nav>
+                {accountSection === "taste" && <>
+                <div className="preference-benefit" role="note">
+                  <b>이렇게 달라져요</b>
+                  <span>선호 활동은 먼저 보여주고, 이동수단과 실내·야외 성향은 코스 계산에 반영해요.</span>
+                </div>
                 <label>
                   이동수단
                   <select
@@ -692,6 +725,8 @@ function HomePage({
                     </label>
                   ))}
                 </fieldset>
+                </>}
+                {accountSection === "library" && <>
                 <section className="saved-course-list">
                   <b>즐겨찾기 장소</b>
                   {favoritePlaces.length ? (
@@ -766,8 +801,9 @@ function HomePage({
                   )}
                   {savedCourseNotice && <p>{savedCourseNotice}</p>}
                 </section>
+                </>}
                 {accountError && <p>{accountError}</p>}
-                <button type="submit">선호 저장</button>
+                {accountSection === "taste" && <button type="submit">내 취향 저장하기</button>}
                 <button
                   className="account-logout"
                   type="button"

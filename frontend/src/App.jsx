@@ -18,6 +18,22 @@ function App() {
   const { request, error } = useRecommendation()
   const [account, setAccount] = useState({ token: localStorage.getItem('koala-token'), user: null, preferences: null })
   const [accountRequestId, setAccountRequestId] = useState(0)
+  const returnToResultAfterAccount = useRef(false)
+
+  // 결과 화면에서 로그인이 필요해도 작성 중인 코스를 폐기하지 않는다.
+  const handleAccountChange = (nextAccount) => {
+    setAccount(nextAccount)
+    if (returnToResultAfterAccount.current && result) {
+      returnToResultAfterAccount.current = false
+      setView('result')
+    }
+  }
+
+  const closeAccountFromResult = () => {
+    if (!returnToResultAfterAccount.current || !result) return
+    returnToResultAfterAccount.current = false
+    setView('result')
+  }
 
   useEffect(() => {
     let secondFrame = 0
@@ -37,7 +53,14 @@ function App() {
     if (!token) return
     Promise.all([getMe(token), getPreferences(token), getPersonalizationProfile(token)])
       .then(([user, preferences, personalization]) => setAccount({ token, user, preferences, personalization }))
-      .catch(() => { localStorage.removeItem('koala-token'); setAccount({ token: null, user: null, preferences: null, personalization: null }) })
+      .catch((restoreError) => {
+        // 네트워크 단절이나 서버 점검은 로그아웃 사유가 아니다. 서버가 토큰을
+        // 명시적으로 거부한 경우에만 저장된 로그인 정보를 제거한다.
+        if (restoreError?.status === 401) {
+          localStorage.removeItem('koala-token')
+          setAccount({ token: null, user: null, preferences: null, personalization: null })
+        }
+      })
   }, [])
 
   const handleRecommendation = async (payload) => {
@@ -88,9 +111,9 @@ function App() {
   return (
     <div className={view !== 'welcome' ? 'app-shell is-home-open' : 'app-shell'}>
       <WelcomePage onStart={() => setView('home')} />
-      <HomePage isOpen={view === 'home'} onRecommend={handleRecommendation} onOpenSavedCourse={openSavedCourse} error={error} account={account} onAccountChange={setAccount} accountRequestId={accountRequestId} />
+      <HomePage isOpen={view === 'home'} onRecommend={handleRecommendation} onOpenSavedCourse={openSavedCourse} error={error} account={account} onAccountChange={handleAccountChange} accountRequestId={accountRequestId} onAccountClose={closeAccountFromResult} />
       {view === 'loading' && <AnalysisLoading onEdit={cancelRecommendation} onCancel={cancelRecommendation} />}
-      {view === 'result' && <Suspense fallback={<AnalysisLoading onEdit={() => setView('home')} onCancel={() => setView('home')} />}><RecommendationPage response={result} onBack={() => { setResult(null); removeSession('koala-result'); setView('home') }} account={account} onOpenAccount={() => { setResult(null); removeSession('koala-result'); setView('home'); setAccountRequestId((current) => current + 1) }} /></Suspense>}
+      {result && (view === 'result' || returnToResultAfterAccount.current) && <Suspense fallback={<AnalysisLoading onEdit={() => setView('home')} onCancel={() => setView('home')} />}><RecommendationPage response={result} onBack={() => { setResult(null); removeSession('koala-result'); setView('home') }} account={account} onOpenAccount={() => { returnToResultAfterAccount.current = true; setView('home'); setAccountRequestId((current) => current + 1) }} /></Suspense>}
     </div>
   )
 }

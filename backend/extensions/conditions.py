@@ -34,7 +34,7 @@ def extract_explicit_activity_location(user_message: str | None):
     if not user_message:
         return None
     normalized = " ".join(user_message.strip().split())
-    activity_pattern = r"(?:쉬|먹|마시|보|놀|걷|산책|카페|전시|문화)"
+    activity_pattern = r"(?:쉬|먹|마시|보|놀|걷|산책|카페|전시|문화|갈\s*만|추천)"
     # 역·동 같은 접미사가 있는 장소는 가장 확실한 형태로 먼저 찾는다.
     match = re.search(
         rf"(?:^|\s)([가-힣A-Za-z0-9·._-]+(?:역|터미널|공항|공원|광장|시장|백화점|대학교|대학|병원|동|구))에서\s+.*{activity_pattern}",

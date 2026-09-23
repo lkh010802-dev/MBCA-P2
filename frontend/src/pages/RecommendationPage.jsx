@@ -63,6 +63,21 @@ const ARRIVAL_DWELL_SECONDS = 60;
 const MAX_ACCEPTED_GPS_ACCURACY_METERS = 80;
 const MAX_ARRIVAL_GPS_ACCURACY_METERS = 35;
 
+const QUEST_COPY = {
+  food: "이곳의 대표 메뉴를 하나 골라보세요.",
+  cafe: "평소 고르지 않던 음료나 디저트를 하나 골라보세요.",
+  walk: "마음에 드는 풍경을 하나 찾아 잠깐 바라보세요.",
+  culture: "가장 기억에 남는 작품이나 공간을 하나 골라보세요.",
+  entertainment: "처음 해보는 활동을 하나 시도해보세요.",
+  shopping: "1만 원 이하의 재미있는 물건을 하나 찾아보세요.",
+  drink: "처음 보는 메뉴를 하나 골라 천천히 즐겨보세요.",
+};
+
+function questForPlace(place, fallback, index) {
+  if (index === 0 && fallback) return fallback;
+  return QUEST_COPY[place.category] ?? "이 장소에서 평소와 다른 선택을 하나 해보세요.";
+}
+
 function placeIdentity(place) {
   const sourceId = place.source_id ?? place.sourceId;
   if (sourceId) return `${place.source ?? "place"}:${sourceId}`;
@@ -640,7 +655,6 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
   const [selectedAutoCourseId, setSelectedAutoCourseId] = useState(null);
   const [verifiedAutoCourses, setVerifiedAutoCourses] = useState([]);
   const [hoveredCoursePlaces, setHoveredCoursePlaces] = useState([]);
-  const [moreChoiceOpen, setMoreChoiceOpen] = useState(false);
   const [sidebarWidth, setSidebarWidth] = useState(
     () => Number(localStorage.getItem("koala-sidebar-width")) || 390,
   );
@@ -659,6 +673,11 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
   const [hasMorePlaces, setHasMorePlaces] = useState(false);
   const [placeStatus, setPlaceStatus] = useState("idle");
   const [placeError, setPlaceError] = useState("");
+  const [moreLoadError, setMoreLoadError] = useState("");
+  const [photoPreview, setPhotoPreview] = useState(null);
+  const [adventureExperience, setAdventureExperience] = useState(null);
+  const [questProgress, setQuestProgress] = useState({});
+  const [mysteryRevealed, setMysteryRevealed] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -747,6 +766,7 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
   const didDrag = useRef(false);
   const requestingRouteKeys = useRef(new Set());
   const loadMoreRequestRef = useRef(false);
+  const lastLoadMoreAtRef = useRef(0);
   const placeScrollRef = useRef(null);
   const dividerDragRef = useRef(null);
   const placeRequestGenerationRef = useRef(0);
@@ -767,7 +787,7 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
     [],
   );
 
-  const useAdventurePlaces = (adventurePlaces) => {
+  const useAdventurePlaces = async (adventurePlaces, options = {}) => {
     setPinnedCourseArea(null);
     const normalized = adventurePlaces.map((place, index) =>
       normalizePlace(place, `adventure-${index}`),
@@ -789,7 +809,61 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
     setPlaceMode(true);
     setCalculated(false);
     setCourseResult(null);
+    setCourseConfirmed(false);
+    setGuidanceStarted(false);
+    setGuideStep(0);
+    setQuestProgress({});
+    setMysteryRevealed(false);
+    setAdventureExperience({
+      mode: options.mode ?? null,
+      quest: options.quest ?? null,
+    });
     setSheetExpanded(true);
+    if (!options.autoConfirm || !normalized.length) return;
+    const requestId = ++calculationRequest.current;
+    setCalculationStatus("loading");
+    setCalculationError("");
+    try {
+      const course = await requestCourse({
+        startLocation,
+        selectedPlaces: normalized,
+        availableTimeMinutes,
+        departureDatetime: result.recommendationContext?.departure_datetime,
+        endLocation:
+          result.mapContext?.end ?? result.recommendationContext?.end_location,
+        transportMode,
+        optimizeOrder: false,
+        fresh: true,
+      });
+      if (requestId !== calculationRequest.current) return;
+      if (course.status !== "FEASIBLE") {
+        setCalculationStatus("warning");
+        setCalculationError("실제 이동시간을 포함하면 시간이 부족해요. 자동으로 다른 코스를 찾는 중이에요.");
+        setPlaceMode(false);
+        return;
+      }
+      setCourseResult({ validation: null, course });
+      setCourseHistory((current) => [
+        {
+          id: `${Date.now()}-${options.mode ?? "adventure"}`,
+          areaName: selectedArea?.name,
+          selectedPlaces: [...normalized],
+          validation: null,
+          course,
+        },
+        ...current,
+      ].slice(0, 3));
+      setCalculated(true);
+      setCourseConfirmed(true);
+      setGuidanceStarted(Boolean(options.startGuidance));
+      setSheetExpanded(Boolean(options.startGuidance));
+      setCalculationStatus("ready");
+    } catch (error) {
+      if (requestId !== calculationRequest.current) return;
+      setCalculationStatus("error");
+      setCalculationError(error.message ?? "코스를 완성하지 못했어요.");
+      setPlaceMode(false);
+    }
   };
   const useAdventureArea = (adventureArea) => {
     setPinnedCourseArea(null);
@@ -961,6 +1035,7 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
     setPlaceSourceFilter("all");
     setPlaceStatus("loading");
     setPlaceError("");
+    setMoreLoadError("");
     requestPlaces({
       areaName: selectedArea.name,
       latitude: selectedArea.latitude,
@@ -1088,58 +1163,60 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
     };
   }, [placeMode, placeStatus, places]);
 
-  const handleLoadMore = async (strategy = "append") => {
+  const handleLoadMore = async ({ force = false } = {}) => {
+    const now = Date.now();
     if (
       !placeCursor ||
       nextOffset == null ||
+      !hasMorePlaces ||
+      (moreLoadError && !force) ||
       placeStatus === "more-loading" ||
-      loadMoreRequestRef.current
+      loadMoreRequestRef.current ||
+      (!force && now - lastLoadMoreAtRef.current < 700)
     )
       return;
+
     loadMoreRequestRef.current = true;
+    lastLoadMoreAtRef.current = now;
     const requestGeneration = placeRequestGenerationRef.current;
+    const requestedOffset = nextOffset;
+    setMoreLoadError("");
     setPlaceStatus("more-loading");
     try {
       const data = await requestMorePlaces({
         cursor: placeCursor,
-        offset: nextOffset,
+        offset: requestedOffset,
       });
       if (requestGeneration !== placeRequestGenerationRef.current) return;
+
       setPlaces((current) => {
-        const base = strategy === "replace" ? [] : current;
-        const seen = new Set(base.map(placeIdentity));
+        const seen = new Set(current.map(placeIdentity));
         const additions = (data.places ?? [])
-          .map((place, index) => normalizePlace(place, base.length + index))
+          .map((place, index) => normalizePlace(place, current.length + index))
           .filter((place) => {
             const identity = placeIdentity(place);
             if (excludedPlaceKeys.has(identity)) return false;
             if (seen.has(identity)) return false;
             seen.add(identity);
             return true;
-          });
-        return [...base, ...additions];
+          })
+          .slice(0, 4);
+        return [...current, ...additions];
       });
-      if (strategy === "replace") {
-        setSelectedPlaces([]);
-        setPreferredPlaceId(null);
-        setCalculated(false);
-        setCourseResult(null);
-        // 교체된 목록은 새 목록으로 인식할 수 있도록 렌더링 직후 첫 장소로 이동한다.
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            placeScrollRef.current?.scrollTo({ top: 0, behavior: "smooth" });
-          });
-        });
-      }
-      setNextOffset(data.next_offset ?? null);
-      setHasMorePlaces(Boolean(data.has_more));
+
+      // 서버는 6개 단위 페이지를 반환하지만 화면에는 한 번에 4개 정도만 추가한다.
+      // 다음 요청을 4칸만 전진시켜 이번 응답에서 아직 노출하지 않은 후보도 다음 번에 다시 받는다.
+      const nextClientOffset = requestedOffset + 4;
+      const receivedCount = (data.places ?? []).length;
+      const moreCandidatesRemain = Boolean(data.has_more) || receivedCount > 4;
+      setNextOffset(moreCandidatesRemain ? nextClientOffset : null);
+      setHasMorePlaces(moreCandidatesRemain);
       setPlaceStatus("ready");
     } catch (error) {
       setPlaceStatus("ready");
-      setPlaceError(error.message);
+      setMoreLoadError(error.message || "장소를 불러오지 못했어요");
     } finally {
       loadMoreRequestRef.current = false;
-      setMoreChoiceOpen(false);
     }
   };
 
@@ -1556,6 +1633,15 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
   }, [courseResult, selectedPlaces]);
   const visiblePlaces =
     calculated && orderedPlaces.length ? orderedPlaces : selectedPlaces;
+  const mysteryMode = adventureExperience?.mode === "blind-course";
+  const mysteryName = (place, index) =>
+    mysteryMode && !mysteryRevealed && index >= guideStep
+      ? `비밀 장소 ${index + 1}`
+      : place.name;
+  const mapVisiblePlaces = visiblePlaces.map((place, index) => ({
+    ...place,
+    name: mysteryName(place, index),
+  }));
   const replacementTarget =
     visiblePlaces[focusedStopIndex ?? Math.max(0, visiblePlaces.length - 1)] ??
     null;
@@ -1845,6 +1931,20 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
     setAutoCourseMode(true);
     setReplacementPreviewOpen(false);
     setSheetExpanded(true);
+  };
+  const canReturnToAutoCourses =
+    response?._client_mode === "auto-course" &&
+    (calculated || Boolean(selectedAutoCourseId));
+  const handleResultsBack = () => {
+    if (!placeMode) {
+      onBack();
+      return;
+    }
+    if (canReturnToAutoCourses) {
+      returnToAutoCourses();
+      return;
+    }
+    returnToRegions();
   };
   const confirmReplacement = () => {
     if (!replacementTarget || !replacementPlace) return;
@@ -2345,7 +2445,7 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
         selectedArea={selectedArea}
         areaRoute={selectedAreaRoute}
         walkingRouteLoading={isWalkingRouteLoading}
-        selectedPlaces={visiblePlaces}
+        selectedPlaces={mapVisiblePlaces}
         previewPlaces={hoveredCoursePlaces}
         focusedStopIndex={mapFocusIndex}
         course={calculated ? courseResult?.course : null}
@@ -2380,9 +2480,13 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
             className={`results-back${placeMode ? " has-label" : " is-icon-only"}`}
             type="button"
             aria-label={
-              placeMode ? "추천 경로로 돌아가기" : "이전 화면으로 돌아가기"
+              canReturnToAutoCourses
+                ? "자동 코스 후보로 돌아가기"
+                : placeMode
+                  ? "추천 경로로 돌아가기"
+                  : "이전 화면으로 돌아가기"
             }
-            onClick={placeMode ? returnToRegions : onBack}
+            onClick={handleResultsBack}
           >
             <img src={iconBack} alt="" aria-hidden="true" />
             {placeMode && <b>추천 경로</b>}
@@ -2498,7 +2602,13 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
                         : guidanceStarted
                           ? "코스 안내 중이에요"
                           : courseConfirmed
-                            ? "코스가 확정됐어요"
+                            ? adventureExperience?.mode === "course"
+                              ? "랜덤 코스를 완성했어요"
+                              : adventureExperience?.mode === "quest"
+                                ? "오늘의 퀘스트 코스예요"
+                                : mysteryMode
+                                  ? "미스터리 안내를 시작해요"
+                                  : "코스가 확정됐어요"
                             : calculated
                               ? "코스가 완성됐어요"
                               : autoCourseCalculating
@@ -2510,8 +2620,10 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
                     <p>
                       {guideIsComplete
                         ? "오늘 이동을 완료했어요"
-                        : guidanceStarted
-                          ? "도착하면 다음 장소를 안내해 드려요"
+                          : guidanceStarted
+                            ? mysteryMode
+                              ? "다음 행동만 따라가면 목적지에서 장소가 공개돼요"
+                              : "도착하면 다음 장소를 안내해 드려요"
                           : courseConfirmed
                             ? "전체 동선을 마지막으로 확인해 보세요"
                             : calculated
@@ -2605,9 +2717,17 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
                           }}
                         >
                           <small>
-                            {guidePlace ? "다음 장소" : "다음 일정"}
+                            {guidePlace
+                              ? mysteryMode && !mysteryRevealed
+                                ? "다음 행동"
+                                : "다음 장소"
+                              : "다음 일정"}
                           </small>
-                          <h3>{guidePlace?.name ?? "다음 일정 장소"}</h3>
+                          <h3>
+                            {guidePlace
+                              ? mysteryName(guidePlace, guideStep)
+                              : "다음 일정 장소"}
+                          </h3>
                           <strong>{formatLegTransport(guideTravel)}</strong>
                           <div
                             className={`guide-next-action${sheetExpanded ? "" : " is-compact"}`}
@@ -2643,6 +2763,16 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
                             </p>
                           )}
                         </section>
+                        {mysteryMode && guidePreviousPlace && (
+                          <div className="mystery-arrival-card" role="status">
+                            <small>방금 도착한 장소</small>
+                            <b>{guidePreviousPlace.name}</b>
+                            <span>
+                              {QUEST_COPY[guidePreviousPlace.category] ??
+                                "이곳을 천천히 둘러보세요."}
+                            </span>
+                          </div>
+                        )}
                         <div className="guide-stops">
                           {visiblePlaces.map((place, index) => (
                             <button
@@ -2658,7 +2788,7 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
                               onClick={() => setGuideStep(index)}
                             >
                               <i>{index + 1}</i>
-                              <span>{place.name}</span>
+                              <span>{mysteryName(place, index)}</span>
                             </button>
                           ))}
                           {result.mapContext?.end && (
@@ -2685,8 +2815,20 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
                             )
                           }
                         >
-                          도착했어요 <span>→</span>
+                          {mysteryMode && guideBoarding.length
+                            ? "내렸어요"
+                            : "도착했어요"}{" "}
+                          <span>→</span>
                         </button>
+                        {mysteryMode && !mysteryRevealed && (
+                          <button
+                            className="mystery-reveal-button"
+                            type="button"
+                            onClick={() => setMysteryRevealed(true)}
+                          >
+                            길을 잃었어요 · 목적지 확인
+                          </button>
+                        )}
                         <button
                           className="guide-reset-button"
                           type="button"
@@ -2720,7 +2862,9 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
                     </div>
                     <div className="course-compact-route">
                       <b>
-                        {visiblePlaces.map((place) => place.name).join(" → ")}
+                        {visiblePlaces
+                          .map((place, index) => mysteryName(place, index))
+                          .join(" → ")}
                       </b>
                       <button
                         type="button"
@@ -2734,6 +2878,60 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
                         전체 코스 보기
                       </button>
                     </div>
+                    {adventureExperience?.mode === "quest" && (
+                      <section className="course-quest-list" aria-label="오늘의 퀘스트">
+                        <div>
+                          <small>오늘의 작은 도전</small>
+                          <b>
+                            {Object.values(questProgress).filter(
+                              (status) => status === "done",
+                            ).length} / {visiblePlaces.length} 완료
+                          </b>
+                        </div>
+                        {visiblePlaces.map((place, index) => {
+                          const status = questProgress[place.id];
+                          return (
+                            <article key={place.id} className={status ? `is-${status}` : ""}>
+                              <span>{index + 1}</span>
+                              <p>
+                                <strong>{place.name}</strong>
+                                <small>
+                                  {questForPlace(
+                                    place,
+                                    adventureExperience.quest,
+                                    index,
+                                  )}
+                                </small>
+                              </p>
+                              <div>
+                                <button
+                                  type="button"
+                                  onClick={() =>
+                                    setQuestProgress((current) => ({
+                                      ...current,
+                                      [place.id]: "done",
+                                    }))
+                                  }
+                                >
+                                  완료했어요
+                                </button>
+                                <button
+                                  type="button"
+                                  onClick={() =>
+                                    setQuestProgress((current) => ({
+                                      ...current,
+                                      [place.id]: "skipped",
+                                    }))
+                                  }
+                                >
+                                  건너뛰기
+                                </button>
+                              </div>
+                            </article>
+                          );
+                        })}
+                      </section>
+                    )}
                     <div className="course-edit-actions">
                       <button
                         className="place-calc-button is-active course-reset-button"
@@ -2752,6 +2950,15 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
                           새 코스 추천
                         </button>
                         )}
+                      {adventureExperience?.mode === "course" && courseConfirmed && (
+                        <button
+                          className="auto-course-return"
+                          type="button"
+                          onClick={returnToRegions}
+                        >
+                          한 번 더 뽑기
+                        </button>
+                      )}
                     </div>
                     <div className="course-timeline">
                       <b>지도에 표시된 실제 이동 동선</b>
@@ -2768,8 +2975,8 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
                             <span>
                               {index === 0
                                 ? "현재 위치"
-                                : visiblePlaces[index - 1].name}{" "}
-                              → {place.name}
+                                : mysteryName(visiblePlaces[index - 1], index - 1)}{" "}
+                              → {mysteryName(place, index)}
                             </span>
                             <small>
                               {formatLegTransport(
@@ -2783,7 +2990,7 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
                             onClick={() => setFocusedStopIndex(index)}
                           >
                             <span>{index + 1}</span>
-                            <strong>{place.name}</strong>
+                            <strong>{mysteryName(place, index)}</strong>
                             <small>
                               {place.categoryLabel} · {place.stayMinutes}분
                               머무르기
@@ -3198,6 +3405,12 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
                     <div
                       className="ranking-scroll place-scroll"
                       ref={placeScrollRef}
+                      onScroll={(event) => {
+                        const target = event.currentTarget;
+                        const distanceToBottom =
+                          target.scrollHeight - target.scrollTop - target.clientHeight;
+                        if (distanceToBottom <= 180) void handleLoadMore();
+                      }}
                     >
                       {filteredPlaces.map((place) => {
                         const selected = selectedPlaces.some(
@@ -3216,7 +3429,7 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
                                 : null;
                         return (
                           <div
-                            className={`place-card-row${selected ? " is-selected" : ""}${place.imageSource === "naver_image_search" ? " has-photo-attribution" : ""}`}
+                            className={`place-card-row${selected ? " is-selected" : ""}`}
                             key={place.id}
                           >
                             <button
@@ -3228,12 +3441,11 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
                                 {selected ? "✓" : ""}
                               </span>
                               <span
-                                className={`place-category-icon${place.imageUrl ? " has-image" : ""}${place.imageStatus === "available" ? " has-actual-image" : " is-fallback-image"}${place.imageSource === "naver_image_search" ? " is-naver-photo" : ""}`}
-                                title={
-                                  place.imageAttribution
-                                    ? `사진: ${place.imageAttribution}`
-                                    : undefined
-                                }
+                                className={`place-category-icon${place.imageUrl ? " has-image" : ""}${place.imageStatus === "available" ? " has-actual-image" : " is-fallback-image"}`}
+                                onClick={place.imageStatus === "available" ? (event) => {
+                                  event.stopPropagation();
+                                  setPhotoPreview(place);
+                                } : undefined}
                               >
                                 {place.categoryIcon}
                                 {place.imageUrl && (
@@ -3304,22 +3516,6 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
                                 {place.categoryIcon}
                               </span>
                             </button>
-                            {place.imageSource === "naver_image_search" && (
-                              place.imageAttributionUrl ? (
-                                <a
-                                  className="place-photo-attribution"
-                                  href={place.imageAttributionUrl}
-                                  target="_blank"
-                                  rel="noreferrer"
-                                >
-                                  사진: {place.imageAttribution ?? "NAVER 이미지 검색"}
-                                </a>
-                              ) : (
-                                <span className="place-photo-attribution">
-                                  사진: {place.imageAttribution ?? "NAVER 이미지 검색"}
-                                </span>
-                              )
-                            )}
                             <button
                               className={`place-favorite-button${favorite ? " is-active" : ""}`}
                               type="button"
@@ -3358,12 +3554,22 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
                                 onClick={() => {
                                   if (preferredPlaceId === place.id) return;
                                   setPreferredPlaceId(place.id);
-                                  setSelectedPlaces((current) =>
-                                    current.map((item) => ({
-                                      ...item,
-                                      preferredFirst: item.id === place.id,
-                                    })),
-                                  );
+                                  setSelectedPlaces((current) => {
+                                    const preferred = current.find(
+                                      (item) => item.id === place.id,
+                                    );
+                                    if (!preferred) return current;
+                                    return [
+                                      { ...preferred, preferredFirst: true },
+                                      ...current
+                                        .filter((item) => item.id !== place.id)
+                                        .map((item) => ({
+                                          ...item,
+                                          preferredFirst: false,
+                                        })),
+                                    ];
+                                  });
+                                  setFocusedStopIndex(0);
                                   setCalculated(false);
                                   setCourseResult(null);
                                 }}
@@ -3382,19 +3588,27 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
                         </p>
                       )}
                     </div>
-                    {hasMorePlaces && (
-                      <button
-                        className="place-more-button place-more-button--visible"
-                        type="button"
-                        onClick={() => setMoreChoiceOpen(true)}
-                        disabled={placeStatus === "more-loading"}
-                      >
-                        {placeStatus === "more-loading"
-                          ? "새 장소를 찾는 중…"
-                          : "새로운 추천 장소 더 보기"}{" "}
-                        <span>＋</span>
-                      </button>
-                    )}
+                    <div
+                      className="place-auto-load-status"
+                      role="status"
+                      aria-live="polite"
+                      aria-atomic="true"
+                    >
+                      {placeStatus === "more-loading" && (
+                        <span>새로운 장소를 찾고 있어요</span>
+                      )}
+                      {moreLoadError && placeStatus !== "more-loading" && (
+                        <span className="is-error">
+                          장소를 불러오지 못했어요
+                          <button type="button" onClick={() => void handleLoadMore({ force: true })}>
+                            다시 불러오기
+                          </button>
+                        </span>
+                      )}
+                      {!hasMorePlaces && places.length > 0 && !moreLoadError && (
+                        <span>추천 가능한 장소를 모두 확인했어요</span>
+                      )}
+                    </div>
                     {calculationStatus === "warning" && (
                       <div className="place-warning is-warning">
                         선택한 장소를 모두 방문하면 시간이 부족해요. 장소를 하나
@@ -3496,40 +3710,6 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
           </button>
         )}
       </aside>
-      {moreChoiceOpen && (
-        <div
-          className="recommend-choice-backdrop"
-          role="presentation"
-          onMouseDown={(event) => {
-            if (event.target === event.currentTarget) setMoreChoiceOpen(false);
-          }}
-        >
-          <section
-            className="recommend-choice-dialog"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="recommend-choice-title"
-          >
-            <h2 id="recommend-choice-title">새 장소를 어떻게 받을까요?</h2>
-            <p>고른 장소를 남겨두거나, 목록 전체를 새 후보로 바꿀 수 있어요.</p>
-            <button type="button" onClick={() => handleLoadMore("append")}>
-              <b>현재 장소 유지</b>
-              <span>기존 목록 아래에 새 장소 추가</span>
-            </button>
-            <button type="button" onClick={() => handleLoadMore("replace")}>
-              <b>새 장소로 교체</b>
-              <span>선택과 목록을 비우고 새 후보 표시</span>
-            </button>
-            <button
-              className="is-cancel"
-              type="button"
-              onClick={() => setMoreChoiceOpen(false)}
-            >
-              취소
-            </button>
-          </section>
-        </div>
-      )}
       {timeBudgetPromptOpen && (
         <div
           className="time-budget-prompt-backdrop"
@@ -3647,6 +3827,44 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
                 ? "지금 코스 유지"
                 : "괜찮아요, 이대로 확정"}
             </button>
+          </section>
+        </div>
+      )}
+      {photoPreview && (
+        <div
+          className="place-photo-preview-backdrop"
+          role="presentation"
+          onClick={() => setPhotoPreview(null)}
+        >
+          <section
+            className="place-photo-preview"
+            role="dialog"
+            aria-modal="true"
+            aria-label={`${photoPreview.name} 사진`}
+            onClick={(event) => event.stopPropagation()}
+          >
+            <button
+              className="place-photo-preview-close"
+              type="button"
+              onClick={() => setPhotoPreview(null)}
+              aria-label="사진 닫기"
+            >
+              ×
+            </button>
+            <img src={photoPreview.imageUrl} alt={`${photoPreview.name} 검색 사진`} />
+            <strong>{photoPreview.name}</strong>
+            <small>{photoPreview.address ?? photoPreview.categoryLabel}</small>
+            <div className="place-photo-preview-source">
+              <span>이미지 검색 결과</span>
+              {photoPreview.imageAttributionUrl && (
+                <>
+                  <span aria-hidden="true"> · </span>
+                  <a href={photoPreview.imageAttributionUrl} target="_blank" rel="noreferrer">
+                    원본 보기
+                  </a>
+                </>
+              )}
+            </div>
           </section>
         </div>
       )}

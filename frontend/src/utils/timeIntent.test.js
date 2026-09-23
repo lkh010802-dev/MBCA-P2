@@ -17,6 +17,21 @@ test("모호한 저녁 약속만 시간 확인이 필요하다", () => {
   );
 });
 
+test("이따가 가야 하는 일정도 정확한 시간을 확인한다", () => {
+  assert.equal(
+    needsAppointmentTimeClarification(
+      "오늘 이따가 신림에 가야 하는데 그 전에 카페 갈래",
+    ),
+    true,
+  );
+  assert.equal(
+    needsAppointmentTimeClarification(
+      "오늘 오후 7시에 신림에 가야 하는데 그 전에 카페 갈래",
+    ),
+    false,
+  );
+});
+
 test("시간대에 맞는 빠른 선택지를 제공한다", () => {
   assert.deepEqual(suggestedAppointmentHours("저녁 약속"), [18, 19, 20]);
   assert.deepEqual(suggestedAppointmentHours("아침 미팅"), [8, 9, 10]);

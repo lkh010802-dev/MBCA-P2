@@ -791,7 +791,7 @@ function KakaoCourseMap({
       )}
       {status === "ready" && missingCoursePath && (
         <p className="map-route-loading" role="status">
-          일부 구간의 상세 경로를 불러오지 못했어요
+          상세 동선이 없는 구간은 예상 경로로 표시했어요
         </p>
       )}
     </div>

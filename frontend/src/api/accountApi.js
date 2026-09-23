@@ -31,7 +31,9 @@ async function api(path, { method = 'GET', token, body } = {}) {
     const message = detail === 'Not Found'
       ? '회원가입 서버 주소를 찾지 못했어요. 잠시 후 다시 시도해 주세요.'
       : (detail || '계정 정보를 처리하지 못했어요.')
-    throw new Error(message)
+    const error = new Error(message)
+    error.status = response.status
+    throw error
   }
   return data
 }
