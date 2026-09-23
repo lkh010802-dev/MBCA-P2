@@ -6,12 +6,23 @@ const ITEM_HEIGHT = 48;
 export default function TimeWheel({ label, values, value, onChange, suffix }) {
   const wheelRef = useRef(null);
   const frameRef = useRef(null);
+  const wheelLockRef = useRef(false);
+  const wheelUnlockTimerRef = useRef(null);
   const dragRef = useRef({ active: false, moved: false, startY: 0, startScrollTop: 0 });
 
   useEffect(() => {
     const index = Math.max(0, values.indexOf(value));
     if (wheelRef.current) wheelRef.current.scrollTop = index * ITEM_HEIGHT;
   }, [value, values]);
+
+  useEffect(
+    () => () => {
+      cancelAnimationFrame(frameRef.current);
+      if (wheelUnlockTimerRef.current)
+        clearTimeout(wheelUnlockTimerRef.current);
+    },
+    [],
+  );
 
   const selectVisibleValue = () => {
     cancelAnimationFrame(frameRef.current);
@@ -26,14 +37,24 @@ export default function TimeWheel({ label, values, value, onChange, suffix }) {
 
   const handleWheel = (event) => {
     event.preventDefault();
+    // 고해상도 마우스·터치패드는 한 번의 제스처에 wheel 이벤트를 여러 번 보낸다.
+    // 짧게 입력을 잠가 사용자 동작 한 번당 정확히 한 칸만 이동시킨다.
+    if (wheelLockRef.current || Math.abs(event.deltaY) < 2) return;
     const currentIndex = Math.max(0, values.indexOf(value));
     const nextIndex = Math.max(0, Math.min(
       values.length - 1,
       currentIndex + (event.deltaY > 0 ? 1 : -1),
     ));
     if (nextIndex === currentIndex) return;
+    wheelLockRef.current = true;
     onChange(values[nextIndex]);
-    wheelRef.current?.scrollTo({ top: nextIndex * ITEM_HEIGHT, behavior: "auto" });
+    wheelRef.current?.scrollTo({
+      top: nextIndex * ITEM_HEIGHT,
+      behavior: "smooth",
+    });
+    wheelUnlockTimerRef.current = setTimeout(() => {
+      wheelLockRef.current = false;
+    }, 220);
   };
 
   return (
@@ -44,6 +65,8 @@ export default function TimeWheel({ label, values, value, onChange, suffix }) {
         <div
           className="time-wheel"
           ref={wheelRef}
+          role="listbox"
+          aria-label={label}
           onScroll={selectVisibleValue}
           onWheel={handleWheel}
           onPointerDown={(event) => {
@@ -76,6 +99,8 @@ export default function TimeWheel({ label, values, value, onChange, suffix }) {
           {values.map((item) => (
             <button
               type="button"
+              role="option"
+              aria-selected={item === value}
               className={item === value ? "is-selected" : ""}
               key={item}
               onClick={() => {
@@ -83,7 +108,21 @@ export default function TimeWheel({ label, values, value, onChange, suffix }) {
                   dragRef.current.moved = false;
                   return;
                 }
-                onChange(item);
+                const currentIndex = Math.max(0, values.indexOf(value));
+                const clickedIndex = values.indexOf(item);
+                // 보이는 위·아래 숫자를 클릭하면 한 칸씩 이동하고 중앙에 정렬한다.
+                const nextIndex = Math.max(
+                  0,
+                  Math.min(
+                    values.length - 1,
+                    currentIndex + Math.sign(clickedIndex - currentIndex),
+                  ),
+                );
+                onChange(values[nextIndex]);
+                wheelRef.current?.scrollTo({
+                  top: nextIndex * ITEM_HEIGHT,
+                  behavior: "smooth",
+                });
               }}
             >
               {String(item).padStart(2, "0")}<span>{suffix}</span>

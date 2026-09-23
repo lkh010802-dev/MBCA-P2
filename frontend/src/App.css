@@ -562,8 +562,7 @@ body:has(.adventure-backdrop) .results-divider { pointer-events:none; }
 .koala-auto-copy { display:grid; min-width:0; gap:3px; }
 .koala-auto-button b { color:#184f96; font-size:14px; }
 .koala-auto-button small { color:#6682a6; font-size:10px; font-weight:750; line-height:1.35; }
-.koala-auto-button em { display:inline-flex; align-items:center; gap:4px; padding:7px 9px; border-radius:999px; color:#1764ee; background:#fff; box-shadow:0 3px 9px rgba(41,102,188,.1); font-size:9px; font-style:normal; font-weight:900; white-space:nowrap; }
-.koala-auto-button em i { font-size:12px; font-style:normal; }
+.koala-auto-button .koala-auto-chevron { display:grid; width:28px; height:28px; padding:0; place-items:center; border-radius:50%; color:#4e86cf; background:transparent; box-shadow:none; font-size:25px; line-height:1; font-style:normal; font-weight:700; }
 .koala-auto-button:disabled { cursor:wait; opacity:.65; }
 
 .time-picker-backdrop { position:fixed; z-index:140; inset:0; display:grid; place-items:center; padding:20px; background:rgba(16,34,60,.5); backdrop-filter:blur(5px); animation:time-picker-fade .18s ease-out; }

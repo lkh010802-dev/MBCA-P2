@@ -229,6 +229,9 @@ button, textarea, input { font: inherit; }
   .map-topbar .map-transport-selector button.is-active span { display:inline; }
 
   .map-ranking-sheet.is-region-mode { height:auto; max-height:calc(100dvh - 150px); padding-top:9px; padding-bottom:max(10px,env(safe-area-inset-bottom)); }
+  .map-ranking-sheet.is-region-mode.is-minimized { height:92px; min-height:92px; overflow:hidden; }
+  .map-ranking-sheet.is-region-mode.is-minimized .ranking-heading { margin-bottom:0; }
+  .map-ranking-sheet.is-region-mode.is-minimized .ranking-scroll { display:none; }
   .map-ranking-sheet.is-region-mode .sheet-handle { margin-bottom:2px; }
   .map-ranking-sheet.is-region-mode .ranking-heading { margin-bottom:7px; }
   .map-ranking-sheet.is-region-mode .ranking-heading p { display:none; }

@@ -3,6 +3,7 @@ import test from "node:test";
 import {
   buildCourseSegments,
   courseSegmentCacheKey,
+  estimateFallbackRoute,
   routeDurationMinutes,
 } from "./courseTravelEstimate.js";
 
@@ -28,5 +29,20 @@ test("교통수단이 다르면 별도 캐시 키를 사용한다", () => {
   assert.notEqual(
     courseSegmentCacheKey(segment, "walk"),
     courseSegmentCacheKey(segment, "public_transit"),
+  );
+});
+
+test("외부 경로 실패 시 0분이 아닌 보수적 예상시간을 만든다", () => {
+  const fallback = estimateFallbackRoute({ from: start, to: first }, "public_transit");
+  assert.equal(fallback.status, "estimated");
+  assert.equal(fallback.source, "distance_fallback");
+  assert.ok(fallback.durationMinutes > 0);
+  assert.equal(fallback.route.calculation_status, "estimated");
+});
+
+test("좌표가 없으면 예상시간을 만들지 않는다", () => {
+  assert.equal(
+    estimateFallbackRoute({ from: start, to: { name: "좌표 없음" } }, "walk"),
+    null,
   );
 });

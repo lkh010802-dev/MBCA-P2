@@ -57,6 +57,7 @@ def calculate_route_travel_times(
             )
         travel = {
             **travel,
+            "calculation_status": travel.get("calculation_status", "exact"),
             "route_status": "complete" if any(
                 isinstance(segment, dict)
                 and isinstance(segment.get("points"), list)
@@ -65,11 +66,20 @@ def calculate_route_travel_times(
             ) else "estimated",
         }
         legs_with_travel_time.append(
-            {**leg, "travel_time_minutes": duration_minutes, "travel": travel}
+            {
+                **leg,
+                "travel_time_minutes": duration_minutes,
+                "calculation_status": travel["calculation_status"],
+                "travel": travel,
+            }
         )
         total_travel_time_minutes += duration_minutes
 
     return {
         "legs": legs_with_travel_time,
         "total_travel_time_minutes": total_travel_time_minutes,
+        "estimated_leg_count": sum(
+            leg["calculation_status"] == "estimated"
+            for leg in legs_with_travel_time
+        ),
     }

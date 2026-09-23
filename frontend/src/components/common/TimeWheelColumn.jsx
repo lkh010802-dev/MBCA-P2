@@ -7,6 +7,7 @@ export default function TimeWheelColumn({ label, options, value, onChange }) {
   const wheelRef = useRef(null);
   const scrollTimerRef = useRef(null);
   const wheelLockRef = useRef(false);
+  const wheelUnlockTimerRef = useRef(null);
   const dragRef = useRef({ active: false, moved: false, startY: 0, startScrollTop: 0 });
 
   useEffect(() => {
@@ -17,6 +18,7 @@ export default function TimeWheelColumn({ label, options, value, onChange }) {
 
   useEffect(() => () => {
     if (scrollTimerRef.current) clearTimeout(scrollTimerRef.current);
+    if (wheelUnlockTimerRef.current) clearTimeout(wheelUnlockTimerRef.current);
     wheelLockRef.current = false;
   }, []);
 
@@ -56,7 +58,9 @@ export default function TimeWheelColumn({ label, options, value, onChange }) {
           if (nextIndex === currentIndex) return;
           wheelLockRef.current = true;
           onChange(options[nextIndex]);
-          setTimeout(() => { wheelLockRef.current = false; }, 110);
+          wheelUnlockTimerRef.current = setTimeout(() => {
+            wheelLockRef.current = false;
+          }, 220);
         }}
         onPointerDown={(event) => {
           if (event.pointerType !== "mouse" || event.button !== 0) return;
@@ -104,8 +108,20 @@ export default function TimeWheelColumn({ label, options, value, onChange }) {
                 dragRef.current.moved = false;
                 return;
               }
-              onChange(option);
-              event.currentTarget.scrollIntoView({ block: "center", behavior: "smooth" });
+              const currentIndex = Math.max(0, options.indexOf(value));
+              const clickedIndex = options.indexOf(option);
+              const nextIndex = Math.max(
+                0,
+                Math.min(
+                  options.length - 1,
+                  currentIndex + Math.sign(clickedIndex - currentIndex),
+                ),
+              );
+              onChange(options[nextIndex]);
+              wheelRef.current?.scrollTo({
+                top: nextIndex * ITEM_HEIGHT,
+                behavior: "smooth",
+              });
             }}
           >
             {String(option).padStart(2, "0")}

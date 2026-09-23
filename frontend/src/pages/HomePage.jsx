@@ -461,7 +461,9 @@ function HomePage({
               </b>
               <small>하고 싶은 일이 없어도 시간만 정하면 코알라가 짜드려요</small>
             </span>
-            <em>{pendingQuickCourse ? "추천 중" : "시간만 선택"} <i>→</i></em>
+            <em className="koala-auto-chevron" aria-hidden="true">
+              {pendingQuickCourse ? "…" : "›"}
+            </em>
           </button>
           <section className="home-adventure-store" aria-label="색다른 추천">
             <div className="home-adventure-head">

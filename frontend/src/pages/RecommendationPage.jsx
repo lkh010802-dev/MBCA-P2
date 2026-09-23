@@ -400,7 +400,7 @@ function AreaCard({ area, selected, onSelect, onPreview }) {
         ? "현재 위치에서 가까워요"
         : area.congestion === "여유"
           ? "비교적 여유롭게 머물 수 있어요"
-          : "이동시간과 머무를 시간을 함께 고려했어요";
+          : "이동시간과 지역에서 쓸 수 있는 시간을 함께 고려했어요";
   return (
     <button
       className={`area-card${selected ? " is-selected" : ""}`}
@@ -418,7 +418,7 @@ function AreaCard({ area, selected, onSelect, onPreview }) {
       <div className="area-route">
         {area.fromStartMinutes > 0 && (
           <span>
-            여기까지{" "}
+            이동 시간{" "}
             <b>
               {formatMinutes(area.fromStartMinutes)}
               {area.fromStartTransport && ` · ${area.fromStartTransport}`}
@@ -427,7 +427,7 @@ function AreaCard({ area, selected, onSelect, onPreview }) {
         )}
         {area.stayMinutes !== null && (
           <span>
-            머무르기 <b>{formatMinutes(area.stayMinutes)}</b>
+            도착 후 여유시간 <b>{formatMinutes(area.stayMinutes)}</b>
           </span>
         )}
         {area.toNextMinutes > 0 && (
@@ -738,6 +738,8 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
   }, [historyKey, courseHistory]);
   const [focusedStopIndex, setFocusedStopIndex] = useState(null);
   const [sheetExpanded, setSheetExpanded] = useState(false);
+  // 모바일 지역 목록은 기본 높이 아래로도 내려 지도를 더 넓게 볼 수 있다.
+  const [sheetMinimized, setSheetMinimized] = useState(false);
   const [routeCache, setRouteCache] = useState({});
   const [routeLoading, setRouteLoading] = useState({});
   const [routeErrors, setRouteErrors] = useState({});
@@ -922,7 +924,10 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
   );
 
   useEffect(() => {
-    if (placeMode) setSheetExpanded(true);
+    if (placeMode) {
+      setSheetMinimized(false);
+      setSheetExpanded(true);
+    }
   }, [placeMode]);
   useEffect(() => {
     // 1순위는 서버가 미리 준비해 준 Tmap 보행 경로를 즉시 사용한다.
@@ -1242,6 +1247,8 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
   const handleSheetPointerDown = (event) => {
     dragStartY.current = event.clientY;
     didDrag.current = false;
+    // 손가락이나 마우스가 좁은 손잡이 밖으로 나가도 drag 이벤트를 계속 받는다.
+    event.currentTarget.setPointerCapture?.(event.pointerId);
   };
   const handleSheetPointerMove = (event) => {
     if (
@@ -1253,9 +1260,21 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
   const handleSheetPointerUp = (event) => {
     if (dragStartY.current === null) return;
     const distance = event.clientY - dragStartY.current;
-    if (distance < -24) setSheetExpanded(true);
-    if (distance > 24) setSheetExpanded(false);
+    if (distance < -24) {
+      if (sheetMinimized) setSheetMinimized(false);
+      else setSheetExpanded(true);
+    }
+    if (distance > 24) {
+      if (sheetExpanded) setSheetExpanded(false);
+      else if (!placeMode) setSheetMinimized(true);
+    }
     dragStartY.current = null;
+    event.currentTarget.releasePointerCapture?.(event.pointerId);
+  };
+  const handleSheetPointerCancel = (event) => {
+    dragStartY.current = null;
+    didDrag.current = false;
+    event.currentTarget.releasePointerCapture?.(event.pointerId);
   };
   const togglePlace = (place) => {
     calculationRequest.current += 1;
@@ -1368,10 +1387,13 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
   const displayedTotal =
     courseResult?.course?.total_required_minutes ?? estimatedTotal;
   const hasActualTime = courseResult?.course?.total_required_minutes != null;
+  const calculationIsEstimated =
+    courseResult?.course?.calculation_status === "estimated" ||
+    (!hasActualTime && travelEstimate.status === "estimated");
   const timeGaugeOver =
     displayedTotal != null && displayedTotal > availableTimeMinutes;
   const timeCalculationLabel = hasActualTime
-    ? `실제 계산 ${displayedTotal}분`
+    ? `${calculationIsEstimated ? "일부 예상" : "실제 계산"} ${displayedTotal}분`
     : displayedTotal != null
       ? `사전 계산 ${displayedTotal}분`
       : travelEstimate.status === "loading"
@@ -2435,19 +2457,30 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
         </header>
         {rankingAreas.length > 0 && (
           <section
-            className={`map-ranking-sheet${placeMode ? " is-place-mode" : " is-region-mode"}${sheetExpanded ? " is-expanded" : ""}${calculated && !sheetExpanded ? " is-course-collapsed" : ""}${guideIsComplete ? " is-guide-complete" : ""}`}
+            className={`map-ranking-sheet${placeMode ? " is-place-mode" : " is-region-mode"}${sheetExpanded ? " is-expanded" : ""}${sheetMinimized && !placeMode ? " is-minimized" : ""}${calculated && !sheetExpanded ? " is-course-collapsed" : ""}${guideIsComplete ? " is-guide-complete" : ""}`}
           >
             <button
               className="sheet-handle"
               type="button"
-              aria-label="추천 지역 목록 펼치기"
+              aria-label={
+                sheetMinimized
+                  ? "추천 지역 목록 기본 크기로 올리기"
+                  : sheetExpanded
+                    ? "추천 지역 목록 내리기"
+                    : "추천 지역 목록 펼치기"
+              }
               aria-expanded={sheetExpanded}
               onPointerDown={handleSheetPointerDown}
               onPointerMove={handleSheetPointerMove}
               onPointerUp={handleSheetPointerUp}
+              onPointerCancel={handleSheetPointerCancel}
               onClick={() => {
                 if (didDrag.current) {
                   didDrag.current = false;
+                  return;
+                }
+                if (sheetMinimized) {
+                  setSheetMinimized(false);
                   return;
                 }
                 setSheetExpanded(!sheetExpanded);
@@ -3094,7 +3127,11 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
                         className={`place-picker-summary${calculationStatus === "warning" ? " is-warning" : ""}`}
                       >
                         <b>
-                          {hasActualTime ? "실제 계산" : "사전 계산"}{" "}
+                          {calculationIsEstimated
+                            ? "일부 예상"
+                            : hasActualTime
+                              ? "실제 계산"
+                              : "사전 계산"}{" "}
                           {displayedTotal == null ? "확인 중" : `${displayedTotal}분`}
                         </b>
                         <span>
@@ -3102,7 +3139,7 @@ function RecommendationPage({ response, onBack, account, onOpenAccount }) {
                             ? travelEstimate.status === "loading"
                               ? "실제 이동 경로를 확인하고 있어요"
                               : "이동시간을 확인할 수 없어요"
-                            : `이동 ${displayedTravel}분 · 체류 ${displayedStay}분`}
+                            : `이동 ${displayedTravel}분 · 체류 ${displayedStay}분${calculationIsEstimated ? " · 실패 구간은 예상시간 적용" : ""}`}
                         </span>
                       </div>
                     )}

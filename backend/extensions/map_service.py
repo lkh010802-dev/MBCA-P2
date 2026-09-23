@@ -1,6 +1,7 @@
 import os
 import re
 import requests
+from math import ceil
 from concurrent.futures import ThreadPoolExecutor
 from copy import deepcopy
 from pathlib import Path
@@ -16,8 +17,11 @@ load_dotenv(BACKEND_DIR / "core" / ".env")
 KAKAO_REST_API_KEY = os.getenv("KAKAO_REST_API_KEY")
 TMAP_APP_KEY = os.getenv("TMAP_APP_KEY")
 ACTUAL_ROUTE_WALK_THRESHOLD_KM = 1.5
+TRANSIT_WALK_FALLBACK_KM = 3.0
 _VISUAL_ROUTE_CACHE = {}
 _VISUAL_ROUTE_CACHE_TTL_SECONDS = 15 * 60
+_TMAP_BREAKER_OPEN_UNTIL = 0.0
+_TMAP_BREAKER_SECONDS = 10 * 60
 
 
 # 2. Kakao API 요청에 사용할 인증 헤더 생성
@@ -508,6 +512,8 @@ def get_transit(
         return {
             # 이동수단
             "mode": "transit",
+            "calculation_status": "exact",
+            "source": "kakao_public_transit",
 
             # BUS / SUBWAY / BUS_AND_SUBWAY 등
             "route_type":
@@ -541,7 +547,11 @@ def get_transit(
 
 # 7. TMAP 실제 보행 경로와 안내 조회
 def get_tmap_walking(start_x, start_y, end_x, end_y):
+    global _TMAP_BREAKER_OPEN_UNTIL
     if not TMAP_APP_KEY:
+        return None
+    # 할당량 초과 상태에서 모든 구간이 같은 실패를 기다리지 않게 즉시 fallback한다.
+    if monotonic() < _TMAP_BREAKER_OPEN_UNTIL:
         return None
     try:
         response = requests.post(
@@ -559,14 +569,30 @@ def get_tmap_walking(start_x, start_y, end_x, end_y):
         )
         response.raise_for_status()
         data = response.json()
+    except requests.HTTPError as error:
+        status_code = error.response.status_code if error.response is not None else None
+        if status_code in {401, 403, 429}:
+            _TMAP_BREAKER_OPEN_UNTIL = monotonic() + _TMAP_BREAKER_SECONDS
+        return None
     except (requests.RequestException, ValueError):
+        return None
+
+    error_text = str(data.get("error") or data.get("errorMessage") or "").lower()
+    if any(token in error_text for token in ("quota", "limit", "exceed")):
+        _TMAP_BREAKER_OPEN_UNTIL = monotonic() + _TMAP_BREAKER_SECONDS
         return None
 
     coordinates = []
     instructions = []
+    total_time_seconds = None
+    total_distance_meters = None
     for feature in data.get("features", []):
         geometry = feature.get("geometry") or {}
         properties = feature.get("properties") or {}
+        if total_time_seconds is None and properties.get("totalTime") is not None:
+            total_time_seconds = properties.get("totalTime")
+        if total_distance_meters is None and properties.get("totalDistance") is not None:
+            total_distance_meters = properties.get("totalDistance")
         feature_coordinates = geometry.get("coordinates", [])
         if geometry.get("type") == "LineString":
             coordinates.extend(feature_coordinates)
@@ -583,6 +609,12 @@ def get_tmap_walking(start_x, start_y, end_x, end_y):
     if len(coordinates) < 2:
         return None
     return {
+        "duration_min": max(1, ceil(float(total_time_seconds) / 60))
+        if total_time_seconds is not None else None,
+        "distance_m": float(total_distance_meters)
+        if total_distance_meters is not None else None,
+        "calculation_status": "exact",
+        "source": "tmap_pedestrian",
         "instructions": instructions,
         "paths": [{
             "type": "WALKING", "vehicle": None,
@@ -665,16 +697,12 @@ def get_walking(
     distance_km = earth_radius * c
 
     if distance_km <= 0.035:
-        return {"mode": "walk", "distance_km": round(distance_km, 3), "duration_min": 1, "paths": [], "nearby": True}
+        return {"mode": "walk", "distance_km": round(distance_km, 3), "duration_min": 1, "paths": [], "nearby": True, "calculation_status": "estimated", "source": "distance_fallback"}
 
-    # 실제 보행거리는 직선거리보다 길기 때문에
-    # 보정계수 1.2를 적용한다.
-    walking_distance_km = distance_km * 1.2
-
-    # 평균 보행속도 4.5 km/h 기준
-    walking_minutes = (
-        walking_distance_km / 4.5
-    ) * 60
+    # 외부 경로가 없을 때만 쓰는 보수적 fallback이다. 실제 거리 우회와
+    # 신호·횡단 대기를 고려해 거리 1.3배, 시속 4km, 최소 3분 여유를 둔다.
+    walking_distance_km = distance_km * 1.3
+    walking_minutes = (walking_distance_km / 4.0) * 60 + 3
 
     walking_result = {
         "mode": "walk",
@@ -686,14 +714,26 @@ def get_walking(
 
         "duration_min": max(
             1,
-            round(walking_minutes)
+            ceil(walking_minutes)
         ),
         "paths": [],
+        "calculation_status": "estimated",
+        "source": "distance_fallback",
     }
     tmap_route = get_tmap_walking(start_x, start_y, end_x, end_y)
     if tmap_route:
         walking_result["paths"] = tmap_route["paths"]
         walking_result["instructions"] = tmap_route["instructions"]
+        if tmap_route.get("duration_min") is not None:
+            walking_result["duration_min"] = tmap_route["duration_min"]
+            walking_result["calculation_status"] = "exact"
+            walking_result["source"] = "tmap_pedestrian"
+        else:
+            # 실제 선은 받았지만 총시간이 없으면 시간값은 추정으로 유지한다.
+            walking_result["source"] = "tmap_path_with_estimated_time"
+        if tmap_route.get("distance_m") is not None:
+            walking_result["distance_m"] = tmap_route["distance_m"]
+            walking_result["distance_km"] = round(tmap_route["distance_m"] / 1000, 2)
     return walking_result
 
 
@@ -798,6 +838,8 @@ def get_driving(
     if result_code == 104:
         return {
             "mode": "car",
+            "calculation_status": "exact",
+            "source": "same_point",
             "distance_m": 0,
             "duration_sec": 0,
             "duration_min": 0,
@@ -833,6 +875,8 @@ def get_driving(
 
     return {
         "mode": "car",
+        "calculation_status": "exact",
+        "source": "kakao_driving",
         "distance_m": distance_m,
         "duration_sec": duration_sec,
         "duration_min": max(
@@ -881,6 +925,8 @@ def get_travel(
     ):
         return {
             "mode": "walk",
+            "calculation_status": "exact",
+            "source": "same_point",
             "distance_m": 0,
             "duration_sec": 0,
             "duration_min": 0,
@@ -907,7 +953,13 @@ def get_travel(
         )
         if transit_route is not None:
             return transit_route
-        if is_nearby(start_x, start_y, end_x, end_y):
+        if is_nearby(
+            start_x,
+            start_y,
+            end_x,
+            end_y,
+            max_distance_km=TRANSIT_WALK_FALLBACK_KM,
+        ):
             walking_route = get_walking(start_x, start_y, end_x, end_y)
             walking_route["fallback_from"] = "public_transit"
             walking_route["fallback_reason"] = "NO_RESULTS"
@@ -942,13 +994,28 @@ def get_travel(
                 end_y
             )
 
-        # 근거리가 아니라면 대중교통 사용
-        return get_transit(
+        # 근거리가 아니라면 대중교통을 우선하되, 도시 내부의 짧은 구간은
+        # 경로 없음 응답 시 보수적인 도보 예상값으로 계속 계산한다.
+        transit_route = get_transit(
             start_x,
             start_y,
             end_x,
             end_y
         )
+        if transit_route is not None:
+            return transit_route
+        if is_nearby(
+            start_x,
+            start_y,
+            end_x,
+            end_y,
+            max_distance_km=TRANSIT_WALK_FALLBACK_KM,
+        ):
+            walking_route = get_walking(start_x, start_y, end_x, end_y)
+            walking_route["fallback_from"] = "public_transit"
+            walking_route["fallback_reason"] = "NO_RESULTS"
+            return walking_route
+        return None
 
     # 아직 지원하지 않는 이동수단
     return None

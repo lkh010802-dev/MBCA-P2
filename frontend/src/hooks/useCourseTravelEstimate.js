@@ -3,6 +3,7 @@ import { requestRoutePreview } from "../api/placesApi";
 import {
   buildCourseSegments,
   courseSegmentCacheKey,
+  estimateFallbackRoute,
   routeDurationMinutes,
 } from "../utils/courseTravelEstimate";
 
@@ -87,23 +88,37 @@ export function useCourseTravelEstimate({
       const failedSegments = results
         .map((result, index) => (result.status === "rejected" ? index : null))
         .filter((index) => index != null);
-      if (failedSegments.length) {
+      const resolvedSegments = results.map((result, index) => {
+        if (result.status === "fulfilled") {
+          return {
+            ...result.value,
+            status:
+              result.value.route?.calculation_status === "estimated"
+                ? "estimated"
+                : "exact",
+          };
+        }
+        return estimateFallbackRoute(segments[index], transportMode);
+      });
+      if (resolvedSegments.some((segment) => segment == null)) {
         setEstimate({
           status: "unavailable",
           travelMinutes: null,
-          segments: results,
+          segments: resolvedSegments,
           failedSegments,
         });
         return;
       }
       setEstimate({
-        status: "ready",
-        travelMinutes: results.reduce(
-          (sum, result) => sum + result.value.durationMinutes,
+        status: resolvedSegments.some((segment) => segment.status === "estimated")
+          ? "estimated"
+          : "ready",
+        travelMinutes: resolvedSegments.reduce(
+          (sum, result) => sum + result.durationMinutes,
           0,
         ),
-        segments: results.map((result) => result.value),
-        failedSegments: [],
+        segments: resolvedSegments,
+        failedSegments,
       });
     }, debounceMs);
 

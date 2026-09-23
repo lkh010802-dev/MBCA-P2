@@ -45,6 +45,12 @@ def evaluate_course_time(
 
     return {
         "legs": travel_time_result["legs"],
+        "calculation_status": (
+            "estimated"
+            if travel_time_result.get("estimated_leg_count", 0) > 0
+            else "exact"
+        ),
+        "estimated_leg_count": travel_time_result.get("estimated_leg_count", 0),
         "total_stay_time_minutes": total_stay_time_minutes,
         "total_travel_time_minutes": total_travel_time_minutes,
         "total_required_minutes": total_required_minutes,
